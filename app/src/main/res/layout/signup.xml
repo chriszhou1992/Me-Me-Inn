@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#1E283B"
+
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/icon"
+        android:src="@drawable/img3"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ME ME INN"
+        style="@style/Base.V21.Theme.AppCompat"
+        android:id="@+id/name"
+        android:textColor="#FF3F59"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:layout_alignBottom="@+id/icon"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/uname"
+        android:hint="Enter your username"
+        android:textColorHint="@color/primary_dark_material_light"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="1dp"
+        android:layout_alignEnd="@+id/icon" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/pword"
+        android:hint="Enter your password"
+        android:textColorHint="@color/primary_dark_material_light"
+        android:layout_below="@+id/uname"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignStart="@+id/uname"
+        android:layout_marginTop="25dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/pword2"
+        android:hint="Confirm your password"
+        android:textColorHint="@color/primary_dark_material_light"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/pword"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignStart="@+id/pword" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="Cancel"
+        android:id="@+id/login"
+        android:background="?android:attr/selectableItemBackground"
+        android:textColor="#FFFFFF"
+        android:textSize="25dp"
+        android:layout_below="@+id/pword2"
+        android:layout_marginTop="34dp"
+        android:layout_alignStart="@+id/pword2" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="Sign UP"
+        android:id="@+id/signup"
+        android:background="?android:attr/selectableItemBackground"
+        android:textColor="#FFFFFF"
+        android:textSize="25dp"
+        android:layout_alignTop="@+id/login"
+        android:layout_alignEnd="@+id/pword2" />
+
+</RelativeLayout>

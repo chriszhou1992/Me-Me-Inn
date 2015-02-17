@@ -1,4 +1,4 @@
-package com.android.memeinn;
+package com.example.richard.memeinn;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
