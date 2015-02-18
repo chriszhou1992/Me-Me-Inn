@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/background"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/icon"
+        android:src="@drawable/img3"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vocabulary List"
+        style="@style/Base.V21.Theme.AppCompat"
+        android:id="@+id/name"
+        android:textColor="#FF3F59"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:layout_alignBottom="@+id/icon"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TOEFL"
+        android:id="@+id/toefl"
+        android:textSize="18dp"
+        android:background="#ff6c303c"
+        android:textAllCaps="false"
+        android:layout_below="@+id/gre"
+        android:layout_alignEnd="@+id/icon" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GRE"
+        android:id="@+id/gre"
+        android:textSize="18dp"
+        android:background="#ffb39a6d"
+        android:textAllCaps="false"
+        android:layout_below="@+id/name"
+        android:layout_alignStart="@+id/name"
+        android:layout_marginTop="31dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IELTS"
+        android:id="@+id/ielts"
+        android:textSize="18dp"
+        android:background="#ff809e6d"
+        android:textAllCaps="false"
+        android:layout_below="@+id/toefl"
+        android:layout_alignLeft="@+id/name" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAT"
+        android:id="@+id/sat"
+        android:textSize="18dp"
+        android:background="#ffa78fa9"
+        android:textAllCaps="false"
+        android:layout_below="@+id/ielts"
+        android:layout_alignEnd="@+id/icon" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACT"
+        android:id="@+id/act"
+        android:textSize="18dp"
+        android:background="#ffcca351"
+        android:textAllCaps="false"
+        android:layout_below="@+id/sat"
+        android:layout_alignStart="@+id/ielts" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GMAT"
+        android:id="@+id/gmat"
+        android:textSize="18dp"
+        android:background="#ffee9e9e"
+        android:textAllCaps="false"
+        android:layout_below="@+id/act"
+        android:layout_alignStart="@+id/toefl" />
+
+</RelativeLayout>
