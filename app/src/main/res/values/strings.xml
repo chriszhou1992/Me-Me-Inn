@@ -6,4 +6,6 @@
     <string name="action_settings">Settings</string>
     <color name="white">#000000</color>
 
+    <string name="facebook_app_id">619574714855646</string>
+
 </resources>

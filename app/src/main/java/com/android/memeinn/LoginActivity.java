@@ -1,5 +1,6 @@
 package com.android.memeinn;
 
+import com.facebook.Session;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
