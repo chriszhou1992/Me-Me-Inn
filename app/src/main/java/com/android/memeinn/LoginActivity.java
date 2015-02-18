@@ -1,4 +1,4 @@
-package com.example.richard.memeinn;
+package com.android.memeinn;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
