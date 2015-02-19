@@ -1,10 +1,20 @@
 package com.android.memeinn;
 
 import com.facebook.Session;
+import com.parse.LogInCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseFacebookUtils;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
+
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class LoginActivity extends ActionBarActivity {
@@ -13,6 +23,54 @@ public class LoginActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+        Parse.initialize(this, "l5qhJIZRq3vPDrHTmyzPu3z6IwMjukw7M3h9A8CZ", "iLgCs4Z7I71j1L9DIWrjwjkCZ02yc6KuDsYVO60e");
+
+        /*ParseUser user = new ParseUser();
+        user.setUsername("my name");
+        user.setPassword("my pass");
+        user.setEmail("email@example.com");
+
+        // other fields can be set just like with ParseObject
+        user.put("phone", "650-555-0000");
+
+        user.signUpInBackground(new SignUpCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    // Hooray! Let them use the app now.
+                } else {
+                    // Sign up didn't succeed. Look at the ParseException
+                    // to figure out what went wrong
+                }
+            }
+        });*/
+    }
+
+
+    public void FBSignOn(View view) {
+        Log.d("MyApp", "Inn");
+        //FB Single-Signon dialog
+        ParseFacebookUtils.logIn(this, new LogInCallback() {
+            @Override
+            public void done(ParseUser user, ParseException err) {
+                Log.d("MyApp", "AAA");
+                if (user == null) {
+                    Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
+                } else if (user.isNew()) {
+                    Log.d("MyApp", "User signed up and logged in through Facebook!");
+                } else {
+                    Log.d("MyApp", "User logged in through Facebook!");
+                }
+            }
+        });
+    }
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
     }
 
 
