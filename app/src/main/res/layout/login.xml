@@ -77,6 +77,7 @@
         android:textColor="#FFFFFF"
         android:background="?android:attr/selectableItemBackground"
 
-        android:layout_alignStart="@+id/login" />
+        android:layout_alignStart="@+id/login"
+        android:onClick="FBSignOn" />
 
 </RelativeLayout>
