@@ -15,9 +15,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 
 public class LoginActivity extends ActionBarActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,25 +28,30 @@ public class LoginActivity extends ActionBarActivity {
         setContentView(R.layout.login);
 
         Parse.initialize(this, "l5qhJIZRq3vPDrHTmyzPu3z6IwMjukw7M3h9A8CZ", "iLgCs4Z7I71j1L9DIWrjwjkCZ02yc6KuDsYVO60e");
+    }
 
-        /*ParseUser user = new ParseUser();
-        user.setUsername("my name");
-        user.setPassword("my pass");
-        user.setEmail("email@example.com");
 
-        // other fields can be set just like with ParseObject
-        user.put("phone", "650-555-0000");
+    public void logIn(View view) {
+        EditText usernameField = (EditText) findViewById(R.id.uname);
+        EditText passField = (EditText) findViewById(R.id.pword);
 
-        user.signUpInBackground(new SignUpCallback() {
-            public void done(ParseException e) {
-                if (e == null) {
-                    // Hooray! Let them use the app now.
+        ParseUser.logInInBackground(usernameField.getText().toString(),
+                passField.getText().toString(), new LogInCallback() {
+
+            public void done(ParseUser user, ParseException e) {
+                if (user != null) {
+                    Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(mainIntent);
                 } else {
-                    // Sign up didn't succeed. Look at the ParseException
-                    // to figure out what went wrong
+                    Log.d("APP", e.getMessage());
                 }
             }
-        });*/
+        });
+    }
+
+    public void gotoSignUp(View view) {
+        Intent signUpIntent = new Intent(this, SignUpActivity.class);
+        startActivity(signUpIntent);
     }
 
 

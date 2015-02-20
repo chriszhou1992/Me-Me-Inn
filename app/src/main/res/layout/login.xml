@@ -51,7 +51,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/icon"
         android:layout_alignEnd="@+id/icon"
-        android:textSize="25dp" />
+        android:textSize="25dp"
+        android:onClick="logIn" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -78,6 +79,6 @@
         android:background="?android:attr/selectableItemBackground"
 
         android:layout_alignStart="@+id/login"
-        android:onClick="FBSignOn" />
+        android:onClick="gotoSignUp" />
 
 </RelativeLayout>

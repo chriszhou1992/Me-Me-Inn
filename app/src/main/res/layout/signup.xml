@@ -76,7 +76,8 @@
         android:textSize="25dp"
         android:layout_below="@+id/pword2"
         android:layout_marginTop="34dp"
-        android:layout_alignStart="@+id/pword2" />
+        android:layout_alignStart="@+id/pword2"
+        android:onClick="gotoLogin" />
 
     <Button
         android:layout_width="100dp"
@@ -87,6 +88,7 @@
         android:textColor="#FFFFFF"
         android:textSize="25dp"
         android:layout_alignTop="@+id/login"
-        android:layout_alignEnd="@+id/pword2" />
+        android:layout_alignEnd="@+id/pword2"
+        android:onClick="signUp" />
 
 </RelativeLayout>
