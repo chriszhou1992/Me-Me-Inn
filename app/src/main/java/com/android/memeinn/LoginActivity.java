@@ -27,16 +27,21 @@ public class LoginActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
+        //Initialize Parse API to initialize connection to cloud
         Parse.initialize(this, "l5qhJIZRq3vPDrHTmyzPu3z6IwMjukw7M3h9A8CZ",
                 "iLgCs4Z7I71j1L9DIWrjwjkCZ02yc6KuDsYVO60e");
     }
 
 
+    /**
+     * Callback function for the Login Button. Synchronously signs in the user.
+     * @param view
+     */
     public void logIn(View view) {
         EditText usernameField = (EditText) findViewById(R.id.uname);
         EditText passField = (EditText) findViewById(R.id.pword);
 
-        ParseUser.logInInBackground(usernameField.getText().toString(),
+        /*ParseUser.logInInBackground(usernameField.getText().toString(),
                 passField.getText().toString(), new LogInCallback() {
 
             public void done(ParseUser user, ParseException e) {
@@ -49,16 +54,31 @@ public class LoginActivity extends ActionBarActivity {
                     Utility.warningDialog(LoginActivity.this, "Login Failed", e.getMessage());
                 }
             }
-        });
+        });*/
+
+        try {
+            ParseUser.logIn(usernameField.getText().toString(), passField.getText().toString());
+            Intent mainIntent = new Intent(this, MainActivity.class);
+            startActivity(mainIntent);
+        } catch (ParseException e) {
+            Log.d("MyApp", e.getMessage());
+            Utility.warningDialog(LoginActivity.this, "Login Failed", e.getMessage());
+        }
     }
 
-
+    /**
+     * Callback function for signUp button. Triggers an Intent to go to the SignUpActivity.
+     * @param view
+     */
     public void gotoSignUp(View view) {
         Intent signUpIntent = new Intent(this, SignUpActivity.class);
         startActivity(signUpIntent);
     }
 
-
+    /**
+     * Function that uses Parse API to trigger Facebook Single-Signon Dialog.
+     * @param view
+     */
     public void FBSignOn(View view) {
         Log.d("MyApp", "Inn");
         //FB Single-Signon dialog

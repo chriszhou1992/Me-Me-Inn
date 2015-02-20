@@ -36,7 +36,8 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="1dp"
-        android:layout_alignEnd="@+id/icon" />
+        android:layout_alignEnd="@+id/icon"
+        android:textColor="#FFFFFF" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -50,7 +51,8 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:layout_alignStart="@+id/uname"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="25dp"
+        android:textColor="#FFFFFF" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -64,7 +66,8 @@
         android:layout_below="@+id/pword"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_alignStart="@+id/pword" />
+        android:layout_alignStart="@+id/pword"
+        android:textColor="#FFFFFF" />
 
     <Button
         android:layout_width="100dp"
