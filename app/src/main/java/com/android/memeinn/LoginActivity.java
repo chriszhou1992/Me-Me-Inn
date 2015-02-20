@@ -8,6 +8,8 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -20,14 +22,13 @@ import android.widget.EditText;
 
 public class LoginActivity extends ActionBarActivity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        Parse.initialize(this, "l5qhJIZRq3vPDrHTmyzPu3z6IwMjukw7M3h9A8CZ", "iLgCs4Z7I71j1L9DIWrjwjkCZ02yc6KuDsYVO60e");
+        Parse.initialize(this, "l5qhJIZRq3vPDrHTmyzPu3z6IwMjukw7M3h9A8CZ",
+                "iLgCs4Z7I71j1L9DIWrjwjkCZ02yc6KuDsYVO60e");
     }
 
 
@@ -43,11 +44,14 @@ public class LoginActivity extends ActionBarActivity {
                     Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(mainIntent);
                 } else {
+                    //failed
                     Log.d("APP", e.getMessage());
+                    Utility.warningDialog(LoginActivity.this, "Login Failed", e.getMessage());
                 }
             }
         });
     }
+
 
     public void gotoSignUp(View view) {
         Intent signUpIntent = new Intent(this, SignUpActivity.class);
@@ -72,7 +76,6 @@ public class LoginActivity extends ActionBarActivity {
             }
         });
     }
-
 
 
     @Override
