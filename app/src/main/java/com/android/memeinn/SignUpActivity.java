@@ -1,6 +1,7 @@
 package com.android.memeinn;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import android.app.Activity;
@@ -20,6 +21,11 @@ public class SignUpActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
 
+        //Fix the issue Android changes the font of password fields into monospace
+        EditText passField = (EditText) findViewById(R.id.pword);
+        EditText passVerifyField = (EditText) findViewById(R.id.pword2);
+        passField.setTypeface(Typeface.DEFAULT);
+        passVerifyField.setTypeface(Typeface.DEFAULT);
     }
 
     /**

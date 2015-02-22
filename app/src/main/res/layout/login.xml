@@ -8,7 +8,6 @@
     <!--android:id="@+id/">-->
 
 
-
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -20,9 +19,9 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
+        android:inputType="text"
         android:ems="10"
-        android:hint="Username"
+        android:hint="@string/usernameHint"
         android:id="@+id/uname"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
@@ -34,18 +33,20 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/passwordHint"
+        android:typeface="serif"
         android:textColorHint="@color/primary_dark_material_light"
         android:id="@+id/pword"
         android:layout_above="@+id/login"
         android:layout_alignStart="@+id/uname"
+        android:layout_alignLeft="@+id/uname"
         android:layout_marginBottom="41dp"
         android:textColor="#ffffff" />
 
     <Button
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:text="Log In"
+        android:text="@string/loginBtnText"
         android:id="@+id/login"
         android:layout_marginBottom="86dp"
         android:background="?android:attr/selectableItemBackground"
@@ -53,17 +54,19 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/icon"
         android:layout_alignEnd="@+id/icon"
-        android:textSize="25dp"
+        android:layout_alignLeft="@+id/icon"
+        android:layout_alignRight="@+id/icon"
+        android:textSize="25sp"
         android:onClick="logIn" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ME ME INN"
+        android:text="@string/logoText"
         style="@style/Base.V21.Theme.AppCompat"
         android:id="@+id/name"
         android:textColor="#FF3F59"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textAlignment="center"
         android:layout_alignBottom="@+id/icon"
         android:layout_centerHorizontal="true" />
@@ -72,11 +75,13 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:textAllCaps="false"
-        android:text="Sign Up for ME ME INN"
+        android:text="@string/gotoSignUpBtnText"
         android:id="@+id/signup"
         android:layout_marginBottom="36dp"
         android:layout_alignParentBottom="true"
         android:layout_alignEnd="@+id/login"
+        android:layout_alignLeft="@+id/login"
+        android:layout_alignRight="@+id/login"
         android:textColor="#FFFFFF"
         android:background="?android:attr/selectableItemBackground"
 

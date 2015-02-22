@@ -14,11 +14,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ME ME INN"
+        android:text="@string/logoText"
         style="@style/Base.V21.Theme.AppCompat"
         android:id="@+id/name"
         android:textColor="#FF3F59"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textAlignment="center"
         android:layout_alignBottom="@+id/icon"
         android:layout_centerHorizontal="true" />
@@ -26,40 +26,46 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go To Vocabulary"
+        android:text="@string/gotoVocab"
         android:id="@+id/vocab"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:background="#ff6c303c"
         android:layout_centerVertical="true"
         android:layout_alignEnd="@+id/icon"
         android:textAllCaps="false"
         android:layout_alignStart="@+id/icon"
+        android:layout_alignLeft="@+id/icon"
+        android:layout_alignRight="@+id/icon"
         android:onClick="gotoVocab" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Match with Friends"
+        android:text="@string/matchFriend"
         android:id="@+id/friends"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:background="#ffb39a6d"
         android:layout_below="@+id/vocab"
         android:layout_alignStart="@+id/vocab"
         android:layout_marginTop="43dp"
         android:textAllCaps="false"
-        android:layout_alignEnd="@+id/vocab" />
+        android:layout_alignEnd="@+id/vocab"
+        android:layout_alignLeft="@+id/vocab"
+        android:layout_alignRight="@+id/vocab" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Match in Ladder"
+        android:text="@string/matchLadder"
         android:id="@+id/ladder"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:background="#ff809e6d"
         android:layout_below="@+id/friends"
         android:layout_alignStart="@+id/friends"
         android:layout_marginTop="43dp"
         android:textAllCaps="false"
-        android:layout_alignEnd="@+id/friends" />
+        android:layout_alignEnd="@+id/friends"
+        android:layout_alignLeft="@+id/friends"
+        android:layout_alignRight="@+id/friends" />
 
 </RelativeLayout>
