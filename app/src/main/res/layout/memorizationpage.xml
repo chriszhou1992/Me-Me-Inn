@@ -66,4 +66,14 @@
         android:layout_alignRight="@+id/icon"
         android:layout_marginBottom="90dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/sessionMarker"
+        android:id="@+id/textView"
+        android:layout_below="@+id/previous"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ff7fff71" />
+
 </RelativeLayout>

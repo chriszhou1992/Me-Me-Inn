@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/background"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/readyq"
+    android:clickable="false">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/icon"
+        android:src="@drawable/img3"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quizName"
+        style="@style/Base.V21.Theme.AppCompat"
+        android:id="@+id/name"
+        android:textColor="#ff86ffc1"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:layout_alignBottom="@+id/icon"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/questionQuiz"
+        android:id="@+id/questionQuiz"
+        android:textStyle="bold"
+        android:layout_below="@+id/icon"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffff8c75" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/testWord"
+        android:id="@+id/testWord"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/questionQuiz"
+        android:textColor="#ff9dff6d" />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_button"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/meaning0"
+        android:id="@+id/button0"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_button"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/meaning1"
+        android:id="@+id/button1"
+        android:layout_below="@+id/button0"
+        android:layout_alignLeft="@+id/button0"
+        android:layout_alignStart="@+id/button0"
+        android:layout_marginTop="25dp"
+        />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_button"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/meaning2"
+        android:id="@+id/button2"
+        android:layout_below="@+id/button0"
+        android:layout_alignLeft="@+id/button0"
+        android:layout_alignStart="@+id/button0"
+        android:layout_marginTop="100dp"
+        />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_button"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/meaning3"
+        android:id="@+id/button3"
+        android:layout_below="@+id/button0"
+        android:layout_alignLeft="@+id/button0"
+        android:layout_alignStart="@+id/button0"
+        android:layout_marginTop="175dp"
+        />
+
+
+    <!--<RadioGroup-->
+        <!--android:id="@+id/questionSelection"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="false"-->
+        <!--android:layout_alignRight="@+id/icon"-->
+        <!--android:layout_alignEnd="@+id/icon"-->
+        <!--android:layout_below="@+id/testWord"-->
+        <!--android:layout_alignLeft="@+id/icon"-->
+        <!--android:layout_alignStart="@+id/icon">-->
+
+        <!--<RadioButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/meaning0"-->
+            <!--android:id="@+id/meaning0"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_below="@+id/testWord"-->
+            <!--android:checked="false" />-->
+
+        <!--<RadioButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/meaning1"-->
+            <!--android:id="@+id/radioButton2"-->
+            <!--android:layout_below="@+id/meaning1"-->
+            <!--android:layout_alignLeft="@+id/meaning1"-->
+            <!--android:layout_alignStart="@+id/meaning1"-->
+            <!--android:checked="false" />-->
+
+        <!--<RadioButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/meaning2"-->
+            <!--android:id="@+id/meaning3"-->
+            <!--android:layout_below="@+id/radioButton2"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:checked="false" />-->
+
+        <!--<RadioButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/meaning3"-->
+            <!--android:id="@+id/radioButton4"-->
+            <!--android:layout_below="@+id/meaning3"-->
+            <!--android:layout_alignRight="@+id/meaning3"-->
+            <!--android:layout_alignEnd="@+id/meaning3"-->
+            <!--android:checked="false" />-->
+
+    <!--</RadioGroup>-->
+
+
+</RelativeLayout>

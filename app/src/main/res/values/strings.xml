@@ -39,6 +39,8 @@
     <string name="wordMeaning">Word meaning</string>
     <string name="prevBtnText">Previous</string>
     <string name="nextBtnText">Next</string>
+    <string name="sessionMarker">Try to remember it!(Review this word!)</string>
+
 
     <!--SignUp Page Strings-->
     <string name="usernameSignUpHint">Enter your username</string>
@@ -55,4 +57,23 @@
     <string name="satText">SAT</string>
     <string name="actText">ACT</string>
     <string name="toeflText">TOEFL</string>
+    <string name="toQuiz">to Quiz!</string>
+    <string name="toMemo">Review</string>
+
+
+    <!--Quiz Page Strings-->
+    <string name="quizName">quiz!</string>
+    <string name="readyq">ready to start?</string>
+    <string name="questionQuiz">Choose the right meaning for: </string>
+    <string name="testWord"> sample </string>
+    <string name="meaning0">  sample meaning 0</string>
+    <string name="meaning1">  sample meaning 1 </string>
+    <string name="meaning2">  sample meaning 2 </string>
+    <string name="meaning3">  sample meaning 3 </string>
+    <string name="toPreviousTestWord"> Last Word! </string>
+
+    <string name="toNextTestWord"> Next Word! </string>
+
+
+
 </resources>
