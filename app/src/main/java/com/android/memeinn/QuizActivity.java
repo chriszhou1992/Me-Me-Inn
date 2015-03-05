@@ -125,7 +125,7 @@ public class QuizActivity extends Activity {
                         int random;
                         for (int j = 0; j < NUM_OF_OPTIONS; j++) {
                             random = Utility.randomIntNonDuplicated(0, wordList.size() - 1, i);
-                            options[j] = wordList.get(random).getString("definition");
+                            options[j] = wordList.get(random).getString("definition").trim();
                         }
 
                         //pick where to place the correct answer
