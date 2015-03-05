@@ -12,7 +12,8 @@ import android.widget.TextView;
  */
 public class ChapterActivity extends Activity{
 
-    public final static String EXTRA_MESSAGE = "vocab.MESSAGE";
+    public final static String EXTRA_MESSAGE_FIRST_LETTER = "chapter.first.letter";
+    public final static String EXTRA_MESSAGE_VOCAB_TYPE = "chapter.vocab.type";
     private String vocabType = "";//the type of vocabulary
     private TextView vocabTypeView;
 
@@ -23,38 +24,18 @@ public class ChapterActivity extends Activity{
 
         Intent intent = getIntent();
         vocabType = intent.getStringExtra(VocabActivity.EXTRA_MESSAGE);
-        //do something with Parse
 
         vocabTypeView = (TextView) findViewById(R.id.vocabTypeView);
         // Give TextView a correct type name
         vocabTypeView.setText(vocabType);
     }
 
-    public void onClickA(View view) {
+    public void onClick(View view) {
         Intent MemorizationIntent = new Intent(this, MemorizationActivity.class);
-        String ButtonText = ((Button) findViewById(R.id.buttonA)).getText().toString();
-        MemorizationIntent.putExtra(EXTRA_MESSAGE, ButtonText);
+        MemorizationIntent.putExtra(EXTRA_MESSAGE_VOCAB_TYPE, vocabType);
+        String firstLetter = ((Button) view).getText().toString();
+        MemorizationIntent.putExtra(EXTRA_MESSAGE_FIRST_LETTER, firstLetter);
         startActivity(MemorizationIntent);
     }
 
-    public void onClickB(View view) {
-        Intent MemorizationIntent = new Intent(this, MemorizationActivity.class);
-        String ButtonText = ((Button) findViewById(R.id.buttonB)).getText().toString();
-        MemorizationIntent.putExtra(EXTRA_MESSAGE, ButtonText);
-        startActivity(MemorizationIntent);
-    }
-
-    public void onClickC(View view) {
-        Intent MemorizationIntent = new Intent(this, MemorizationActivity.class);
-        String ButtonText = ((Button) findViewById(R.id.buttonC)).getText().toString();
-        MemorizationIntent.putExtra(EXTRA_MESSAGE, ButtonText);
-        startActivity(MemorizationIntent);
-    }
-
-    public void onClickD(View view) {
-        Intent MemorizationIntent = new Intent(this, MemorizationActivity.class);
-        String ButtonText = ((Button) findViewById(R.id.buttonD)).getText().toString();
-        MemorizationIntent.putExtra(EXTRA_MESSAGE, ButtonText);
-        startActivity(MemorizationIntent);
-    }
 }

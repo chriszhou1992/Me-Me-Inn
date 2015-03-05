@@ -43,7 +43,7 @@
             android:background="#ff6c303c"
             android:textAllCaps="false"
             android:layout_gravity="center_horizontal"
-            android:onClick="onClickA"/>
+            android:onClick="onClick"/>
         <Button
             android:id="@+id/buttonB"
             android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
             android:background="#ff6c303c"
             android:textAllCaps="false"
             android:layout_gravity="center_horizontal"
-            android:onClick="onClickB"/>
+            android:onClick="onClick"/>
         <Button
             android:id="@+id/buttonC"
             android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
             android:background="#ff6c303c"
             android:textAllCaps="false"
             android:layout_gravity="center_horizontal"
-            android:onClick="onClickC"/>
+            android:onClick="onClick"/>
         <Button
             android:id="@+id/buttonD"
             android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
             android:background="#ff6c303c"
             android:textAllCaps="false"
             android:layout_gravity="center_horizontal"
-            android:onClick="onClickD"/>
+            android:onClick="onClick"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
