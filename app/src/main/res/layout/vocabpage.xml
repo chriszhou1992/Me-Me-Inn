@@ -17,7 +17,7 @@ android:layout_width="match_parent" android:layout_height="match_parent">
     android:text="@string/vocabText"
     style="@style/Base.V21.Theme.AppCompat"
     android:id="@+id/name"
-    android:textColor="#FF3F59"
+    android:textColor="@color/logo_color"
     android:textSize="30sp"
     android:textAlignment="center"
     android:layout_alignBottom="@+id/icon"

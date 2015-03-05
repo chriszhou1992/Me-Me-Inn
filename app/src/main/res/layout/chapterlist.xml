@@ -17,7 +17,7 @@
         android:text="@string/toeflText"
         style="@style/Base.V21.Theme.AppCompat"
         android:id="@+id/name"
-        android:textColor="#FF3F59"
+        android:textColor="@color/logo_color"
         android:textSize="30sp"
         android:textAlignment="center"
         android:layout_alignBottom="@+id/icon"
@@ -39,7 +39,7 @@
             android:layout_margin="10dp"
             android:text="@string/chapter1Text"
             android:textSize="18sp"
-            android:background="#ff6c303c"
+            android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
             android:layout_gravity="center_horizontal" />
         <Button
@@ -48,7 +48,7 @@
             android:layout_margin="10dp"
             android:text="@string/chapter2Text"
             android:textSize="18sp"
-            android:background="#ff6c303c"
+            android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
             android:layout_gravity="center_horizontal" />
         <Button
@@ -57,7 +57,7 @@
             android:layout_margin="10dp"
             android:text="@string/chapter3Text"
             android:textSize="18sp"
-            android:background="#ff6c303c"
+            android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
             android:layout_gravity="center_horizontal" />
         <Button
@@ -66,7 +66,7 @@
             android:layout_margin="10dp"
             android:text="@string/chapter4Text"
             android:textSize="18sp"
-            android:background="#ff6c303c"
+            android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
             android:layout_gravity="center_horizontal" />
         <Button
@@ -75,7 +75,7 @@
             android:layout_margin="10dp"
             android:text="@string/chapter5Text"
             android:textSize="18sp"
-            android:background="#ff6c303c"
+            android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
             android:layout_gravity="center_horizontal" />
         <Button
@@ -84,7 +84,7 @@
             android:layout_margin="10dp"
             android:text="@string/chapter6Text"
             android:textSize="18sp"
-            android:background="#ff6c303c"
+            android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
             android:layout_gravity="center_horizontal" />
         <Button
@@ -93,7 +93,7 @@
             android:layout_margin="10dp"
             android:text="@string/chapter7Text"
             android:textSize="18sp"
-            android:background="#ff6c303c"
+            android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
             android:layout_gravity="center_horizontal" />
         <Button
@@ -102,7 +102,7 @@
             android:layout_margin="10dp"
             android:text="@string/chapter8Text"
             android:textSize="18sp"
-            android:background="#ff6c303c"
+            android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
             android:layout_gravity="center_horizontal" />
         <Button
@@ -111,7 +111,7 @@
             android:layout_margin="10dp"
             android:text="@string/chapter9Text"
             android:textSize="18sp"
-            android:background="#ff6c303c"
+            android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
             android:layout_gravity="center_horizontal" />
         <Button
@@ -120,7 +120,7 @@
             android:layout_margin="10dp"
             android:text="@string/chapter10Text"
             android:textSize="18sp"
-            android:background="#ff6c303c"
+            android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
             android:layout_gravity="center_horizontal" />
         <Button
@@ -129,7 +129,7 @@
             android:layout_margin="10dp"
             android:text="@string/chapter11Text"
             android:textSize="18sp"
-            android:background="#ff6c303c"
+            android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
             android:layout_gravity="center_horizontal" />
 

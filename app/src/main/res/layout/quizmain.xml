@@ -3,7 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/background"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:id="@+id/readyq"
+    android:id="@+id/quizLayout"
     android:clickable="false">
 
     <ImageView
@@ -53,10 +53,10 @@
         android:background="@drawable/round_button"
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/meaning0"
-        android:id="@+id/button0"
+        android:id="@+id/option0"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        />
+        android:onClick="choiceClicked" />
 
     <Button
         android:layout_width="300dp"
@@ -64,10 +64,10 @@
         android:background="@drawable/round_button"
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/meaning1"
-        android:id="@+id/button1"
-        android:layout_below="@+id/button0"
-        android:layout_alignLeft="@+id/button0"
-        android:layout_alignStart="@+id/button0"
+        android:id="@+id/option1"
+        android:layout_below="@+id/option0"
+        android:layout_alignLeft="@+id/option0"
+        android:layout_alignStart="@+id/option0"
         android:layout_marginTop="25dp"
         />
 
@@ -77,10 +77,10 @@
         android:background="@drawable/round_button"
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/meaning2"
-        android:id="@+id/button2"
-        android:layout_below="@+id/button0"
-        android:layout_alignLeft="@+id/button0"
-        android:layout_alignStart="@+id/button0"
+        android:id="@+id/option2"
+        android:layout_below="@+id/option0"
+        android:layout_alignLeft="@+id/option0"
+        android:layout_alignStart="@+id/option0"
         android:layout_marginTop="100dp"
         />
 
@@ -90,12 +90,20 @@
         android:background="@drawable/round_button"
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/meaning3"
-        android:id="@+id/button3"
-        android:layout_below="@+id/button0"
-        android:layout_alignLeft="@+id/button0"
-        android:layout_alignStart="@+id/button0"
+        android:id="@+id/option3"
+        android:layout_below="@+id/option0"
+        android:layout_alignLeft="@+id/option0"
+        android:layout_alignStart="@+id/option0"
         android:layout_marginTop="175dp"
         />
+
+    <ProgressBar
+        android:id="@+id/spinner"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone" />
 
 
     <!--<RadioGroup-->
