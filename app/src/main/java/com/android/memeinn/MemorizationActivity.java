@@ -65,16 +65,17 @@ public class MemorizationActivity extends ActionBarActivity {
     private void initDict() {
         this.dict = new LinkedHashMap<String, String>();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("GRE");
-        query.whereStartsWith("Word", firstLetter.toLowerCase());
+        query.whereStartsWith("word", firstLetter.toLowerCase());
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> wordList, ParseException e) {
                 if (e == null) {
                     // Query success
                     for (ParseObject word : wordList) {
-                        dict.put(word.getString("Word"), word.getString("Definition"));
+                        dict.put(word.getString("word"), word.getString("definition"));
                     }
                     indexedList = new ArrayList<Map.Entry<String, String>>(dict.entrySet());
+                    initMemorizationView();
                 } else {
                     Log.e("GetWordError", e.toString());
                 }
@@ -84,7 +85,7 @@ public class MemorizationActivity extends ActionBarActivity {
     }
 
     private void initMemorizationView() {
-        getEntryWithPos(1);
+        getEntryWithPos(0);
     }
 
     private void updateMemorizationView() {
