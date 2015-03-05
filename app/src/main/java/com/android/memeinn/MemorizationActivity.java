@@ -18,6 +18,7 @@ import com.parse.*;
 
 public class MemorizationActivity extends ActionBarActivity {
 
+    private String vocabType = "";
     private String firstLetter = "";
     private Map<String, String> dict;
     private List<Entry<String, String>> indexedList;
@@ -38,7 +39,8 @@ public class MemorizationActivity extends ActionBarActivity {
         wordMeaningView = (TextView) findViewById(R.id.wordMeaningView);
 
         Intent intent = getIntent();
-        firstLetter = intent.getStringExtra(VocabActivity.EXTRA_MESSAGE);
+        vocabType = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);
+        firstLetter = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FIRST_LETTER);
         initDict();
     }
 
@@ -64,7 +66,7 @@ public class MemorizationActivity extends ActionBarActivity {
 
     private void initDict() {
         this.dict = new LinkedHashMap<String, String>();
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("GRE");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(vocabType);
         query.whereStartsWith("word", firstLetter.toLowerCase());
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -75,7 +77,6 @@ public class MemorizationActivity extends ActionBarActivity {
                         dict.put(word.getString("word"), word.getString("definition"));
                     }
                     indexedList = new ArrayList<Map.Entry<String, String>>(dict.entrySet());
-                    initMemorizationView();
                 } else {
                     Log.e("GetWordError", e.toString());
                 }
@@ -85,7 +86,7 @@ public class MemorizationActivity extends ActionBarActivity {
     }
 
     private void initMemorizationView() {
-        getEntryWithPos(0);
+        getEntryWithPos(1);
     }
 
     private void updateMemorizationView() {
