@@ -26,8 +26,8 @@ public class LoginActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
-
+        setContentView(R.layout.vocabpage);
+    /*
         //Initialize Parse API to initialize connection to cloud
         Parse.initialize(this, "l5qhJIZRq3vPDrHTmyzPu3z6IwMjukw7M3h9A8CZ",
                 "iLgCs4Z7I71j1L9DIWrjwjkCZ02yc6KuDsYVO60e");
@@ -35,6 +35,7 @@ public class LoginActivity extends ActionBarActivity {
         //Fix the issue Android changes the font of password fields into monospace
         EditText passField = (EditText) findViewById(R.id.pword);
         passField.setTypeface(Typeface.DEFAULT);
+        */
     }
 
 

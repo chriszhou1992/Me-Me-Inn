@@ -46,7 +46,8 @@
         android:layout_below="@+id/name"
         android:layout_alignStart="@+id/name"
         android:layout_alignLeft="@+id/name"
-        android:layout_marginTop="31dp" />
+        android:layout_marginTop="31dp"
+        android:onClick="gotoGREChapList" />
 
     <Button
         android:layout_width="wrap_content"
