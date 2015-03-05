@@ -9,7 +9,8 @@
         android:allowBackup="true"
         android:icon="@drawable/img3"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:name=".MeMeInnApp">
 
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -39,7 +40,6 @@
             android:label="@string/app_name" >
         </activity>
 
-
         <activity
             android:name=".VocabActivity"
             android:label="@string/app_name" >
@@ -49,17 +49,16 @@
             android:name=".QuizActivity"
             android:label="@string/app_name" >
         </activity>
+
         <activity
-            android:name=".QuizResult"
+            android:name=".QuizResultActivity"
             android:label="@string/app_name" >
         </activity>
-
 
         <activity
             android:name=".VocabMemoActivity"
             android:label="@string/app_name" >
         </activity>
-
 
     </application>
 

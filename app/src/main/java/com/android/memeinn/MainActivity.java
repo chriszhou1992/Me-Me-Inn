@@ -6,15 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
-/**
- * Created by bchen11 on 2/19/15.
- */
+
+
 public class MainActivity extends Activity{
 
     @Override

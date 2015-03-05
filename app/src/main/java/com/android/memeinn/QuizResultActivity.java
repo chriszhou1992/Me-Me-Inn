@@ -8,23 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * Created by bchen11 on 3/4/15.
- */
-public class QuizResult extends Activity {
+
+public class QuizResultActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quizresult);
         ViewGroup gr = (ViewGroup)getWindow().getDecorView().findViewById(android.R.id.content);
         Log.d("MyApp", "enter the group, gr count is " + gr);
 
-
-        for(int i = 0; i < gr.getChildCount(); i++){
-            View view = gr.getChildAt(i);
+        //for(int i = 0; i < gr.getChildCount(); i++){
+            //View view = gr.getChildAt(i);
             //Log.d("MyApp", "view name " + getResources().getResourceEntryName(view.getId()));
-        }
-
-
+        //}
 
         View v = findViewById(R.id.backButton);
         Log.d("MyApp", "view type is " + v.getClass().getName());
@@ -40,7 +35,7 @@ public class QuizResult extends Activity {
 
 
     public void goBack(View view){
-                Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(mainIntent);
+        Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(mainIntent);
     }
 }
