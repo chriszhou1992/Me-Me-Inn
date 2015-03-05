@@ -17,10 +17,10 @@ public class VocabActivity extends Activity{
         //Parse.initialize(this, "l5qhJIZRq3vPDrHTmyzPu3z6IwMjukw7M3h9A8CZ", "iLgCs4Z7I71j1L9DIWrjwjkCZ02yc6KuDsYVO60e");
     }
 
-    public void gotoGREChapList(View view) {
-        Intent GREIntent = new Intent(this, ChapterActivity.class);
-        String GREButtonText = ((Button) findViewById(R.id.gre)).getText().toString();
-        GREIntent.putExtra(EXTRA_MESSAGE, GREButtonText);
-        startActivity(GREIntent);
+    public void gotoChapList(View view) {
+        Intent goToChapIntent = new Intent(this, ChapterActivity.class);
+        String vocabType = ((Button) /*findViewById(R.id.gre)*/view).getText().toString();
+        goToChapIntent.putExtra(EXTRA_MESSAGE, vocabType);
+        startActivity(goToChapIntent);
     }
 }
