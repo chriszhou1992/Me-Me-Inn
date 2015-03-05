@@ -10,6 +10,7 @@
 
     <string name="logoText">ME ME INN</string>
 
+
     <!--Main Page Strings-->
     <string name="gotoVocab">Go To Vocabulary</string>
     <string name="matchFriend">Match with Friends</string>
@@ -71,9 +72,14 @@
     <string name="meaning2">  sample meaning 2 </string>
     <string name="meaning3">  sample meaning 3 </string>
     <string name="toPreviousTestWord"> Last Word! </string>
-
     <string name="toNextTestWord"> Next Word! </string>
 
+    <!--Quiz Result Page Strings-->
+    <string name="resultSentence"> Congratulations on finishing the quiz! </string>
+    <string name="score"> Your quiz score </string>
+
+    <!--Universal Strings-->
+    <string name="goBack"> Back to main menu </string>
 
 
 </resources>

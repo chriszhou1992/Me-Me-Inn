@@ -70,10 +70,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/sessionMarker"
+        android:text="Large Text"
         android:id="@+id/textView"
-        android:layout_below="@+id/previous"
-        android:layout_centerHorizontal="true"
-        android:textColor="#ff7fff71" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/name"
+        android:layout_alignStart="@+id/name" />
 
 </RelativeLayout>

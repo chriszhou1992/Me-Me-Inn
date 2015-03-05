@@ -55,7 +55,8 @@
         android:text="@string/meaning0"
         android:id="@+id/button0"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        />
 
     <Button
         android:layout_width="300dp"
