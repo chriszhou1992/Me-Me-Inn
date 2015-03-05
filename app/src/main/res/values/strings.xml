@@ -22,10 +22,10 @@
     <string name="gotoSignUpBtnText">Sign Up for ME ME INN</string>
 
     <!--Chapter List Page Strings-->
-    <string name="chapter1Text">Chapter 1</string>
-    <string name="chapter2Text">Chapter 2</string>
-    <string name="chapter3Text">Chapter 3</string>
-    <string name="chapter4Text">Chapter 4</string>
+    <string name="chapter1Text">A</string>
+    <string name="chapter2Text">B</string>
+    <string name="chapter3Text">C</string>
+    <string name="chapter4Text">D</string>
     <string name="chapter5Text">Chapter 5</string>
     <string name="chapter6Text">Chapter 6</string>
     <string name="chapter7Text">Chapter 7</string>
@@ -55,4 +55,5 @@
     <string name="satText">SAT</string>
     <string name="actText">ACT</string>
     <string name="toeflText">TOEFL</string>
+    <string name="vocabType">type</string>
 </resources>

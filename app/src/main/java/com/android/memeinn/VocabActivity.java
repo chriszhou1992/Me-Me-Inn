@@ -4,12 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-
+import android.widget.Button;
 
 public class VocabActivity extends Activity{
 
     public final static String EXTRA_MESSAGE = "vocab.MESSAGE";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,10 +19,8 @@ public class VocabActivity extends Activity{
 
     public void gotoGREChapList(View view) {
         Intent GREIntent = new Intent(this, ChapterActivity.class);
-        EditText editText = (EditText) findViewById(R.id.gre);
-        String message = editText.getText().toString();
-        GREIntent.putExtra(EXTRA_MESSAGE, message);
+        String GREButtonText = ((Button) findViewById(R.id.gre)).getText().toString();
+        GREIntent.putExtra(EXTRA_MESSAGE, GREButtonText);
         startActivity(GREIntent);
     }
-
 }
