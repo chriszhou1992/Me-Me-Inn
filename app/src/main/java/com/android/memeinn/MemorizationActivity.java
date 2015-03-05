@@ -55,7 +55,7 @@ public class MemorizationActivity extends ActionBarActivity {
     public void onClickPrev(View view) {
         if (currPos > 0) {
             currPos --;
-            if (currPos < 0) {
+            if (currPos == 0) {
                 currPos = dict.size() - 1;
             }
             updateMemorizationView();
@@ -84,7 +84,7 @@ public class MemorizationActivity extends ActionBarActivity {
     }
 
     private void initMemorizationView() {
-        getEntryWithPos(0);
+        getEntryWithPos(1);
     }
 
     private void updateMemorizationView() {
