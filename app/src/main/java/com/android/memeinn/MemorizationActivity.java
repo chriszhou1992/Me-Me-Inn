@@ -55,9 +55,9 @@ public class MemorizationActivity extends ActionBarActivity {
     }
 
     public void onClickPrev(View view) {
-        if (currPos > 0) {
+        if (currPos >= 0) {
             currPos --;
-            if (currPos == 0) {
+            if (currPos < 0) {
                 currPos = dict.size() - 1;
             }
             updateMemorizationView();
@@ -77,6 +77,7 @@ public class MemorizationActivity extends ActionBarActivity {
                         dict.put(word.getString("word"), word.getString("definition"));
                     }
                     indexedList = new ArrayList<Map.Entry<String, String>>(dict.entrySet());
+                    initMemorizationView();
                 } else {
                     Log.e("GetWordError", e.toString());
                 }
@@ -86,7 +87,7 @@ public class MemorizationActivity extends ActionBarActivity {
     }
 
     private void initMemorizationView() {
-        getEntryWithPos(1);
+        getEntryWithPos(0);
     }
 
     private void updateMemorizationView() {
