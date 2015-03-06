@@ -68,8 +68,14 @@
             android:name=".MemorizationActivity"
             android:label="@string/title_activity_memorization" >
         </activity>
+
         <activity
             android:name=".ProfileActivity"
+            android:label="@string/app_name" >
+        </activity>
+
+        <activity
+            android:name=".ReviewActivity"
             android:label="@string/app_name" >
         </activity>
 

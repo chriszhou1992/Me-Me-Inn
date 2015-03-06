@@ -78,5 +78,13 @@
     <!--Universal Strings-->
     <string name="goBack"> Back to main menu </string>
 
+    <!--Review Page Strings-->
+    <string name="tableLayoutID"></string>
+
+    <!--Profile Page Strings-->
+    <string name="reviewBtnText">Review Vocabulary</string>
+    <string name="rankBtnText">Ranking</string>
+    <string name="friendBtnText">Friends</string>
+    <string name="usernameText">Username</string>
 
 </resources>

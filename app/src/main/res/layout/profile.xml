@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username"
+        android:text="@string/usernameText"
         style="@style/Base.V21.Theme.AppCompat"
         android:id="@+id/name"
         android:textColor="#FF3F59"
@@ -27,7 +27,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ranking"
+        android:text="@string/rankBtnText"
         android:id="@+id/ranking"
         android:textSize="18sp"
         android:background="#ff6c303c"
@@ -41,7 +41,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Review Vocabulary"
+        android:text="@string/reviewBtnText"
         android:id="@+id/scores"
         android:textSize="18sp"
         android:background="#ff809e6d"
@@ -51,12 +51,14 @@
         android:textAllCaps="false"
         android:layout_alignEnd="@+id/ranking"
         android:layout_alignLeft="@+id/ranking"
-        android:layout_alignRight="@+id/ranking" />
+        android:layout_alignRight="@+id/ranking"
+        android:onClick="gotoReview"
+        android:nestedScrollingEnabled="false"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Friends"
+        android:text="@string/friendBtnText"
         android:id="@+id/friends"
         android:textSize="18sp"
         android:background="#ffb39a6d"

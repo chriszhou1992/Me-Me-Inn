@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:id="@+id/ScrlView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
@@ -10,75 +16,91 @@
              android:paddingTop="@dimen/activity_vertical_margin"
              android:background="@color/background_color"
              android:paddingBottom="@dimen/activity_vertical_margin"
+             android:id="@+id/reviewTable"
              >
 
-    <TableRow>
+    <!--TableRow>
         <TextView
             android:layout_column="1"
             android:text="Open..."
-            android:padding="3dip" />
+            android:padding="3dip"
+            android:textColor="@color/white" />
         <TextView
             android:text="Ctrl-O"
             android:gravity="right"
-            android:padding="3dip" />
+            android:padding="3dip"
+            android:textColor="@color/white" />
     </TableRow>
 
     <TableRow>
         <TextView
             android:layout_column="1"
             android:text="Save..."
-            android:padding="3dip" />
+            android:padding="3dip"
+            android:textColor="@color/white" />
         <TextView
             android:text="Ctrl-S"
             android:gravity="right"
-            android:padding="3dip" />
+            android:padding="3dip"
+            android:textColor="@color/white" />
     </TableRow>
 
     <TableRow>
         <TextView
             android:layout_column="1"
             android:text="Save As..."
-            android:padding="3dip" />
+            android:padding="3dip"
+            android:textColor="@color/white" />
         <TextView
             android:text="Ctrl-Shift-S"
             android:gravity="right"
-            android:padding="3dip" />
+            android:padding="3dip"
+            android:textColor="@color/white" />
     </TableRow>
 
     <View
         android:layout_height="2dip"
-        android:background="#FF909090" />
+        android:background="#FF909090"
+        android:textColor="@color/white"/>
 
     <TableRow>
         <TextView
             android:text="X"
-            android:padding="3dip" />
+            android:padding="3dip"
+            android:textColor="@color/white" />
         <TextView
             android:text="Import..."
-            android:padding="3dip" />
+            android:padding="3dip"
+            android:textColor="@color/white" />
     </TableRow>
 
     <TableRow>
         <TextView
             android:text="X"
-            android:padding="3dip" />
+            android:padding="3dip"
+            android:textColor="@color/white" />
         <TextView
             android:text="Export..."
-            android:padding="3dip" />
+            android:padding="3dip"
+            android:textColor="@color/white" />
         <TextView
             android:text="Ctrl-E"
             android:gravity="right"
-            android:padding="3dip" />
+            android:padding="3dip"
+            android:textColor="@color/white" />
     </TableRow>
 
     <View
         android:layout_height="2dip"
-        android:background="#FF909090" />
+        android:background="#FF909090"
+        android:textColor="@color/white" />
 
     <TableRow>
         <TextView
             android:layout_column="1"
             android:text="Quit"
-            android:padding="3dip" />
-    </TableRow>
+            android:padding="3dip"
+            android:textColor="@color/white" />
+    </TableRow-->
 </TableLayout>
+</ScrollView>
