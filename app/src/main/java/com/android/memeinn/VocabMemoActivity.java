@@ -27,34 +27,34 @@ public class VocabMemoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.memorizationpage);
 
-        getWords(getWindow().getDecorView().findViewById(android.R.id.content));
+        //getWords(getWindow().getDecorView().findViewById(android.R.id.content));
     }
 
     /**
      * triggers intent to quiz activity
      * @param view
      */
-    public void getWords(View view) {
-        Log.d("MyApp", "enter getwords");
-
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("GRE");
-        query.whereStartsWith("Word", "a");
-        query.findInBackground(new FindCallback<ParseObject>(){
-            @Override
-            public void done(List<ParseObject> capList, ParseException e) {
-                Log.d("MyApp", "enter done");
-
-                if (e == null && capList.size() >= 4) {
-                            TextView meaning = (TextView)findViewById(R.id.wordmeaning);
-                            TextView word = (TextView)findViewById(R.id.name);
-                            meaning.setText(capList.get(0).getString("Definition"));
-                            word.setText(capList.get(0).getString("Word"));
-                }
-                else{
-                    Log.d("MyApp", "cap size is null " + capList.size());
-                }
-            }
-        });
-    };
+//    public void getWords(View view) {
+//        Log.d("MyApp", "enter getwords");
+//
+//        ParseQuery<ParseObject> query = ParseQuery.getQuery("GRE");
+//        query.whereStartsWith("Word", "a");
+//        query.findInBackground(new FindCallback<ParseObject>(){
+//            @Override
+//            public void done(List<ParseObject> capList, ParseException e) {
+//                Log.d("MyApp", "enter done");
+//
+//                if (e == null && capList.size() >= 4) {
+//                            TextView meaning = (TextView)findViewById(R.id.wordmeaning);
+//                            TextView word = (TextView)findViewById(R.id.name);
+//                            meaning.setText(capList.get(0).getString("Definition"));
+//                            word.setText(capList.get(0).getString("Word"));
+//                }
+//                else{
+//                    Log.d("MyApp", "cap size is null " + capList.size());
+//                }
+//            }
+//        });
+//    };
 
 }

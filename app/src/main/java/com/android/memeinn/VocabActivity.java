@@ -3,6 +3,7 @@ package com.android.memeinn;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -39,6 +40,7 @@ public class VocabActivity extends Activity{
     public void gotoChapList(View view) {
         Intent goToChapIntent = new Intent(this, ChapterActivity.class);
         String vocabType = ((Button) /*findViewById(R.id.gre)*/view).getText().toString();
+        Log.d("MyApp", "VocabType" + vocabType);
         goToChapIntent.putExtra(EXTRA_MESSAGE, vocabType);
         startActivity(goToChapIntent);
     }

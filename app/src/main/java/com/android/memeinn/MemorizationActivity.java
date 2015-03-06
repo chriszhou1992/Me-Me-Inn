@@ -40,6 +40,7 @@ public class MemorizationActivity extends ActionBarActivity {
 
         Intent intent = getIntent();
         vocabType = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);
+        Log.d("myapp", "Memorization.vocabType = " + vocabType);
         firstLetter = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FIRST_LETTER);
         initDict();
     }

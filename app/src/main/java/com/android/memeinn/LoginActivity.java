@@ -64,7 +64,7 @@ public class LoginActivity extends ActionBarActivity {
         try {
             ParseUser.logIn(usernameField.getText().toString(), passField.getText().toString());
             //Intent mainIntent = new Intent(this, MainActivity.class);
-            Intent mainIntent = new Intent(this, QuizActivity.class);
+            Intent mainIntent = new Intent(this, MainActivity.class);
             startActivity(mainIntent);
         } catch (ParseException e) {
             Log.d("MyApp", e.getMessage());

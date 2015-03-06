@@ -3,6 +3,7 @@ package com.android.memeinn;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,6 +29,8 @@ public class ChapterActivity extends Activity{
         vocabTypeView = (TextView) findViewById(R.id.vocabTypeView);
         // Give TextView a correct type name
         vocabTypeView.setText(vocabType);
+
+        Log.d("myapp", "Chapter.vocabType = " + vocabType);
     }
 
     public void onClick(View view) {

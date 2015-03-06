@@ -13,7 +13,6 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
-
 public class SignUpActivity extends Activity {
 
     @Override
