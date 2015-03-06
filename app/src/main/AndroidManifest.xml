@@ -40,6 +40,7 @@
             android:label="@string/app_name" >
         </activity>
 
+
         <activity
             android:name=".VocabActivity"
             android:label="@string/app_name" >
@@ -59,7 +60,14 @@
             android:name=".VocabMemoActivity"
             android:label="@string/app_name" >
         </activity>
-
+        <activity
+            android:name=".ChapterActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".MemorizationActivity"
+            android:label="@string/title_activity_memorization" >
+        </activity>
     </application>
 
 </manifest>

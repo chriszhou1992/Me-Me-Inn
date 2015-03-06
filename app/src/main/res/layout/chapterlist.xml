@@ -14,9 +14,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/toeflText"
+        android:text="@string/vocabType"
         style="@style/Base.V21.Theme.AppCompat"
-        android:id="@+id/name"
+        android:id="@+id/vocabTypeView"
         android:textColor="@color/logo_color"
         android:textSize="30sp"
         android:textAlignment="center"
@@ -34,6 +34,7 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/buttonA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -41,8 +42,10 @@
             android:textSize="18sp"
             android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="onClick"/>
         <Button
+            android:id="@+id/buttonB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -50,8 +53,10 @@
             android:textSize="18sp"
             android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="onClick"/>
         <Button
+            android:id="@+id/buttonC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -59,8 +64,10 @@
             android:textSize="18sp"
             android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="onClick"/>
         <Button
+            android:id="@+id/buttonD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -68,7 +75,8 @@
             android:textSize="18sp"
             android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="onClick"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

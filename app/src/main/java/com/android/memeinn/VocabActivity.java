@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 
 public class VocabActivity extends Activity{
+
+    public final static String EXTRA_MESSAGE = "vocab.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,4 +36,10 @@ public class VocabActivity extends Activity{
         startActivity(memoAct);
     }
 
+    public void gotoChapList(View view) {
+        Intent goToChapIntent = new Intent(this, ChapterActivity.class);
+        String vocabType = ((Button) /*findViewById(R.id.gre)*/view).getText().toString();
+        goToChapIntent.putExtra(EXTRA_MESSAGE, vocabType);
+        startActivity(goToChapIntent);
+    }
 }
