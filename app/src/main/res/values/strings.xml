@@ -77,6 +77,14 @@
 
     <!--Universal Strings-->
     <string name="goBack"> Back to main menu </string>
+    <!--review chart Strings-->
+
+    <string name="reviewProgress"> You have mastered 0/100 </string>
+    <string name="remember"> I no! ^_^ </string>
+    <string name="notRemember"> IDK...TT </string>
+    <string name="checkMeaning"> check out the meaning!</string>
+    <string name="finishReview"> finish the review</string>
+
 
 
 </resources>

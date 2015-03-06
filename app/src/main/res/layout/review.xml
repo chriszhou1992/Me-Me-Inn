@@ -27,7 +27,8 @@
         <TextView
             android:layout_column="1"
             android:text="Save..."
-            android:padding="3dip" />
+            android:padding="3dip"
+            android:id="@+id/" />
         <TextView
             android:text="Ctrl-S"
             android:gravity="right"
@@ -55,7 +56,8 @@
             android:padding="3dip" />
         <TextView
             android:text="Import..."
-            android:padding="3dip" />
+            android:padding="3dip"
+            android:id="@+id/" />
     </TableRow>
 
     <TableRow>
@@ -80,5 +82,25 @@
             android:layout_column="1"
             android:text="Quit"
             android:padding="3dip" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"></TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"></TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/button"
+            android:layout_column="5" />
     </TableRow>
 </TableLayout>
