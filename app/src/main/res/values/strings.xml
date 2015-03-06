@@ -32,7 +32,7 @@
 
     <!-- Memorization Page Strings -->
     <string name="wordContent">Word Content</string>
-    <string name="wordMeaning">Word meaning</string>
+    <string name="wordMeaning">Word Meaning</string>
     <string name="prevBtnText">Previous</string>
     <string name="nextBtnText">Next</string>
     <string name="sessionMarker">Try to remember it!(Review this word!)</string>
@@ -87,12 +87,15 @@
 
 
     <!--Review Page Strings-->
-    <string name="tableLayoutID"></string>
+    <string name="wordColHeader">Word</string>
+    <string name="definitionColHeader">Definition</string>
+    <string name="placeHolderTab">    </string>
 
     <!--Profile Page Strings-->
     <string name="reviewBtnText">Review Vocabulary</string>
     <string name="rankBtnText">Ranking</string>
     <string name="friendBtnText">Friends</string>
     <string name="usernameText">Username</string>
+
 
 </resources>
