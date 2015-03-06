@@ -37,6 +37,11 @@
             android:layout_column="2"/>
     </TableRow>
 
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090"
+        android:textColor="@color/white"/>
+
     <!--TableRow>
         <TextView
             android:layout_column="1"
