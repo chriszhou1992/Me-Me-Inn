@@ -36,6 +36,8 @@ public class QuizActivity extends Activity {
     private final int ROUNDS = 5;
     //private List<ParseObject> capL;
     private Queue<Question> questionQueue;
+    private String vocabCategory;
+    private String firstLetter;
     private ProgressBar spinner;
 
     private final int[] BTN_IDS = {R.id.option0, R.id.option1, R.id.option2, R.id.option3};
@@ -65,19 +67,6 @@ public class QuizActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "l5qhJIZRq3vPDrHTmyzPu3z6IwMjukw7M3h9A8CZ",
-                "iLgCs4Z7I71j1L9DIWrjwjkCZ02yc6KuDsYVO60e");
-
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        try {
-            testObject.save();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
         setContentView(R.layout.quizmain);
         score = 0;
         rounds = 0;
@@ -90,6 +79,21 @@ public class QuizActivity extends Activity {
         for (int i = 0; i < NUM_OF_OPTIONS; i++)
             optionBtns.add(i, (Button)findViewById(BTN_IDS[i]));
 
+        initAnimations();
+
+        vocabCategory = "GRE";
+        firstLetter = "a";
+        Intent i = getIntent();
+        if (i != null) {
+            vocabCategory = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);
+            firstLetter = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FIRST_LETTER);
+        }
+        questionQueue = new LinkedList<>();
+        //one DB fetch to generate all quiz questions needed
+        generateQuizQuestions();
+    }
+
+    private void initAnimations() {
         //fade-out/fade-in animations
         animatedView = findViewById(R.id.quizLayout);
         out.setDuration(1000);
@@ -130,8 +134,8 @@ public class QuizActivity extends Activity {
      * questions in one shot.
      */
     private void generateQuizQuestions() {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("GRE");
-        query.whereStartsWith("word", "a");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(vocabCategory);
+        query.whereStartsWith("word", firstLetter);
 
         //show an icon of loading spinner
         spinner.setVisibility(View.VISIBLE);
@@ -141,8 +145,6 @@ public class QuizActivity extends Activity {
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> wordList, ParseException e) {
-                Log.d("Myapp", "Done");
-
                 spinner.setVisibility(View.GONE);
                 if (e == null && wordList.size() >= ROUNDS) {
                     Log.d("MyApp", "get the object with size " + wordList.size());
@@ -172,8 +174,8 @@ public class QuizActivity extends Activity {
 
                     nextQuestion(); //display first question
                 } else {
-                    //Log.d("MyApp", "Oops, list too short with only size " + wordList.size());
-                    Log.d("MyApp", "Error: " + e.getMessage());
+                    Log.d("MyApp", "Oops, list too short with only size " + wordList.size());
+                    e.printStackTrace();
                 }
             }
         });

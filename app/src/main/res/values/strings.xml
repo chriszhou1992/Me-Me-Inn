@@ -21,17 +21,17 @@
     <string name="gotoSignUpBtnText">Sign Up for ME ME INN</string>
 
     <!--Chapter List Page Strings-->
-    <string name="chapter1Text">Chapter 1</string>
-    <string name="chapter2Text">Chapter 2</string>
-    <string name="chapter3Text">Chapter 3</string>
-    <string name="chapter4Text">Chapter 4</string>
-    <string name="chapter5Text">Chapter 5</string>
-    <string name="chapter6Text">Chapter 6</string>
-    <string name="chapter7Text">Chapter 7</string>
-    <string name="chapter8Text">Chapter 8</string>
-    <string name="chapter9Text">Chapter 9</string>
-    <string name="chapter10Text">Chapter 10</string>
-    <string name="chapter11Text">Chapter 11</string>
+    <string name="chapter1Text">A</string>
+    <string name="chapter2Text">B</string>
+    <string name="chapter3Text">C</string>
+    <string name="chapter4Text">D</string>
+    <string name="chapter5Text">E</string>
+    <string name="chapter6Text">F</string>
+    <string name="chapter7Text">G</string>
+    <string name="chapter8Text">H</string>
+    <string name="chapter9Text">J</string>
+    <string name="chapter10Text">K</string>
+    <string name="chapter11Text">L</string>
 
     <!--Memorization Page Strings-->
     <string name="wordContent">Word Content</string>

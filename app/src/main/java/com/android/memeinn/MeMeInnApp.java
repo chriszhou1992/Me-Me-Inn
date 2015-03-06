@@ -5,6 +5,8 @@ import android.app.Application;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
+import com.parse.Parse;
+
 /**
  * Custom Application child class for the app in order to fix
  * the screen orientation to portrait.
@@ -21,6 +23,10 @@ public class MeMeInnApp extends Application {
             @Override
             public void onActivityCreated(Activity activity,
                                           Bundle savedInstanceState) {
+
+                //Initialize Parse API to initialize connection to cloud
+                Parse.initialize(activity, "l5qhJIZRq3vPDrHTmyzPu3z6IwMjukw7M3h9A8CZ",
+                        "iLgCs4Z7I71j1L9DIWrjwjkCZ02yc6KuDsYVO60e");
 
                 // new activity created; force its orientation to portrait
                 activity.setRequestedOrientation(
