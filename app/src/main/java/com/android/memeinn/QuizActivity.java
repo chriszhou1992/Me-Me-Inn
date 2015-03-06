@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.FindCallback;
@@ -48,9 +49,35 @@ public class QuizActivity extends Activity {
     final Animation out = new AlphaAnimation(1.0f, 0.0f);
     final Animation in = new AlphaAnimation(0.0f, 1.0f);
 
+    public int getScore(){
+        return score;
+    }
+
+    public int getNUM_OF_OPTIONS(){
+        return NUM_OF_OPTIONS;
+    }
+    public Button getButton(int idx){
+        return optionBtns.get(idx);
+    }
+    public int getButtonId(int idx){
+        return BTN_IDS[idx];
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "l5qhJIZRq3vPDrHTmyzPu3z6IwMjukw7M3h9A8CZ",
+                "iLgCs4Z7I71j1L9DIWrjwjkCZ02yc6KuDsYVO60e");
+
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar");
+        try {
+            testObject.save();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         setContentView(R.layout.quizmain);
         score = 0;
         rounds = 0;
@@ -108,9 +135,14 @@ public class QuizActivity extends Activity {
 
         //show an icon of loading spinner
         spinner.setVisibility(View.VISIBLE);
+        //disable buttons
+        setOptionsClickable(false);
+
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> wordList, ParseException e) {
+                Log.d("Myapp", "Done");
+
                 spinner.setVisibility(View.GONE);
                 if (e == null && wordList.size() >= ROUNDS) {
                     Log.d("MyApp", "get the object with size " + wordList.size());
@@ -140,8 +172,8 @@ public class QuizActivity extends Activity {
 
                     nextQuestion(); //display first question
                 } else {
-                    Log.d("MyApp", "Oops, list too short with only size " + wordList.size());
-                    //Log.d("MyApp", "Error: " + e.getMessage());
+                    //Log.d("MyApp", "Oops, list too short with only size " + wordList.size());
+                    Log.d("MyApp", "Error: " + e.getMessage());
                 }
             }
         });
