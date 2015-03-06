@@ -23,13 +23,11 @@
         <TextView
             android:layout_column="1"
             android:text="Open..."
-            android:padding="3dip"
-            android:textColor="@color/white" />
+            android:padding="3dip" />
         <TextView
             android:text="Ctrl-O"
             android:gravity="right"
-            android:padding="3dip"
-            android:textColor="@color/white" />
+            android:padding="3dip" />
     </TableRow>
 
     <TableRow>
@@ -101,6 +99,25 @@
             android:text="Quit"
             android:padding="3dip"
             android:textColor="@color/white" />
+    </TableRow>
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"></TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"></TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/button"
+            android:layout_column="5" />
     </TableRow-->
 </TableLayout>
 </ScrollView>

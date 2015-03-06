@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/background"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/reviewChartLayout">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/icon"
+        android:src="@drawable/img3"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/wordContent"
+        style="@style/Base.V21.Theme.AppCompat"
+        android:id="@+id/wordContentView"
+        android:textColor="#ff69abff"
+        android:textSize="30sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/reviewProgress"
+        android:layout_marginTop="50dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/remember"
+        android:id="@+id/prevWordBtn"
+        android:textSize="18sp"
+        android:background="#ff02790d"
+        android:textAllCaps="false"
+        android:onClick="onClickPrev"
+        android:layout_alignTop="@+id/nextWordBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="49dp"
+        android:layout_marginStart="49dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/notRemember"
+        android:id="@+id/nextWordBtn"
+        android:textSize="18sp"
+        android:background="#ff9e3344"
+        android:textAllCaps="false"
+        android:layout_marginBottom="46dp"
+        android:onClick="onClickNext"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="48dp"
+        android:layout_marginEnd="48dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/reviewProgress"
+        android:id="@+id/reviewProgress"
+        android:textColor="#FFFF00"
+        style="@style/Base.V21.Theme.AppCompat"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/reviewProgressBar"
+        android:layout_alignStart="@+id/reviewProgressBar" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/reviewProgressBar"
+        android:layout_above="@+id/wordContentView"
+        android:layout_alignLeft="@+id/prevWordBtn"
+        android:layout_alignStart="@+id/prevWordBtn"
+        android:layout_below="@+id/reviewProgress"
+        android:layout_alignRight="@+id/nextWordBtn"
+        android:layout_alignEnd="@+id/nextWordBtn" />
+
+    <Button
+        android:text="@string/checkMeaning"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background = "@drawable/circlebutton"
+        android:id="@+id/checkMeaning"
+        android:layout_below="@+id/wordContentView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        style="@style/Base.V21.Theme.AppCompat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/wordMeaning"
+        android:id="@+id/wordMeaning"
+        android:textColor="#ff69abff"
+        android:textSize="30sp"
+        android:layout_marginTop="69dp"
+        android:layout_alignTop="@+id/checkMeaning"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/finishReview"
+        android:id="@+id/finishReview"
+        android:layout_below="@+id/reviewProgress"
+        android:layout_alignLeft="@+id/nextWordBtn"
+        android:layout_alignStart="@+id/nextWordBtn" />
+
+</RelativeLayout>
