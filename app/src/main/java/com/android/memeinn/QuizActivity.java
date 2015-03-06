@@ -1,13 +1,12 @@
 package com.android.memeinn;
 
 import android.annotation.TargetApi;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
-
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -15,11 +14,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.parse.Parse;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,9 +25,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-/**
- * Class that models
- */
 public class QuizActivity extends Activity {
     private int score;
     private int rounds;
@@ -79,15 +74,19 @@ public class QuizActivity extends Activity {
         for (int i = 0; i < NUM_OF_OPTIONS; i++)
             optionBtns.add(i, (Button)findViewById(BTN_IDS[i]));
 
-        initAnimations();
-
         vocabCategory = "GRE";
         firstLetter = "a";
         Intent i = getIntent();
         if (i != null) {
-            vocabCategory = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);
-            firstLetter = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FIRST_LETTER);
+            String s = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);
+            vocabCategory = s == null? "GRE" : s;
+            s = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FIRST_LETTER);
+            firstLetter = s == null? "a" : s;
         }
+        questionQueue = new LinkedList<>();
+
+        initAnimations();
+
         questionQueue = new LinkedList<>();
         //one DB fetch to generate all quiz questions needed
         generateQuizQuestions();
@@ -118,15 +117,6 @@ public class QuizActivity extends Activity {
 
             }
         });
-
-        questionQueue = new LinkedList<>();
-        //one DB fetch to generate all quiz questions needed
-        generateQuizQuestions();
-
-        //generateQuizQuestion(getWindow().getCurrentFocus());
-        //rightChoice(getWindow().getDecorView().findViewById(android.R.id.content));
-        // getWindow().getDecorView().findViewById(android.R.id.content) from stack
-        //http://stackoverflow.com/questions/4486034/get-root-view-from-current-activity
     }
 
     /**

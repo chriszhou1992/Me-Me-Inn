@@ -28,10 +28,10 @@
     <string name="chapter5Text">E</string>
     <string name="chapter6Text">F</string>
     <string name="chapter7Text">G</string>
-    <string name="chapter8Text">H</string>
-    <string name="chapter9Text">J</string>
-    <string name="chapter10Text">K</string>
-    <string name="chapter11Text">L</string>
+    <string name="chapter8Text">P</string>
+    <string name="chapter9Text">N</string>
+    <string name="chapter10Text">T</string>
+    <string name="chapter11Text">S</string>
 
     <!--Memorization Page Strings-->
     <string name="wordContent">Word Content</string>
