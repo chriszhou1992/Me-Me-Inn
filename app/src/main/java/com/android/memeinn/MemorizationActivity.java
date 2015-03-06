@@ -32,9 +32,6 @@ public class MemorizationActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.memorizationpage);
 
-//        Parse.initialize(this, "l5qhJIZRq3vPDrHTmyzPu3z6IwMjukw7M3h9A8CZ",
-//                "iLgCs4Z7I71j1L9DIWrjwjkCZ02yc6KuDsYVO60e");
-
         wordContentView = (TextView) findViewById(R.id.wordContentView);
         wordMeaningView = (TextView) findViewById(R.id.wordMeaningView);
 
@@ -66,21 +63,24 @@ public class MemorizationActivity extends ActionBarActivity {
     }
 
     private void initDict() {
-        this.dict = new LinkedHashMap<String, String>();
+        this.dict = new LinkedHashMap<>();
         ParseQuery<ParseObject> query = ParseQuery.getQuery(vocabType);
         query.whereStartsWith("word", firstLetter.toLowerCase());
+        Log.d("MyAPP", firstLetter.toLowerCase());
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> wordList, ParseException e) {
                 if (e == null) {
                     // Query success
                     for (ParseObject word : wordList) {
+                        Log.d("MyApp", "1");
                         dict.put(word.getString("word"), word.getString("definition"));
                     }
-                    indexedList = new ArrayList<Map.Entry<String, String>>(dict.entrySet());
+                    indexedList = new ArrayList<>(dict.entrySet());
                     initMemorizationView();
                 } else {
-                    Log.e("GetWordError", e.toString());
+                    e.printStackTrace();
+                    //Log.e("GetWordError", e.toString());
                 }
             }
         });

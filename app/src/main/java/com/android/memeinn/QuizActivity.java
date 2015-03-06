@@ -91,11 +91,6 @@ public class QuizActivity extends Activity {
         questionQueue = new LinkedList<>();
         //one DB fetch to generate all quiz questions needed
         generateQuizQuestions();
-
-        //generateQuizQuestion(getWindow().getCurrentFocus());
-        //rightChoice(getWindow().getDecorView().findViewById(android.R.id.content));
-        // getWindow().getDecorView().findViewById(android.R.id.content) from stack
-        //http://stackoverflow.com/questions/4486034/get-root-view-from-current-activity
     }
 
     /**
@@ -141,7 +136,7 @@ public class QuizActivity extends Activity {
                     nextQuestion(); //display first question
                 } else {
                     Log.d("MyApp", "Oops, list too short with only size " + wordList.size());
-                    //Log.d("MyApp", "Error: " + e.getMessage());
+                    e.printStackTrace();
                 }
             }
         });

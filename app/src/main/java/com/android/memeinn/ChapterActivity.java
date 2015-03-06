@@ -8,9 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-/**
- * Created by lindsey on 15-02-26.
- */
+
 public class ChapterActivity extends Activity{
 
     public final static String EXTRA_MESSAGE_FIRST_LETTER = "chapter.first.letter";
