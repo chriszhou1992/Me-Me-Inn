@@ -32,8 +32,8 @@ public class MemorizationActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.memorizationpage);
 
-//        Parse.initialize(this, "l5qhJIZRq3vPDrHTmyzPu3z6IwMjukw7M3h9A8CZ",
-//                "iLgCs4Z7I71j1L9DIWrjwjkCZ02yc6KuDsYVO60e");
+        Parse.initialize(this, "l5qhJIZRq3vPDrHTmyzPu3z6IwMjukw7M3h9A8CZ",
+                "iLgCs4Z7I71j1L9DIWrjwjkCZ02yc6KuDsYVO60e");
 
         wordContentView = (TextView) findViewById(R.id.wordContentView);
         wordMeaningView = (TextView) findViewById(R.id.wordMeaningView);
