@@ -6,21 +6,18 @@
     <string name="action_settings">Settings</string>
     
     <string name="facebook_app_id">619574714855646</string>
-
     <string name="logoText">ME ME INN</string>
 
-    <!--Main Page Strings-->
+    <!-- Main Page Strings -->
     <string name="gotoVocab">Go To Vocabulary</string>
     <string name="matchFriend">Match with Friends</string>
     <string name="matchLadder">Match in Ladder</string>
-
     <string name="usernameHint">Username</string>
     <string name="passwordHint">Password</string>
     <string name="loginBtnText">Log In</string>
-
     <string name="gotoSignUpBtnText">Sign Up for ME ME INN</string>
 
-    <!--Chapter List Page Strings-->
+    <!-- Chapter List Page Strings -->
     <string name="chapter1Text">A</string>
     <string name="chapter2Text">B</string>
     <string name="chapter3Text">C</string>
@@ -33,21 +30,21 @@
     <string name="chapter10Text">T</string>
     <string name="chapter11Text">S</string>
 
-    <!--Memorization Page Strings-->
+    <!-- Memorization Page Strings -->
     <string name="wordContent">Word Content</string>
     <string name="wordMeaning">Word meaning</string>
     <string name="prevBtnText">Previous</string>
     <string name="nextBtnText">Next</string>
     <string name="sessionMarker">Try to remember it!(Review this word!)</string>
 
-    <!--SignUp Page Strings-->
+    <!-- SignUp Page Strings -->
     <string name="usernameSignUpHint">Enter your username</string>
     <string name="passSignUpHint">Enter your password</string>
     <string name="pass2SignUpHint">Confirm your password</string>
     <string name="cancelBtnText">Cancel</string>
     <string name="signUpBtnText">Sign Up</string>
 
-    <!--Vocab Page Strings-->
+    <!-- Vocab Page Strings -->
     <string name="vocabText">Vocabulary List</string>
     <string name="greText">GRE</string>
     <string name="ieltsText">IELTS</string>

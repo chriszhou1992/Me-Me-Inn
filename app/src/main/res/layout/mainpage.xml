@@ -68,4 +68,14 @@
         android:layout_alignLeft="@+id/friends"
         android:layout_alignRight="@+id/friends" />
 
+    <ImageButton
+        android:background="@drawable/profile_icon_black"
+        android:layout_width="50dip"
+        android:layout_height="50dip"
+        android:id="@+id/imageButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="gotoProfile" />
+
 </RelativeLayout>

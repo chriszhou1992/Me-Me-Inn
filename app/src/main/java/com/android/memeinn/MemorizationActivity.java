@@ -17,6 +17,7 @@ import android.view.View;
 import com.parse.*;
 
 public class MemorizationActivity extends ActionBarActivity {
+
     private String vocabType = "";
     private String firstLetter = "";
     private Map<String, String> dict;
@@ -65,7 +66,6 @@ public class MemorizationActivity extends ActionBarActivity {
         this.dict = new LinkedHashMap<>();
         ParseQuery<ParseObject> query = ParseQuery.getQuery(vocabType);
         query.whereStartsWith("word", firstLetter.toLowerCase());
-        Log.d("MyAPP", firstLetter.toLowerCase());
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> wordList, ParseException e) {

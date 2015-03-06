@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/background"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/icon"
+        android:src="@drawable/profile_icon_black"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        style="@style/Base.V21.Theme.AppCompat"
+        android:id="@+id/name"
+        android:textColor="#FF3F59"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:layout_below="@+id/icon"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ranking"
+        android:id="@+id/ranking"
+        android:textSize="18sp"
+        android:background="#ff6c303c"
+        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/icon"
+        android:textAllCaps="false"
+        android:layout_alignStart="@+id/icon"
+        android:layout_alignLeft="@+id/icon"
+        android:layout_alignRight="@+id/icon" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Scores"
+        android:id="@+id/scores"
+        android:textSize="18sp"
+        android:background="#ff809e6d"
+        android:layout_below="@+id/ranking"
+        android:layout_alignStart="@+id/ranking"
+        android:layout_marginTop="43dp"
+        android:textAllCaps="false"
+        android:layout_alignEnd="@+id/ranking"
+        android:layout_alignLeft="@+id/ranking"
+        android:layout_alignRight="@+id/ranking" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Friends"
+        android:id="@+id/friends"
+        android:textSize="18sp"
+        android:background="#ffb39a6d"
+        android:layout_below="@+id/scores"
+        android:layout_alignStart="@+id/scores"
+        android:layout_marginTop="43dp"
+        android:textAllCaps="false"
+        android:layout_alignEnd="@+id/scores"
+        android:layout_alignLeft="@+id/scores"
+        android:layout_alignRight="@+id/scores" />
+
+
+</RelativeLayout>
