@@ -17,7 +17,6 @@ import android.view.View;
 import com.parse.*;
 
 public class MemorizationActivity extends ActionBarActivity {
-
     private String vocabType = "";
     private String firstLetter = "";
     private Map<String, String> dict;
@@ -73,7 +72,6 @@ public class MemorizationActivity extends ActionBarActivity {
                 if (e == null) {
                     // Query success
                     for (ParseObject word : wordList) {
-                        Log.d("MyApp", "1");
                         dict.put(word.getString("word"), word.getString("definition"));
                     }
                     indexedList = new ArrayList<>(dict.entrySet());
@@ -103,4 +101,10 @@ public class MemorizationActivity extends ActionBarActivity {
         this.wordMeaningView.setText(wordMeaning);
     }
 
+    public void startQuiz(View quizBtn) {
+        Intent quizIntent = new Intent(this, QuizActivity.class);
+        quizIntent.putExtra(ChapterActivity.EXTRA_MESSAGE_FIRST_LETTER, firstLetter.toLowerCase());
+        quizIntent.putExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE, vocabType);
+        startActivity(quizIntent);
+    }
 }

@@ -1,13 +1,12 @@
 package com.android.memeinn;
 
 import android.annotation.TargetApi;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
-
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -15,10 +14,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,15 +25,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-/**
- * Class that models
- */
 public class QuizActivity extends Activity {
     private int score;
     private int rounds;
     private final int ROUNDS = 5;
     //private List<ParseObject> capL;
     private Queue<Question> questionQueue;
+    private String vocabCategory;
+    private String firstLetter;
     private ProgressBar spinner;
 
     private final int[] BTN_IDS = {R.id.option0, R.id.option1, R.id.option2, R.id.option3};
@@ -48,6 +46,19 @@ public class QuizActivity extends Activity {
     final Animation out = new AlphaAnimation(1.0f, 0.0f);
     final Animation in = new AlphaAnimation(0.0f, 1.0f);
 
+    public int getScore(){
+        return score;
+    }
+
+    public int getNUM_OF_OPTIONS(){
+        return NUM_OF_OPTIONS;
+    }
+    public Button getButton(int idx){
+        return optionBtns.get(idx);
+    }
+    public int getButtonId(int idx){
+        return BTN_IDS[idx];
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +74,25 @@ public class QuizActivity extends Activity {
         for (int i = 0; i < NUM_OF_OPTIONS; i++)
             optionBtns.add(i, (Button)findViewById(BTN_IDS[i]));
 
+        vocabCategory = "GRE";
+        firstLetter = "a";
+        Intent i = getIntent();
+        if (i != null) {
+            String s = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);
+            vocabCategory = s == null? "GRE" : s;
+            s = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FIRST_LETTER);
+            firstLetter = s == null? "a" : s;
+        }
+        questionQueue = new LinkedList<>();
+
+        initAnimations();
+
+        questionQueue = new LinkedList<>();
+        //one DB fetch to generate all quiz questions needed
+        generateQuizQuestions();
+    }
+
+    private void initAnimations() {
         //fade-out/fade-in animations
         animatedView = findViewById(R.id.quizLayout);
         out.setDuration(1000);
@@ -87,10 +117,6 @@ public class QuizActivity extends Activity {
 
             }
         });
-
-        questionQueue = new LinkedList<>();
-        //one DB fetch to generate all quiz questions needed
-        generateQuizQuestions();
     }
 
     /**
@@ -98,11 +124,14 @@ public class QuizActivity extends Activity {
      * questions in one shot.
      */
     private void generateQuizQuestions() {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("GRE");
-        query.whereStartsWith("word", "a");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(vocabCategory);
+        query.whereStartsWith("word", firstLetter);
 
         //show an icon of loading spinner
         spinner.setVisibility(View.VISIBLE);
+        //disable buttons
+        setOptionsClickable(false);
+
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> wordList, ParseException e) {
