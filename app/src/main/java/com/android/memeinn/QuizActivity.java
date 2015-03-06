@@ -33,8 +33,10 @@ public class QuizActivity extends Activity {
     private int score;
     private int rounds;
     private final int ROUNDS = 5;
-    //private List<ParseObject> capL;
+
     private Queue<Question> questionQueue;
+    private String vocabCategory;
+    private String firstLetter;
     private ProgressBar spinner;
 
     private final int[] BTN_IDS = {R.id.option0, R.id.option1, R.id.option2, R.id.option3};
@@ -63,6 +65,21 @@ public class QuizActivity extends Activity {
         for (int i = 0; i < NUM_OF_OPTIONS; i++)
             optionBtns.add(i, (Button)findViewById(BTN_IDS[i]));
 
+        initAnimations();
+
+        vocabCategory = "GRE";
+        firstLetter = "a";
+        Intent i = getIntent();
+        if (i != null) {
+            vocabCategory = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);
+            firstLetter = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FIRST_LETTER);
+        }
+        questionQueue = new LinkedList<>();
+        //one DB fetch to generate all quiz questions needed
+        generateQuizQuestions();
+    }
+
+    private void initAnimations() {
         //fade-out/fade-in animations
         animatedView = findViewById(R.id.quizLayout);
         out.setDuration(1000);
@@ -87,10 +104,6 @@ public class QuizActivity extends Activity {
 
             }
         });
-
-        questionQueue = new LinkedList<>();
-        //one DB fetch to generate all quiz questions needed
-        generateQuizQuestions();
     }
 
     /**
@@ -98,8 +111,8 @@ public class QuizActivity extends Activity {
      * questions in one shot.
      */
     private void generateQuizQuestions() {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("GRE");
-        query.whereStartsWith("word", "a");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(vocabCategory);
+        query.whereStartsWith("word", firstLetter);
 
         //show an icon of loading spinner
         spinner.setVisibility(View.VISIBLE);

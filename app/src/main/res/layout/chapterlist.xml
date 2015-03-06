@@ -85,7 +85,8 @@
             android:textSize="18sp"
             android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="onClick" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,7 +95,8 @@
             android:textSize="18sp"
             android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="onClick" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,7 +105,8 @@
             android:textSize="18sp"
             android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="onClick" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -112,7 +115,8 @@
             android:textSize="18sp"
             android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="onClick" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -121,7 +125,8 @@
             android:textSize="18sp"
             android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="onClick" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -130,7 +135,8 @@
             android:textSize="18sp"
             android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="onClick" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -139,7 +145,8 @@
             android:textSize="18sp"
             android:background="@color/chapterBtn_background_color"
             android:textAllCaps="false"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:onClick="onClick" />
 
     </LinearLayout>
     </ScrollView>
