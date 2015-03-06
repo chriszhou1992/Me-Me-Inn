@@ -25,4 +25,9 @@ public class MainActivity extends Activity{
         Intent vocabIntent = new Intent(this, VocabActivity.class);
         startActivity(vocabIntent);
     }
+
+    public void gotoProfile(View view) {
+        Intent profIntent = new Intent(this, ProfileActivity.class);
+        startActivity(profIntent);
+    }
 }
