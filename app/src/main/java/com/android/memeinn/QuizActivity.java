@@ -15,9 +15,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseRelation;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,10 +32,13 @@ public class QuizActivity extends Activity {
     private int score;
     private int rounds;
     private final int ROUNDS = 5;
-    //private List<ParseObject> capL;
+
     private Queue<Question> questionQueue;
     private String vocabCategory;
     private String firstLetter;
+    private ArrayList<ParseObject> wordList;
+
+    /* GUI loading spinner */
     private ProgressBar spinner;
 
     private final int[] BTN_IDS = {R.id.option0, R.id.option1, R.id.option2, R.id.option3};
@@ -41,24 +47,12 @@ public class QuizActivity extends Activity {
     private ArrayList<Button> optionBtns;
     private TextView questionTextView;
 
-    //fade-out/fade-in animations
+    /* fade-out/fade-in animations */
     private View animatedView;
     final Animation out = new AlphaAnimation(1.0f, 0.0f);
     final Animation in = new AlphaAnimation(0.0f, 1.0f);
 
-    public int getScore(){
-        return score;
-    }
 
-    public int getNUM_OF_OPTIONS(){
-        return NUM_OF_OPTIONS;
-    }
-    public Button getButton(int idx){
-        return optionBtns.get(idx);
-    }
-    public int getButtonId(int idx){
-        return BTN_IDS[idx];
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +68,16 @@ public class QuizActivity extends Activity {
         for (int i = 0; i < NUM_OF_OPTIONS; i++)
             optionBtns.add(i, (Button)findViewById(BTN_IDS[i]));
 
+        initQuizVocabSet();
+        initAnimations();
+
+        wordList = new ArrayList<>();
+        questionQueue = new LinkedList<>();
+        //one DB fetch to generate all quiz questions needed
+        generateQuizQuestions();
+    }
+
+    private void initQuizVocabSet() {
         vocabCategory = "GRE";
         firstLetter = "a";
         Intent i = getIntent();
@@ -83,13 +87,6 @@ public class QuizActivity extends Activity {
             s = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FIRST_LETTER);
             firstLetter = s == null? "a" : s;
         }
-        questionQueue = new LinkedList<>();
-
-        initAnimations();
-
-        questionQueue = new LinkedList<>();
-        //one DB fetch to generate all quiz questions needed
-        generateQuizQuestions();
     }
 
     private void initAnimations() {
@@ -97,7 +94,6 @@ public class QuizActivity extends Activity {
         animatedView = findViewById(R.id.quizLayout);
         out.setDuration(1000);
         in.setDuration(1000);
-
         out.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -144,8 +140,9 @@ public class QuizActivity extends Activity {
                     String[] options = new String[NUM_OF_OPTIONS];
                     for (int i = 0; i < ROUNDS; i++) {
                         ParseObject word = wordList.get(i);
-                        String w = word.getString("word");
+                        QuizActivity.this.wordList.add(word);
 
+                        String w = word.getString("word");
                         int random;
                         for (int j = 0; j < NUM_OF_OPTIONS; j++) {
                             random = Utility.randomIntNonDuplicated(0, wordList.size() - 1, i);
@@ -196,7 +193,6 @@ public class QuizActivity extends Activity {
                     btn.setTag(false);
             }
         }
-
         setOptionsClickable(true);
     }
 
@@ -206,11 +202,16 @@ public class QuizActivity extends Activity {
      * @param view The button that is clicked.
      */
     public void choiceClicked(View view) {
+        ParseObject vocab = wordList.get(rounds - 1);
         if ((boolean)view.getTag()) {
             score++;
             changeAnswerBtnBackground(view, 1);
         } else {
             changeAnswerBtnBackground(view, -1);
+            //if answered incorrectly, add this word to user's review list
+            ParseRelation<ParseObject> rel = vocab.getRelation("reviewUsers");
+            rel.add(ParseUser.getCurrentUser());
+            vocab.saveInBackground();
         }
         //disable further button clicking
         setOptionsClickable(false);
@@ -262,6 +263,22 @@ public class QuizActivity extends Activity {
             if (clickable)  //rollback colors if re-enabling answer buttons
                 changeAnswerBtnBackground(b, 0);
         }
+    }
+
+    public int getScore(){
+        return score;
+    }
+
+    public int getNUM_OF_OPTIONS(){
+        return NUM_OF_OPTIONS;
+    }
+
+    public Button getButton(int idx){
+        return optionBtns.get(idx);
+    }
+
+    public int getButtonId(int idx){
+        return BTN_IDS[idx];
     }
 
 //    public void goToNext(View view){

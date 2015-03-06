@@ -41,7 +41,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total Scores"
+        android:text="Review Vocabulary"
         android:id="@+id/scores"
         android:textSize="18sp"
         android:background="#ff809e6d"
