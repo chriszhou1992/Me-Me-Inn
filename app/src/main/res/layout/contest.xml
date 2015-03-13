@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:background="@drawable/background"
+                android:layout_width="match_parent" android:layout_height="match_parent"
+                android:id="@+id/quizLayout"
+                android:clickable="false">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/icon"
+        android:src="@drawable/img3"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contestType"
+        style="@style/Base.V21.Theme.AppCompat"
+        android:id="@+id/name"
+        android:textColor="#ff86ffc1"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:layout_below="@+id/userIcon"
+        android:layout_toRightOf="@+id/userIcon"
+        android:layout_toEndOf="@+id/userIcon"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/questionQuiz"
+        android:id="@+id/questionQuiz"
+        android:textStyle="bold"
+        android:layout_marginTop="200dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffff8c75" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/testWord"
+        android:id="@+id/testWord"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="220dp"
+        android:textColor="#ff9dff6d" />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_button"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/meaning0"
+        android:id="@+id/option0"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="startChange"
+         />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_button"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/meaning1"
+        android:id="@+id/option1"
+        android:layout_below="@+id/option0"
+        android:layout_alignLeft="@+id/option0"
+        android:layout_alignStart="@+id/option0"
+        android:layout_marginTop="25dp"
+    />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_button"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/meaning2"
+        android:id="@+id/option2"
+        android:layout_below="@+id/option0"
+        android:layout_alignLeft="@+id/option0"
+        android:layout_alignStart="@+id/option0"
+        android:layout_marginTop="100dp"
+    />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_button"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/meaning3"
+        android:id="@+id/option3"
+        android:layout_below="@+id/option0"
+        android:layout_alignLeft="@+id/option0"
+        android:layout_alignStart="@+id/option0"
+        android:layout_marginTop="175dp"
+    />
+
+    <!--<ProgressBar-->
+        <!--android:id="@+id/spinner"-->
+        <!--style="?android:attr/progressBarStyleLarge"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:visibility="visible" />-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/user"
+        android:id="@+id/user"
+        android:textColor="#ff4af5ff"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/name"
+        android:layout_toStartOf="@+id/name"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/opponent"
+        android:id="@+id/opponent"
+        android:textColor="#ff4af5ff"
+
+        android:layout_alignBottom="@+id/user"
+        android:layout_toRightOf="@+id/name"
+        android:layout_toEndOf="@+id/name"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/userScore"
+        android:id="@+id/userScore"
+        android:textColor="#ff50ff63"
+
+        android:layout_alignTop="@+id/textView4"
+        android:layout_toLeftOf="@+id/name"
+        android:layout_alignLeft="@+id/user"
+        android:layout_alignStart="@+id/user"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/oppoScore"
+        android:id="@+id/textView4"
+        android:textColor="#ff50ff63"
+
+        android:layout_below="@+id/oppoicon"
+        android:layout_marginTop="38dp"
+        android:layout_toRightOf="@+id/name"
+        android:layout_toEndOf="@+id/name"/>
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/userIcon"
+        android:src="@drawable/usericon"
+        android:layout_below="@+id/icon"
+        android:layout_alignLeft="@+id/option0"
+        android:layout_alignStart="@+id/option0"/>
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/oppoicon"
+        android:src="@drawable/oppoicon"
+        android:layout_below="@+id/icon"
+        android:layout_alignRight="@+id/opponent"
+        android:layout_alignEnd="@+id/opponent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/timeLeft"
+        android:id="@+id/timeLeft"
+        android:layout_marginTop="60dp"
+        android:textColor="#ffff851a"
+        android:layout_centerHorizontal="true"
+        />
+
+
+</RelativeLayout>

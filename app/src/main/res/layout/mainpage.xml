@@ -51,7 +51,9 @@
         android:textAllCaps="false"
         android:layout_alignEnd="@+id/vocab"
         android:layout_alignLeft="@+id/vocab"
-        android:layout_alignRight="@+id/vocab" />
+        android:layout_alignRight="@+id/vocab"
+        android:onClick="goMatchWithFriend"
+        />
 
     <Button
         android:layout_width="wrap_content"

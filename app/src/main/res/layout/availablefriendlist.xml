@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:background="@drawable/background"
+                android:layout_width="match_parent" android:layout_height="match_parent"
+                android:id="@+id/quizLayout"
+                android:clickable="false">
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/userIcon"
+        android:src="@drawable/friendsicon"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/friendMatch"
+        style="@style/Base.V21.Theme.AppCompat"
+        android:gravity="center_vertical|center_horizontal"
+        android:id="@+id/checkOutClicking"
+        android:textColor="#ffb1acff"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:layout_below="@+id/userIcon"
+        android:layout_centerHorizontal="true"
+        android:onClick="checkOutFriend"
+        />
+
+    <LinearLayout
+        android:id = "@+id/buttonField"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="250dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/resultSentence"
+        android:layout_alignLeft="@+id/userIcon"
+        android:layout_alignStart="@+id/userIcon">
+    </LinearLayout>
+
+
+</RelativeLayout>

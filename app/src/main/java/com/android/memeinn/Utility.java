@@ -10,7 +10,6 @@ import java.util.Random;
 public class Utility {
     private static final Random RAND = new Random();
     private static final HashMap<Integer, Boolean> duplicateMap = new HashMap<>();
-
     /**
      * Public function that opens up a warning dialog on the specified Context displaying
      * the specified title and message.

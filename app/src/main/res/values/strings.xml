@@ -97,5 +97,17 @@
     <string name="friendBtnText">Friends</string>
     <string name="usernameText">Username</string>
 
+    <!--Contest Page Strings-->
+    <string name="contestType">GRE Contest!</string>
+    <string name="user">userName</string>
+    <string name="opponent">oppoName</string>
+    <string name="userScore">userScore</string>
+    <string name="oppoScore">oppoScore</string>
+    <string name="timeLeft">time</string>
+
+    <!--find available friend Page Strings-->
+    <string name="friendMatch">Click here to check out online friends!</string>
+
+
 
 </resources>

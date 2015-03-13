@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
+import com.firebase.client.Firebase;
 import com.parse.Parse;
 
 /**
@@ -31,6 +32,9 @@ public class MeMeInnApp extends Application {
                 // new activity created; force its orientation to portrait
                 activity.setRequestedOrientation(
                         ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+                Firebase.setAndroidContext(activity);
+
             }
 
             @Override

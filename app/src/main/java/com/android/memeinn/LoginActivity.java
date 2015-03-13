@@ -1,24 +1,19 @@
 package com.android.memeinn;
 
-import com.facebook.Session;
-import com.parse.LogInCallback;
-import com.parse.Parse;
-import com.parse.ParseException;
-import com.parse.ParseFacebookUtils;
-import com.parse.ParseUser;
-import com.parse.SignUpCallback;
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseFacebookUtils;
+import com.parse.ParseUser;
 
 
 public class LoginActivity extends ActionBarActivity {
@@ -27,6 +22,7 @@ public class LoginActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
 
         //Fix the issue Android changes the font of password fields into monospace
         EditText passField = (EditText) findViewById(R.id.pword);
@@ -41,7 +37,6 @@ public class LoginActivity extends ActionBarActivity {
     public void logIn(View view) {
         EditText usernameField = (EditText) findViewById(R.id.uname);
         EditText passField = (EditText) findViewById(R.id.pword);
-
         /*ParseUser.logInInBackground(usernameField.getText().toString(),
                 passField.getText().toString(), new LogInCallback() {
 
