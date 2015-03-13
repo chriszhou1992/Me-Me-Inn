@@ -31,6 +31,7 @@ public class ChapterActivity extends Activity{
         Log.d("myapp", "Chapter.vocabType = " + vocabType);
     }
 
+    // click the chapter button and return the chapter name to help database achieve relative word list
     public void onClick(View view) {
         Intent MemorizationIntent = new Intent(this, MemorizationActivity.class);
         MemorizationIntent.putExtra(EXTRA_MESSAGE_VOCAB_TYPE, vocabType);

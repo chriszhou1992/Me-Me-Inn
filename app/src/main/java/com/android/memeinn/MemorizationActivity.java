@@ -42,6 +42,7 @@ public class MemorizationActivity extends ActionBarActivity {
         initDict();
     }
 
+    //control the Button Next
     public void onClickNext(View view) {
         if (currPos < dict.size()) {
             currPos ++;
@@ -52,6 +53,7 @@ public class MemorizationActivity extends ActionBarActivity {
         }
     }
 
+    //control the Button Previous
     public void onClickPrev(View view) {
         if (currPos >= 0) {
             currPos --;
@@ -62,6 +64,7 @@ public class MemorizationActivity extends ActionBarActivity {
         }
     }
 
+    //parse the vocabulary set and print the words and meanings
     private void initDict() {
         this.dict = new LinkedHashMap<>();
         ParseQuery<ParseObject> query = ParseQuery.getQuery(vocabType);
@@ -85,14 +88,17 @@ public class MemorizationActivity extends ActionBarActivity {
         currPos = 0;
     }
 
+    //initialize the memorization view page
     private void initMemorizationView() {
         getEntryWithPos(0);
     }
 
+    // helper function when click the next or previous button
     private void updateMemorizationView() {
         getEntryWithPos(currPos);
     }
 
+    //get the current word position to control the sequence
     private void getEntryWithPos(int pos) {
         Map.Entry<String, String> entry = indexedList.get(pos);
         String wordContent = entry.getKey();
