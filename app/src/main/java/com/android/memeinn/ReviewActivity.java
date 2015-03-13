@@ -2,6 +2,7 @@ package com.android.memeinn;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,15 +23,20 @@ import java.util.List;
 
 public class ReviewActivity extends Activity {
 
+    private String vocabType = "";//the type of vocabulary
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.review);
 
+        Intent intent = getIntent();
+        vocabType = intent.getStringExtra(VocabActivity.EXTRA_MESSAGE);
+
         Log.d("Myapp", "ReviewActivity");
 
         ParseUser u = ParseUser.getCurrentUser();
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("GRE");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(vocabType);
         query.whereEqualTo("reviewUsers", u);
 
         query.findInBackground(new FindCallback<ParseObject>() {
