@@ -97,5 +97,9 @@
     <string name="friendBtnText">Friends</string>
     <string name="usernameText">Username</string>
 
+    <!--Friend Page Strings-->
+    <string name="friendsText">My Friends</string>
+    <string name="addfriendsText">Add Friends</string>
+
 
 </resources>

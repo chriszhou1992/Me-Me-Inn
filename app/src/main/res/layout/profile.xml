@@ -68,7 +68,8 @@
         android:textAllCaps="false"
         android:layout_alignEnd="@+id/scores"
         android:layout_alignLeft="@+id/scores"
-        android:layout_alignRight="@+id/scores" />
+        android:layout_alignRight="@+id/scores"
+        android:onClick="onFriends"/>
 
 
 </RelativeLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background" >
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/img3" />
+
+    <TextView
+        android:id="@+id/name"
+        style="@style/Base.V21.Theme.AppCompat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/icon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:text="@string/friendsText"
+        android:textColor="#FF3F59"
+        android:textSize="30sp" />
+
+    <View
+        android:id="@+id/empty_view"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/name"
+        android:background="@color/white" />
+
+    <TextView
+        android:id="@+id/addfriend"
+        style="@style/Base.V21.Theme.AppCompat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:onClick="onAddFriend"
+        android:text="@string/addfriendsText"
+        android:textColor="#FF3F59"
+        android:textSize="30sp" />
+
+    <ListView
+        android:id="@+id/lst_users"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/addfriend"
+        android:layout_below="@id/empty_view"
+        android:divider="@color/white"
+        android:dividerHeight="2dp" >
+    </ListView>
+
+</RelativeLayout>
