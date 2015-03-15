@@ -30,4 +30,9 @@ public class ProfileActivity extends Activity {
         startActivity(reviewIntent);
     }
 
+    public void onFriends(View view) {
+        Intent Friends = new Intent(this, FriendActivity.class);
+        startActivity(Friends);
+    }
+
 }

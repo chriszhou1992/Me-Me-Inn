@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.firebase.client.Firebase;
 import com.parse.Parse;
+import com.parse.ParseObject;
 
 /**
  * Custom Application child class for the app in order to fix
@@ -23,6 +24,7 @@ public class MeMeInnApp extends Application {
         //Initialize Parse API to initialize connection to cloud
         Parse.initialize(this, getString(R.string.parse_app_id),
                 getString(R.string.parse_client_key));
+        ParseObject.registerSubclass(RequestFriendSession.class);
 
         // register to be informed of activities starting up
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {

@@ -111,5 +111,9 @@
     <string name="friendMatch">Click here to check out online friends!</string>
 
 
+    <!--Friend Page Strings-->
+    <string name="friendsText">My Friends</string>
+    <string name="addfriendsText">Add Friends</string>
+
 
 </resources>
