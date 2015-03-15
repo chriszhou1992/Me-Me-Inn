@@ -69,9 +69,10 @@ public class ReviewActivity extends Activity {
     //remove the word from review list table
     public void knowWord(View view){
         ParseUser u = ParseUser.getCurrentUser();
-        String relationName = "reviewUsers"/*+vocabType*/;
+        String relationName = "UserReviewList"+vocabType;
         ParseRelation relation = u.getRelation(relationName);
         ParseObject word = wordList.get(currPos);
+        System.out.println("I know this word: " + word.getString("word"));
         relation.remove(word);
         //this somehow didn't remove the word from DB successfully
         onClickNext(view);
@@ -90,7 +91,7 @@ public class ReviewActivity extends Activity {
     //parse the vocabulary set and print the words and meanings
     private void initList() {
         ParseUser u = ParseUser.getCurrentUser();
-        String relationName = "UserReviewList"/*+vocabType*/;
+        String relationName = "UserReviewList"+vocabType;
         ParseRelation relation = u.getRelation(relationName);
         ParseQuery query = relation.getQuery();
 
@@ -121,6 +122,7 @@ public class ReviewActivity extends Activity {
 
     // helper function when click the next or previous button
     private void updateReviewView() {
+        hideMeaning();
         setWordDisplayWithPos(currPos);
     }
 
