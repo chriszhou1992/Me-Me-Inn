@@ -34,7 +34,7 @@
         android:textSize="18sp"
         android:background="#ff02790d"
         android:textAllCaps="false"
-        android:onClick="onClickPrev"
+        android:onClick="knowWord"
         android:layout_alignTop="@+id/nextWordBtn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -89,14 +89,15 @@
         android:id="@+id/checkMeaning"
         android:layout_below="@+id/wordContentView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:onClick="showMeaning" />
 
     <TextView
         style="@style/Base.V21.Theme.AppCompat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/wordMeaning"
-        android:id="@+id/wordMeaning"
+        android:id="@+id/wordMeaningView"
         android:textColor="#ff69abff"
         android:textSize="30sp"
         android:layout_marginTop="69dp"
@@ -110,6 +111,7 @@
         android:id="@+id/finishReview"
         android:layout_below="@+id/reviewProgress"
         android:layout_alignLeft="@+id/nextWordBtn"
-        android:layout_alignStart="@+id/nextWordBtn" />
+        android:layout_alignStart="@+id/nextWordBtn"
+        android:onClick="backToProfile" />
 
 </RelativeLayout>
