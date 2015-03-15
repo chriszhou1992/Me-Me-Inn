@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import com.parse.Parse;
+import com.parse.ParseObject;
 
 /**
  * Custom Application child class for the app in order to fix
@@ -23,6 +24,8 @@ public class MeMeInnApp extends Application {
             @Override
             public void onActivityCreated(Activity activity,
                                           Bundle savedInstanceState) {
+
+                ParseObject.registerSubclass(RequestFriendSession.class);
 
                 //Initialize Parse API to initialize connection to cloud
                 Parse.initialize(activity, "l5qhJIZRq3vPDrHTmyzPu3z6IwMjukw7M3h9A8CZ",
