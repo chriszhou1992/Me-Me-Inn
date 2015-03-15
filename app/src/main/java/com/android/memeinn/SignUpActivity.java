@@ -1,17 +1,14 @@
 package com.android.memeinn;
-import android.app.AlertDialog;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-
-import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
-import com.parse.SignUpCallback;
 
 public class SignUpActivity extends Activity {
 
@@ -86,6 +83,7 @@ public class SignUpActivity extends Activity {
     public void gotoLogin(View view) {
         Intent loginIntent = new Intent(this, LoginActivity.class);
         startActivity(loginIntent);
+        finish();   //destroy activity to prevent going back to sign-up screen
     }
 
 }

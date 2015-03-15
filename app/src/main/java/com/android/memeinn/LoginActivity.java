@@ -70,6 +70,7 @@ public class LoginActivity extends ActionBarActivity {
     public void gotoSignUp(View view) {
         Intent signUpIntent = new Intent(this, SignUpActivity.class);
         startActivity(signUpIntent);
+        finish();   //destroy activity to prevent going back to sign-in screen
     }
 
     /**

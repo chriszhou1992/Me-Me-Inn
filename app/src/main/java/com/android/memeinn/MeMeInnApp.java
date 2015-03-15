@@ -18,23 +18,19 @@ public class MeMeInnApp extends Application {
     public void onCreate() {
         super.onCreate();
 
+        //only needs to be called once per application
+        Firebase.setAndroidContext(this);
+        //Initialize Parse API to initialize connection to cloud
+        Parse.initialize(this, getString(R.string.parse_app_id), getString(R.string.parse_client_key));
+
         // register to be informed of activities starting up
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
-
             @Override
             public void onActivityCreated(Activity activity,
                                           Bundle savedInstanceState) {
-
-                //Initialize Parse API to initialize connection to cloud
-                Parse.initialize(activity, "l5qhJIZRq3vPDrHTmyzPu3z6IwMjukw7M3h9A8CZ",
-                        "iLgCs4Z7I71j1L9DIWrjwjkCZ02yc6KuDsYVO60e");
-
                 // new activity created; force its orientation to portrait
                 activity.setRequestedOrientation(
                         ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-                Firebase.setAndroidContext(activity);
-
             }
 
             @Override
