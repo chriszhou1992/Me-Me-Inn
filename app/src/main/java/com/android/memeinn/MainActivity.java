@@ -20,6 +20,7 @@ public class MainActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mainpage);
+        Firebase.goOnline();
         updateUserOnlinePresence();
     }
 
@@ -29,15 +30,24 @@ public class MainActivity extends Activity{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 boolean connected = dataSnapshot.getValue(Boolean.class);
-                if (connected) {    //change user status to online in Firebase
-                    //get Firebase reference to the logged in user
+                if (connected) {
+                    String username = ParseUser.getCurrentUser().getUsername();
+
+                    //change user status to online in Firebase
+                    Firebase onlineUsersRef = FirebaseSingleton.getInstance("onlineUsers/")
+                            .child(username);
+                    onlineUsersRef.setValue(Boolean.TRUE);
+                    //mark the user as offline when user loses network
+                    onlineUsersRef.onDisconnect().removeValue();
+
                     Firebase userRef = FirebaseSingleton.getInstance("users")
-                            .child(ParseUser.getCurrentUser().getUsername());
+                            .child(username);
                     //log this connection to this user's online presence data
-                    Firebase con = userRef.child("connections").push();
-                    con.setValue(Boolean.TRUE);
+                    Firebase userOnlineRef = userRef.child("isOnline");
+                    userOnlineRef.setValue(Boolean.TRUE);
+
                     //add listener to remove this connection when disconnected
-                    con.onDisconnect().removeValue();
+                    userOnlineRef.onDisconnect().setValue(Boolean.FALSE);
                     //update last time online when disconnected
                     userRef.child("lastOnline").onDisconnect().setValue(ServerValue.TIMESTAMP);
                 }
@@ -72,5 +82,11 @@ public class MainActivity extends Activity{
 //        FirebaseObj fireRef = new FirebaseObj(myFirebaseRef);
 //        availFriend.putExtra("fireRef", fireRef);
         startActivity(availFriend);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Firebase.goOffline();
     }
 }

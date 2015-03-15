@@ -21,7 +21,8 @@ public class MeMeInnApp extends Application {
         //only needs to be called once per application
         Firebase.setAndroidContext(this);
         //Initialize Parse API to initialize connection to cloud
-        Parse.initialize(this, getString(R.string.parse_app_id), getString(R.string.parse_client_key));
+        Parse.initialize(this, getString(R.string.parse_app_id),
+                getString(R.string.parse_client_key));
 
         // register to be informed of activities starting up
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
