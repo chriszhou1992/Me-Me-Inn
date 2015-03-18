@@ -35,7 +35,9 @@ public class QuizActivity extends Activity {
 
     private Queue<Question> questionQueue;
     private String vocabCategory;
-    private String firstLetter;
+    private String wordTableName;
+    private String wordFrequency;
+    //private String firstLetter;
     private ArrayList<ParseObject> wordList;
 
     /* GUI loading spinner */
@@ -79,13 +81,17 @@ public class QuizActivity extends Activity {
 
     private void initQuizVocabSet() {
         vocabCategory = "GRE";
-        firstLetter = "a";
+        //firstLetter = "a";
         Intent i = getIntent();
         if (i != null) {
-            String s = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);
-            vocabCategory = s == null? "GRE" : s;
-            s = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FIRST_LETTER);
-            firstLetter = s == null? "a" : s;
+            //String s = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);
+            wordFrequency = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FREQUENCY);
+            wordTableName = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_TABLE_NAME);
+            //vocabCategory = s == null? "GRE" : s;
+            vocabCategory = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FREQUENCY);
+            System.out.println("vocabCategory" + vocabCategory);
+            System.out.println("wordTableName" + wordTableName);
+            //firstLetter = s == null? "a" : s;
         }
     }
 
@@ -120,8 +126,20 @@ public class QuizActivity extends Activity {
      * questions in one shot.
      */
     private void generateQuizQuestions() {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(vocabCategory);
-        query.whereStartsWith("word", firstLetter);
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(wordTableName);
+        //query.whereStartsWith("word", firstLetter);
+
+        System.out.println("Quiz ChapterActivity.EXTRA_MESSAGE_FREQUENCY" + wordFrequency);
+        if(wordFrequency.toLowerCase().equals("high frequency")){
+            query.whereGreaterThan("frequency", 4);
+        }
+        else if(wordFrequency.toLowerCase().equals("medium frequency")){
+            query.whereGreaterThanOrEqualTo("frequency", 3);
+            query.whereLessThanOrEqualTo("frequency", 4);
+        }
+        else{
+            query.whereLessThanOrEqualTo("frequency", 2);
+        }
 
         //show an icon of loading spinner
         spinner.setVisibility(View.VISIBLE);
@@ -248,6 +266,7 @@ public class QuizActivity extends Activity {
     private void goToResult(){
         Intent quizResult = new Intent(getApplicationContext(), QuizResultActivity.class);
         quizResult.putExtra("score", score);
+        quizResult.putExtra("vocabTableName", wordTableName);
         startActivity(quizResult);
     }
 

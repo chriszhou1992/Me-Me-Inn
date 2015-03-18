@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.content.Intent;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -18,9 +19,11 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+
 import java.util.List;
 
 public class ReviewActivity extends Activity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +33,8 @@ public class ReviewActivity extends Activity {
         Log.d("Myapp", "ReviewActivity");
 
         ParseUser u = ParseUser.getCurrentUser();
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("GRE");
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("GREfrequency");
         query.whereEqualTo("reviewUsers", u);
 
         query.findInBackground(new FindCallback<ParseObject>() {

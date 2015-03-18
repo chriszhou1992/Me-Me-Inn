@@ -11,10 +11,13 @@ import android.widget.TextView;
 
 public class ChapterActivity extends Activity{
 
-    public final static String EXTRA_MESSAGE_FIRST_LETTER = "chapter.first.letter";
+    public final static String EXTRA_MESSAGE_FREQUENCY = "chapter.vocab.frequency";
     public final static String EXTRA_MESSAGE_VOCAB_TYPE = "chapter.vocab.type";
+    public final static String EXTRA_MESSAGE_TABLE_NAME = "chapter.vocab.table.name";
+
     private String vocabType = "";//the type of vocabulary
     private TextView vocabTypeView;
+    private String vocabTableName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +26,7 @@ public class ChapterActivity extends Activity{
 
         Intent intent = getIntent();
         vocabType = intent.getStringExtra(VocabActivity.EXTRA_MESSAGE);
-
+        vocabTableName = "GREfrequency";
         vocabTypeView = (TextView) findViewById(R.id.vocabTypeView);
         // Give TextView a correct type name
         vocabTypeView.setText(vocabType);
@@ -34,9 +37,14 @@ public class ChapterActivity extends Activity{
     // click the chapter button and return the chapter name to help database achieve relative word list
     public void onClick(View view) {
         Intent MemorizationIntent = new Intent(this, MemorizationActivity.class);
+        //Intent QuizIntent = new Intent(this, QuizActivity.class);
+        if(vocabType.equals("GRE")){
+           vocabTableName = "GREfrequency";
+        }
+        MemorizationIntent.putExtra(EXTRA_MESSAGE_TABLE_NAME, vocabTableName);
         MemorizationIntent.putExtra(EXTRA_MESSAGE_VOCAB_TYPE, vocabType);
-        String firstLetter = ((Button) view).getText().toString();
-        MemorizationIntent.putExtra(EXTRA_MESSAGE_FIRST_LETTER, firstLetter);
+        String frequencyText = ((Button) view).getText().toString();
+        MemorizationIntent.putExtra(EXTRA_MESSAGE_FREQUENCY, frequencyText);
         startActivity(MemorizationIntent);
     }
 
