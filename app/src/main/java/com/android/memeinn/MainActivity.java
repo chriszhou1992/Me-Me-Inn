@@ -79,6 +79,7 @@ public class MainActivity extends Activity{
         filter.addAction(ACTION_FRIEND_RESPONSE);
         registerReceiver(mReceiver, filter);
 
+        // check database and return latest content
         Intent serviceIntent = new Intent(this, CheckRequestService.class);
         bindService(serviceIntent, mRequestServiceConnection, BIND_AUTO_CREATE);
 
@@ -131,9 +132,11 @@ public class MainActivity extends Activity{
         public void onReceive(Context context, Intent intent) {
             final ParseUser currentUser = ParseUser.getCurrentUser();
             String action = intent.getAction();
+            //deal with add friend
             if (action.equalsIgnoreCase(ACTION_ADD_FRIEND)) {
                 String fromUserID = intent.getStringExtra(REQUESTFRIEND_FROMID);
                 if (currentUser != null) {
+                    // connect with database by calling function in RequestFriendSession.java
                     ParseQuery<RequestFriendSession> query = ParseQuery.getQuery(RequestFriendSession.CLASS_NAME);
                     query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_TOUSERID, currentUser.getObjectId());
                     query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_FROMUSERID, fromUserID);
@@ -155,9 +158,11 @@ public class MainActivity extends Activity{
                     });
                 }
             }
+            // deal with the friend request response
             else if (action.equalsIgnoreCase(ACTION_FRIEND_RESPONSE)) {
                 final String toUserID = intent.getStringExtra(REQUESTFRIEND_TOID);
                 if (currentUser != null) {
+                    // connect with database by calling function in RequestFriendSession.java
                     ParseQuery<RequestFriendSession> query = ParseQuery.getQuery(RequestFriendSession.CLASS_NAME);
                     query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_FROMUSERID, currentUser.getObjectId());
                     query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_TOUSERID, toUserID);

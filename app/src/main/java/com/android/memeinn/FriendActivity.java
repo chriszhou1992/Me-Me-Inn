@@ -56,6 +56,7 @@ public class FriendActivity extends Activity {
             }
         });
 
+        // print the friend list
         lst_users = (ListView) findViewById(R.id.lst_users);
         ParseRelation<ParseUser> relation = currentUser.getRelation("Relationship");
         relation.getQuery().findInBackground(new FindCallback<ParseUser>() {
@@ -132,6 +133,7 @@ public class FriendActivity extends Activity {
         }
     };
 
+    //add the just accepted frined to the friend list and print on the table
     public void onAddFriend(View view) {
         ArrayList<String> strUsersArray = new ArrayList<String>();
         for (ParseUser user : mAllUsers)
@@ -188,6 +190,7 @@ public class FriendActivity extends Activity {
         builder.create().show();
     }
 
+    // parse data to the database
     private void makeSessionToParse() {
         ParseUser currentUser = ParseUser.getCurrentUser();
         ParseUser friendUser = mAllUsers.get(mSelectedIndex);
@@ -217,7 +220,7 @@ public class FriendActivity extends Activity {
     }
 
     /*
-     * list adapter
+     * list adapter, print data by adapter
      */
     public class LazyAdapter extends BaseAdapter {
         private LayoutInflater inflater = null;

@@ -18,6 +18,7 @@ public class ShowMsgActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.showmsg);
 
+        // get the id and return the content
         txt_ok = (TextView) findViewById(R.id.txt_ok);
         txt_ok.setOnClickListener(new OnClickListener() {
 
@@ -37,6 +38,7 @@ public class ShowMsgActivity extends Activity {
             }
         });
 
+        // get the id and return the content
         txt_content = (TextView) findViewById(R.id.txt_content);
         String strContent = getIntent().getStringExtra(MainActivity.MESSAGE_CONTENT);
         if (!TextUtils.isEmpty(strContent))

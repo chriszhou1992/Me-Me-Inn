@@ -30,6 +30,10 @@ public class ProfileActivity extends Activity {
         startActivity(reviewIntent);
     }
 
+    /**
+     * Callback function for Frineds button. Triggers an Intent to go to the FriendActivity.
+     * @param view The Button that is clicked.
+     */
     public void onFriends(View view) {
         Intent Friends = new Intent(this, FriendActivity.class);
         startActivity(Friends);

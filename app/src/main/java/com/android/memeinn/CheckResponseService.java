@@ -66,6 +66,7 @@ public class CheckResponseService extends Service {
     public void onDestroy() {
     }
 
+    //to check database
     private void startTimer() {
         if (mCheckTimer != null) {
             mCheckTimer.cancel();
@@ -85,6 +86,7 @@ public class CheckResponseService extends Service {
         }
     }
 
+    //connect with database and return content
     private void CheckParseDB() {
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
