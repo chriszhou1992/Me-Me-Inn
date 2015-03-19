@@ -1,7 +1,6 @@
 package com.android.memeinn;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,12 +29,15 @@ public class AvailFriendListActivity extends Activity {
     public Firebase usersRef; //reference object of Firebase
     public LinearLayout ll;
     public HashMap<String, Button> userBtnMap;
+    private String currentUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.availablefriendlist);
+
         userBtnMap = new HashMap<>();
+        currentUsername = ParseUser.getCurrentUser().getUsername();
         usersRef = FirebaseSingleton.getInstance("users");
 
         ll = (LinearLayout) findViewById(R.id.buttonField);
@@ -43,8 +45,6 @@ public class AvailFriendListActivity extends Activity {
 
         Query onlineRef = usersRef.orderByChild("isOnline").limitToLast(50);
         onlineRef.addChildEventListener(new ChildEventListener() {
-            private String currentUsername = ParseUser.getCurrentUser().getUsername();
-
             /**
              * Real-time function monitoring the available user list,
              * so fetching has 3 constraints:
@@ -55,9 +55,6 @@ public class AvailFriendListActivity extends Activity {
              */
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildKey) {
-                Log.d("userList", "the checkout list " + dataSnapshot.getValue().toString());
-                Log.d("userList", "listKey " + dataSnapshot.getKey());
-
                 String username = dataSnapshot.getKey();
                 //traverse the user list to fetch the available users
                 HashMap userInfo = dataSnapshot.getValue(HashMap.class);
@@ -100,8 +97,6 @@ public class AvailFriendListActivity extends Activity {
                 Log.d("userList", "list fail " + firebaseError.getMessage());
             }
         });
-        //thanks to http://stackoverflow.com/questions/1066589/iterate-through-a-hashmap
-        //TODO: How to set the buttons in the center? Currently just work around by set layout to the right
     }
 
     /**
@@ -145,7 +140,7 @@ public class AvailFriendListActivity extends Activity {
      * @param view
      */
     public void checkOutFriend(View view){
-        ((TextView)findViewById(R.id.checkOutClicking)).setText("See available friends");
+        ((TextView)findViewById(R.id.friendListText)).setText("See available friends");
     }
 
     /**
@@ -155,12 +150,21 @@ public class AvailFriendListActivity extends Activity {
     public void startConstest(View view) {
         if (!(Boolean)view.getTag())
             return;
+
         String oppoName = ((Button)view).getText().toString();
         Log.d("avail", "chosen oppo name is " + oppoName);
-        //Query findUser = myFirebaseRef.child("onLineUser")
+
+        //send match request to opponent
+        Firebase userRef = FirebaseSingleton.getInstance("users/" + ((Button) view).getText());
+        userRef.child("matchRequests/" + currentUsername).setValue(Boolean.TRUE);
+        //alert user request sent
+        Utility.warningDialog(AvailFriendListActivity.this, "Match Requested",
+                "Request sent to " + oppoName);
+
+        /*
         Intent contestIntent = new Intent(this, ContestActivity.class);
         contestIntent.putExtra("opponame", oppoName);
-        startActivity(contestIntent);
+        startActivity(contestIntent);*/
     }
 
 }

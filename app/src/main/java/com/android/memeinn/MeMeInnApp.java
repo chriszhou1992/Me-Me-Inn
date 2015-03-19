@@ -14,11 +14,10 @@ import com.parse.ParseObject;
  * the screen orientation to portrait.
  */
 public class MeMeInnApp extends Application {
-
+    public Activity currentActivity;    //tracks the activity on display in the foreground
     @Override
     public void onCreate() {
         super.onCreate();
-
         //only needs to be called once per application
         Firebase.setAndroidContext(this);
         //Initialize Parse API to initialize connection to cloud
@@ -43,17 +42,20 @@ public class MeMeInnApp extends Application {
 
             @Override
             public void onActivityResumed(Activity activity) {
-
+                //Every activity must call onResumed() before going to the foreground
+                currentActivity = activity;
             }
 
             @Override
             public void onActivityPaused(Activity activity) {
-
+                if (activity == currentActivity)
+                    currentActivity = null;
             }
 
             @Override
             public void onActivityStopped(Activity activity) {
-
+                if (activity == currentActivity)
+                    currentActivity = null;
             }
 
             @Override
@@ -63,7 +65,8 @@ public class MeMeInnApp extends Application {
 
             @Override
             public void onActivityDestroyed(Activity activity) {
-
+                if (activity == currentActivity)
+                    currentActivity = null;
             }
         });
     }

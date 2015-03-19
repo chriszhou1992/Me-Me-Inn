@@ -10,6 +10,9 @@ https://github.com/wtsang02/colors/blob/master/color.xml
     <color name="background_color">#1E283B</color>
     <color name="chapterBtn_background_color">#ff6c303c</color>
 
+    <!-- Match Activity Styles -->
+    <color name="match_background_gray">#3A3941</color>
+
     <!-- Android style -->
     <color name="android_green">#A4C639</color>
     <!-- Android Holo style -->
