@@ -27,6 +27,10 @@ import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+/**
+ * Main interface of the application. Provides navigation
+ * to features of the app.
+ */
 public class MainActivity extends Activity {
 
     public static final String ACTION_ADD_FRIEND = "com.android.memeinn.ACTION_ADD_FRIEND";

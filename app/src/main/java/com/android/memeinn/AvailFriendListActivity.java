@@ -22,8 +22,7 @@ import com.parse.ParseUser;
 import java.util.HashMap;
 
 /**
- * Created by bchen11 on 3/13/15.
- * activity to see all the available friend to match with
+ * Activity to see all the available friend to match with.
  */
 public class AvailFriendListActivity extends Activity {
 

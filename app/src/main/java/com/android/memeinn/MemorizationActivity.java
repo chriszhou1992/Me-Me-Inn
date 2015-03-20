@@ -1,21 +1,26 @@
 package com.android.memeinn;
 
-import java.util.Map;
-import java.util.LinkedHashMap;
-import java.util.Map.Entry;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.widget.TextView;
 import android.view.View;
+import android.widget.TextView;
 
-import com.parse.*;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+/**
+ * Activity for the learning system. Used to learn/memorize words.
+ */
 public class MemorizationActivity extends ActionBarActivity {
 
     private String vocabType = "";
@@ -42,7 +47,11 @@ public class MemorizationActivity extends ActionBarActivity {
         initDict();
     }
 
-    //control the Button Next
+    /**
+     * Callback function for the Next button. Update interface to display
+     * the next word in the list.
+     * @param view Button The button clicked.
+     */
     public void onClickNext(View view) {
         if (currPos < dict.size()) {
             currPos ++;
@@ -53,7 +62,11 @@ public class MemorizationActivity extends ActionBarActivity {
         }
     }
 
-    //control the Button Previous
+    /**
+     * Callback function for the Previous button. Update interface to display
+     * the previous word in the list.
+     * @param view Button The button clicked.
+     */
     public void onClickPrev(View view) {
         if (currPos >= 0) {
             currPos --;
@@ -64,7 +77,10 @@ public class MemorizationActivity extends ActionBarActivity {
         }
     }
 
-    //parse the vocabulary set and print the words and meanings
+    /**
+     * Fetch vocabulary set from Parse database and parse the set into an
+     * ArrayList to enable easy display of the words and meanings.
+     */
     private void initDict() {
         this.dict = new LinkedHashMap<>();
         ParseQuery<ParseObject> query = ParseQuery.getQuery(vocabType);
@@ -88,17 +104,24 @@ public class MemorizationActivity extends ActionBarActivity {
         currPos = 0;
     }
 
-    //initialize the memorization view page
+    /**
+     * Initialize the interface with the first word in the vocab list.
+     */
     private void initMemorizationView() {
         getEntryWithPos(0);
     }
 
-    // helper function when click the next or previous button
+    /**
+     * Helper function triggered when clicked the next or previous button.
+     */
     private void updateMemorizationView() {
         getEntryWithPos(currPos);
     }
 
-    //get the current word position to control the sequence
+    /**
+     * Method that updates the interface to display the vocab at the given position.
+     * @param pos int The position of the word in the word array.
+     */
     private void getEntryWithPos(int pos) {
         Map.Entry<String, String> entry = indexedList.get(pos);
         String wordContent = entry.getKey();
@@ -107,6 +130,10 @@ public class MemorizationActivity extends ActionBarActivity {
         this.wordMeaningView.setText(wordMeaning);
     }
 
+    /**
+     * Callback to start an Intent to open Quiz activity.
+     * @param quizBtn Button The button clicked.
+     */
     public void startQuiz(View quizBtn) {
         Intent quizIntent = new Intent(this, QuizActivity.class);
         quizIntent.putExtra(ChapterActivity.EXTRA_MESSAGE_FIRST_LETTER, firstLetter.toLowerCase());

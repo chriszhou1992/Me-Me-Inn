@@ -27,6 +27,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+/**
+ * Activity that handles logics dealing with quizzes.
+ */
 public class QuizActivity extends Activity {
     private int score;
     private int rounds;
@@ -88,6 +91,10 @@ public class QuizActivity extends Activity {
         }
     }
 
+    /**
+     * Setup animation specs for fade-in/fade-out effects. Fade-In animation
+     * should start after fade-out animation has finished.
+     */
     private void initAnimations() {
         //fade-out/fade-in animations
         animatedView = findViewById(R.id.quizLayout);
@@ -208,9 +215,10 @@ public class QuizActivity extends Activity {
         } else {
             changeAnswerBtnBackground(view, -1);
             //if answered incorrectly, add this word to user's review list
-            /*from lingzi- I reversed this relationship so that each word is associated with the current user*/
+            /*from lingzi- I reversed this relationship so that each word is
+            associated with the current user*/
             ParseUser u = ParseUser.getCurrentUser();
-            String relationName = "UserReviewList"+vocabCategory;
+            String relationName = "UserReviewList" + vocabCategory;
             ParseRelation<ParseObject> rel = u.getRelation(relationName);
             rel.add(vocab);
             u.saveInBackground();
@@ -267,18 +275,36 @@ public class QuizActivity extends Activity {
         }
     }
 
+    /**
+     * Getter for current score.
+     * @return int The current quiz score.
+     */
     public int getScore(){
         return score;
     }
 
+    /**
+     * Getter for NUM_OF_OPTIONS constant.
+     * @return int The number of choices each quiz question has.
+     */
     public int getNUM_OF_OPTIONS(){
         return NUM_OF_OPTIONS;
     }
 
+    /**
+     * Getter for quiz option Buttons. Used in testing.
+     * @param idx int The index of the choice button.
+     * @return Button A reference to that button.
+     */
     public Button getButton(int idx){
         return optionBtns.get(idx);
     }
 
+    /**
+     * Getter for BTN_IDS constant array. Used in testing.
+     * @param idx int The index of the choice button id needed.
+     * @return int The ID of the needed choice button.
+     */
     public int getButtonId(int idx){
         return BTN_IDS[idx];
     }

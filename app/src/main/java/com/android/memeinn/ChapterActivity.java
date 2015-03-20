@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-
+/**
+ * Activity for ChapterList GUI.
+ */
 public class ChapterActivity extends Activity{
 
     public final static String EXTRA_MESSAGE_FIRST_LETTER = "chapter.first.letter";
@@ -31,7 +33,11 @@ public class ChapterActivity extends Activity{
         Log.d("myapp", "Chapter.vocabType = " + vocabType);
     }
 
-    // click the chapter button and return the chapter name to help database achieve relative word list
+    /**
+     * Callback function for click event on the chapter buttons.Return the chapter name to
+     * help database retrieve relative word list.
+     * @param view Button The chapter button clicked
+     */
     public void onClick(View view) {
         Intent MemorizationIntent = new Intent(this, MemorizationActivity.class);
         MemorizationIntent.putExtra(EXTRA_MESSAGE_VOCAB_TYPE, vocabType);

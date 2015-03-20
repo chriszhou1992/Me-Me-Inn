@@ -7,19 +7,21 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseUser;
 import com.parse.ParseRelation;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Activity that handles the display of words to review.
+ */
 public class ReviewActivity extends Activity {
 
     private String vocabType = "";//the type of vocabulary
@@ -78,6 +80,11 @@ public class ReviewActivity extends Activity {
         onClickNext(view);
     }
 
+    /**
+     * Callback function for the Next button. Update interface to display
+     * the next word in the list.
+     * @param view Button The button clicked.
+     */
     public void onClickNext(View view) {
         if (currPos < wordList.size()) {
             currPos ++;
@@ -91,7 +98,7 @@ public class ReviewActivity extends Activity {
     //parse the vocabulary set and print the words and meanings
     private void initList() {
         ParseUser u = ParseUser.getCurrentUser();
-        String relationName = "UserReviewList"+vocabType;
+        String relationName = "UserReviewList" + vocabType;
         ParseRelation relation = u.getRelation(relationName);
         ParseQuery query = relation.getQuery();
 

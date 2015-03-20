@@ -8,7 +8,10 @@ import android.widget.TextView;
 
 import com.parse.ParseUser;
 
-
+/**
+ * Activity for displaying the profile (user statistics, words to review etc.)
+ * of a user.
+ */
 public class ProfileActivity extends Activity {
 
     @Override

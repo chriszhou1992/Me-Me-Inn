@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+/**
+ * Activity used to display a customized friend request message box.
+ */
 public class ShowMsgActivity extends Activity {
 
     TextView txt_ok;

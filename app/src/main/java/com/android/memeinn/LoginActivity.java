@@ -15,7 +15,9 @@ import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 
-
+/**
+ * Default activity of the application. Handles login.
+ */
 public class LoginActivity extends ActionBarActivity {
 
     @Override

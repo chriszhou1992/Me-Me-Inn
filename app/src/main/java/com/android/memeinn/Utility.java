@@ -8,6 +8,9 @@ import android.content.DialogInterface;
 import java.util.HashMap;
 import java.util.Random;
 
+/**
+ * Public Utility class that contains functions useful for the whole application.
+ */
 public class Utility {
     private static final Random RAND = new Random();
     private static final HashMap<Integer, Boolean> duplicateMap = new HashMap<>();

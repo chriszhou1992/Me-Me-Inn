@@ -19,9 +19,8 @@ public class ContestActivity extends Activity {
     }
 
     /**
-     *init firebase, get the opponent user name and set a pair relation in the firebase to
-     * indicate that the two users are in a game
-     * @param savedInstanceState
+     * Setup function for the activity.
+     * @param savedInstanceState Bundle
      */
     @Override
     protected void onCreate(Bundle savedInstanceState){

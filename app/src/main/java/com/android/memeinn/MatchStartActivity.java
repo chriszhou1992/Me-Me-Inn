@@ -16,6 +16,10 @@ import com.parse.ParseUser;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Activity that is displayed before the start of a match. Used to track and display
+ * the status of submitted match request/response.
+ */
 public class MatchStartActivity extends Activity {
 
     //private Thread animationThread;

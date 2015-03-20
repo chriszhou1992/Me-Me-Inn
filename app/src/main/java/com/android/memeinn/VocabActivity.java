@@ -33,11 +33,11 @@ public class VocabActivity extends Activity{
     }
 
     /**
-     * triggers intent to review activity
+     * Triggers intent to review activity
      * @param view
      */
     public void goToReview(View view) {
-        Intent memoAct = new Intent(this, VocabMemoActivity.class);
+        Intent memoAct = new Intent(this, MemorizationActivity.class);
         startActivity(memoAct);
     }
 

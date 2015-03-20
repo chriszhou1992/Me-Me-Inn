@@ -10,11 +10,13 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 
 /**
- * Custom Application child class for the app in order to fix
- * the screen orientation to portrait.
+ * Custom Application class for the app to initialize Firebase and Parse
+ * backend, force screen orientation, and keep track of the current foreground
+ * activity.
  */
 public class MeMeInnApp extends Application {
     public Activity currentActivity;    //tracks the activity on display in the foreground
+
     @Override
     public void onCreate() {
         super.onCreate();
