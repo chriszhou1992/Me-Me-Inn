@@ -1,4 +1,4 @@
-package com.android.memeinn;
+package com.android.memeinn.match;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -12,6 +12,9 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.android.memeinn.FirebaseSingleton;
+import com.android.memeinn.R;
+import com.android.memeinn.Utility;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;

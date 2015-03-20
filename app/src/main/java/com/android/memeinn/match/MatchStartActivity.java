@@ -1,4 +1,4 @@
-package com.android.memeinn;
+package com.android.memeinn.match;
 
 
 import android.app.Activity;
@@ -7,6 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.android.memeinn.ContestActivity;
+import com.android.memeinn.FirebaseSingleton;
+import com.android.memeinn.Global;
+import com.android.memeinn.MeMeInnApp;
+import com.android.memeinn.Utility;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;

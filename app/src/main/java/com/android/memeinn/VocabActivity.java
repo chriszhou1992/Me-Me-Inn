@@ -7,10 +7,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.memeinn.learn.ChapterActivity;
+import com.android.memeinn.R;
+import com.android.memeinn.learn.MemorizationActivity;
+import com.android.memeinn.learn.QuizActivity;
+import com.android.memeinn.review.ReviewActivity;
+
 
 public class VocabActivity extends Activity{
 
-    public final static String EXTRA_MESSAGE = "vocab.MESSAGE";
+    public static final String EXTRA_MESSAGE = "vocab.MESSAGE";
     public int flag;//0 for review mode, 1 for learning mode
 
     @Override
@@ -20,7 +26,6 @@ public class VocabActivity extends Activity{
 
         Intent intent = getIntent();
         flag = intent.getFlags();
-
     }
 
     /**

@@ -20,9 +20,10 @@
     <string name="gotoSignUpBtnText">Sign Up for ME ME INN</string>
 
     <!-- Chapter List Page Strings -->
-    <string name="chapter1Text">A</string>
-    <string name="chapter2Text">B</string>
-    <string name="chapter3Text">C</string>
+    <string name="chapter1Text">High Frequency</string>
+    <string name="chapter2Text">Medium Frequency</string>
+    <string name="chapter3Text">Low Frequency</string>
+    <!--
     <string name="chapter4Text">D</string>
     <string name="chapter5Text">E</string>
     <string name="chapter6Text">F</string>
@@ -31,6 +32,7 @@
     <string name="chapter9Text">N</string>
     <string name="chapter10Text">T</string>
     <string name="chapter11Text">S</string>
+    -->
 
     <!-- Memorization Page Strings -->
     <string name="wordContent">Word Content</string>
@@ -114,6 +116,7 @@
     <!--Friend Page Strings-->
     <string name="friendsText">My Friends</string>
     <string name="addfriendsText">Add Friends</string>
+
 
 
 </resources>

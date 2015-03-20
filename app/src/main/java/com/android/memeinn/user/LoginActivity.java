@@ -1,4 +1,4 @@
-package com.android.memeinn;
+package com.android.memeinn.user;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -10,6 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.android.memeinn.MainActivity;
+import com.android.memeinn.R;
+import com.android.memeinn.SignUpActivity;
+import com.android.memeinn.Utility;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;

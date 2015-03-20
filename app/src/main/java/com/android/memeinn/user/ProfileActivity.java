@@ -1,4 +1,4 @@
-package com.android.memeinn;
+package com.android.memeinn.user;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.memeinn.R;
+import com.android.memeinn.VocabActivity;
+import com.android.memeinn.friend.FriendActivity;
 import com.parse.ParseUser;
 
 /**
@@ -25,7 +28,8 @@ public class ProfileActivity extends Activity {
     }
 
     /**
-     * Callback function for Review button. Triggers an Intent to go to the ReviewActivity.
+     * Callback function for Review button. Triggers an Intent to go to the vocab list to
+     * select the category of words to review.
      * @param view The Button that is clicked.
      */
     public void gotoVocab(View view) {

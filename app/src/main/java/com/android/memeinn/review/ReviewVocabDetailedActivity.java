@@ -1,5 +1,4 @@
-package com.android.memeinn;
-
+package com.android.memeinn.review;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.memeinn.ProfileActivity;
+import com.android.memeinn.R;
+import com.android.memeinn.VocabActivity;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -20,11 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Activity that handles the display of words to review.
+ * Activity that handles displaying review words one by one to enable
+ * detailed reviewing.
  */
-public class ReviewActivity extends Activity {
+public class ReviewVocabDetailedActivity extends Activity {
 
-    private String vocabType = "";//the type of vocabulary
     private ArrayList<ParseObject> wordList;
     private int currPos;
 
@@ -32,6 +34,7 @@ public class ReviewActivity extends Activity {
     private TextView wordMeaningView;
     private Button hide;
 
+    private String vocabType = "";  //the type of vocabulary
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +48,39 @@ public class ReviewActivity extends Activity {
         Intent intent = getIntent();
         vocabType = intent.getStringExtra(VocabActivity.EXTRA_MESSAGE);
 
-        Log.d("Myapp", "ReviewActivity.vocabType = " + vocabType);
-
         wordList = new ArrayList<>();
         initList();
         currPos = 0;
-
     }
 
-    /*Assumption:
+    //parse the vocabulary set and print the words and meanings
+    private void initList() {
+        ParseUser u = ParseUser.getCurrentUser();
+        String relationName = "UserReviewList" + vocabType;
+        ParseRelation relation = u.getRelation(relationName);
+        ParseQuery query = relation.getQuery();
+
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, ParseException e) {
+                if ((e == null) && (!list.isEmpty())) {
+                    Log.d("MyApp", "get review word objects");
+                    System.out.println("UserReviewList of this user has " + list.size() + " tuples");
+                    for (int i = 0; i < list.size(); i++) {
+                        ParseObject word = list.get(i);
+                        ReviewVocabDetailedActivity.this.wordList.add(word);
+                    }
+                    initReviewView();
+                } else if(list.isEmpty()){
+                    System.out.println("UserReviewList is empty!");
+                } else {
+                    Log.d("MyApp", "Error from retrieving review words: " + e.getMessage());
+                }
+            }
+        });
+    }
+
+   /*Assumption:
     * User will always click on the circle to show meaning if he/she doesn't remember,
     * and will then provide feedback(IDK).
     * However the user can click on "I know" without discovering the word meaning and go straight to next word*/
@@ -71,7 +98,7 @@ public class ReviewActivity extends Activity {
     //remove the word from review list table
     public void knowWord(View view){
         ParseUser u = ParseUser.getCurrentUser();
-        String relationName = "UserReviewList"+vocabType;
+        String relationName = "UserReviewList" + vocabType;
         ParseRelation relation = u.getRelation(relationName);
         ParseObject word = wordList.get(currPos);
         System.out.println("I know this word: " + word.getString("word"));
@@ -93,33 +120,6 @@ public class ReviewActivity extends Activity {
             }
             updateReviewView();
         }
-    }
-
-    //parse the vocabulary set and print the words and meanings
-    private void initList() {
-        ParseUser u = ParseUser.getCurrentUser();
-        String relationName = "UserReviewList" + vocabType;
-        ParseRelation relation = u.getRelation(relationName);
-        ParseQuery query = relation.getQuery();
-
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> list, ParseException e) {
-                if ((e == null) && (!list.isEmpty())) {
-                    Log.d("MyApp", "get review word objects");
-                    System.out.println("UserReviewList of this user has " + list.size() + " tuples");
-                    for (int i = 0; i < list.size(); i++) {
-                        ParseObject word = list.get(i);
-                        ReviewActivity.this.wordList.add(word);
-                    }
-                    initReviewView();
-                } else if(list.isEmpty()){
-                    System.out.println("UserReviewList is empty!");
-                } else {
-                    Log.d("MyApp", "Error from retrieving review words: " + e.getMessage());
-                }
-            }
-        });
     }
 
     //initialize the memorization view page

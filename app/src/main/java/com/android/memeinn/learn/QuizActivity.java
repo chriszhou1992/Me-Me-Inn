@@ -1,4 +1,4 @@
-package com.android.memeinn;
+package com.android.memeinn.learn;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -14,6 +14,11 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.memeinn.ChapterActivity;
+import com.android.memeinn.Question;
+import com.android.memeinn.QuizResultActivity;
+import com.android.memeinn.R;
+import com.android.memeinn.Utility;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -37,7 +42,9 @@ public class QuizActivity extends Activity {
 
     private Queue<Question> questionQueue;
     private String vocabCategory;
-    private String firstLetter;
+    private String wordTableName;
+    private String wordFrequency;
+    //private String firstLetter;
     private ArrayList<ParseObject> wordList;
 
     /* GUI loading spinner */
@@ -81,13 +88,17 @@ public class QuizActivity extends Activity {
 
     private void initQuizVocabSet() {
         vocabCategory = "GRE";
-        firstLetter = "a";
+        //firstLetter = "a";
         Intent i = getIntent();
         if (i != null) {
-            String s = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);
-            vocabCategory = s == null? "GRE" : s;
-            s = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FIRST_LETTER);
-            firstLetter = s == null? "a" : s;
+            //String s = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);
+            wordFrequency = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FREQUENCY);
+            wordTableName = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_TABLE_NAME);
+            //vocabCategory = s == null? "GRE" : s;
+            vocabCategory = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);
+            System.out.println("vocabCategory" + vocabCategory);
+            System.out.println("wordTableName" + wordTableName);
+            //firstLetter = s == null? "a" : s;
         }
     }
 
@@ -126,8 +137,20 @@ public class QuizActivity extends Activity {
      * questions in one shot.
      */
     private void generateQuizQuestions() {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(vocabCategory);
-        query.whereStartsWith("word", firstLetter);
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(wordTableName);
+        //query.whereStartsWith("word", firstLetter);
+
+        System.out.println("Quiz ChapterActivity.EXTRA_MESSAGE_FREQUENCY" + wordFrequency);
+        if(wordFrequency.toLowerCase().equals("high frequency")){
+            query.whereGreaterThan("frequency", 4);
+        }
+        else if(wordFrequency.toLowerCase().equals("medium frequency")){
+            query.whereGreaterThanOrEqualTo("frequency", 3);
+            query.whereLessThanOrEqualTo("frequency", 4);
+        }
+        else{
+            query.whereLessThanOrEqualTo("frequency", 2);
+        }
 
         //show an icon of loading spinner
         spinner.setVisibility(View.VISIBLE);
@@ -220,7 +243,9 @@ public class QuizActivity extends Activity {
             ParseUser u = ParseUser.getCurrentUser();
             String relationName = "UserReviewList" + vocabCategory;
             ParseRelation<ParseObject> rel = u.getRelation(relationName);
+            Log.d("quiz", relationName);
             rel.add(vocab);
+            Log.d("quiz", vocab.getString("word"));
             u.saveInBackground();
         }
         //disable further button clicking
@@ -258,6 +283,7 @@ public class QuizActivity extends Activity {
     private void goToResult(){
         Intent quizResult = new Intent(getApplicationContext(), QuizResultActivity.class);
         quizResult.putExtra("score", score);
+        quizResult.putExtra("vocabTableName", wordTableName);
         startActivity(quizResult);
     }
 

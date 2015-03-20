@@ -26,7 +26,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/icon">
+        android:layout_below="@+id/icon"
+        android:id="@+id/scrollView">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +46,7 @@
 
         <Button
             android:id="@+id/buttonA"
-            android:layout_width="wrap_content"
+            android:layout_width="152dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="@string/chapter1Text"
@@ -54,111 +55,37 @@
             android:textAllCaps="false"
             android:layout_gravity="center_horizontal"
             android:onClick="onClick"/>
-        <Button
-            android:id="@+id/buttonB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/chapter2Text"
-            android:textSize="18sp"
-            android:background="@color/chapterBtn_background_color"
-            android:textAllCaps="false"
-            android:layout_gravity="center_horizontal"
-            android:onClick="onClick"/>
-        <Button
-            android:id="@+id/buttonC"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/chapter3Text"
-            android:textSize="18sp"
-            android:background="@color/chapterBtn_background_color"
-            android:textAllCaps="false"
-            android:layout_gravity="center_horizontal"
-            android:onClick="onClick"/>
-        <Button
-            android:id="@+id/buttonD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/chapter4Text"
-            android:textSize="18sp"
-            android:background="@color/chapterBtn_background_color"
-            android:textAllCaps="false"
-            android:layout_gravity="center_horizontal"
-            android:onClick="onClick"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/chapter5Text"
-            android:textSize="18sp"
-            android:background="@color/chapterBtn_background_color"
-            android:textAllCaps="false"
-            android:layout_gravity="center_horizontal"
-            android:onClick="onClick" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/chapter6Text"
-            android:textSize="18sp"
-            android:background="@color/chapterBtn_background_color"
-            android:textAllCaps="false"
-            android:layout_gravity="center_horizontal"
-            android:onClick="onClick" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/chapter7Text"
-            android:textSize="18sp"
-            android:background="@color/chapterBtn_background_color"
-            android:textAllCaps="false"
-            android:layout_gravity="center_horizontal"
-            android:onClick="onClick" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/chapter8Text"
-            android:textSize="18sp"
-            android:background="@color/chapterBtn_background_color"
-            android:textAllCaps="false"
-            android:layout_gravity="center_horizontal"
-            android:onClick="onClick" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/chapter9Text"
-            android:textSize="18sp"
-            android:background="@color/chapterBtn_background_color"
-            android:textAllCaps="false"
-            android:layout_gravity="center_horizontal"
-            android:onClick="onClick" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/chapter10Text"
-            android:textSize="18sp"
-            android:background="@color/chapterBtn_background_color"
-            android:textAllCaps="false"
-            android:layout_gravity="center_horizontal"
-            android:onClick="onClick" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/chapter11Text"
-            android:textSize="18sp"
-            android:background="@color/chapterBtn_background_color"
-            android:textAllCaps="false"
-            android:layout_gravity="center_horizontal"
-            android:onClick="onClick" />
 
     </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/buttonC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chapter3Text"
+        android:textSize="18sp"
+        android:background="@color/chapterBtn_background_color"
+        android:textAllCaps="false"
+        android:onClick="onClick"
+        android:layout_marginBottom="62dp"
+        android:layout_alignBottom="@+id/scrollView"
+        android:layout_alignLeft="@+id/buttonB"
+        android:layout_alignStart="@+id/buttonB"
+        android:layout_alignRight="@+id/buttonB"
+        android:layout_alignEnd="@+id/buttonB" />
+
+    <Button
+        android:id="@+id/buttonB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chapter2Text"
+        android:textSize="18sp"
+        android:background="@color/chapterBtn_background_color"
+        android:textAllCaps="false"
+        android:onClick="onClick"
+        android:layout_marginBottom="77dp"
+        android:layout_above="@+id/buttonC"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

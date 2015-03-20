@@ -1,4 +1,4 @@
-package com.android.memeinn;
+package com.android.memeinn.friend;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -10,6 +10,8 @@ import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
 
+import com.android.memeinn.MainActivity;
+import com.android.memeinn.RequestFriendSession;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;

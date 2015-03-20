@@ -1,4 +1,4 @@
-package com.android.memeinn;
+package com.android.memeinn.friend;
 import android.text.TextUtils;
 
 import com.parse.ParseClassName;

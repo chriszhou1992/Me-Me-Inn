@@ -1,4 +1,4 @@
-package com.android.memeinn;
+package com.android.memeinn.friend;
 
 import java.util.List;
 import java.util.Timer;
@@ -13,6 +13,8 @@ import android.os.IBinder;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.android.memeinn.MainActivity;
+import com.android.memeinn.RequestFriendSession;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
