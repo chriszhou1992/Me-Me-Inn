@@ -22,7 +22,6 @@ import com.firebase.client.ValueEventListener;
 import com.parse.DeleteCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;

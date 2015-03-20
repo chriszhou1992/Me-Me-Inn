@@ -1,8 +1,5 @@
 package com.android.memeinn;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -22,15 +19,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
-import com.parse.ParseImageView;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressLint("InlinedApi")
 public class FriendActivity extends Activity {

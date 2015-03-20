@@ -31,7 +31,7 @@ public class ProfileActivity extends Activity {
     }
 
     /**
-     * Callback function for Frineds button. Triggers an Intent to go to the FriendActivity.
+     * Callback function for Friends button. Triggers an Intent to go to the FriendActivity.
      * @param view The Button that is clicked.
      */
     public void onFriends(View view) {
