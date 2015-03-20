@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.memeinn.review.ReviewVocabDetailedActivity;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -29,16 +30,13 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 
-/**
- * Created by lindsey on 15-03-20.
- */
-public class ReviewActivityTest  extends ActivityInstrumentationTestCase2<ReviewActivity> {
+public class ReviewActivityTest  extends ActivityInstrumentationTestCase2<ReviewVocabDetailedActivity> {
     private String lastWord;
     private String lastProgress;
-    private ReviewActivity currAct;
+    private ReviewVocabDetailedActivity currAct;
 
     public ReviewActivityTest() {
-        super(ReviewActivity.class);
+        super(ReviewVocabDetailedActivity.class);
         lastWord = new String();
         lastProgress = new String();
     }

@@ -1,4 +1,4 @@
-package com.android.memeinn;
+package com.android.memeinn.review;
 
 
 import android.app.Activity;
@@ -9,15 +9,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.memeinn.R;
+import com.android.memeinn.Utility;
+import com.android.memeinn.VocabActivity;
+import com.android.memeinn.user.ProfileActivity;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseUser;
 import com.parse.ParseRelation;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,12 +120,12 @@ public class ReviewVocabDetailedActivity extends Activity {
             updateReviewView();
         } else {
             Utility.warningDialog(this, "Review finished!", "Congradulations! You have finished " +
-                    "the review. Click OK to go back to Profile page.", "OK",
+                            "the review. Click OK to go back to Profile page.", "OK",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             backToProfile(null);
                         }
-            });
+                    });
         }
     }
 
@@ -160,7 +163,7 @@ public class ReviewVocabDetailedActivity extends Activity {
                         ReviewVocabDetailedActivity.this.wordList.add(word);
                     }
                     initReviewView();
-                } else if(list.isEmpty()){
+                } else if (list.isEmpty()) {
                     listEmpty();
                 } else {
                     Log.d("MyApp", "Error from retrieving review words: " + e.getMessage());
