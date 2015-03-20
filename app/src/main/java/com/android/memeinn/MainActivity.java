@@ -22,6 +22,7 @@ import com.firebase.client.ValueEventListener;
 import com.parse.DeleteCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
@@ -75,6 +76,7 @@ public class MainActivity extends Activity {
         filter.addAction(ACTION_FRIEND_RESPONSE);
         registerReceiver(mReceiver, filter);
 
+        // check database and return latest content
         Intent serviceIntent = new Intent(this, CheckRequestService.class);
         bindService(serviceIntent, mRequestServiceConnection, BIND_AUTO_CREATE);
 
@@ -296,9 +298,11 @@ public class MainActivity extends Activity {
              public void onReceive(Context context, Intent intent) {
                  final ParseUser currentUser = ParseUser.getCurrentUser();
                  String action = intent.getAction();
+                 //deal with add friend
                  if (action.equalsIgnoreCase(ACTION_ADD_FRIEND)) {
                      String fromUserID = intent.getStringExtra(REQUESTFRIEND_FROMID);
                      if (currentUser != null) {
+                         // connect with database by calling function in RequestFriendSession.java
                          ParseQuery<RequestFriendSession> query = ParseQuery.getQuery(RequestFriendSession.CLASS_NAME);
                          query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_TOUSERID, currentUser.getObjectId());
                          query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_FROMUSERID, fromUserID);
@@ -308,7 +312,8 @@ public class MainActivity extends Activity {
                              public void done(RequestFriendSession session, ParseException e) {
                                  if (session == null) {
                                      // nothing
-                                 } else {
+                                 }
+                                 else {
                                      mCheckSession = session;
                                      Intent i = new Intent(MainActivity.this, ShowMsgActivity.class);
                                      i.putExtra(MESSAGE_CONTENT, session.getFromUserName() + " send request for friends.");
@@ -318,9 +323,12 @@ public class MainActivity extends Activity {
                              }
                          });
                      }
-                 } else if (action.equalsIgnoreCase(ACTION_FRIEND_RESPONSE)) {
+                 }
+                 // deal with the friend request response
+                 else if (action.equalsIgnoreCase(ACTION_FRIEND_RESPONSE)) {
                      final String toUserID = intent.getStringExtra(REQUESTFRIEND_TOID);
                      if (currentUser != null) {
+                         // connect with database by calling function in RequestFriendSession.java
                          ParseQuery<RequestFriendSession> query = ParseQuery.getQuery(RequestFriendSession.CLASS_NAME);
                          query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_FROMUSERID, currentUser.getObjectId());
                          query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_TOUSERID, toUserID);
@@ -328,7 +336,8 @@ public class MainActivity extends Activity {
                              public void done(final RequestFriendSession session, ParseException e) {
                                  if (session == null) {
                                      // nothing
-                                 } else {
+                                 }
+                                 else {
                                      final boolean bAccept = session.getIsAccepted();
                                      final boolean bReject = session.getIsRejected();
 
@@ -363,7 +372,8 @@ public class MainActivity extends Activity {
                                              public void done(ParseException e) {
                                                  if (e == null) {
                                                      //Toast.makeText(MainActivity.this, "Successfully delete session.", Toast.LENGTH_LONG).show();
-                                                 } else {
+                                                 }
+                                                 else {
                                                      //
                                                  }
                                              }

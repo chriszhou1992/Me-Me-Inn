@@ -17,7 +17,7 @@ public class RequestFriendSession extends ParseObject {
     public static String CLASS_NAME = "RequestFriendSession";
 
     /*
-     * fields
+     * fields all functions below are used for connecting database
      */
     public static final String REQUEST_FIELD_FROMUSERID = "fromUserID";
     public static final String REQUEST_FIELD_FROMUSERNAME = "fromUserName";
