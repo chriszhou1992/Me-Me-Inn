@@ -85,7 +85,8 @@ public class QuizActivity extends Activity {
 
     private void initQuizVocabSet() {
         vocabCategory = "GRE";
-        //firstLetter = "a";
+        wordFrequency = "High Frequency";
+        wordTableName = "GRE";
         Intent i = getIntent();
         if (i != null) {
             //String s = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);

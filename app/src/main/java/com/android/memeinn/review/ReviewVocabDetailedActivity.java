@@ -1,21 +1,26 @@
-package com.android.memeinn;
+package com.android.memeinn.review;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.memeinn.R;
+import com.android.memeinn.Utility;
+import com.android.memeinn.VocabActivity;
+import com.android.memeinn.user.ProfileActivity;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseUser;
 import com.parse.ParseRelation;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,23 +96,18 @@ public class ReviewVocabDetailedActivity extends Activity {
      * @param view Button The button clicked.
      */
     public void onClickNext(View view) {
-        if (currPos < wordList.size()) {
-    public void onClickNext(final View view) {
         count++;
         if (count < total) {
             currPos ++;
             updateReviewView();
         } else {
-            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setTitle("Review finished!");
-            alertDialog.setMessage("Congradulations! You have finished the review. Click OK to go back to Profile page.");
-            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    backToProfile();
-                }
+            Utility.warningDialog(this, "Review finished!", "Congradulations! You have finished " +
+                    "the review. Click OK to go back to Profile page.", "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            backToProfile(null);
+                        }
             });
-            alertDialog.setIcon(R.drawable.img2);
-            alertDialog.show();
         }
     }
 
@@ -118,7 +118,7 @@ public class ReviewVocabDetailedActivity extends Activity {
         alertDialog.setMessage("You hav nothing to review yet. Try doing more quizes. Click OK to go back to Profile page.");
         alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                backToProfile();
+                backToProfile(null);
             }
         });
         alertDialog.setIcon(R.drawable.img2);
@@ -142,7 +142,7 @@ public class ReviewVocabDetailedActivity extends Activity {
 
                     for (int i = 0; i < list.size(); i++) {
                         ParseObject word = list.get(i);
-                        ReviewActivity.this.wordList.add(word);
+                        ReviewVocabDetailedActivity.this.wordList.add(word);
                     }
                     initReviewView();
                 } else if(list.isEmpty()){
@@ -181,6 +181,7 @@ public class ReviewVocabDetailedActivity extends Activity {
         ParseUser.getCurrentUser().saveInBackground();
         Intent profIntent = new Intent(this, ProfileActivity.class);
         startActivity(profIntent);
+        finish();
     }
 
     @Override
