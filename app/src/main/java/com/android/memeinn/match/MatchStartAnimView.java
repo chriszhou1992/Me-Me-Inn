@@ -84,14 +84,13 @@ public class MatchStartAnimView extends SurfaceView
         //Setup how to paint countdown
         setupPaintsForCountDown();
 
-        //Check opponent status and set whether match is ready accordingly
-        checkMatchStatus();
-
         isMatchReady = false;
         textBoundRect = new Rect();
         isAnimationDone = false;
         this.opponentName = opponentName;
 
+        //Check opponent status and set whether match is ready accordingly
+        checkMatchStatus();
         countDown = 15;
     }
 
@@ -102,7 +101,7 @@ public class MatchStartAnimView extends SurfaceView
     private void checkMatchStatus() {
         Firebase opponentStatusRef = FirebaseSingleton.getInstance("matches/" + Utility
                 .combineStringSorted(
-                        ParseUser.getCurrentUser().getUsername(), opponentName) + opponentName);
+                        ParseUser.getCurrentUser().getUsername(), opponentName)).child(opponentName);
         opponentStatusRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

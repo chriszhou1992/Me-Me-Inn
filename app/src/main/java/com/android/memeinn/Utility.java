@@ -4,6 +4,7 @@ package com.android.memeinn;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -196,6 +197,7 @@ public class Utility {
      * @return String the combined string of a and b.
      */
     public static String combineStringSorted(String a, String b) {
+        Log.d("combined", "" + a + "//" + b);
         int compare = a.compareToIgnoreCase(b);
         if (compare < 0) {
             return a + b;
