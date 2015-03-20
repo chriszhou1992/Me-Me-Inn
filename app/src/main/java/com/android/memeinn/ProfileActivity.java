@@ -25,9 +25,10 @@ public class ProfileActivity extends Activity {
      * Callback function for Review button. Triggers an Intent to go to the ReviewActivity.
      * @param view The Button that is clicked.
      */
-    public void gotoReview(View view) {
-        Intent reviewIntent = new Intent(this, ReviewActivity.class);
-        startActivity(reviewIntent);
+    public void gotoVocab(View view) {
+        Intent vocabIntent = new Intent(this, VocabActivity.class);
+        vocabIntent.setFlags(0);//flag: 0 for review, 1 for learn
+        startActivity(vocabIntent);
     }
 
     /**

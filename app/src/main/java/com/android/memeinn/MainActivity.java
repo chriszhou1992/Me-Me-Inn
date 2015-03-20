@@ -260,6 +260,7 @@ public class MainActivity extends Activity {
      */
     public void gotoVocab(View view) {
         Intent vocabIntent = new Intent(this, VocabActivity.class);
+        vocabIntent.setFlags(1);//flag: 0 for review, 1 for learn
         startActivity(vocabIntent);
     }
 

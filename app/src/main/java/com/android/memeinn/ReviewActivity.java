@@ -2,14 +2,12 @@ package com.android.memeinn;
 
 
 import android.app.Activity;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TableLayout;
-import android.widget.TableRow;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -17,68 +15,128 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.ParseRelation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewActivity extends Activity {
 
+    private String vocabType = "";//the type of vocabulary
+    private ArrayList<ParseObject> wordList;
+    private int currPos;
+
+    private TextView wordContentView;
+    private TextView wordMeaningView;
+    private Button hide;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.review);
+        setContentView(R.layout.reviewchart);
 
-        Log.d("Myapp", "ReviewActivity");
+        wordContentView = (TextView) findViewById(R.id.wordContentView);
+        wordMeaningView = (TextView) findViewById(R.id.wordMeaningView);
+        hide = (Button) findViewById(R.id.checkMeaning);
 
+        Intent intent = getIntent();
+        vocabType = intent.getStringExtra(VocabActivity.EXTRA_MESSAGE);
+
+        Log.d("Myapp", "ReviewActivity.vocabType = " + vocabType);
+
+        wordList = new ArrayList<>();
+        initList();
+        currPos = 0;
+
+    }
+
+    /*Assumption:
+    * User will always click on the circle to show meaning if he/she doesn't remember,
+    * and will then provide feedback(IDK).
+    * However the user can click on "I know" without discovering the word meaning and go straight to next word*/
+
+    //disappear the circle and show word meaning hidden underneath
+    public void showMeaning(View view){
+        view.setVisibility(View.GONE);
+    }
+
+    public void hideMeaning(){
+        hide.setVisibility(View.VISIBLE);
+    }
+
+    //user nailed the word
+    //remove the word from review list table
+    public void knowWord(View view){
         ParseUser u = ParseUser.getCurrentUser();
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("GRE");
-        query.whereEqualTo("reviewUsers", u);
+        String relationName = "UserReviewList"+vocabType;
+        ParseRelation relation = u.getRelation(relationName);
+        ParseObject word = wordList.get(currPos);
+        System.out.println("I know this word: " + word.getString("word"));
+        relation.remove(word);
+        //this somehow didn't remove the word from DB successfully
+        onClickNext(view);
+    }
+
+    public void onClickNext(View view) {
+        if (currPos < wordList.size()) {
+            currPos ++;
+            if (currPos == wordList.size()) {
+                currPos = 0;
+            }
+            updateReviewView();
+        }
+    }
+
+    //parse the vocabulary set and print the words and meanings
+    private void initList() {
+        ParseUser u = ParseUser.getCurrentUser();
+        String relationName = "UserReviewList"+vocabType;
+        ParseRelation relation = u.getRelation(relationName);
+        ParseQuery query = relation.getQuery();
 
         query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> results, ParseException e) {
-                if (e == null) {
-                    TableLayout table = (TableLayout) findViewById(R.id.reviewTable);
-
-                    TableRow.LayoutParams wordColLayout = new TableRow.LayoutParams(
-                            ViewGroup.LayoutParams.WRAP_CONTENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
-                    wordColLayout.span = 1;
-
-                    TableRow.LayoutParams definitionColLayout = new TableRow.LayoutParams(
-                            1,
-                            ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
-                    definitionColLayout.span = 2;
-
-                    for (ParseObject obj : results) {
-                        TableRow tr = new TableRow(ReviewActivity.this);
-
-                        TextView wordField = new TextView(ReviewActivity.this);
-                        wordField.setText(obj.getString("word"));
-                        wordField.setLayoutParams(wordColLayout);
-                        wordField.setTextColor(Color.WHITE);
-                        wordField.setGravity(Gravity.START);
-                        wordField.setPadding(0,0,4,0);
-
-                        TextView defField = new TextView(ReviewActivity.this);
-                        defField.setText(obj.getString("definition"));
-                        defField.setLayoutParams(definitionColLayout);
-                        defField.setGravity(Gravity.START);
-                        defField.setTextColor(Color.WHITE);
-                        defField.setPadding(1,1,1,1);
-
-                        tr.addView(wordField);
-                        tr.addView(defField);
-                        table.addView(tr);
-
-                        View separator = new View(ReviewActivity.this);
-                        separator.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup
-                                .LayoutParams.MATCH_PARENT, 2));
-                        separator.setBackgroundColor(Color.WHITE);
-                        table.addView(separator);
+            @Override
+            public void done(List<ParseObject> list, ParseException e) {
+                if ((e == null) && (!list.isEmpty())) {
+                    Log.d("MyApp", "get review word objects");
+                    System.out.println("UserReviewList of this user has " + list.size() + " tuples");
+                    for (int i = 0; i < list.size(); i++) {
+                        ParseObject word = list.get(i);
+                        ReviewActivity.this.wordList.add(word);
                     }
+                    initReviewView();
+                } else if(list.isEmpty()){
+                    System.out.println("UserReviewList is empty!");
                 } else {
-                    e.printStackTrace();
+                    Log.d("MyApp", "Error from retrieving review words: " + e.getMessage());
                 }
             }
         });
+    }
+
+    //initialize the memorization view page
+    private void initReviewView() {
+        setWordDisplayWithPos(0);
+    }
+
+    // helper function when click the next or previous button
+    private void updateReviewView() {
+        hideMeaning();
+        setWordDisplayWithPos(currPos);
+    }
+
+    //get the current word position to control the sequence
+    private void setWordDisplayWithPos(int pos) {
+        ParseObject word = wordList.get(pos);
+        String wordContent = word.getString("word");
+        String wordMeaning = word.getString("definition");
+        this.wordContentView.setText(wordContent);
+        this.wordMeaningView.setText(wordMeaning);
+    }
+
+    public void backToProfile(View view) {
+        Intent profIntent = new Intent(this, ProfileActivity.class);
+        startActivity(profIntent);
     }
 }

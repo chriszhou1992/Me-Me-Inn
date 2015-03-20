@@ -15,7 +15,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -209,9 +208,12 @@ public class QuizActivity extends Activity {
         } else {
             changeAnswerBtnBackground(view, -1);
             //if answered incorrectly, add this word to user's review list
-            ParseRelation<ParseObject> rel = vocab.getRelation("reviewUsers");
-            rel.add(ParseUser.getCurrentUser());
-            vocab.saveInBackground();
+            /*from lingzi- I reversed this relationship so that each word is associated with the current user*/
+            ParseUser u = ParseUser.getCurrentUser();
+            String relationName = "UserReviewList"+vocabCategory;
+            ParseRelation<ParseObject> rel = u.getRelation(relationName);
+            rel.add(vocab);
+            u.saveInBackground();
         }
         //disable further button clicking
         setOptionsClickable(false);

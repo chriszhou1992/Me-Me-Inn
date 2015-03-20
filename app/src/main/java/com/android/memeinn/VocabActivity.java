@@ -11,11 +11,16 @@ import android.widget.Button;
 public class VocabActivity extends Activity{
 
     public final static String EXTRA_MESSAGE = "vocab.MESSAGE";
+    public int flag;//0 for review mode, 1 for learning mode
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vocabpage);
+
+        Intent intent = getIntent();
+        flag = intent.getFlags();
+
     }
 
     /**
@@ -36,11 +41,20 @@ public class VocabActivity extends Activity{
         startActivity(memoAct);
     }
 
-    public void gotoChapList(View view) {
-        Intent goToChapIntent = new Intent(this, ChapterActivity.class);
-        String vocabType = ((Button) /*findViewById(R.id.gre)*/view).getText().toString();
-        Log.d("MyApp", "VocabType" + vocabType);
-        goToChapIntent.putExtra(EXTRA_MESSAGE, vocabType);
-        startActivity(goToChapIntent);
+    public void gotoChapOrReview(View view) {
+        if(flag == 1){
+            Intent goToChapIntent = new Intent(this, ChapterActivity.class);
+            String vocabType = ((Button) /*findViewById(R.id.gre)*/view).getText().toString();
+            Log.d("MyApp", "VocabType" + vocabType);
+            goToChapIntent.putExtra(EXTRA_MESSAGE, vocabType);
+            startActivity(goToChapIntent);
+        } else if (flag == 0){
+            Intent goToReviewIntent = new Intent(this, ReviewActivity.class);
+            String vocabType = ((Button) /*findViewById(R.id.gre)*/view).getText().toString();
+            Log.d("MyApp", "VocabType" + vocabType);
+            goToReviewIntent.putExtra(EXTRA_MESSAGE, vocabType);
+            startActivity(goToReviewIntent);
+        }
+
     }
 }
