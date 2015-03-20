@@ -96,6 +96,7 @@
     <string name="rankBtnText">Ranking</string>
     <string name="friendBtnText">Friends</string>
     <string name="usernameText">Username</string>
+    <string name="title_activity_review_finished_pop_up">ReviewFinishedPopUp</string>
 
 
 </resources>

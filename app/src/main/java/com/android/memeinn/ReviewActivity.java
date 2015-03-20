@@ -2,6 +2,8 @@ package com.android.memeinn;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +31,10 @@ public class ReviewActivity extends Activity {
     private TextView wordContentView;
     private TextView wordMeaningView;
     private Button hide;
+    private TextView reviewProgressView;
+
+    private int total;//total num of words to review
+    private int count;//counting up the progress
 
 
     @Override
@@ -39,6 +45,7 @@ public class ReviewActivity extends Activity {
         wordContentView = (TextView) findViewById(R.id.wordContentView);
         wordMeaningView = (TextView) findViewById(R.id.wordMeaningView);
         hide = (Button) findViewById(R.id.checkMeaning);
+        reviewProgressView = (TextView) findViewById(R.id.reviewProgress);
 
         Intent intent = getIntent();
         vocabType = intent.getStringExtra(VocabActivity.EXTRA_MESSAGE);
@@ -72,21 +79,30 @@ public class ReviewActivity extends Activity {
         String relationName = "UserReviewList"+vocabType;
         ParseRelation relation = u.getRelation(relationName);
         ParseObject word = wordList.get(currPos);
-        System.out.println("I know this word: " + word.getString("word"));
         relation.remove(word);
         //this somehow didn't remove the word from DB successfully
         onClickNext(view);
     }
 
-    public void onClickNext(View view) {
-        if (currPos < wordList.size()) {
+    public void onClickNext(final View view) {
+        count++;
+        if (count < total) {
             currPos ++;
-            if (currPos == wordList.size()) {
-                currPos = 0;
-            }
             updateReviewView();
+        } else {
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Review finished!");
+            alertDialog.setMessage("Congradulations! You have finished the review. Click OK to go back to Profile page.");
+            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    backToProfile(view);
+                }
+            });
+            alertDialog.setIcon(R.drawable.img2);
+            alertDialog.show();
         }
     }
+
 
     //parse the vocabulary set and print the words and meanings
     private void initList() {
@@ -101,6 +117,8 @@ public class ReviewActivity extends Activity {
                 if ((e == null) && (!list.isEmpty())) {
                     Log.d("MyApp", "get review word objects");
                     System.out.println("UserReviewList of this user has " + list.size() + " tuples");
+                    total = list.size();
+
                     for (int i = 0; i < list.size(); i++) {
                         ParseObject word = list.get(i);
                         ReviewActivity.this.wordList.add(word);
@@ -117,6 +135,7 @@ public class ReviewActivity extends Activity {
 
     //initialize the memorization view page
     private void initReviewView() {
+        count = 0;
         setWordDisplayWithPos(0);
     }
 
@@ -131,8 +150,10 @@ public class ReviewActivity extends Activity {
         ParseObject word = wordList.get(pos);
         String wordContent = word.getString("word");
         String wordMeaning = word.getString("definition");
+        String progress = "You have mastered "+count+"/"+total;
         this.wordContentView.setText(wordContent);
         this.wordMeaningView.setText(wordMeaning);
+        this.reviewProgressView.setText(progress);
     }
 
     public void backToProfile(View view) {
