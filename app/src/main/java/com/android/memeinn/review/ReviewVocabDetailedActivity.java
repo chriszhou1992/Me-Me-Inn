@@ -1,4 +1,5 @@
-package com.android.memeinn.review;
+package com.android.memeinn;
+
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,17 +7,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.memeinn.R;
-import com.android.memeinn.VocabActivity;
-import com.android.memeinn.user.ProfileActivity;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseRelation;
 import com.parse.ParseUser;
+import com.parse.ParseRelation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +32,11 @@ public class ReviewVocabDetailedActivity extends Activity {
     private TextView wordContentView;
     private TextView wordMeaningView;
     private Button hideCircle;
+    private TextView reviewProgressView;
 
     private String vocabType = "";  //the type of vocabulary
+    private int total;//total num of words to review
+    private int count;//counting up the progress
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class ReviewVocabDetailedActivity extends Activity {
         wordContentView = (TextView) findViewById(R.id.wordContentView);
         wordMeaningView = (TextView) findViewById(R.id.wordMeaningView);
         hideCircle = (Button) findViewById(R.id.checkMeaning);
+        reviewProgressView = (TextView) findViewById(R.id.reviewProgress);
 
         Intent intent = getIntent();
         vocabType = intent.getStringExtra(VocabActivity.EXTRA_MESSAGE);
@@ -51,33 +54,7 @@ public class ReviewVocabDetailedActivity extends Activity {
         wordList = new ArrayList<>();
         initList();
         currPos = 0;
-    }
 
-    //parse the vocabulary set and print the words and meanings
-    private void initList() {
-        ParseUser u = ParseUser.getCurrentUser();
-        String relationName = "UserReviewList" + vocabType;
-        ParseRelation relation = u.getRelation(relationName);
-        ParseQuery query = relation.getQuery();
-
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> list, ParseException e) {
-                if ((e == null) && (!list.isEmpty())) {
-                    Log.d("MyApp", "get review word objects");
-                    System.out.println("UserReviewList of this user has " + list.size() + " tuples");
-                    for (int i = 0; i < list.size(); i++) {
-                        ParseObject word = list.get(i);
-                        ReviewVocabDetailedActivity.this.wordList.add(word);
-                    }
-                    initReviewView();
-                } else if(list.isEmpty()){
-                    System.out.println("UserReviewList is empty!");
-                } else {
-                    Log.d("MyApp", "Error from retrieving review words: " + e.getMessage());
-                }
-            }
-        });
     }
 
    /*Assumption:
@@ -103,8 +80,8 @@ public class ReviewVocabDetailedActivity extends Activity {
         String relationName = "UserReviewList" + vocabType;
         ParseRelation relation = u.getRelation(relationName);
         ParseObject word = wordList.get(currPos);
-        System.out.println("I know this word: " + word.getString("word"));
         relation.remove(word);
+        //this somehow didn't remove the word from DB successfully
         onClickNext(view);
     }
 
@@ -115,16 +92,71 @@ public class ReviewVocabDetailedActivity extends Activity {
      */
     public void onClickNext(View view) {
         if (currPos < wordList.size()) {
+    public void onClickNext(final View view) {
+        count++;
+        if (count < total) {
             currPos ++;
-            if (currPos == wordList.size()) {
-                currPos = 0;
-            }
             updateReviewView();
+        } else {
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Review finished!");
+            alertDialog.setMessage("Congradulations! You have finished the review. Click OK to go back to Profile page.");
+            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    backToProfile();
+                }
+            });
+            alertDialog.setIcon(R.drawable.img2);
+            alertDialog.show();
         }
+    }
+
+    public void listEmpty(){
+        System.out.println("UserReviewList is empty!");
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Review list is empty!");
+        alertDialog.setMessage("You hav nothing to review yet. Try doing more quizes. Click OK to go back to Profile page.");
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                backToProfile();
+            }
+        });
+        alertDialog.setIcon(R.drawable.img2);
+        alertDialog.show();
+    }
+
+    //parse the vocabulary set and print the words and meanings
+    private void initList() {
+        ParseUser u = ParseUser.getCurrentUser();
+        String relationName = "UserReviewList"+vocabType;
+        ParseRelation relation = u.getRelation(relationName);
+        ParseQuery query = relation.getQuery();
+
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, ParseException e) {
+                if ((e == null) && (!list.isEmpty())) {
+                    Log.d("MyApp", "get review word objects");
+                    System.out.println("UserReviewList of this user has " + list.size() + " tuples");
+                    total = list.size();
+
+                    for (int i = 0; i < list.size(); i++) {
+                        ParseObject word = list.get(i);
+                        ReviewActivity.this.wordList.add(word);
+                    }
+                    initReviewView();
+                } else if(list.isEmpty()){
+                    listEmpty();
+                } else {
+                    Log.d("MyApp", "Error from retrieving review words: " + e.getMessage());
+                }
+            }
+        });
     }
 
     //initialize the memorization view page
     private void initReviewView() {
+        count = 0;
         setWordDisplayWithPos(0);
     }
 
@@ -139,8 +171,10 @@ public class ReviewVocabDetailedActivity extends Activity {
         ParseObject word = wordList.get(pos);
         String wordContent = word.getString("word");
         String wordMeaning = word.getString("definition");
+        String progress = "You have mastered "+count+"/"+total;
         this.wordContentView.setText(wordContent);
         this.wordMeaningView.setText(wordMeaning);
+        this.reviewProgressView.setText(progress);
     }
 
     public void backToProfile(View view) {
