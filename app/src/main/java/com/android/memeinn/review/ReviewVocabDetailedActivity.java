@@ -1,4 +1,4 @@
-package com.android.memeinn.review;
+package com.android.memeinn;
 
 
 import android.app.Activity;
@@ -9,18 +9,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.memeinn.R;
-import com.android.memeinn.Utility;
-import com.android.memeinn.VocabActivity;
-import com.android.memeinn.user.ProfileActivity;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseRelation;
 import com.parse.ParseUser;
+import com.parse.ParseRelation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +28,20 @@ import java.util.List;
  */
 public class ReviewVocabDetailedActivity extends Activity {
 
+    public String getVocabType() {
+        return vocabType;
+    }
+
+    private String vocabType = "";//the type of vocabulary
+
+    public int getCurrPos() {
+        return currPos;
+    }
+
+    public ArrayList<ParseObject> getWordList() {
+        return wordList;
+    }
+
     private ArrayList<ParseObject> wordList;
     private int currPos;
 
@@ -39,9 +50,9 @@ public class ReviewVocabDetailedActivity extends Activity {
     private Button hideCircle;
     private TextView reviewProgressView;
 
-    private String vocabType = "";  //the type of vocabulary
     private int total;//total num of words to review
     private int count;//counting up the progress
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +66,8 @@ public class ReviewVocabDetailedActivity extends Activity {
 
         Intent intent = getIntent();
         vocabType = intent.getStringExtra(VocabActivity.EXTRA_MESSAGE);
+
+        Log.d("Myapp", "ReviewActivity.vocabType = " + vocabType);
 
         wordList = new ArrayList<>();
         initList();
@@ -86,6 +99,8 @@ public class ReviewVocabDetailedActivity extends Activity {
         ParseRelation relation = u.getRelation(relationName);
         ParseObject word = wordList.get(currPos);
         relation.remove(word);
+        u.saveInBackground();
+        Log.d("Myapp", word.getString("word")+" has been removed");
         //this somehow didn't remove the word from DB successfully
         onClickNext(view);
     }
