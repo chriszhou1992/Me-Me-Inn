@@ -80,6 +80,8 @@ public class ReviewActivity extends Activity {
         ParseRelation relation = u.getRelation(relationName);
         ParseObject word = wordList.get(currPos);
         relation.remove(word);
+        u.saveInBackground();
+        Log.d("Myapp", word.getString("word")+" has been removed");
         //this somehow didn't remove the word from DB successfully
         onClickNext(view);
     }
@@ -95,7 +97,7 @@ public class ReviewActivity extends Activity {
             alertDialog.setMessage("Congradulations! You have finished the review. Click OK to go back to Profile page.");
             alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    backToProfile(view);
+                    backToProfile();
                 }
             });
             alertDialog.setIcon(R.drawable.img2);
@@ -103,6 +105,19 @@ public class ReviewActivity extends Activity {
         }
     }
 
+    public void listEmpty(){
+        System.out.println("UserReviewList is empty!");
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Review list is empty!");
+        alertDialog.setMessage("You hav nothing to review yet. Try doing more quizes. Click OK to go back to Profile page.");
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                backToProfile();
+            }
+        });
+        alertDialog.setIcon(R.drawable.img2);
+        alertDialog.show();
+    }
 
     //parse the vocabulary set and print the words and meanings
     private void initList() {
@@ -125,7 +140,7 @@ public class ReviewActivity extends Activity {
                     }
                     initReviewView();
                 } else if(list.isEmpty()){
-                    System.out.println("UserReviewList is empty!");
+                    listEmpty();
                 } else {
                     Log.d("MyApp", "Error from retrieving review words: " + e.getMessage());
                 }
@@ -157,6 +172,11 @@ public class ReviewActivity extends Activity {
     }
 
     public void backToProfile(View view) {
+        Intent profIntent = new Intent(this, ProfileActivity.class);
+        startActivity(profIntent);
+    }
+
+    public void backToProfile() {
         Intent profIntent = new Intent(this, ProfileActivity.class);
         startActivity(profIntent);
     }
