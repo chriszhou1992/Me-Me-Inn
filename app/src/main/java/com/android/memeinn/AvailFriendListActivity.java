@@ -1,6 +1,7 @@
 package com.android.memeinn;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,14 +45,22 @@ public class AvailFriendListActivity extends Activity {
         //thanks to http://stackoverflow.com/questions/7195056/how-do-i-programmatically-add-buttons-into-layout-one-by-one-in-several-lines
 
         Query onlineRef = usersRef.orderByChild("isOnline").limitToLast(50);
-        onlineRef.addChildEventListener(new ChildEventListener() {
+        onlineRef.addChildEventListener(createListenerForUserOnlineStatus());
+    }
+
+    /**
+     * Real-time listener monitoring the available user list,
+     * so fetching has 3 constraints:
+     * 1. this user must be online(a child of "onLineUser")
+     * 2. this user must not be in a game(not inside game mode)
+     * 3. this user must be a friend of user(not implemented)
+     */
+    private ChildEventListener createListenerForUserOnlineStatus() {
+        return new ChildEventListener() {
             /**
-             * Real-time function monitoring the available user list,
-             * so fetching has 3 constraints:
-             * 1. this user must be online(a child of "onLineUser")
-             * 2. this user must not be in a game(not inside game mode)
-             * 3. this user must be a friend of user(not implemented)
+             * New users signed-up and came in.
              * @param dataSnapshot
+             * @param previousChildKey
              */
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildKey) {
@@ -65,22 +74,33 @@ public class AvailFriendListActivity extends Activity {
 
                 Button userBtn = createUserButton();
                 userBtn.setText(username);
-                setUserButtonOnlineStatus(userBtn, (Boolean)userInfo.get("isOnline"));
+                setUserButtonOnlineStatus(userBtn, (Boolean)userInfo.get("isOnline"), false);
                 userBtnMap.put(username, userBtn);
                 ll.addView(userBtnMap.get(username));
             }
 
+            /**
+             * A user's status changed.
+             * @param dataSnapshot
+             * @param previousChildKey
+             */
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String previousChildKey) {
                 String username = dataSnapshot.getKey();
                 if (username.equals(currentUsername))
                     return;
                 Button b = userBtnMap.get(username);
-                setUserButtonOnlineStatus(b, dataSnapshot.child("isOnline")
-                        .getValue(Boolean.class));
+                Boolean isOnline = dataSnapshot.child("isOnline").getValue(Boolean.class);
+                Boolean isInMatch = dataSnapshot.child("isInMatch").getValue(Boolean.class);
+                setUserButtonOnlineStatus(b, isOnline, isInMatch);
                 b.setText(username);
             }
 
+            /**
+             * A user is removed. Possibly by going from online back to offline thus going off
+             * our list since it's ordered by whether the user is online.
+             * @param dataSnapshot
+             */
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 Button b = userBtnMap.remove(dataSnapshot.getKey());
@@ -96,7 +116,7 @@ public class AvailFriendListActivity extends Activity {
             public void onCancelled(FirebaseError firebaseError) {
                 Log.d("userList", "list fail " + firebaseError.getMessage());
             }
-        });
+        };
     }
 
     /**
@@ -122,16 +142,16 @@ public class AvailFriendListActivity extends Activity {
     /**
      * Function that changes the display of Button b depending on whether the user
      * that button represents is online or not. A Boolean metadata is also stored onto Button
-     * b indicating whether the user is online or not.
+     * b indicating whether the user is online/inMatch or not.
      * @param b
      * @param isOnline
      */
-    private void setUserButtonOnlineStatus(Button b, Boolean isOnline) {
-        b.setTag(isOnline);
-        if (isOnline)
-            b.setBackgroundColor(Color.GREEN);
-        else
-            b.setBackgroundColor(Color.RED);
+    private void setUserButtonOnlineStatus(Button b, Boolean isOnline, Boolean isInMatch) {
+        b.setTag(isOnline && !isInMatch);
+        int buttonStatusColor = isInMatch? Color.CYAN : Color.GREEN;
+        if (!isOnline)
+            buttonStatusColor = Color.RED;
+        b.setBackgroundColor(buttonStatusColor);
     }
 
     /**
@@ -148,6 +168,7 @@ public class AvailFriendListActivity extends Activity {
      * @param view
      */
     public void startConstest(View view) {
+        //If the target user is in match or offline, then the click triggers nothing
         if (!(Boolean)view.getTag())
             return;
 
@@ -157,14 +178,11 @@ public class AvailFriendListActivity extends Activity {
         //send match request to opponent
         Firebase userRef = FirebaseSingleton.getInstance("users/" + ((Button) view).getText());
         userRef.child("matchRequests/" + currentUsername).setValue(Boolean.TRUE);
-        //alert user request sent
-        Utility.warningDialog(AvailFriendListActivity.this, "Match Requested",
-                "Request sent to " + oppoName);
 
-        /*
-        Intent contestIntent = new Intent(this, ContestActivity.class);
-        contestIntent.putExtra("opponame", oppoName);
-        startActivity(contestIntent);*/
+        //Trigger Tntent to start a match
+        Intent matchStartIntent = new Intent(this, MatchStartActivity.class);
+        matchStartIntent.putExtra(Global.EXTRA_MESSAGE_OPPONAME, oppoName);
+        startActivity(matchStartIntent);
     }
 
 }

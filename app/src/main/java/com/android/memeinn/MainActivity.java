@@ -126,8 +126,10 @@ public class MainActivity extends Activity {
                     Firebase userOnlineRef = userRef.child("isOnline");
                     userOnlineRef.setValue(Boolean.TRUE);
 
-                    //add listener to remove this connection when disconnected
+                    //add listener to clean up data when connection is disconnected
                     userOnlineRef.onDisconnect().setValue(Boolean.FALSE);
+                    userRef.child("isInMatch").onDisconnect().setValue(Boolean.FALSE);
+
                     //update last time online when disconnected
                     userRef.child("lastOnline").onDisconnect().setValue(ServerValue.TIMESTAMP);
                 }
@@ -149,9 +151,11 @@ public class MainActivity extends Activity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 final String requestUser = dataSnapshot.getKey();
+                final String currentUsername = ParseUser.getCurrentUser().getUsername();
+                final MeMeInnApp app = (MeMeInnApp)getApplicationContext();
+
                 DialogInterface.OnClickListener acceptListener =
                         new DialogInterface.OnClickListener() {
-                    String currentUsername = ParseUser.getCurrentUser().getUsername();
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Firebase userRef = FirebaseSingleton.getInstance("users")
@@ -162,22 +166,33 @@ public class MainActivity extends Activity {
                         userRef.child("matchRequests/" + requestUser).removeValue();
 
                         //create a match entry
-                        Firebase matchRef = FirebaseSingleton.getInstance("matches");
-                        matchRef.child(Utility.combineStringSorted(requestUser,
-                                currentUsername)).child(currentUsername).setValue(Boolean.TRUE);
+                        Firebase matchRef = FirebaseSingleton.getInstance("matches/" +
+                                Utility.combineStringSorted(requestUser,currentUsername));
+                        matchRef.child(currentUsername).setValue(Boolean.TRUE);
+
+                        Intent startMatchIntent = new Intent(app.currentActivity,
+                                MatchStartActivity.class);
+                        startMatchIntent.putExtra(Global.EXTRA_MESSAGE_OPPONAME, requestUser);
+                        startActivity(startMatchIntent);
+
+                        Log.d("match", "accepted");
                     }
                 };
                 DialogInterface.OnClickListener rejectListener =
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Firebase userRef = FirebaseSingleton.getInstance("users")
-                                        .child(ParseUser.getCurrentUser().getUsername());
                                 //remove that request from request queue
+                                Firebase userRef = FirebaseSingleton.getInstance("users")
+                                        .child(currentUsername);
                                 userRef.child("matchRequests/" + requestUser).removeValue();
+
+                                //remove match room
+                                Firebase matchRef = FirebaseSingleton.getInstance("matches/" +
+                                        Utility.combineStringSorted(currentUsername, requestUser));
+                                matchRef.removeValue();
                             }
                         };
-                MeMeInnApp app = (MeMeInnApp)getApplicationContext();
                 Utility.warningDialog(app.currentActivity, "Match Request Received",
                         "User " + requestUser + " wants to start a match with you.", "Accept Match",
                         acceptListener, "Reject Match", rejectListener);

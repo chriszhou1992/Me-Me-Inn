@@ -6,9 +6,17 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
+import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+import com.parse.ParseUser;
 
 public class MatchStartAnimView extends SurfaceView
         implements SurfaceHolder.Callback {
@@ -26,16 +34,29 @@ public class MatchStartAnimView extends SurfaceView
     /*Paths that tracks the outlines of the triangle*/
     private Path upperTriPath;
     private Path lowerTriPath;
-    /*Colors for the triangles*/
+    /*Paints for the triangles*/
     private Paint upperTriPaint;
     private Paint lowerTriPaint;
+    /*Paints for the username texts*/
+    private Paint onlineUserPaint;
+    private Paint offlineUserPaint;
+    /*Paint for circle*/
+    private Paint circlePaint;
+    /*Paint for count down text*/
+    private Paint countDownTextPaint;
+    private Rect textBoundRect;
 
     /*Tracks the end of animation*/
     private Boolean isAnimationDone;
 
-    public MatchStartAnimView(Context context) {
+    private String opponentName = null;
+    private Boolean isMatchReady;
+
+    private Integer countDown;
+
+    public MatchStartAnimView(Context context, String opponentName) {
         super(context);
-        setBackgroundColor(Color.WHITE);
+        setBackgroundColor(Color.BLACK);
         getHolder().addCallback(this);
         setFocusable(true);
 
@@ -54,6 +75,49 @@ public class MatchStartAnimView extends SurfaceView
         lowerTriPath = new Path();
 
         //Setup how to paint the triangles
+        setupPaintsForTriangles();
+        //Setup how to paint username
+        setupPaintsForUsers();
+        //Setup how to paint countdown
+        setupPaintsForCountDown();
+
+        //Check opponent status and set whether match is ready accordingly
+        checkMatchStatus();
+
+        isMatchReady = false;
+        textBoundRect = new Rect();
+        isAnimationDone = false;
+        this.opponentName = opponentName;
+
+        countDown = 15;
+    }
+
+    /**
+     * Direct check of the existence of data at the URI. If the data exists, then
+     * opponent is ready, so update isMatchReady flag.
+     */
+    private void checkMatchStatus() {
+        Firebase opponentStatusRef = FirebaseSingleton.getInstance("matches/" + Utility
+                .combineStringSorted(
+                        ParseUser.getCurrentUser().getUsername(), opponentName) + opponentName);
+        opponentStatusRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                isMatchReady = dataSnapshot.exists();
+                Log.d("match", "snapshot exists");
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+    }
+
+    /**
+     * Method to initialize Paint objects for the upper and lower triangles in the animation.
+     */
+    private void setupPaintsForTriangles() {
         upperTriPaint = new Paint();
         upperTriPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         upperTriPaint.setColor(getResources().getColor(R.color.match_background_gray));
@@ -61,12 +125,42 @@ public class MatchStartAnimView extends SurfaceView
         lowerTriPaint = new Paint();
         lowerTriPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         lowerTriPaint.setColor(getResources().getColor(R.color.logo_color));
-        isAnimationDone = false;
     }
 
     /**
-     *
-     * @param canvas
+     * Method to initialize Paint objects for the usernames.
+     */
+    private void setupPaintsForUsers() {
+        onlineUserPaint = new Paint();
+        onlineUserPaint.setColor(Color.GREEN);
+        onlineUserPaint.setTextSize(36);
+
+        offlineUserPaint = new Paint();
+        offlineUserPaint.setColor(Color.BLUE);
+        offlineUserPaint.setTextSize(36);
+    }
+
+    /**
+     * Method to initialize Paint objects for the circle and text in the
+     * countdown circle.
+     */
+    private void setupPaintsForCountDown() {
+        circlePaint = new Paint();
+        upperTriPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        circlePaint.setColor(Color.BLACK);
+
+        countDownTextPaint = new Paint();
+        countDownTextPaint.setStyle(Paint.Style.STROKE);
+        countDownTextPaint.setColor(Color.WHITE);
+        countDownTextPaint.setTextSize(48);
+        Typeface tf = Typeface.create("Serif",Typeface.BOLD_ITALIC);
+        countDownTextPaint.setTypeface(tf);
+    }
+
+    /**
+     * Method which is triggered whenever the interface needs to be drawn/re-drawn.
+     * Performs animations by updating private counters that keep track of W and H of triangles.
+     * @param canvas Canvas The canvas to draw upon.
      * @note http://stackoverflow.com/questions/22042603/android-how-to-create-triangle-and-rectangle-shape-programatically
      */
     @Override
@@ -82,6 +176,52 @@ public class MatchStartAnimView extends SurfaceView
         isAnimationDone = triWidth == W && triHeight == H;
         Log.d("thread", "" + isAnimationDone);
 
+        //animate triangles
+        drawTriangles(canvas);
+        //draw usernames
+        drawUsers(canvas);
+        //draw countdown circle
+        drawCountDownCircle(canvas);
+        if (!isAnimationDone)
+            postInvalidate();
+    }
+
+    /**
+     * Draw representation of the two competing Users on the screen.
+     * @param canvas Canvas The canvas to draw upon.
+     */
+    private void drawUsers(Canvas canvas) {
+        canvas.drawText(ParseUser.getCurrentUser().getUsername(), triWidth/4, triHeight/4,
+                onlineUserPaint);
+        canvas.drawText(opponentName, W - triWidth/4, H - triHeight/4,
+                isMatchReady ? onlineUserPaint : offlineUserPaint);
+    }
+
+    /**
+     * Draw the circle that tracks the countdown seconds before the match request
+     * is automatically terminated.
+     * @param canvas Canvas The canvas to draw upon.
+     */
+    private void drawCountDownCircle(Canvas canvas) {
+        /*Draw countdown circle*/
+        canvas.drawCircle(W/2, H/2, 50, circlePaint);
+        /*Draw countdown text centered at the center of the circle
+         *from http://stackoverflow.com/questions/14052013/number-inside-circle */
+        String countDownString = countDown.toString();
+        if (isMatchReady)
+            countDownString = "GO!";
+        countDownTextPaint.getTextBounds(countDownString, 0, countDownString.length(), textBoundRect);
+        float x = W/2 - textBoundRect.width() / 2;
+        Paint.FontMetrics fm = countDownTextPaint.getFontMetrics();
+        float y = H/2 - (fm.descent + fm.ascent) / 2;
+        canvas.drawText(countDownString, x, y, countDownTextPaint);
+    }
+
+    /**
+     * Draw the upper and lower triangles which make up the animation.
+     * @param canvas Canvas The canvas to draw upon.
+     */
+    private void drawTriangles(Canvas canvas) {
         //animate upper triangle
         b.set(triWidth, 0);
         c.set(0, triHeight);
@@ -106,14 +246,11 @@ public class MatchStartAnimView extends SurfaceView
         //Draw path on canvas
         canvas.drawPath(upperTriPath, upperTriPaint);
         canvas.drawPath(lowerTriPath, lowerTriPaint);
-
-        if (!isAnimationDone)
-            postInvalidate();
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        //animationThread.start();
+
     }
 
     @Override
@@ -140,5 +277,22 @@ public class MatchStartAnimView extends SurfaceView
      */
     public Boolean isAnimationDone() {
         return isAnimationDone;
+    }
+
+    /**
+     * Setter method for isMatchReady..
+     * @param acceptedMatch Boolean A boolean indicating whether opponent is ready..
+     */
+    public void setOpponentStatus(Boolean acceptedMatch) {
+        isMatchReady = acceptedMatch;
+        postInvalidate();
+    }
+
+    /**
+     * Method used to update countdown integer.
+     */
+    public int decrementCountdown() {
+        countDown--;
+        return countDown;
     }
 }

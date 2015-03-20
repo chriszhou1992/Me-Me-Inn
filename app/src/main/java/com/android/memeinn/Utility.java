@@ -29,6 +29,25 @@ public class Utility {
         warning.create().show();
     }
 
+    /**
+     * Public function that opens up a warning dialog on the specified Context displaying
+     * the specified title, message and OK button.
+     * @param c Context Dialog will be displayed.
+     * @param title String The title of the dialog.
+     * @param msg String The message displayed in the dialog.
+     * @param okText String The text of the OK button on the dialog.
+     * @param okListener OnClickListener The listener callback for OK button.
+     */
+    public static void warningDialog(Context c, String title, String msg, String okText,
+                                     DialogInterface.OnClickListener okListener) {
+        AlertDialog.Builder warning = new AlertDialog.Builder(c);
+        warning.setTitle(title);
+        warning.setMessage(msg);
+        warning.setPositiveButton(android.R.string.yes, null);
+        warning.setIcon(android.R.drawable.ic_dialog_alert);
+        warning.setPositiveButton(okText, okListener);
+        warning.create().show();
+    }
 
     /**
      * Public function that opens up a warning dialog on the specified Context displaying
@@ -53,7 +72,6 @@ public class Utility {
         warning.setNegativeButton(cancelText, cancelListener);
         warning.create().show();
     }
-
 
     /**
      * Public function that opens up a warning dialog on the specified Context displaying
