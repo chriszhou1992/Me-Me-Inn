@@ -1,4 +1,4 @@
-package com.android.memeinn;
+package com.android.memeinn.match;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +12,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.memeinn.FirebaseSingleton;
+import com.android.memeinn.Global;
+import com.android.memeinn.R;
+import com.android.memeinn.match.MatchStartActivity;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;

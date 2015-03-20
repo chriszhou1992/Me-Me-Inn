@@ -1,4 +1,4 @@
-package com.android.memeinn;
+package com.android.memeinn.learn;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.memeinn.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -24,7 +25,8 @@ import java.util.Map.Entry;
 public class MemorizationActivity extends ActionBarActivity {
 
     private String vocabType = "";
-    private String firstLetter = "";
+    private String frequencyText = "";
+    private String wordTableName = "";
     private Map<String, String> dict;
     private List<Entry<String, String>> indexedList;
     private int currPos;
@@ -43,7 +45,9 @@ public class MemorizationActivity extends ActionBarActivity {
         Intent intent = getIntent();
         vocabType = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);
         Log.d("myapp", "Memorization.vocabType = " + vocabType);
-        firstLetter = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FIRST_LETTER);
+        frequencyText = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FREQUENCY);
+        wordTableName = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_TABLE_NAME);
+
         initDict();
     }
 
@@ -83,8 +87,26 @@ public class MemorizationActivity extends ActionBarActivity {
      */
     private void initDict() {
         this.dict = new LinkedHashMap<>();
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(vocabType);
-        query.whereStartsWith("word", firstLetter.toLowerCase());
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(wordTableName);
+        query.setLimit(1000);
+        query.orderByAscending("word");
+        //query.whereStartsWith("word", frequencyText.toLowerCase());
+
+        //query based on word frequency
+        //System.out.println("vocabType" + vocabType);
+        //System.out.println("frequencyText" + frequencyText);
+        //System.out.println("wordTableName" + wordTableName);
+        if(frequencyText.toLowerCase().equals("high frequency")){
+            query.whereGreaterThan("frequency", 4);
+        }
+        else if(frequencyText.toLowerCase().equals("medium frequency")){
+            query.whereGreaterThanOrEqualTo("frequency", 3);
+            query.whereLessThanOrEqualTo("frequency", 4);
+        }
+        else{
+            query.whereLessThanOrEqualTo("frequency", 2);
+        }
+
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> wordList, ParseException e) {
@@ -136,8 +158,9 @@ public class MemorizationActivity extends ActionBarActivity {
      */
     public void startQuiz(View quizBtn) {
         Intent quizIntent = new Intent(this, QuizActivity.class);
-        quizIntent.putExtra(ChapterActivity.EXTRA_MESSAGE_FIRST_LETTER, firstLetter.toLowerCase());
+        quizIntent.putExtra(ChapterActivity.EXTRA_MESSAGE_FREQUENCY, frequencyText.toLowerCase());
         quizIntent.putExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE, vocabType);
+        quizIntent.putExtra(ChapterActivity.EXTRA_MESSAGE_TABLE_NAME, wordTableName);
         startActivity(quizIntent);
     }
 }

@@ -1,4 +1,4 @@
-package com.android.memeinn;
+package com.android.memeinn.user;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -7,6 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.android.memeinn.MainActivity;
+import com.android.memeinn.R;
+import com.android.memeinn.Utility;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 

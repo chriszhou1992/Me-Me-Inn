@@ -2,6 +2,8 @@ package com.android.memeinn;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.android.memeinn.user.SignUpActivity;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -13,9 +15,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.endsWith;
 
-/**
- * Created by bchen11 on 2/20/15.
- */
 public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpActivity> {
 
     public SignUpActivityTest() {

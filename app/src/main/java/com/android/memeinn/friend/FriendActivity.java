@@ -1,4 +1,4 @@
-package com.android.memeinn;
+package com.android.memeinn.friend;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -19,6 +19,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.memeinn.MainActivity;
+import com.android.memeinn.R;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;

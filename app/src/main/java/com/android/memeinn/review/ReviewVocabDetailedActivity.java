@@ -1,5 +1,4 @@
-package com.android.memeinn;
-
+package com.android.memeinn.review;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.memeinn.R;
+import com.android.memeinn.VocabActivity;
+import com.android.memeinn.user.ProfileActivity;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -20,18 +22,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Activity that handles the display of words to review.
+ * Activity that handles displaying review words one by one to enable
+ * detailed reviewing.
  */
-public class ReviewActivity extends Activity {
+public class ReviewVocabDetailedActivity extends Activity {
 
-    private String vocabType = "";//the type of vocabulary
     private ArrayList<ParseObject> wordList;
     private int currPos;
 
     private TextView wordContentView;
     private TextView wordMeaningView;
-    private Button hide;
+    private Button hideCircle;
 
+    private String vocabType = "";  //the type of vocabulary
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,59 +43,14 @@ public class ReviewActivity extends Activity {
 
         wordContentView = (TextView) findViewById(R.id.wordContentView);
         wordMeaningView = (TextView) findViewById(R.id.wordMeaningView);
-        hide = (Button) findViewById(R.id.checkMeaning);
+        hideCircle = (Button) findViewById(R.id.checkMeaning);
 
         Intent intent = getIntent();
         vocabType = intent.getStringExtra(VocabActivity.EXTRA_MESSAGE);
 
-        Log.d("Myapp", "ReviewActivity.vocabType = " + vocabType);
-
         wordList = new ArrayList<>();
         initList();
         currPos = 0;
-
-    }
-
-    /*Assumption:
-    * User will always click on the circle to show meaning if he/she doesn't remember,
-    * and will then provide feedback(IDK).
-    * However the user can click on "I know" without discovering the word meaning and go straight to next word*/
-
-    //disappear the circle and show word meaning hidden underneath
-    public void showMeaning(View view){
-        view.setVisibility(View.GONE);
-    }
-
-    public void hideMeaning(){
-        hide.setVisibility(View.VISIBLE);
-    }
-
-    //user nailed the word
-    //remove the word from review list table
-    public void knowWord(View view){
-        ParseUser u = ParseUser.getCurrentUser();
-        String relationName = "UserReviewList"+vocabType;
-        ParseRelation relation = u.getRelation(relationName);
-        ParseObject word = wordList.get(currPos);
-        System.out.println("I know this word: " + word.getString("word"));
-        relation.remove(word);
-        //this somehow didn't remove the word from DB successfully
-        onClickNext(view);
-    }
-
-    /**
-     * Callback function for the Next button. Update interface to display
-     * the next word in the list.
-     * @param view Button The button clicked.
-     */
-    public void onClickNext(View view) {
-        if (currPos < wordList.size()) {
-            currPos ++;
-            if (currPos == wordList.size()) {
-                currPos = 0;
-            }
-            updateReviewView();
-        }
     }
 
     //parse the vocabulary set and print the words and meanings
@@ -110,7 +68,7 @@ public class ReviewActivity extends Activity {
                     System.out.println("UserReviewList of this user has " + list.size() + " tuples");
                     for (int i = 0; i < list.size(); i++) {
                         ParseObject word = list.get(i);
-                        ReviewActivity.this.wordList.add(word);
+                        ReviewVocabDetailedActivity.this.wordList.add(word);
                     }
                     initReviewView();
                 } else if(list.isEmpty()){
@@ -120,6 +78,49 @@ public class ReviewActivity extends Activity {
                 }
             }
         });
+    }
+
+   /*Assumption:
+    * User will always click on the circle to show meaning if he/she doesn't remember,
+    * and will then provide feedback(IDK).
+    * However the user can click on "I know" without discovering the word meaning and go straight to next word*/
+
+    //disappear the circle and show word meaning hidden underneath
+    public void showMeaning(View view){
+        view.setVisibility(View.GONE);
+        wordMeaningView.setVisibility(View.VISIBLE);
+    }
+
+    public void hideMeaning(){
+        hideCircle.setVisibility(View.VISIBLE);
+        wordMeaningView.setVisibility(View.GONE);
+    }
+
+    //user nailed the word
+    //remove the word from review list table
+    public void knowWord(View view){
+        ParseUser u = ParseUser.getCurrentUser();
+        String relationName = "UserReviewList" + vocabType;
+        ParseRelation relation = u.getRelation(relationName);
+        ParseObject word = wordList.get(currPos);
+        System.out.println("I know this word: " + word.getString("word"));
+        relation.remove(word);
+        onClickNext(view);
+    }
+
+    /**
+     * Callback function for the Next button. Update interface to display
+     * the next word in the list.
+     * @param view Button The button clicked.
+     */
+    public void onClickNext(View view) {
+        if (currPos < wordList.size()) {
+            currPos ++;
+            if (currPos == wordList.size()) {
+                currPos = 0;
+            }
+            updateReviewView();
+        }
     }
 
     //initialize the memorization view page
@@ -143,7 +144,20 @@ public class ReviewActivity extends Activity {
     }
 
     public void backToProfile(View view) {
+        ParseUser.getCurrentUser().saveInBackground();
         Intent profIntent = new Intent(this, ProfileActivity.class);
         startActivity(profIntent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        ParseUser.getCurrentUser().saveInBackground();
+        super.onBackPressed();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ParseUser.getCurrentUser().saveInBackground();
     }
 }

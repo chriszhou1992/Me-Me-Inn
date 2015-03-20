@@ -1,10 +1,8 @@
 package com.android.memeinn;
 
-/**
- * Created by qingsongqi on 3/6/15.
- */
-
 import android.test.ActivityInstrumentationTestCase2;
+
+import com.android.memeinn.learn.ChapterActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -26,10 +24,9 @@ public class ChapterActivityTest extends ActivityInstrumentationTestCase2<Chapte
     }
 
     public void testButtons() {
-        onView(withId(R.id.buttonA)).check(matches(withText("A")));
-        onView(withId(R.id.buttonB)).check(matches(withText("B")));
-        onView(withId(R.id.buttonC)).check(matches(withText("C")));
-        onView(withId(R.id.buttonD)).check(matches(withText("D")));
+        onView(withId(R.id.buttonA)).check(matches(withText("High Frequency")));
+        onView(withId(R.id.buttonB)).check(matches(withText("Medium Frequency")));
+        onView(withId(R.id.buttonC)).check(matches(withText("Low Frequency")));
     }
 
 

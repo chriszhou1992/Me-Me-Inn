@@ -1,4 +1,4 @@
-package com.android.memeinn;
+package com.android.memeinn.learn;
 
 /**
  * Class that models a question in quiz/match.

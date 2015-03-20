@@ -1,6 +1,5 @@
-package com.android.memeinn;
+package com.android.memeinn.friend;
 
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -10,19 +9,16 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
-import android.text.TextUtils;
-import android.widget.Toast;
 
-import com.parse.FindCallback;
+import com.android.memeinn.MainActivity;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-public class CheckResponseService extends Service {
-    public static final String MY_SERVICE = "CheckResponseService";
+public class CheckRequestService extends Service {
+    public static final String MY_SERVICE = "CheckRequestService";
 
     private boolean mBInited = false;
     private Timer mCheckTimer = null;
@@ -66,7 +62,7 @@ public class CheckResponseService extends Service {
     public void onDestroy() {
     }
 
-    //to check database
+    // check database
     private void startTimer() {
         if (mCheckTimer != null) {
             mCheckTimer.cancel();
@@ -86,35 +82,35 @@ public class CheckResponseService extends Service {
         }
     }
 
-    //connect with database and return content
+    // parse database and return content
     private void CheckParseDB() {
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
             ParseQuery<RequestFriendSession> query = ParseQuery.getQuery(RequestFriendSession.CLASS_NAME);
-            query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_FROMUSERID, currentUser.getObjectId());
-            query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_ISFROMCHECKED, false);
-            query.findInBackground(new FindCallback<RequestFriendSession>() {
+            String curUser = currentUser.getObjectId();
+//	    	query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_TOUSERID, currentUser.getObjectId());
+            query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_TOUSERID, curUser);
+            query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_ISACCEPTED, false);
+            query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_ISREJECTED, false);
+            query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_ISTOCHECKED, false);
+            query.getFirstInBackground(new GetCallback<RequestFriendSession>() {
+                public void done(final RequestFriendSession session, ParseException e) {
+                    if (session == null) {
+                        // nothing
+                    }
+                    else {
+                        session.setIsToChecked(true);
+                        session.saveInBackground(new SaveCallback() {
 
-                @Override
-                public void done(List<RequestFriendSession> sessions, ParseException e) {
-                    // TODO Auto-generated method stub
-                    for (RequestFriendSession session : sessions) {
-                        boolean bAccept = session.getIsAccepted();
-                        boolean bReject = session.getIsRejected();
-                        if (bAccept || bReject) {
-                            session.setIsFromChecked(true);
-                            session.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException arg0) {
+                                // TODO Auto-generated method stub
+                            }
+                        });
 
-                                @Override
-                                public void done(ParseException arg0) {
-                                    // TODO Auto-generated method stub
-                                }
-                            });
-
-                            final Intent intent = new Intent(MainActivity.ACTION_FRIEND_RESPONSE);
-                            intent.putExtra(MainActivity.REQUESTFRIEND_TOID, session.getToUserID());
-                            sendBroadcast(intent);
-                        }
+                        final Intent intent = new Intent(MainActivity.ACTION_ADD_FRIEND);
+                        intent.putExtra(MainActivity.REQUESTFRIEND_FROMID, session.getFromUserID());
+                        sendBroadcast(intent);
                     }
                 }
             });

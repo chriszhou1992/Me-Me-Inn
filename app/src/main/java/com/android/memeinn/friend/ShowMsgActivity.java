@@ -1,4 +1,4 @@
-package com.android.memeinn;
+package com.android.memeinn.friend;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,6 +6,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+
+import com.android.memeinn.MainActivity;
+import com.android.memeinn.R;
 
 /**
  * Activity used to display a customized friend request message box.

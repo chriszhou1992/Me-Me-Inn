@@ -1,9 +1,11 @@
-package com.android.memeinn;
+package com.android.memeinn.match;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.android.memeinn.Global;
+import com.android.memeinn.R;
 import com.parse.ParseUser;
 
 /**

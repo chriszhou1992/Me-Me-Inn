@@ -13,6 +13,13 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 
+import com.android.memeinn.friend.CheckRequestService;
+import com.android.memeinn.friend.CheckResponseService;
+import com.android.memeinn.friend.RequestFriendSession;
+import com.android.memeinn.friend.ShowMsgActivity;
+import com.android.memeinn.match.AvailFriendListActivity;
+import com.android.memeinn.match.MatchStartActivity;
+import com.android.memeinn.user.ProfileActivity;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;

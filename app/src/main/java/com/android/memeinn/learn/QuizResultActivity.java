@@ -1,4 +1,4 @@
-package com.android.memeinn;
+package com.android.memeinn.learn;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.android.memeinn.MainActivity;
+import com.android.memeinn.R;
 
 
 public class QuizResultActivity extends Activity {

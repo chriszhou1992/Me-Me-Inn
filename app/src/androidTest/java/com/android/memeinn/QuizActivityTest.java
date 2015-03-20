@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.memeinn.learn.QuizActivity;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -27,9 +28,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 
-/**
- * Created by bchen11 on 3/4/15.
- */
 public class QuizActivityTest extends ActivityInstrumentationTestCase2<QuizActivity> {
     private String lastWord;
     private QuizActivity currAct;

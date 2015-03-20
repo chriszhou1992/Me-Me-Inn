@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
+import com.android.memeinn.friend.RequestFriendSession;
 import com.firebase.client.Firebase;
 import com.parse.Parse;
 import com.parse.ParseObject;
