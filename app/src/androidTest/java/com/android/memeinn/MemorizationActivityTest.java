@@ -1,11 +1,18 @@
 package com.android.memeinn;
 
+import android.content.res.Resources;
+import android.support.test.espresso.action.ViewActions;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
+import android.view.View;
 
+import java.util.regex.Matcher;
+
+import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -93,5 +100,62 @@ public class MemorizationActivityTest extends ActivityInstrumentationTestCase2<V
         onView(withId(R.id.prevWordBtn)).check(matches(withText("Previous")));
         onView(withId(R.id.nextWordBtn)).check(matches(withText("Next")));
     }
+
+
+    public void testHighFrequencyWordMatch() throws InterruptedException{
+        Log.d("Myapp", "testWithHighFrequencyClicked");
+
+        onView(withId(R.id.gre)).perform(click());
+        Thread.sleep(100);
+        onView(withId(R.id.buttonA)).perform(click());
+        //onView(withId(R.id.nextWordBtn)).perform(click());
+        //needs sometime for database to respond
+        Thread.sleep(5000);
+        onView(withId(R.id.wordContentView)).check(matches(withText("abate")));
+    }
+
+
+    public void testMeidumFrequencyWordMatch() throws InterruptedException{
+        Log.d("Myapp", "testWithHighFrequencyClicked");
+
+        onView(withId(R.id.gre)).perform(click());
+        Thread.sleep(100);
+        onView(withId(R.id.buttonB)).perform(click());
+        //onView(withId(R.id.nextWordBtn)).perform(click());
+        //needs sometime for database to respond
+        Thread.sleep(5000);
+        onView(withId(R.id.wordContentView)).check(matches(withText("abhor")));
+    }
+
+
+
+    public void testLowFrequencyWordMatch() throws InterruptedException{
+        Log.d("Myapp", "testWithHighFrequencyClicked");
+
+        onView(withId(R.id.gre)).perform(click());
+        Thread.sleep(100);
+        onView(withId(R.id.buttonC)).perform(click());
+        //onView(withId(R.id.nextWordBtn)).perform(click());
+        //needs sometime for database to respond
+        Thread.sleep(5000);
+        onView(withId(R.id.wordContentView)).check(matches(withText("abacus")));
+    }
+
+
+
+        //all the way from sign in
+        /*
+        onView(withId(R.id.uname)).perform(typeText("my name"), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.pword)).perform(typeText("my pass"), ViewActions.closeSoftKeyboard());
+
+        //Test if correctly typed
+        onView(withId(R.id.uname)).check(matches(withText("my name")));
+        onView(withId(R.id.pword)).check(matches(withText("my pass")));
+
+        //New intent to goto MainActivity
+        onView(withId(R.id.login)).perform(click());
+        Thread.sleep(100);
+        onView(withId(R.id.vocab)).perform(click());
+        Thread.sleep(100);*/
 }
 
