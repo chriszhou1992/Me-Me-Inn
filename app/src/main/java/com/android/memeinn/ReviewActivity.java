@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -24,7 +23,20 @@ import java.util.List;
 
 public class ReviewActivity extends Activity {
 
+    public String getVocabType() {
+        return vocabType;
+    }
+
     private String vocabType = "";//the type of vocabulary
+
+    public int getCurrPos() {
+        return currPos;
+    }
+
+    public ArrayList<ParseObject> getWordList() {
+        return wordList;
+    }
+
     private ArrayList<ParseObject> wordList;
     private int currPos;
 
