@@ -106,10 +106,20 @@ public class MatchStartActivity extends Activity {
         startContestTask = new TimerTask() {
             @Override
             public void run() {
+//
+//                Intent contestIntent = new Intent(MatchStartActivity.this,
+//                        ContestActivity.class);
+//                contestIntent.putExtra(Global.EXTRA_MESSAGE_OPPONAME, opponentName);
+//                startActivity(contestIntent);
+
                 Intent contestIntent = new Intent(MatchStartActivity.this,
-                        ContestActivity.class);
+                        SelectMatchingTopicActivity.class);
                 contestIntent.putExtra(Global.EXTRA_MESSAGE_OPPONAME, opponentName);
                 startActivity(contestIntent);
+
+                //TODO: first direct the intent to the select topic page,
+                // and then go to the matching stage
+
             }
         };
         timer.scheduleAtFixedRate(countDownTask, 1000, 1000);

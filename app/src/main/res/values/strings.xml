@@ -118,6 +118,9 @@
     <string name="friendsText">My Friends</string>
     <string name="addfriendsText">Add Friends</string>
 
+    <!--Selection contest page Strings-->
+    <string name="chooseType">select challenge!</string>
+
 
 
 </resources>

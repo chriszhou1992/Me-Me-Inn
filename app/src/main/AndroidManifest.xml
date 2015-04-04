@@ -114,6 +114,11 @@
             android:theme="@style/TransTheme" >
         </activity>
 
+        <activity
+            android:name=".match.SelectMatchingTopicActivity"
+            android:label="@string/app_name" >
+        </activity>
+
         <service android:name=".friend.CheckRequestService" />
         <service android:name=".friend.CheckResponseService" />
     </application>

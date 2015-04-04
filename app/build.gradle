@@ -4,6 +4,13 @@ android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
 
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
     defaultConfig {
         applicationId "com.android.memeinn"
         minSdkVersion 14
@@ -20,6 +27,9 @@ android {
         debug {
             debuggable true
         }
+    }
+    dexOptions {
+        preDexLibraries = false;
     }
 
     packagingOptions {

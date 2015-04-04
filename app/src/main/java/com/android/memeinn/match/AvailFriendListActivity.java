@@ -3,6 +3,7 @@ package com.android.memeinn.match;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 import com.android.memeinn.FirebaseSingleton;
 import com.android.memeinn.Global;
 import com.android.memeinn.R;
-import com.android.memeinn.match.MatchStartActivity;
+import com.android.memeinn.Utility;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -77,7 +78,13 @@ public class AvailFriendListActivity extends Activity {
 
                 Button userBtn = createUserButton();
                 userBtn.setText(username);
-                setUserButtonOnlineStatus(userBtn, (Boolean)userInfo.get("isOnline"), false);
+                Log.d("availFr", "username: " + username + " isInMatch: " + userInfo.get
+                        ("isInMatch"));
+                setUserButtonOnlineStatus(userBtn, (Boolean)userInfo.get("isOnline"),
+                        (Boolean)userInfo.get("isInMatch"));
+
+                //setUserButtonOnlineStatus(userBtn, (Boolean)userInfo.get("isOnline"),
+                // false);
                 userBtnMap.put(username, userBtn);
                 ll.addView(userBtnMap.get(username));
             }
@@ -168,12 +175,23 @@ public class AvailFriendListActivity extends Activity {
 
     /**
      * onClick event to fire up an intent to the contest page.
+     * **~~~~ add a warning dialog for offline or in match user
      * @param view
      */
     public void startConstest(View view) {
         //If the target user is in match or offline, then the click triggers nothing
-        if (!(Boolean)view.getTag())
+
+        //modified here for in match user or offline user
+        if (!(Boolean)view.getTag()){
+            if(((ColorDrawable)view.getBackground()).getColor() == Color.CYAN){
+                Utility.warningDialog(AvailFriendListActivity.this, "Sorry this user is in match",
+                        "matching friend");
+            }
+            else
+                Utility.warningDialog(AvailFriendListActivity.this, "Sorry this user is in offline",
+                    "offline friend");
             return;
+        }
 
         String oppoName = ((Button)view).getText().toString();
         Log.d("avail", "chosen oppo name is " + oppoName);

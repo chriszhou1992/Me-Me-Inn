@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:background="@drawable/background"
+                android:layout_width="match_parent" android:layout_height="match_parent"
+                android:id="@+id/selectcontesttopic">
+
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/greText"
+        android:id="@+id/gre"
+        android:textSize="18sp"
+        android:background = "@drawable/circlebutton"
+        android:textAllCaps="false"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="50dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ieltsText"
+        android:id="@+id/ielts"
+        android:textSize="18sp"
+        android:background = "@drawable/circlebutton"
+        android:textAllCaps="false"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin ="50dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/toeflText"
+        android:id="@+id/toefl"
+        android:textSize="18sp"
+        android:background = "@drawable/circlebutton"
+        android:textAllCaps="false"
+        android:layout_below="@+id/imageView"
+        android:layout_margin="150dp"
+/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/satText"
+        android:id="@+id/sat"
+        android:textSize="18sp"
+        android:background = "@drawable/circlebutton"
+        android:textAllCaps="false"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/toefl"
+
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/actText"
+        android:id="@+id/act"
+        android:textSize="18sp"
+        android:background = "@drawable/circlebutton"
+        android:layout_alignTop="@+id/gmat"
+        android:layout_alignLeft="@+id/gre"
+        android:layout_alignStart="@+id/gre"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gmatText"
+        android:id="@+id/gmat"
+        android:textSize="18sp"
+        android:background = "@drawable/circlebutton"
+        android:textAllCaps="false"
+        android:layout_below="@+id/imageView"
+        android:layout_margin="250dp"
+
+        />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/friendsicon"
+        android:layout_above="@+id/name"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/opponent"
+        android:id="@+id/oppoName"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/sat"
+        android:layout_alignRight="@+id/gmat"
+        android:layout_alignEnd="@+id/gmat"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/usernameText"
+        android:id="@+id/user"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/sat"
+        android:layout_alignLeft="@+id/gre"
+        android:layout_alignStart="@+id/gre"/>
+
+</RelativeLayout>
