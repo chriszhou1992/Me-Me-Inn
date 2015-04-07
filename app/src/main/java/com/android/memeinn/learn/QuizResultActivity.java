@@ -20,8 +20,8 @@ public class QuizResultActivity extends Activity {
         Log.d("MyApp", "enter the group, gr count is " + gr);
 
         //for(int i = 0; i < gr.getChildCount(); i++){
-            //View view = gr.getChildAt(i);
-            //Log.d("MyApp", "view name " + getResources().getResourceEntryName(view.getId()));
+        //View view = gr.getChildAt(i);
+        //Log.d("MyApp", "view name " + getResources().getResourceEntryName(view.getId()));
         //}
 
         View v = findViewById(R.id.backButton);

@@ -9,30 +9,35 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.memeinn.R;
-import com.android.memeinn.VocabActivity;
 
 /**
- * Activity for ChapterList GUI.
+ * Activity for the learning system. Used to learn/memorize words.
  */
-public class ChapterActivity extends Activity{
+public class FreqChapActivity extends Activity {
 
     public final static String EXTRA_MESSAGE_FREQUENCY = "chapter.vocab.frequency";
     public final static String EXTRA_MESSAGE_VOCAB_TYPE = "chapter.vocab.type";
     public final static String EXTRA_MESSAGE_TABLE_NAME = "chapter.vocab.table.name";
+    //
+    public final static String EXTRA_MESSAGE_CHAPTER = "chapter.vocab.chapter";
+
 
     private String vocabType = "";//the type of vocabulary
+    private String vocabFrequency = "";
     private TextView vocabTypeView;
     private String vocabTableName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chapterlist);
+        setContentView(R.layout.freqchaplist);
 
         Intent intent = getIntent();
-        vocabType = intent.getStringExtra(VocabActivity.EXTRA_MESSAGE);
+        vocabType = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);
+        vocabFrequency = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FREQUENCY);
         vocabTableName = "GRE";
         vocabTypeView = (TextView) findViewById(R.id.vocabTypeView);
+
         // Give TextView a correct type name
         vocabTypeView.setText(vocabType);
 
@@ -45,16 +50,16 @@ public class ChapterActivity extends Activity{
      * @param view Button The chapter button clicked
      */
     public void onClick(View view) {
-
-        //modified here
-        Intent freqChapIntent;
-        freqChapIntent = new Intent(this, FreqChapActivity.class);
+        Intent MemorizationIntent = new Intent(this, MemorizationActivity.class);
         //Intent QuizIntent = new Intent(this, QuizActivity.class);
-        freqChapIntent.putExtra(EXTRA_MESSAGE_TABLE_NAME, vocabTableName);
-        freqChapIntent.putExtra(EXTRA_MESSAGE_VOCAB_TYPE, vocabType);
-        String frequencyText = ((Button) view).getText().toString();
-        freqChapIntent.putExtra(EXTRA_MESSAGE_FREQUENCY, frequencyText);
-        startActivity(freqChapIntent);
+        MemorizationIntent.putExtra(EXTRA_MESSAGE_TABLE_NAME, vocabTableName);
+        MemorizationIntent.putExtra(EXTRA_MESSAGE_VOCAB_TYPE, vocabType);
+        MemorizationIntent.putExtra(EXTRA_MESSAGE_FREQUENCY, vocabFrequency);
+        String chapterText = ((Button) view).getText().toString();
+        MemorizationIntent.putExtra(EXTRA_MESSAGE_CHAPTER, chapterText);
+        startActivity(MemorizationIntent);
     }
-
 }
+
+
+

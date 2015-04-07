@@ -10,9 +10,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
-public class MemorizationActivityTest extends ActivityInstrumentationTestCase2<VocabActivity> {
+public class MomorizationActivityTest extends ActivityInstrumentationTestCase2<VocabActivity> {
 
-    public MemorizationActivityTest() {
+    public MomorizationActivityTest() {
         super(VocabActivity.class);
     }
 

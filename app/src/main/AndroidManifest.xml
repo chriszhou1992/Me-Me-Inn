@@ -6,74 +6,60 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".MeMeInnApp"
         android:allowBackup="true"
         android:icon="@drawable/img3"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name="com.android.memeinn.MeMeInnApp">
-
+        android:theme="@style/AppTheme" >
         <meta-data
             android:name="com.parse.APPLICATION_ID"
             android:value="@string/parse_app_id" />
         <meta-data
             android:name="com.parse.CLIENT_KEY"
             android:value="@string/parse_client_key" />
-
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
         <activity
             android:name="com.facebook.LoginActivity"
             android:label="title_facebook_login" >
         </activity>
-
         <activity
             android:name=".user.LoginActivity"
             android:label="@string/app_name"
             android:noHistory="true" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".user.SignUpActivity"
             android:label="@string/app_name"
             android:noHistory="true" >
         </activity>
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
         </activity>
-
-
         <activity
             android:name=".VocabActivity"
             android:label="@string/app_name" >
         </activity>
-
         <activity
             android:name=".learn.QuizActivity"
             android:label="@string/app_name" >
         </activity>
-
-        <activity
-            android:name=".learn.QuizResultActivity"
-            android:label="@string/app_name" >
-        </activity>
-
         <activity
             android:name=".learn.ChapterActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".learn.MemorizationActivity"
+            android:name=".learn.FreqChapActivity"
             android:label="@string/title_activity_memorization" >
         </activity>
-
         <activity
             android:name=".user.ProfileActivity"
             android:label="@string/app_name" >
@@ -82,32 +68,26 @@
             android:name=".friend.FriendActivity"
             android:label="@string/app_name" >
         </activity>
-
         <activity
             android:name=".review.ReviewActivity"
             android:label="@string/app_name" >
         </activity>
-
         <activity
             android:name=".review.ReviewVocabDetailedActivity"
             android:label="@string/app_name" >
         </activity>
-
         <activity
             android:name=".match.ContestActivity"
             android:label="@string/app_name" >
         </activity>
-
         <activity
             android:name=".match.AvailFriendListActivity"
             android:label="@string/app_name" >
         </activity>
-
         <activity
             android:name=".match.MatchStartActivity"
             android:label="@string/app_name" >
         </activity>
-
         <activity
             android:name=".friend.ShowMsgActivity"
             android:label="@string/app_name"
@@ -116,6 +96,11 @@
 
         <service android:name=".friend.CheckRequestService" />
         <service android:name=".friend.CheckResponseService" />
+
+        <activity
+            android:name=".learn.MemorizationActivity"
+            android:label="@string/title_activity_memorization" >
+        </activity>
     </application>
 
 </manifest>

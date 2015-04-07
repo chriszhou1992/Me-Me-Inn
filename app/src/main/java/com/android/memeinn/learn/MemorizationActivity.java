@@ -1,9 +1,11 @@
 package com.android.memeinn.learn;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,22 +19,31 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Locale;
 
-/**
- * Activity for the learning system. Used to learn/memorize words.
- */
+import android.app.Activity;
+import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.view.Menu;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+
 public class MemorizationActivity extends ActionBarActivity {
 
     private String vocabType = "";
     private String frequencyText = "";
     private String wordTableName = "";
     private Map<String, String> dict;
-    private List<Entry<String, String>> indexedList;
+    private List<Map.Entry<String, String>> indexedList;
     private int currPos;
 
     private TextView wordContentView;
     private TextView wordMeaningView;
+
+    TextToSpeech ttobj;
+    private EditText write;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +58,18 @@ public class MemorizationActivity extends ActionBarActivity {
         Log.d("myapp", "Memorization.vocabType = " + vocabType);
         frequencyText = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FREQUENCY);
         wordTableName = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_TABLE_NAME);
+
+        write = (EditText)findViewById(R.id.hidden_edit_view);
+        ttobj=new TextToSpeech(getApplicationContext(),
+                new TextToSpeech.OnInitListener() {
+                    @Override
+                    public void onInit(int status) {
+                        if(status != TextToSpeech.ERROR){
+                            ttobj.setLanguage(Locale.US);
+                        }
+                    }
+                });
+
 
         initDict();
     }
@@ -152,6 +175,12 @@ public class MemorizationActivity extends ActionBarActivity {
         this.wordMeaningView.setText(wordMeaning);
     }
 
+    private String getWord(int pos) {
+        Map.Entry<String, String> entry = indexedList.get(pos);
+        String wordContent = entry.getKey();
+        return wordContent;
+    }
+
     /**
      * Callback to start an Intent to open Quiz activity.
      * @param quizBtn Button The button clicked.
@@ -163,4 +192,23 @@ public class MemorizationActivity extends ActionBarActivity {
         quizIntent.putExtra(ChapterActivity.EXTRA_MESSAGE_TABLE_NAME, wordTableName);
         startActivity(quizIntent);
     }
+
+    @Override
+    public void onPause(){
+        if(ttobj !=null){
+            ttobj.stop();
+            ttobj.shutdown();
+        }
+        super.onPause();
+    }
+
+    public void speakText(View view){
+        String toSpeak = getWord(currPos);
+        Toast.makeText(getApplicationContext(), toSpeak,
+                Toast.LENGTH_SHORT).show();
+        ttobj.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+
+    }
+
+
 }
