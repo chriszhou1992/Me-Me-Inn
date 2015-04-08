@@ -56,6 +56,11 @@
         </activity>
 
         <activity
+            android:name=".definitionAPI.DefinitionActivity"
+            android:label="@string/app_name" >
+        </activity>
+
+        <activity
             android:name=".learn.QuizActivity"
             android:label="@string/app_name" >
         </activity>

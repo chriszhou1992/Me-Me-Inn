@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,19 +32,13 @@ public class HttpAsyncTask extends AsyncTask<String, Void, String> {
     public ConnectivityManager connMgr;
     public Context context;
     public String result=null;
-    public Map<String, String> dict;
-    public String curWord;
-    public TextView wordContentView;
-    public TextView wordMeaningView;
+    public EditText editText;
 
-    public HttpAsyncTask(ConnectivityManager connMgr, Context context, Map<String, String> dict, String curWord, TextView wordContentView, TextView wordMeaningView){
+    public HttpAsyncTask(ConnectivityManager connMgr, Context context, EditText editText){
         //connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
         this.connMgr = connMgr;
         this.context = context;
-        this.dict = dict;
-        this.curWord = curWord;
-        this.wordContentView = wordContentView;
-        this.wordMeaningView = wordMeaningView;
+        this.editText = editText;
     }
 
     @Override
@@ -63,11 +58,8 @@ public class HttpAsyncTask extends AsyncTask<String, Void, String> {
             JSONArray definitions = json.getJSONArray("definitions");
             str = definitions.getJSONObject(0).getString("text");
 
-            wordContentView.setText(curWord);
-            wordMeaningView.setText(str);
-            dict.put(curWord,str);
             this.result=str;
-
+            editText.setText(str);
 
         } catch (JSONException e) {
             // TODO Auto-generated catch block
