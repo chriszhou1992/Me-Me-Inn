@@ -80,12 +80,12 @@
         android:layout_alignParentEnd="true"
         android:onClick="gotoProfile" />
     <ImageButton
-        android:background="@drawable/profile_icon_black"
-        android:layout_width="50dip"
-        android:layout_height="50dip"
+        android:background="@drawable/online_dic"
+        android:layout_width="100dip"
+        android:layout_height="30dip"
         android:id="@+id/onlineDictionaryButton"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:onClick="gotoProfile" />
+        android:onClick="gotoOnlineDictionary" />
 
 </RelativeLayout>
