@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -33,6 +35,30 @@ public class DefinitionActivity extends Activity {
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
         Context context = getBaseContext();
         HttpAsyncTask httpAsyncTask = new HttpAsyncTask(connMgr, context, etResponse);
-        httpAsyncTask.execute("https://montanaflynn-dictionary.p.mashape.com/define?word=" + word);
+        httpAsyncTask.execute("https://montanaflynn-dictionary.p.mashape.com/define?word=" + etWord.getText().toString());
+
+        etWord.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+
+                // you can call or do what you want with your EditText here
+                ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
+                Context context = getBaseContext();
+                HttpAsyncTask httpAsyncTask = new HttpAsyncTask(connMgr, context, etResponse);
+                httpAsyncTask.execute("https://montanaflynn-dictionary.p.mashape.com/define?word=" + etWord.getText().toString());
+
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });
+
+
+
+
+
     }
+
+
 }
