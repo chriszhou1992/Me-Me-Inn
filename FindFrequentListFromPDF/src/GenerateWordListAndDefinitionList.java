@@ -14,7 +14,8 @@ public class GenerateWordListAndDefinitionList {
 	public static void main(String[] args){
 		Gson gson = new Gson();
 		String fileName = "GRE_PDFs/GMAT.json.new.json";
-		String fileName = "GRE_PDFs/SAT.json.new.json";
+		//String fileName = "GRE_PDFs/SAT.json.new.json";
+		//String fileName = "GRE_PDFs/TOEFL.json.new.json";
 		try {
 	 
 			BufferedReader br = new BufferedReader(new FileReader(fileName));
@@ -49,7 +50,7 @@ public class GenerateWordListAndDefinitionList {
 			while (iter.hasNext()) {
 			    DataObject dataObject = iter.next();
 			    String word =dataObject.getWord();
-			    String definition = dataObject.getDefination();
+			    String definition = dataObject.getDefinition();
 			    bw0.write(word+"\n");
 			    bw1.write(definition+"\n");
 			}

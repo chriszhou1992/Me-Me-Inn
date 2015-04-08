@@ -2,10 +2,11 @@
 
 public class DataObject {
 	private String createdAt;
-    private String defination;
+    private String definition;
     private String objectId;
     private String updatedAt;
     private String word;
+    private int frequency;
 
 	public String getCreatedAt() {
 		return createdAt;
@@ -13,12 +14,7 @@ public class DataObject {
 	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}
-	public String getDefination() {
-		return defination;
-	}
-	public void setDefination(String defination) {
-		this.defination = defination;
-	}
+
 	public String getObjectId() {
 		return objectId;
 	}
@@ -40,9 +36,21 @@ public class DataObject {
 	@Override
 	public String toString() {
 		return "\"createdAt\":"+"\""+createdAt+"\","+
-			   "\"definition\":"+"\""+defination+"\","+
+			   "\"definition\":"+"\""+definition+"\","+
 			   "\"objectId\":"+"\""+objectId+"\","+
 			   "\"updatedAt\":"+"\""+updatedAt+"\","+
 			   "\"word\":"+"\""+word+"\"";
+	}
+	public String getDefinition() {
+		return definition;
+	}
+	public void setDefinition(String definition) {
+		this.definition = definition;
+	}
+	public int getFrequency() {
+		return frequency;
+	}
+	public void setFrequency(int frequency) {
+		this.frequency = frequency;
 	}
 }
