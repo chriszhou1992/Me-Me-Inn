@@ -147,7 +147,7 @@ public class FindFrequentListFromPDF {
 	    	//}
 	    }*/
 	    
-	   pdftoHashmap("wordList.pdf",true);
+	   pdftoHashmap("GRE_PDFs/wordList.pdf",true);
 	   for(Word w:baseWordList) {
 		    	w.setFrequency(wordFreq.get(w.getWord()));
 		    System.out.println(w.getWord()+":"+w.getFrequency());
