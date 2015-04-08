@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -18,7 +19,7 @@ import com.android.memeinn.R;
 public class OnlineDictionaryActivity extends Activity {
 
     private String word;
-    private EditText etResponse;
+    private TextView etResponse;
     private EditText etWord;
 
     @Override
@@ -29,24 +30,35 @@ public class OnlineDictionaryActivity extends Activity {
 
         // get reference to the views
         etWord = (EditText) findViewById(R.id.etWord);
-        etResponse = (EditText) findViewById(R.id.etResponse);
+        etResponse = (TextView)findViewById(R.id.etResponse);
         etWord.setText(word);
 
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
         Context context = getBaseContext();
         HttpAsyncTask httpAsyncTask = new HttpAsyncTask(connMgr, context, etResponse);
         httpAsyncTask.execute("https://montanaflynn-dictionary.p.mashape.com/define?word=" + etWord.getText().toString());
+        etWord.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    etWord.setHint("");
+                }
+            }
+        });
 
         etWord.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
-
-                // you can call or do what you want with your EditText here
-                ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
-                Context context = getBaseContext();
-                HttpAsyncTask httpAsyncTask = new HttpAsyncTask(connMgr, context, etResponse);
-                httpAsyncTask.execute("https://montanaflynn-dictionary.p.mashape.com/define?word=" + etWord.getText().toString());
-
+                String searchString = etWord.getText().toString();
+                if((searchString!=null) && (!searchString.equals(""))) {
+                    // you can call or do what you want with your EditText here
+                    ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
+                    Context context = getBaseContext();
+                    HttpAsyncTask httpAsyncTask = new HttpAsyncTask(connMgr, context, etResponse);
+                    httpAsyncTask.execute("https://montanaflynn-dictionary.p.mashape.com/define?word=" + searchString);
+                }else{
+                    etResponse.setText("");
+                }
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}

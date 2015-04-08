@@ -32,9 +32,9 @@ public class HttpAsyncTask extends AsyncTask<String, Void, String> {
     public ConnectivityManager connMgr;
     public Context context;
     public String result=null;
-    public EditText editText;
+    public TextView editText;
 
-    public HttpAsyncTask(ConnectivityManager connMgr, Context context, EditText editText){
+    public HttpAsyncTask(ConnectivityManager connMgr, Context context, TextView editText){
         //connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
         this.connMgr = connMgr;
         this.context = context;
