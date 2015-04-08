@@ -13,6 +13,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 
+import com.android.memeinn.definitionAPI.DefinitionActivity;
 import com.android.memeinn.friend.CheckRequestService;
 import com.android.memeinn.friend.CheckResponseService;
 import com.android.memeinn.friend.RequestFriendSession;
@@ -291,6 +292,11 @@ public class MainActivity extends Activity {
     public void goMatchWithFriend(View view) {
         Intent availFriend = new Intent(this, AvailFriendListActivity.class);
         startActivity(availFriend);
+    }
+
+    public void gotoOnlineDitionary(View view){
+        Intent onlineDictionary = new Intent(this, DefinitionActivity.class);
+        startActivity(onlineDictionary);
     }
 
     /**

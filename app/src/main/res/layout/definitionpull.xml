@@ -26,6 +26,7 @@
         android:textAlignment="center"
         android:layout_marginTop="45dp"
         android:textSize="30sp"
+        android:textColor="#FFFFFF"
         android:ems="10"
         android:inputType="textMultiLine" />
 

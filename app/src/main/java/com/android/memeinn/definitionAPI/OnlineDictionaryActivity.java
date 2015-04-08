@@ -15,7 +15,7 @@ import com.android.memeinn.R;
 /**
  * Created by yifan on 4/7/15.
  */
-public class DefinitionActivity extends Activity {
+public class OnlineDictionaryActivity extends Activity {
 
     private String word;
     private EditText etResponse;
