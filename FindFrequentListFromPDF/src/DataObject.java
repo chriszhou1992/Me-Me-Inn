@@ -6,7 +6,7 @@ public class DataObject {
     private String objectId;
     private String updatedAt;
     private String word;
-    private int frequency;
+
 	public String getCreatedAt() {
 		return createdAt;
 	}
@@ -44,11 +44,5 @@ public class DataObject {
 			   "\"objectId\":"+"\""+objectId+"\","+
 			   "\"updatedAt\":"+"\""+updatedAt+"\","+
 			   "\"word\":"+"\""+word+"\"";
-	}
-	public int getFrequency() {
-		return frequency;
-	}
-	public void setFrequency(int frequency) {
-		this.frequency = frequency;
 	}
 }

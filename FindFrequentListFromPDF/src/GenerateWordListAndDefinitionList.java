@@ -8,63 +8,56 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.google.gson.Gson;
-import com.meme.AllData;
-import com.meme.DataObject;
-import com.meme.DefinitionAPI;
 
 
 public class GenerateWordListAndDefinitionList {
-	Gson gson = new Gson();
-	DefinitionAPI definitionAPI = new DefinitionAPI(); 
-	try {
- 
-		BufferedReader br = new BufferedReader(new FileReader(fileName));
- 
-		//convert the json string back to object
-		AllData obj = gson.fromJson(br, AllData.class);
-		ArrayList<DataObject> results = obj.getResults();
-		
-		
-		Iterator<DataObject> iter = results.iterator();
-
-		while (iter.hasNext()) {
-		    DataObject dataObject = iter.next();
-		    String word =dataObject.getWord();
-		    if (word ==null || word.contains(" "))
-		        iter.remove();
-		}
-		
-		iter = results.iterator();
-		
-		int count = 0;
-		while (iter.hasNext()) {
-			System.out.println(count++);
-		    DataObject dataObject = iter.next();
-			String defination = DefinitionAPI.wordToDefinition(dataObject.getWord());
-			if(defination==null){
-				iter.remove();
-			}else{
-				dataObject.setDefination(defination);
+	public static void main(String[] args){
+		Gson gson = new Gson();
+		String fileName = "GRE_PDFs/GMAT.json.new.json";
+		String fileName = "GRE_PDFs/SAT.json.new.json";
+		try {
+	 
+			BufferedReader br = new BufferedReader(new FileReader(fileName));
+	 
+			//convert the json string back to object
+			AllData obj = gson.fromJson(br, AllData.class);
+			ArrayList<DataObject> results = obj.getResults();
+			
+			File writeFile0 = new File("GRE_PDFs/wordList1.txt");
+			 
+			// if file doesnt exists, then create it
+			if (!writeFile0.exists()) {
+				writeFile0.createNewFile();
 			}
+	
+			FileWriter fw0 = new FileWriter(writeFile0);
+			BufferedWriter bw0 = new BufferedWriter(fw0);
+			
+			File writeFile1 = new File("GRE_PDFs/definitionList1.txt");
+			 
+			// if file doesnt exists, then create it
+			if (!writeFile1.exists()) {
+				writeFile1.createNewFile();
+			}
+	
+			FileWriter fw1 = new FileWriter(writeFile1);
+			BufferedWriter bw1 = new BufferedWriter(fw1);
+			
+			
+			Iterator<DataObject> iter = results.iterator();
+	
+			while (iter.hasNext()) {
+			    DataObject dataObject = iter.next();
+			    String word =dataObject.getWord();
+			    String definition = dataObject.getDefination();
+			    bw0.write(word+"\n");
+			    bw1.write(definition+"\n");
+			}
+			
+			bw0.close(); bw1.close();
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		
-		
-		File writeFile = new File(fileName+".new.json");
-		 
-		// if file doesnt exists, then create it
-		if (!writeFile.exists()) {
-			writeFile.createNewFile();
-		}
-
-		FileWriter fw = new FileWriter(writeFile);
-		BufferedWriter bw = new BufferedWriter(fw);
-		
-		String json = gson.toJson(obj);
-		bw.write(json);
-		bw.close();
- 
-	} catch (IOException e) {
-		e.printStackTrace();
 	}
-}
 }
