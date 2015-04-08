@@ -49,7 +49,7 @@ public class HttpAsyncTask extends AsyncTask<String, Void, String> {
     // onPostExecute displays the results of the AsyncTask.
     @Override
     public void onPostExecute(String result) {
-        Toast.makeText(context, "Received!", Toast.LENGTH_LONG).show();
+        //Toast.makeText(context, "Received!", Toast.LENGTH_LONG).show();
         try {
             JSONObject json = new JSONObject(result);
 
