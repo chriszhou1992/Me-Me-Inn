@@ -18,6 +18,7 @@
         android:textColor="#FFFF00"
         android:textSize="30sp"
         android:hint="Enter word here to search"
+        android:textColorHint="#F0F000"
         android:textAlignment="center"
         android:inputType="textMultiLine" />
     <TextView

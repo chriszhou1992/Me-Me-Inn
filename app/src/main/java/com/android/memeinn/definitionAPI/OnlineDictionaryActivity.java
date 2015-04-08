@@ -26,7 +26,6 @@ public class OnlineDictionaryActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.definitionapi);
-        word = "ubiquitous";
 
         // get reference to the views
         etWord = (EditText) findViewById(R.id.etWord);
