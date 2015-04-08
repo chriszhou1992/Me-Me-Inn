@@ -19,7 +19,7 @@
         android:textSize="30sp"
         android:textAlignment="center"
         android:inputType="textMultiLine" />
-    <EditText
+    <TextView
         android:id="@+id/etResponse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
