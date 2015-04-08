@@ -13,7 +13,6 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 
-import com.android.memeinn.definitionAPI.DefinitionActivity;
 import com.android.memeinn.friend.CheckRequestService;
 import com.android.memeinn.friend.CheckResponseService;
 import com.android.memeinn.friend.RequestFriendSession;
@@ -34,6 +33,8 @@ import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
+import com.android.memeinn.definitionAPI.*;
 
 /**
  * Main interface of the application. Provides navigation
@@ -294,8 +295,8 @@ public class MainActivity extends Activity {
         startActivity(availFriend);
     }
 
-    public void gotoOnlineDitionary(View view){
-        Intent onlineDictionary = new Intent(this, DefinitionActivity.class);
+    public void gotoOnlineDictionary(View view){
+        Intent onlineDictionary = new Intent(this, OnlineDictionaryActivity.class);
         startActivity(onlineDictionary);
     }
 

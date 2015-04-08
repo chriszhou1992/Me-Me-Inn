@@ -24,7 +24,7 @@ public class OnlineDictionaryActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.definitionpull);
+        setContentView(R.layout.definitionapi);
         word = "ubiquitous";
 
         // get reference to the views
@@ -53,10 +53,6 @@ public class OnlineDictionaryActivity extends Activity {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
-
-
-
-
 
     }
 
