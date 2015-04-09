@@ -116,6 +116,26 @@
 
         <service android:name=".friend.CheckRequestService" />
         <service android:name=".friend.CheckResponseService" />
+
+        <activity
+            android:name=".postquestion.PostQuestion"
+            android:label="@string/app_name" >
+        </activity>
+
+        <activity
+            android:name=".postquestion.CheckQuestion"
+            android:label="@string/app_name" >
+        </activity>
+
+        <activity
+            android:name=".postquestion.AddPostActivity"
+            android:label="@string/app_name" >
+        </activity>
+
+        <activity
+            android:name=".postquestion.CheckPostActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>
