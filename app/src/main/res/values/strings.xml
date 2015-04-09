@@ -101,7 +101,9 @@
     <string name="friendBtnText">Friends</string>
     <string name="usernameText">Username</string>
     <string name="title_activity_review_finished_pop_up">ReviewFinishedPopUp</string>
-    <string name="checkaddpost">Check/Add Post</string>
+    <string name="checkpost">Check Post</string>
+    <string name="addpost">Add Post</string>
+
 
 
     <!--Contest Page Strings-->
@@ -125,11 +127,16 @@
     <string name="inputquestion">Input Question</string>
     <string name="questioncontent">Question Content</string>
 
-    <!--Review Question Page Strings-->
+    <!--Check Question Page Strings-->
     <string name="acceptpost">Accept</string>
     <string name="declinepost">Decline</string>
-    <string name="reviewquestion">review Question</string>
+    <string name="checkquestion">Check Question</string>
 
+    <!--Check Post Vocab List Page Strings-->
+    <string name="checkpostlist">Check Post List</string>
+
+    <!--Add Post Vocab List Page Strings-->
+    <string name="addpostlist">Add Post List</string>
 
 
 

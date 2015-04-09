@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.android.memeinn.R;
 import com.android.memeinn.VocabActivity;
 import com.android.memeinn.friend.FriendActivity;
+import com.android.memeinn.postquestion.AddPostActivity;
+import com.android.memeinn.postquestion.CheckPostActivity;
 import com.parse.ParseUser;
 
 /**
@@ -47,4 +49,13 @@ public class ProfileActivity extends Activity {
         startActivity(Friends);
     }
 
+    public void gotoCheckPost(View view) {
+        Intent CheckPost = new Intent(this, CheckPostActivity.class);
+        startActivity(CheckPost);
+    }
+
+    public void gotoAddPost(View view) {
+        Intent AddPost = new Intent(this, AddPostActivity.class);
+        startActivity(AddPost);
+    }
 }
