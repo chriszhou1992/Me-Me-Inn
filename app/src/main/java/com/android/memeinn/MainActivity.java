@@ -142,6 +142,8 @@ public class MainActivity extends Activity {
                     userOnlineRef.onDisconnect().setValue(Boolean.FALSE);
                     userRef.child("isInMatch").onDisconnect().setValue(Boolean.FALSE);
 
+                    userRef.child("selectedTopic").setValue("unselected");
+
                     //update last time online when disconnected
                     userRef.child("lastOnline").onDisconnect().setValue(ServerValue.TIMESTAMP);
                 }

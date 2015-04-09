@@ -19,6 +19,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_margin="50dp"
+        android:onClick="chooseTopic"
         />
 
     <Button
@@ -33,6 +34,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_margin ="50dp"
+        android:onClick="chooseTopic"
         />
 
     <Button
@@ -45,7 +47,8 @@
         android:textAllCaps="false"
         android:layout_below="@+id/imageView"
         android:layout_margin="150dp"
-/>
+        android:onClick="chooseTopic"
+        />
 
     <Button
         android:layout_width="wrap_content"
@@ -57,7 +60,7 @@
         android:textAllCaps="false"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/toefl"
-
+        android:onClick="chooseTopic"
         />
 
     <Button
@@ -69,7 +72,9 @@
         android:background = "@drawable/circlebutton"
         android:layout_alignTop="@+id/gmat"
         android:layout_alignLeft="@+id/gre"
-        android:layout_alignStart="@+id/gre"/>
+        android:layout_alignStart="@+id/gre"
+        android:onClick="chooseTopic"
+        />
 
     <Button
         android:layout_width="wrap_content"
@@ -81,7 +86,7 @@
         android:textAllCaps="false"
         android:layout_below="@+id/imageView"
         android:layout_margin="250dp"
-
+        android:onClick="chooseTopic"
         />
 
     <ImageView
@@ -98,6 +103,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/opponent"
         android:id="@+id/oppoName"
+        android:textColor="@color/blue"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/sat"
         android:layout_alignRight="@+id/gmat"
@@ -108,7 +114,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/usernameText"
-        android:id="@+id/user"
+        android:id="@+id/userName"
+        android:textColor="@color/green"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/sat"
         android:layout_alignLeft="@+id/gre"
