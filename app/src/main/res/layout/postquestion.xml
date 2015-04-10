@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/background"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageView
         android:layout_width="200dp"
@@ -11,23 +13,100 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/inputquestion"
-        style="@style/Base.V21.Theme.AppCompat"
-        android:id="@+id/checkquestion"
-        android:textColor="#FFFF00"
-        android:textSize="30sp"
-        android:textAlignment="center"
+        android:inputType="text"
+        android:ems="10"
+        android:hint="@string/QuestionTitleHint"
+        android:id="@+id/qtitle"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/icon"
-        android:layout_centerHorizontal="true" />
+        android:textColor="@color/yellow"
+        android:textColorHint="@color/primary_dark_material_light" />
+
+    <RadioGroup
+        android:id="@+id/option_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="65dip"
+        android:layout_marginTop="250dip"
+        android:layout_gravity="center">
+
+        <RadioButton
+            android:id="@+id/option1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A. "/>
+
+        <RadioButton
+            android:id="@+id/option2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dip"
+            android:text="B. " />
+        <RadioButton
+            android:id="@+id/option3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dip"
+            android:text="C. "/>
+        <RadioButton
+            android:id="@+id/option4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dip"
+            android:text="D. "/>
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/option1text"
+        android:inputType="text"
+        android:hint="@string/QuestionOption1Hint"
+        android:textColor="@color/white"
+        android:textColorHint="@color/primary_dark_material_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dip"
+        android:layout_toRightOf="@+id/option_group" />
+
+    <EditText
+        android:id="@+id/option2text"
+        android:inputType="text"
+        android:hint="@string/QuestionOption2Hint"
+        android:textColor="@color/white"
+        android:textColorHint="@color/primary_dark_material_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/option1text"
+        android:layout_toRightOf="@+id/option_group" />
+
+    <EditText
+        android:id="@+id/option3text"
+        android:inputType="text"
+        android:hint="@string/QuestionOption3Hint"
+        android:textColor="@color/white"
+        android:textColorHint="@color/primary_dark_material_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/option2text"
+        android:layout_toRightOf="@+id/option_group" />
+    <EditText
+        android:id="@+id/option4text"
+        android:inputType="text"
+        android:hint="@string/QuestionOption4Hint"
+        android:textColor="@color/white"
+        android:textColorHint="@color/primary_dark_material_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/option3text"
+        android:layout_toRightOf="@+id/option_group" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/submitpost"
-        android:id="@+id/acceptthepost"
+        android:id="@+id/submitpost"
         android:textSize="18sp"
         android:background="@color/DarkGoldenrod"
         android:textAllCaps="false"
@@ -35,62 +114,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="48dp" />
-
-    <TextView
-        style="@style/Base.V21.Theme.AppCompat"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:text="@string/questioncontent"
-        android:id="@+id/reviewquestioncontent1"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:layout_gravity="center"
-        android:layout_below="@+id/checkquestion"
-        android:layout_alignLeft="@+id/checkquestion"
-        android:layout_alignStart="@+id/checkquestion"
-        android:layout_marginTop="66dp" />
-
-    <TextView
-        style="@style/Base.V21.Theme.AppCompat"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:text="@string/questioncontent"
-        android:id="@+id/reviewquestioncontent2"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:layout_gravity="center"
-        android:layout_below="@+id/reviewquestioncontent1"
-        android:layout_alignLeft="@+id/reviewquestioncontent1"
-        android:layout_alignStart="@+id/reviewquestioncontent1" />
-
-    <TextView
-        style="@style/Base.V21.Theme.AppCompat"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:text="@string/questioncontent"
-        android:id="@+id/reviewquestioncontent3"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:layout_gravity="center"
-        android:layout_below="@+id/reviewquestioncontent2"
-        android:layout_alignLeft="@+id/reviewquestioncontent2"
-        android:layout_alignStart="@+id/reviewquestioncontent2" />
-
-    <TextView
-        style="@style/Base.V21.Theme.AppCompat"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:text="@string/questioncontent"
-        android:id="@+id/newquestioncontent4"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:layout_gravity="center"
-        android:layout_below="@+id/reviewquestioncontent3"
-        android:layout_alignLeft="@+id/reviewquestioncontent3"
-        android:layout_alignStart="@+id/reviewquestioncontent3" />
-
 </RelativeLayout>
+
+

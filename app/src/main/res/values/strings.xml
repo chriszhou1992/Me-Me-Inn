@@ -124,13 +124,20 @@
 
     <!--Post Question Page Strings-->
     <string name="submitpost">Submit</string>
-    <string name="inputquestion">Input Question</string>
-    <string name="questioncontent">Question Content</string>
+    <string name="QuestionTitleHint">Input Question Title</string>
+    <string name="QuestionOption1Hint">Input Option 1</string>
+    <string name="QuestionOption2Hint">Input Option 2</string>
+    <string name="QuestionOption3Hint">Input Option 3</string>
+    <string name="QuestionOption4Hint">Input Option 4</string>
 
     <!--Check Question Page Strings-->
+    <string name="QuestionTitle">Question title</string>
+    <string name="QuestionOption1">Option 1</string>
+    <string name="QuestionOption2">Option 2</string>
+    <string name="QuestionOption3">Option 3</string>
+    <string name="QuestionOption4">Option 4</string>
     <string name="acceptpost">Accept</string>
     <string name="declinepost">Decline</string>
-    <string name="checkquestion">Check Question</string>
 
     <!--Check Post Vocab List Page Strings-->
     <string name="checkpostlist">Check Post List</string>
