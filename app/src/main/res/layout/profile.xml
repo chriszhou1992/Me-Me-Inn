@@ -97,5 +97,15 @@
         android:layout_marginEnd="34dp"
         android:onClick="gotoAddPost"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log out"
+        android:id="@+id/logout"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="onLogOut"/>
+
 
 </RelativeLayout>
