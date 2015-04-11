@@ -8,8 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.android.memeinn.learn.ChapterActivity;
-import com.android.memeinn.R;
-import com.android.memeinn.learn.MemorizationActivity;
+import com.android.memeinn.learn.FreqChapActivity;
 import com.android.memeinn.learn.QuizActivity;
 import com.android.memeinn.review.ReviewActivity;
 
@@ -42,7 +41,7 @@ public class VocabActivity extends Activity{
      * @param view
      */
     public void goToReview(View view) {
-        Intent memoAct = new Intent(this, MemorizationActivity.class);
+        Intent memoAct = new Intent(this, FreqChapActivity.class);
         startActivity(memoAct);
     }
 

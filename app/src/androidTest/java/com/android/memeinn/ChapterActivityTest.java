@@ -1,6 +1,7 @@
 package com.android.memeinn;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 
 import com.android.memeinn.learn.ChapterActivity;
 
@@ -23,10 +24,33 @@ public class ChapterActivityTest extends ActivityInstrumentationTestCase2<Chapte
         getActivity();
     }
 
-    public void testButtons() {
-        onView(withId(R.id.buttonA)).check(matches(withText("High Frequency")));
-        onView(withId(R.id.buttonB)).check(matches(withText("Medium Frequency")));
-        onView(withId(R.id.buttonC)).check(matches(withText("Low Frequency")));
+
+    public void testWithHighFrequencyClicked() {
+        Log.d("Myapp", "testWithHighFrequencyClicked");
+        onView(withId(R.id.gre)).perform(click());
+        onView(withId(R.id.buttonA)).perform(click());
+
+        onView(withId(R.id.prevWordBtn)).check(matches(withText("Previous")));
+        onView(withId(R.id.nextWordBtn)).check(matches(withText("Next")));
+    }
+
+    public void testWithMediumFrequencyClicked() {
+        Log.d("Myapp", "testWithMediumFrequencyClicked");
+        onView(withId(R.id.gre)).perform(click());
+        onView(withId(R.id.buttonB)).perform(click());
+
+        onView(withId(R.id.prevWordBtn)).check(matches(withText("Previous")));
+        onView(withId(R.id.nextWordBtn)).check(matches(withText("Next")));
+    }
+
+
+    public void testWithLowFrequencyClicked() {
+        Log.d("Myapp", "testWithLowFrequencyClicked");
+        onView(withId(R.id.gre)).perform(click());
+        onView(withId(R.id.buttonC)).perform(click());
+
+        onView(withId(R.id.prevWordBtn)).check(matches(withText("Previous")));
+        onView(withId(R.id.nextWordBtn)).check(matches(withText("Next")));
     }
 
 

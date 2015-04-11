@@ -45,13 +45,16 @@ public class ChapterActivity extends Activity{
      * @param view Button The chapter button clicked
      */
     public void onClick(View view) {
-        Intent MemorizationIntent = new Intent(this, MemorizationActivity.class);
+
+        //modified here
+        Intent freqChapIntent;
+        freqChapIntent = new Intent(this, FreqChapActivity.class);
         //Intent QuizIntent = new Intent(this, QuizActivity.class);
-        MemorizationIntent.putExtra(EXTRA_MESSAGE_TABLE_NAME, vocabTableName);
-        MemorizationIntent.putExtra(EXTRA_MESSAGE_VOCAB_TYPE, vocabType);
+        freqChapIntent.putExtra(EXTRA_MESSAGE_TABLE_NAME, vocabTableName);
+        freqChapIntent.putExtra(EXTRA_MESSAGE_VOCAB_TYPE, vocabType);
         String frequencyText = ((Button) view).getText().toString();
-        MemorizationIntent.putExtra(EXTRA_MESSAGE_FREQUENCY, frequencyText);
-        startActivity(MemorizationIntent);
+        freqChapIntent.putExtra(EXTRA_MESSAGE_FREQUENCY, frequencyText);
+        startActivity(freqChapIntent);
     }
 
 }
