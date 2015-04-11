@@ -84,7 +84,6 @@
         android:textSize="18sp"
         android:background = "@drawable/circlebutton"
         android:textAllCaps="false"
-        android:layout_below="@+id/imageView"
         android:layout_margin="250dp"
         android:onClick="chooseTopic"
         />
@@ -94,7 +93,6 @@
         android:layout_height="100dp"
         android:id="@+id/imageView"
         android:src="@drawable/friendsicon"
-        android:layout_above="@+id/name"
         android:layout_centerHorizontal="true"/>
 
     <TextView
@@ -105,7 +103,6 @@
         android:id="@+id/oppoName"
         android:textColor="@color/blue"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/sat"
         android:layout_alignRight="@+id/gmat"
         android:layout_alignEnd="@+id/gmat"/>
 
@@ -117,7 +114,6 @@
         android:id="@+id/userName"
         android:textColor="@color/green"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/sat"
         android:layout_alignLeft="@+id/gre"
         android:layout_alignStart="@+id/gre"/>
 

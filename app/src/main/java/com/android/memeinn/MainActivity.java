@@ -141,8 +141,7 @@ public class MainActivity extends Activity {
                     //add listener to clean up data when connection is disconnected
                     userOnlineRef.onDisconnect().setValue(Boolean.FALSE);
                     userRef.child("isInMatch").onDisconnect().setValue(Boolean.FALSE);
-
-                    userRef.child("selectedTopic").setValue("unselected");
+                    userRef.child("matchRequests").onDisconnect().removeValue();
 
                     //update last time online when disconnected
                     userRef.child("lastOnline").onDisconnect().setValue(ServerValue.TIMESTAMP);

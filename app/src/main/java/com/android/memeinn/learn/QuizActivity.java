@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.memeinn.Question;
 import com.android.memeinn.R;
 import com.android.memeinn.Utility;
 import com.parse.FindCallback;
@@ -166,6 +167,8 @@ public class QuizActivity extends Activity {
 
                     String[] options = new String[NUM_OF_OPTIONS];
                     for (int i = 0; i < ROUNDS; i++) {
+                        Utility.clearSession();
+
                         ParseObject word = wordList.get(i);
                         QuizActivity.this.wordList.add(word);
 
@@ -182,8 +185,6 @@ public class QuizActivity extends Activity {
                         options[random] = word.getString("definition");
                         Question q = new Question(w, options, random);
                         questionQueue.add(q);
-
-                        Utility.clearSession();
                     }//for
 
                     nextQuestion(); //display first question

@@ -175,21 +175,19 @@ public class AvailFriendListActivity extends Activity {
 
     /**
      * onClick event to fire up an intent to the contest page.
-     * **~~~~ add a warning dialog for offline or in match user
+     * Add a warning dialog for offline or in match users.
      * @param view
      */
     public void startConstest(View view) {
         //If the target user is in match or offline, then the click triggers nothing
-
-        //modified here for in match user or offline user
         if (!(Boolean)view.getTag()){
             if(((ColorDrawable)view.getBackground()).getColor() == Color.CYAN){
-                Utility.warningDialog(AvailFriendListActivity.this, "Sorry this user is in match",
-                        "matching friend");
+                Utility.warningDialog(AvailFriendListActivity.this, "Friend In Match",
+                        "Sorry this user is in match");
             }
             else
-                Utility.warningDialog(AvailFriendListActivity.this, "Sorry this user is in offline",
-                    "offline friend");
+                Utility.warningDialog(AvailFriendListActivity.this, "Offline Friend",
+                        "Sorry this user is in offline");
             return;
         }
 

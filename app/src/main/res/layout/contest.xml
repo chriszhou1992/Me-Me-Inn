@@ -136,11 +136,12 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/userScore"
+        android:gravity="center"
         android:id="@+id/userScore"
-        android:textColor="#ff50ff63"
-
-        android:layout_alignTop="@+id/textView4"
+        android:textColor="@color/white"
+        android:layout_alignTop="@+id/oppoScore"
         android:layout_toLeftOf="@+id/name"
+        android:layout_toStartOf="@+id/name"
         android:layout_alignLeft="@+id/user"
         android:layout_alignStart="@+id/user"/>
 
@@ -149,9 +150,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/oppoScore"
-        android:id="@+id/textView4"
-        android:textColor="#ff50ff63"
-
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:id="@+id/oppoScore"
         android:layout_below="@+id/oppoicon"
         android:layout_marginTop="38dp"
         android:layout_toRightOf="@+id/name"

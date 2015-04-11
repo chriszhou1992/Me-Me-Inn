@@ -106,20 +106,11 @@ public class MatchStartActivity extends Activity {
         startContestTask = new TimerTask() {
             @Override
             public void run() {
-//
-//                Intent contestIntent = new Intent(MatchStartActivity.this,
-//                        ContestActivity.class);
-//                contestIntent.putExtra(Global.EXTRA_MESSAGE_OPPONAME, opponentName);
-//                startActivity(contestIntent);
-
                 Intent contestIntent = new Intent(MatchStartActivity.this,
                         SelectMatchingTopicActivity.class);
                 contestIntent.putExtra(Global.EXTRA_MESSAGE_OPPONAME, opponentName);
                 startActivity(contestIntent);
-
-                //TODO: first direct the intent to the select topic page,
-                // and then go to the matching stage
-
+                finish();
             }
         };
         timer.scheduleAtFixedRate(countDownTask, 1000, 1000);
@@ -133,8 +124,6 @@ public class MatchStartActivity extends Activity {
     private void addMatchReqResultListener() {
         final Firebase matchRef = FirebaseSingleton.getInstance("matches/" + Utility
                 .combineStringSorted(opponentName, currentUsername));
-        //indicate the current user is ready to go into match
-        matchRef.child(currentUsername).setValue(Boolean.TRUE);
 
         //listen to the result of the match request
         ValueEventListener matchReqResultListener = new ValueEventListener() {
@@ -167,6 +156,8 @@ public class MatchStartActivity extends Activity {
 
             }
         };
+        //indicate the current user is ready to go into match
+        matchRef.child(currentUsername).setValue(Boolean.TRUE);
         matchRef.addValueEventListener(matchReqResultListener);
     }
 
