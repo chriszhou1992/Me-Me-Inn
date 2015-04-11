@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/icon"
+        android:src="@drawable/img3"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:hint="@string/QuestionTitleHint"
+        android:id="@+id/qtitle"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/icon"
+        android:textColor="@color/yellow"
+        android:textColorHint="@color/primary_dark_material_light" />
+
+    <RadioGroup
+        android:id="@+id/option_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="65dip"
+        android:layout_marginTop="250dip"
+        android:layout_gravity="center">
+
+        <RadioButton
+            android:id="@+id/option1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A. "/>
+
+        <RadioButton
+            android:id="@+id/option2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dip"
+            android:text="B. " />
+        <RadioButton
+            android:id="@+id/option3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dip"
+            android:text="C. "/>
+        <RadioButton
+            android:id="@+id/option4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dip"
+            android:text="D. "/>
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/option1text"
+        android:inputType="text"
+        android:hint="@string/QuestionOption1Hint"
+        android:textColor="@color/white"
+        android:textColorHint="@color/primary_dark_material_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dip"
+        android:layout_toRightOf="@+id/option_group" />
+
+    <EditText
+        android:id="@+id/option2text"
+        android:inputType="text"
+        android:hint="@string/QuestionOption2Hint"
+        android:textColor="@color/white"
+        android:textColorHint="@color/primary_dark_material_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/option1text"
+        android:layout_toRightOf="@+id/option_group" />
+
+    <EditText
+        android:id="@+id/option3text"
+        android:inputType="text"
+        android:hint="@string/QuestionOption3Hint"
+        android:textColor="@color/white"
+        android:textColorHint="@color/primary_dark_material_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/option2text"
+        android:layout_toRightOf="@+id/option_group" />
+    <EditText
+        android:id="@+id/option4text"
+        android:inputType="text"
+        android:hint="@string/QuestionOption4Hint"
+        android:textColor="@color/white"
+        android:textColorHint="@color/primary_dark_material_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/option3text"
+        android:layout_toRightOf="@+id/option_group" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submitpost"
+        android:id="@+id/submitpost"
+        android:textSize="18sp"
+        android:background="@color/DarkGoldenrod"
+        android:textAllCaps="false"
+        android:onClick="startQuiz"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="48dp" />
+</RelativeLayout>
+
+

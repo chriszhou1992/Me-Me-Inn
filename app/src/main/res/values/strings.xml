@@ -101,6 +101,8 @@
     <string name="friendBtnText">Friends</string>
     <string name="usernameText">Username</string>
     <string name="title_activity_review_finished_pop_up">ReviewFinishedPopUp</string>
+    <string name="checkpost">Check Post</string>
+    <string name="addpost">Add Post</string>
 
     <!--Contest Page Strings-->
     <string name="contestType">GRE Contest!</string>
@@ -117,6 +119,29 @@
     <!--Friend Page Strings-->
     <string name="friendsText">My Friends</string>
     <string name="addfriendsText">Add Friends</string>
+
+    <!--Post Question Page Strings-->
+    <string name="submitpost">Submit</string>
+    <string name="QuestionTitleHint">Input Question Title</string>
+    <string name="QuestionOption1Hint">Input Option 1</string>
+    <string name="QuestionOption2Hint">Input Option 2</string>
+    <string name="QuestionOption3Hint">Input Option 3</string>
+    <string name="QuestionOption4Hint">Input Option 4</string>
+
+    <!--Check Question Page Strings-->
+    <string name="QuestionTitle">Question title</string>
+    <string name="QuestionOption1">Option 1</string>
+    <string name="QuestionOption2">Option 2</string>
+    <string name="QuestionOption3">Option 3</string>
+    <string name="QuestionOption4">Option 4</string>
+    <string name="acceptpost">Accept</string>
+    <string name="declinepost">Decline</string>
+
+    <!--Check Post Vocab List Page Strings-->
+    <string name="checkpostlist">Check Post List</string>
+
+    <!--Add Post Vocab List Page Strings-->
+    <string name="addpostlist">Add Post List</string>
 
     <!--Selection contest page Strings-->
     <string name="chooseType">select challenge!</string>

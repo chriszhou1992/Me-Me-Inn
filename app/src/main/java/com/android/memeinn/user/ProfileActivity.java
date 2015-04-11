@@ -3,12 +3,16 @@ package com.android.memeinn.user;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.memeinn.R;
 import com.android.memeinn.VocabActivity;
 import com.android.memeinn.friend.FriendActivity;
+import com.android.memeinn.postquestion.AddPostActivity;
+import com.android.memeinn.postquestion.CheckPostActivity;
 import com.parse.ParseUser;
 
 /**
@@ -25,6 +29,15 @@ public class ProfileActivity extends Activity {
         TextView userNameView = (TextView)findViewById(R.id.name);
         ParseUser u = ParseUser.getCurrentUser();
         userNameView.setText(u.getUsername());
+
+        //hide check new post option for non-admin users
+        Button checkpost = (Button)findViewById(R.id.checknewpost);
+        String userID = u.getObjectId();
+        //Log.d("profile page: ", adminID);
+        if(!userID.equals("Jj6H7TVnGH")){
+            Log.d("profile page", " user is not admin");
+            checkpost.setVisibility(View.INVISIBLE);
+        }
     }
 
     /**
@@ -45,6 +58,22 @@ public class ProfileActivity extends Activity {
     public void onFriends(View view) {
         Intent Friends = new Intent(this, FriendActivity.class);
         startActivity(Friends);
+    }
+
+    public void gotoCheckPost(View view) {
+        Intent CheckPost = new Intent(this, CheckPostActivity.class);
+        startActivity(CheckPost);
+    }
+
+    public void gotoAddPost(View view) {
+        Intent AddPost = new Intent(this, AddPostActivity.class);
+        startActivity(AddPost);
+    }
+
+    public void onLogOut(View view){
+        ParseUser.logOut();
+        Intent LogOut = new Intent(this, LoginActivity.class);
+        startActivity(LogOut);
     }
 
 }
