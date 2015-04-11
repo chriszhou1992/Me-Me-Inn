@@ -34,6 +34,8 @@ import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import com.android.memeinn.definitionAPI.*;
+
 /**
  * Main interface of the application. Provides navigation
  * to features of the app.
@@ -292,6 +294,11 @@ public class MainActivity extends Activity {
     public void goMatchWithFriend(View view) {
         Intent availFriend = new Intent(this, AvailFriendListActivity.class);
         startActivity(availFriend);
+    }
+
+    public void gotoOnlineDictionary(View view){
+        Intent onlineDictionary = new Intent(this, OnlineDictionaryActivity.class);
+        startActivity(onlineDictionary);
     }
 
     /**

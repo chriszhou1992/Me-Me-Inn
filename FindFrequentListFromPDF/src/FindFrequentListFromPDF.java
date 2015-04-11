@@ -19,6 +19,8 @@ import org.apache.pdfbox.pdfparser.PDFParser;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.util.PDFTextStripper;
 
+import com.google.gson.Gson;
+
 public class FindFrequentListFromPDF {
 	static Map<String, Integer> wordFreq = new HashMap<String, Integer>();
 	static ArrayList<Word> baseWordList = new ArrayList<Word>();
@@ -147,46 +149,82 @@ public class FindFrequentListFromPDF {
 	    	//}
 	    }*/
 	    
-	   pdftoHashmap("wordList.pdf",true);
-	   for(Word w:baseWordList) {
-		    	w.setFrequency(wordFreq.get(w.getWord()));
-		    System.out.println(w.getWord()+":"+w.getFrequency());
-	   }
+	   pdftoHashmap("wordList1.pdf",true);
+//	   for(Word w:baseWordList) {
+//		    	w.setFrequency(wordFreq.get(w.getWord()));
+//		    System.out.println(w.getWord()+":"+w.getFrequency());
+//	   }
 	   
 	   
 	   //read all definitions
-        BufferedReader br = null;
-		String sCurrentLine;
-		br = new BufferedReader(new FileReader("GRE_PDFs/definitionList.txt"));
-		int lineNum=0;
-		while ((sCurrentLine = br.readLine()) != null) {
-			baseWordList.get(lineNum).setDefinition(sCurrentLine);
-			Word curWord = baseWordList.get(lineNum);
-			System.out.println(curWord.getWord()+":"+curWord.getDefinition()+":"+curWord.getFrequency());
-			lineNum++;
-		}
-	   
-		br.close();
+//        BufferedReader br = null;
+//		String sCurrentLine;
+//		br = new BufferedReader(new FileReader("GRE_PDFs/definitionList1.txt"));
+//		int lineNum=0;
+//		while ((sCurrentLine = br.readLine()) != null) {
+//			baseWordList.get(lineNum).setDefinition(sCurrentLine);
+//			Word curWord = baseWordList.get(lineNum);
+//			System.out.println(curWord.getWord()+":"+curWord.getDefinition()+":"+curWord.getFrequency());
+//			lineNum++;
+//		}
+//	   
+//		br.close();
 		
 		//Creat new CSV
 		
 		
-		File file =new File("wordList.csv");
+//		File file =new File("wordList.csv");
+//		 
+//		//if file doesnt exists, then create it
+//		if(!file.exists()){
+//			file.createNewFile();
+//		}
+//
+//		//true = append file
+//		FileWriter fileWriter = new FileWriter(file.getName());
+//        BufferedWriter bw = new BufferedWriter(fileWriter);
+//        bw.write("word,definition,frequency");
+//        for (Word w:baseWordList) {
+//			bw.write("\n"+w.getWord()+","+w.getDefinition()+","+w.getFrequency());
+//		}
+//		bw.close();
+//		fileWriter.close();
+		
+	   
+	   BufferedReader br = new BufferedReader(new FileReader("GRE_PDFs/TOEFL.json.new.json"));
+	   	Gson gson = new Gson();
+	   //convert the json string back to object
+		AllData obj = gson.fromJson(br, AllData.class);
+		ArrayList<DataObject> results = obj.getResults();
+		
+		Iterator iter = results.iterator();
+		
+		int count = 0;
+		while (iter.hasNext()) {
+			try{
+			System.out.println(count++);
+		    DataObject dataObject = (DataObject) iter.next();
+			dataObject.setFrequency(wordFreq.get(dataObject.getWord()));
+			}
+			catch(NullPointerException e){
+			 iter.remove();
+			}
+		}
+	   
+	   
+		File writeFile = new File("TOEFL_NEW_FEQ.json");
 		 
-		//if file doesnt exists, then create it
-		if(!file.exists()){
-			file.createNewFile();
+		// if file doesnt exists, then create it
+		if (!writeFile.exists()) {
+			writeFile.createNewFile();
 		}
-
-		//true = append file
-		FileWriter fileWriter = new FileWriter(file.getName());
-        BufferedWriter bw = new BufferedWriter(fileWriter);
-        bw.write("word,definition,frequency");
-        for (Word w:baseWordList) {
-			bw.write("\n"+w.getWord()+","+w.getDefinition()+","+w.getFrequency());
-		}
+		
+		FileWriter fw = new FileWriter(writeFile);
+		BufferedWriter bw = new BufferedWriter(fw);
+		
+		String json = gson.toJson(obj);
+		bw.write(json);
 		bw.close();
-		fileWriter.close();
 	}
 
 }

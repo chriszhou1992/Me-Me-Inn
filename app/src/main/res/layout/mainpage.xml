@@ -79,5 +79,13 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:onClick="gotoProfile" />
+    <ImageButton
+        android:background="@drawable/online_dic"
+        android:layout_width="100dip"
+        android:layout_height="30dip"
+        android:id="@+id/onlineDictionaryButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:onClick="gotoOnlineDictionary" />
 
 </RelativeLayout>
