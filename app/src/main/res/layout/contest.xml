@@ -58,7 +58,7 @@
         android:id="@+id/option0"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:onClick="startChange"
+        android:onClick="choiceClicked"
          />
 
     <Button
@@ -72,7 +72,7 @@
         android:layout_alignLeft="@+id/option0"
         android:layout_alignStart="@+id/option0"
         android:layout_marginTop="25dp"
-    />
+        android:onClick="choiceClicked"/>
 
     <Button
         android:layout_width="300dp"
@@ -85,7 +85,7 @@
         android:layout_alignLeft="@+id/option0"
         android:layout_alignStart="@+id/option0"
         android:layout_marginTop="100dp"
-    />
+        android:onClick="choiceClicked"/>
 
     <Button
         android:layout_width="300dp"
@@ -98,7 +98,8 @@
         android:layout_alignLeft="@+id/option0"
         android:layout_alignStart="@+id/option0"
         android:layout_marginTop="175dp"
-    />
+        android:onClick="choiceClicked"
+        android:nestedScrollingEnabled="false"/>
 
     <!--<ProgressBar-->
         <!--android:id="@+id/spinner"-->

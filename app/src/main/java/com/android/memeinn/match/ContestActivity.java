@@ -47,6 +47,7 @@ public class ContestActivity extends Activity {
     /*Timer Fields*/
     private TextView timeLeftTextView;
     private Timer timer;
+    private Timer tempTimer;
     private Integer countDown;
     private TimerTask countDownTask;
 
@@ -126,9 +127,9 @@ public class ContestActivity extends Activity {
                         Question q = new Question(questionData);
                         Log.d("contest", q.toString());
                         questionQueue.add(q);
-                        //start match
-                        setupTimer();
                     }
+                    //start match
+                    setupTimer();
                     nextQuestion();
                     matchRef.removeEventListener(this);
                 }
@@ -167,6 +168,8 @@ public class ContestActivity extends Activity {
                         oppoSelection = oppoSelection * -1;
                     //opponent chose wrong answer
                     displayScore(0, encoding); //encoding has the remaining countdown
+                    Log.d("contest", "oppoSelected = " + oppoSelection);
+                    Log.d("contest", "oppoCountDown = " + encoding);
                 }
 
                 @Override
@@ -181,32 +184,34 @@ public class ContestActivity extends Activity {
      * Setup the Timer which counts down the time remaining to answer the question.
      */
     private void setupTimer() {
+        tempTimer = new Timer();
         timer = new Timer();
         Log.d("contest", "countdownTV = " + timeLeftTextView.getText());
         countDownTask = new TimerTask() {
             @Override
             public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        decrementCountDown();
-                        Log.d("contest", "timer = " + countDown);
-                        if (countDown <= 0) {
-                            timer.cancel();
-                            countDown = 10;
-                            Log.d("contest", "Choice Clicked(null)");
-                            choiceClicked(null);
-                        }
-                    }
-                });
+                Log.d("contest", "timer trigger");
+                decrementCountDown();
+                Log.d("contest", "timer = " + countDown);
             }
         };
         timer.scheduleAtFixedRate(countDownTask, 1000, 1000);
     }
 
     private void decrementCountDown() {
-        countDown--;
-        timeLeftTextView.setText(countDown.toString());
+        if (countDown > 0)
+            countDown--;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                timeLeftTextView.setText(countDown.toString());
+                if (countDown == 0) {
+                    countDown--;
+                    Log.d("contest", "Choice Clicked(null)");
+                    choiceClicked(null);
+                }
+            }
+        });
     }
 
     /**
@@ -247,17 +252,19 @@ public class ContestActivity extends Activity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                Timer t = new Timer();
                 //1 second delay to display options
-                t.schedule(new TimerTask() {
+                tempTimer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        for (Button b : optionBtns) {
-                            b.setVisibility(View.VISIBLE);
-                            timer.cancel();
-                            timer = new Timer();
-                            timer.scheduleAtFixedRate(countDownTask, 1000, 1000);
-                        }
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                for (Button b : optionBtns) {
+                                    b.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        });
+                        countDown = 10;
                     }
                 }, 1000);
             }
@@ -357,20 +364,25 @@ public class ContestActivity extends Activity {
             displayScore(oppoScoreTextView, oppoScoreGain, oppoScore);
     }
 
-    private void displayScore(final TextView scoreTextView, int scoreGain, final int finalScore) {
+    private void displayScore(final TextView scoreTextView, int scoreGain,
+                              final Integer finalScore) {
         if (scoreGain < 0) {
             scoreTextView.setTextColor(Color.RED);
         } else {
             scoreTextView.setTextColor(Color.GREEN);
             scoreTextView.setText("+" + scoreGain);
-            Timer t = new Timer();
-            t.schedule(new TimerTask() {
+            tempTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    scoreTextView.setTextColor(Color.WHITE);
-                    scoreTextView.setText(finalScore);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            scoreTextView.setTextColor(Color.WHITE);
+                            scoreTextView.setText(finalScore.toString());
+                        }
+                    });
                 }
-            }, 1500);
+            }, 1000);
         }
     }
 
@@ -390,8 +402,12 @@ public class ContestActivity extends Activity {
             if ((boolean) btn.getTag()) {
                 scoreEncoding = countDown + BASE_CORRECT_SCORE;
                 changeAnswerBtnBackground(btn, 1);
+                displayScore(scoreEncoding, 0);
+                Log.d("contest", "correct choice");
             } else {
+                displayScore(-1, 0);
                 changeAnswerBtnBackground(btn, -1);
+                Log.d("contest", "wrong choice");
                 //if answered incorrectly, add this word to user's review list
            /* ParseUser u = ParseUser.getCurrentUser();
             String relationName = "UserReviewList" + vocabCategory;
@@ -408,49 +424,72 @@ public class ContestActivity extends Activity {
             //encode
             scoreEncoding = scoreEncoding * (int) Math.pow(10, i);
         } else {
-            int i = 0;
-            for (; i < optionBtns.size(); i++)
-                if ((boolean)optionBtns.get(i).getTag())
-                    break;
+            displayScore(-1, 0);
+
             //encode
-            scoreEncoding = scoreEncoding * (int) Math.pow(10, i);
+            scoreEncoding = -2;
         }
 
         Firebase choiceRef = matchRef.child(currentUsername + rounds);
         choiceRef.setValue(scoreEncoding);
 
-        timer.cancel();
-        int count = 0;
-        //wait for opponent action
-        while (oppoSelection == null) {
-            try {
-                Thread.sleep(1000);
-                count++;
-                if (count >= 10) {
-                    Utility.warningDialog(this, "Opponent Exited", "Your opponent exit the match.");
-                    finish();
-                    break;
+        matchRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild(currentUsername + rounds) &&
+                        dataSnapshot.hasChild(opponentName + rounds)) {
+                    oppoSelection = 1;
+                    HashMap m = dataSnapshot.getValue(HashMap.class);
+                    int encoding = (int)m.get(opponentName + rounds);
+                    while (encoding % 10 == 0) {
+                        oppoSelection++;
+                        encoding = encoding / 10;
+                    }
+                    if (encoding < 0)
+                        oppoSelection = oppoSelection * -1;
+
+                    if (encoding == -2)
+                        oppoSelection = null;
+
+                    tempTimer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            if (oppoSelection != null) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        //displayRoundResult();
+                                        displayRoundResult();
+                                        animatedView.startAnimation(out);
+                                    }
+                                });
+                            }
+                        }
+                    }, 1500);
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
-        }
-        if (oppoSelection != null) {
-            displayRoundResult();
-            animatedView.startAnimation(out);
-        }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
     }
 
     private void displayRoundResult() {
-        Button b = optionBtns.get(Math.abs(oppoSelection));
+        if (oppoSelection == null) {
+            return;
+        }
+
+        Button b = optionBtns.get(Math.abs(oppoSelection) - 1);
         if (oppoSelection < 0) {
             changeAnswerBtnBackground(b, -1);
             for (int i = 0; i < optionBtns.size(); i++) {
                 b = optionBtns.get(i);
                 if ((boolean)b.getTag())
                     changeAnswerBtnBackground(b, 1);
+                Log.d("contest", "correct = " + i);
             }
-        } else
+        } else if (oppoSelection > 0)
             changeAnswerBtnBackground(b, 1);
         oppoSelection = null;
     }
