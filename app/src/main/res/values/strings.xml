@@ -12,6 +12,7 @@
 
     <!-- Main Page Strings -->
     <string name="gotoVocab">Go To Vocabulary</string>
+    <string name="gotoUserQuiz">Go To User-created quiz</string>
     <string name="matchFriend">Match with Friends</string>
     <string name="matchLadder">Match in Ladder</string>
     <string name="usernameHint">Username</string>
@@ -145,6 +146,9 @@
 
     <!--Selection contest page Strings-->
     <string name="chooseType">select challenge!</string>
+
+    <!--User-created quiz list Strings-->
+    <string name="userquizlist">User-created Quiz List</string>
 
 
 

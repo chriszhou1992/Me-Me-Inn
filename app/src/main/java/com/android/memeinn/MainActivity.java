@@ -19,6 +19,7 @@ import com.android.memeinn.friend.RequestFriendSession;
 import com.android.memeinn.friend.ShowMsgActivity;
 import com.android.memeinn.match.AvailFriendListActivity;
 import com.android.memeinn.match.MatchStartActivity;
+import com.android.memeinn.postquestion.ShowUserQuiz;
 import com.android.memeinn.user.ProfileActivity;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -285,6 +286,11 @@ public class MainActivity extends Activity {
     public void gotoProfile(View view) {
         Intent profIntent = new Intent(this, ProfileActivity.class);
         startActivity(profIntent);
+    }
+
+    public void gotouserquizlist(View view) {
+        Intent userquizlistIntent = new Intent(this, ShowUserQuiz.class);
+        startActivity(userquizlistIntent);
     }
 
     /**
