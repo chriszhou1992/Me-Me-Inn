@@ -62,7 +62,6 @@ public class CheckPostActivity extends Activity{
         if (currPos < questions.size()) {
             ParseObject o = questions.get(currPos);
             String objectId = o.getObjectId();
-            Log.d("onClickAccept", objectId);
             ParseQuery<ParseObject> query = ParseQuery.getQuery("QuizQuestions");
             query.getInBackground(objectId, new GetCallback<ParseObject>() {
                 public void done(ParseObject question, ParseException e) {
@@ -85,7 +84,6 @@ public class CheckPostActivity extends Activity{
         if (currPos < questions.size()) {
             ParseObject o = questions.get(currPos);
             String objectId = o.getObjectId();
-            Log.d("onClickDecline", objectId);
             ParseQuery<ParseObject> query = ParseQuery.getQuery("QuizQuestions");
             query.getInBackground(objectId, new GetCallback<ParseObject>() {
                 public void done(ParseObject question, ParseException e) {
