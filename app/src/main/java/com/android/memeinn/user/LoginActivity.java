@@ -82,29 +82,33 @@ public class LoginActivity extends ActionBarActivity {
      * Function that uses Parse API to trigger Facebook Single-Signon Dialog.
      * @param view
      */
-    public void FBSignOn(View view) {
-        Log.d("MyApp", "Inn");
-        //FB Single-Signon dialog
-        ParseFacebookUtils.logIn(this, new LogInCallback() {
-            @Override
-            public void done(ParseUser user, ParseException err) {
-                Log.d("MyApp", "AAA");
-                if (user == null) {
-                    Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
-                } else if (user.isNew()) {
-                    Log.d("MyApp", "User signed up and logged in through Facebook!");
-                } else {
-                    Log.d("MyApp", "User logged in through Facebook!");
-                }
-            }
-        });
-    }
+//    public void FBSignOn(View view) {
+//        Log.d("MyApp", "Inn");
+//        //FB Single-Signon dialog
+//        ParseFacebookUtils.logIn(this, new LogInCallback() {
+//            @Override
+//            public void done(ParseUser user, ParseException err) {
+//                Log.d("MyApp", "AAA");
+//                if (user == null) {
+//                    Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
+//                } else if (user.isNew()) {
+//                    Log.d("MyApp", "User signed up and logged in through Facebook!");
+//                } else {
+//                    Log.d("MyApp", "User logged in through Facebook!");
+//                }
+//            }
+//        });
+//    }
 
 
-    @Override
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
+//    }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
+        ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
     }
 
 

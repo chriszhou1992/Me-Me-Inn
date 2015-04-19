@@ -46,8 +46,10 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.facebook.android:facebook-android-sdk:4.0.0'
+    compile 'com.parse.bolts:bolts-android:1.+'
     //compile 'com.parse.bolts:bolts-android:1.+'     //Facebook API Dependency Library
-    compile fileTree(dir: 'libs', include: 'Parse-*.jar')   //Parse API
+    //compile 'com.parse.bolts:bolts-android:1.2.0'
+    compile fileTree(dir: 'libs', include: '*.jar')   //Parse API
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'    //Espresso
     androidTestCompile 'com.android.support.test:testing-support-lib:0.1'   //Espresso Dependency
     compile 'com.firebase:firebase-client-android:2.2.1+' //firebase api
