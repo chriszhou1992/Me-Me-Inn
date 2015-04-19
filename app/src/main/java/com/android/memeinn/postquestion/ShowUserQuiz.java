@@ -30,7 +30,7 @@ public class ShowUserQuiz extends Activity{
 
     }
 
-    public void gotoChapOrReview(View view) {
+    public void gotoUserQ(View view) {
         Intent goToUserQuiz = new Intent(this, UserQuiz.class);
         String vocabType = ((Button) /*findViewById(R.id.gre)*/view).getText().toString();
         Log.d("MyApp", "VocabType" + vocabType);

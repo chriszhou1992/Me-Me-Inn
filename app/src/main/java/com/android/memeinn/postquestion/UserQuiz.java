@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.AlertDialog;
 
 import com.android.memeinn.Question;
 import com.android.memeinn.R;
@@ -55,7 +56,7 @@ public class UserQuiz extends Activity {
         Intent intent = getIntent();
         extraString = intent.getStringExtra(ShowUserQuiz.EXTRA_MESSAGE);
 
-        questionTitle = (TextView) findViewById(R.id.testWord);
+        questionTitle = (TextView) findViewById(R.id.questionT);
         option1 = (Button) findViewById(R.id.option0);
         option2 = (Button) findViewById(R.id.option1);
         option3 = (Button) findViewById(R.id.option2);
@@ -67,13 +68,13 @@ public class UserQuiz extends Activity {
         options.add(option3);
         options.add(option4);
 
-        questionTitle.setText(questionTitle + " (" + extraString + ")");
+        //questionTitle.setText(questionTitle + " (" + extraString + ")");
 
         initQuestions();
     }
 
     public void choiceClicked(View view) {
-        if (currPos < questions.size()) {
+        if (currPos+1< questions.size()) {
             currAnswer = questions.get(currPos).getString("CurrentAnswer");
             Button btn = options.get(currAnswer.charAt(0) - 'A');
             String answerContent = btn.getText().toString();
@@ -87,37 +88,57 @@ public class UserQuiz extends Activity {
                 }
             });
         } else {
-            Utility.warningDialog(this, "End of quiz", "You have done all the quiz", "OK", new DialogInterface.OnClickListener() {
+            currAnswer = questions.get(currPos).getString("CurrentAnswer");
+            Button btn = options.get(currAnswer.charAt(0) - 'A');
+            String answerContent = btn.getText().toString();
+            Utility.warningDialog(this, "Answer",
+                    "Correct answer for " + questions.get(currPos).getString("questionTitle") + " is " + answerContent,
+                     "You have done all the quiz" ,new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+            /*Utility.warningDialog(this, "End of quiz", "You have done all the quiz", "OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     finish();
                 }
-            });
+            });*/
         }
     }
 
     private void initQuestions() {
-        this.questions = new ArrayList<ParseObject>();
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("QuizQuestions");
-        query.orderByAscending("createdAt");
+        try {
+            this.questions = new ArrayList<ParseObject>();
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("QuizQuestions");
+            query.orderByAscending("createdAt");
 
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> questionList, ParseException e) {
-                if (e == null) {
-                    // Query success
-                    for (ParseObject question : questionList) {
-                        if ((boolean) question.get("accepted") == true) {
-                            questions.add(question);
+            query.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> questionList, ParseException e) {
+                    if (e == null) {
+                        // Query success
+                        for (ParseObject question : questionList) {
+                            if (((boolean) question.get("accepted") == true) && (question.get("VocabType").equals(extraString))) {
+                                questions.add(question);
+                            }
                         }
+                        if (questions.size() > 0) {
+                            System.out.print("questionsize"+questions.size());
+                            displayContentWithPos(0);
+                        } else {
+                            printEmptyMessage();
+                        }
+                    } else {
+                        e.printStackTrace();
                     }
-                    displayContentWithPos(0);
-                } else {
-                    e.printStackTrace();
                 }
-            }
-        });
-        currPos = 0;
+            });
+            currPos = 0;
+        }catch (IndexOutOfBoundsException e) {
+            printEmptyMessage();
+        }
     }
 
     private void displayContentWithPos(int pos) {
@@ -132,5 +153,15 @@ public class UserQuiz extends Activity {
             currAnswer = (String) question.get("CurrentAnswer");
         } catch (IndexOutOfBoundsException e) {
         }
+    }
+
+    private void printEmptyMessage() {
+        Utility.warningDialog(this, "No quiz avaliable ", "Please come and post your DIY quiz", "OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        //Toast.makeText(this, "There is no more question to show!", Toast.LENGTH_SHORT).show();
     }
 }

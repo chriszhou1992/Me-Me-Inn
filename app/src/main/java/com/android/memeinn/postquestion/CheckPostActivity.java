@@ -5,6 +5,7 @@ package com.android.memeinn.postquestion;
  */
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.util.Log;
 
 import com.android.memeinn.R;
 
+import com.android.memeinn.Utility;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -171,7 +173,13 @@ public class CheckPostActivity extends Activity{
     }
 
     private void printEmptyMessage() {
-        Toast.makeText(this, "There is no more question to show!", Toast.LENGTH_SHORT).show();
+        Utility.warningDialog(this, "Reminder ", "No More Quiz to Check", "OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        //Toast.makeText(this, "There is no more question to show!", Toast.LENGTH_SHORT).show();
     }
 
 }

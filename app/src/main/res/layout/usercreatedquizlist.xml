@@ -34,7 +34,7 @@
         android:layout_below="@+id/gre"
         android:layout_alignEnd="@+id/icon"
         android:layout_alignRight="@+id/icon"
-        android:onClick="gotoChapOrReview" />
+        android:onClick="gotoUserQ" />
 
     <Button
         android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
         android:background="#ffb39a6d"
         android:textAllCaps="false"
         android:layout_marginTop="31dp"
-        android:onClick="gotoChapOrReview"
+        android:onClick="gotoUserQ"
         android:layout_below="@+id/name"
         android:layout_alignLeft="@+id/icon"
         android:layout_alignStart="@+id/icon" />
@@ -58,7 +58,7 @@
         android:textSize="18sp"
         android:background="#ff809e6d"
         android:textAllCaps="false"
-        android:onClick="gotoChapOrReview"
+        android:onClick="gotoUserQ"
         android:layout_below="@+id/toefl"
         android:layout_alignLeft="@+id/gre"
         android:layout_alignStart="@+id/gre" />
@@ -74,7 +74,7 @@
         android:layout_below="@+id/ielts"
         android:layout_alignEnd="@+id/icon"
         android:layout_alignRight="@+id/icon"
-        android:onClick="gotoChapOrReview" />
+        android:onClick="gotoUserQ" />
 
     <Button
         android:layout_width="wrap_content"
@@ -87,7 +87,7 @@
         android:layout_below="@+id/sat"
         android:layout_alignStart="@+id/ielts"
         android:layout_alignLeft="@+id/ielts"
-        android:onClick="gotoChapOrReview" />
+        android:onClick="gotoUserQ" />
 
     <Button
         android:layout_width="wrap_content"
@@ -100,6 +100,6 @@
         android:layout_below="@+id/act"
         android:layout_alignStart="@+id/toefl"
         android:layout_alignLeft="@+id/toefl"
-        android:onClick="gotoChapOrReview" />
+        android:onClick="gotoUserQ" />
 
 </RelativeLayout>
