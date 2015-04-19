@@ -9,7 +9,7 @@ import com.android.memeinn.friend.RequestFriendSession;
 import com.firebase.client.Firebase;
 import com.parse.Parse;
 import com.parse.ParseObject;
-
+import com.parse.ParseFacebookUtils;
 /**
  * Custom Application class for the app to initialize Firebase and Parse
  * backend, force screen orientation, and keep track of the current foreground
@@ -27,6 +27,7 @@ public class MeMeInnApp extends Application {
         Parse.initialize(this, getString(R.string.parse_app_id),
                 getString(R.string.parse_client_key));
         ParseObject.registerSubclass(RequestFriendSession.class);
+        ParseFacebookUtils.initialize("");
 
         // register to be informed of activities starting up
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
