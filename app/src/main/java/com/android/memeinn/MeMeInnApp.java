@@ -27,7 +27,7 @@ public class MeMeInnApp extends Application {
         Parse.initialize(this, getString(R.string.parse_app_id),
                 getString(R.string.parse_client_key));
         ParseObject.registerSubclass(RequestFriendSession.class);
-        ParseFacebookUtils.initialize(this);
+        ParseFacebookUtils.initialize(getApplicationContext());
 
         // register to be informed of activities starting up
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {

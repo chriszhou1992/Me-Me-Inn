@@ -20,6 +20,11 @@ import com.android.memeinn.friend.ShowMsgActivity;
 import com.android.memeinn.match.AvailFriendListActivity;
 import com.android.memeinn.match.MatchStartActivity;
 import com.android.memeinn.user.ProfileActivity;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -53,6 +58,8 @@ public class MainActivity extends Activity {
 
     private RequestFriendSession mCheckSession;
     private final BroadcastReceiver mReceiver = createMsgReceiver();
+
+    CallbackManager callbackManager;
 
     private final ServiceConnection mRequestServiceConnection = new ServiceConnection() {
 
@@ -111,6 +118,7 @@ public class MainActivity extends Activity {
 
         Intent serviceIntent1 = new Intent(this, CheckResponseService.class);
         bindService(serviceIntent1, mResponseServiceConnection, BIND_AUTO_CREATE);
+
     }
 
     /**
