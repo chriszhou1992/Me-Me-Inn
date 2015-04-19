@@ -34,7 +34,7 @@
         android:layout_below="@+id/gre"
         android:layout_alignEnd="@+id/icon"
         android:layout_alignRight="@+id/icon"
-        android:onClick="gotoChapOrReview" />
+        android:onClick="gotoPostQuestion" />
 
     <Button
         android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
         android:layout_alignStart="@+id/name"
         android:layout_alignLeft="@+id/name"
         android:layout_marginTop="31dp"
-        android:onClick="gotoChapOrReview" />
+        android:onClick="gotoPostQuestion" />
 
     <Button
         android:layout_width="wrap_content"
@@ -60,7 +60,7 @@
         android:textAllCaps="false"
         android:layout_below="@+id/toefl"
         android:layout_alignLeft="@+id/name"
-        android:onClick="gotoChapOrReview" />
+        android:onClick="gotoPostQuestion" />
 
     <Button
         android:layout_width="wrap_content"
@@ -73,7 +73,7 @@
         android:layout_below="@+id/ielts"
         android:layout_alignEnd="@+id/icon"
         android:layout_alignRight="@+id/icon"
-        android:onClick="gotoChapOrReview" />
+        android:onClick="gotoPostQuestion" />
 
     <Button
         android:layout_width="wrap_content"
@@ -86,7 +86,7 @@
         android:layout_below="@+id/sat"
         android:layout_alignStart="@+id/ielts"
         android:layout_alignLeft="@+id/ielts"
-        android:onClick="gotoChapOrReview" />
+        android:onClick="gotoPostQuestion" />
 
     <Button
         android:layout_width="wrap_content"
@@ -99,6 +99,6 @@
         android:layout_below="@+id/act"
         android:layout_alignStart="@+id/toefl"
         android:layout_alignLeft="@+id/toefl"
-        android:onClick="gotoChapOrReview" />
+        android:onClick="gotoPostQuestion" />
 
 </RelativeLayout>

@@ -30,7 +30,7 @@ public class AddPostActivity extends Activity {
         //flag = intent.getFlags();
     }
 
-    public void gotoChapOrReview(View view) {
+    public void gotoPostQuestion(View view) {
         Intent goToPost = new Intent(this, PostQuestion.class);
         String vocabType = ((Button) /*findViewById(R.id.gre)*/view).getText().toString();
         Log.d("MyApp", "VocabType" + vocabType);

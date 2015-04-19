@@ -16,11 +16,12 @@
         android:layout_height="wrap_content"
         android:text="@string/QuestionTitle"
         style="@style/Base.V21.Theme.AppCompat"
-        android:id="@+id/checkquestion"
+        android:id="@+id/questionTitle"
         android:textColor="#FFFF00"
         android:textSize="30sp"
-        android:layout_below="@+id/icon"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/vocabType"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp" />
 
 
     <TextView
@@ -33,9 +34,9 @@
         android:textSize="20sp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:layout_below="@+id/checkquestion"
-        android:layout_alignLeft="@+id/checkquestion"
-        android:layout_alignStart="@+id/checkquestion"
+        android:layout_below="@+id/questionTitle"
+        android:layout_alignLeft="@+id/questionTitle"
+        android:layout_alignStart="@+id/questionTitle"
         android:layout_marginTop="66dp" />
 
     <TextView
@@ -88,9 +89,11 @@
         android:textSize="18sp"
         android:background="@color/DarkGoldenrod"
         android:textAllCaps="false"
+        android:layout_marginBottom="61dp"
+        android:onClick="onClickDecline"
         android:layout_alignTop="@+id/acceptthepost"
-        android:layout_alignRight="@+id/checkquestion"
-        android:layout_alignEnd="@+id/checkquestion" />
+        android:layout_alignRight="@+id/icon"
+        android:layout_alignEnd="@+id/icon" />
 
     <Button
         android:layout_width="wrap_content"
@@ -103,7 +106,19 @@
         android:layout_marginBottom="61dp"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/icon"
-        android:layout_alignStart="@+id/icon" />
+        android:layout_alignStart="@+id/icon"
+        android:onClick="onClickAccept"/>
+
+    <TextView
+        style="@style/Base.V21.Theme.AppCompat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/QuestionType"
+        android:id="@+id/vocabType"
+        android:textColor="#FFFF00"
+        android:textSize="30sp"
+        android:layout_alignBottom="@+id/icon"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

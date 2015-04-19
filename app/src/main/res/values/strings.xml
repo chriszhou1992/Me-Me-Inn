@@ -131,6 +131,7 @@
 
     <!--Check Question Page Strings-->
     <string name="QuestionTitle">Question title</string>
+    <string name="QuestionType">Vocab Type</string>
     <string name="QuestionOption1">Option 1</string>
     <string name="QuestionOption2">Option 2</string>
     <string name="QuestionOption3">Option 3</string>

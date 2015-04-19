@@ -37,26 +37,32 @@
             android:id="@+id/option1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="A. "/>
+            android:text="A. "
+            android:checked="false" />
 
         <RadioButton
             android:id="@+id/option2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dip"
-            android:text="B. " />
+            android:text="B. "
+            android:checked="false" />
+
         <RadioButton
             android:id="@+id/option3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dip"
-            android:text="C. "/>
+            android:text="C. "
+            android:checked="false" />
         <RadioButton
             android:id="@+id/option4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dip"
-            android:text="D. "/>
+            android:text="D. "
+            android:checked="false" />
+
     </RadioGroup>
 
     <EditText
@@ -110,7 +116,7 @@
         android:textSize="18sp"
         android:background="@color/DarkGoldenrod"
         android:textAllCaps="false"
-        android:onClick="startQuiz"
+        android:onClick="onClickSubmit"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="48dp" />
