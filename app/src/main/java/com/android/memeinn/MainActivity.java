@@ -33,6 +33,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.facebook.appevents.*;
 
 import com.android.memeinn.definitionAPI.*;
 
@@ -74,6 +75,22 @@ public class MainActivity extends Activity {
         public void onServiceDisconnected(ComponentName componentName) {
         }
     };
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Logs 'install' and 'app activate' App Events.
+        AppEventsLogger.activateApp(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // Logs 'app deactivate' App Event.
+        AppEventsLogger.deactivateApp(this);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
