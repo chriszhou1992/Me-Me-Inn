@@ -19,6 +19,7 @@ import com.android.memeinn.friend.RequestFriendSession;
 import com.android.memeinn.friend.ShowMsgActivity;
 import com.android.memeinn.match.AvailFriendListActivity;
 import com.android.memeinn.match.MatchStartActivity;
+import com.android.memeinn.user.FacebookLoginActivity;
 import com.android.memeinn.user.FacebookLoginFragment;
 import com.android.memeinn.user.ProfileActivity;
 import com.firebase.client.ChildEventListener;
@@ -291,7 +292,7 @@ public class MainActivity extends Activity {
     }
 
     public void gotoFacebookFriends(View view){
-        Intent profIntent = new Intent(this, FacebookLoginFragment.class);
+        Intent profIntent = new Intent(getApplicationContext(), FacebookLoginActivity.class);
         startActivity(profIntent);
     }
     /**

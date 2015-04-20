@@ -133,6 +133,7 @@ public class FacebookLoginFragment extends Fragment {
         List<String> permissions = Arrays.asList("public_profile", "email", "user_friends");
         mButtonLogin.setReadPermissions(permissions);
         mButtonLogin.registerCallback(mCallbackManager, mFacebookCallback);
+        mButtonLogin.performClick();
     }
 
     private String constructWelcomeMessage(Profile profile) {
