@@ -37,6 +37,14 @@ public class LoginActivity extends ActionBarActivity {
         //Fix the issue Android changes the font of password fields into monospace
         EditText passField = (EditText) findViewById(R.id.pword);
         passField.setTypeface(Typeface.DEFAULT);
+
+        // Check if there is a currently logged in user
+        // and it's linked to a Facebook account.
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if ((currentUser != null) && ParseFacebookUtils.isLinked(currentUser)) {
+            // Go to the Main Activity
+            showMainActivity();
+        }
     }
 
 
@@ -83,34 +91,6 @@ public class LoginActivity extends ActionBarActivity {
         finish();   //destroy activity to prevent going back to sign-in screen
     }
 
-    /**
-     * Function that uses Parse API to trigger Facebook Single-Signon Dialog.
-     * @param view
-     */
-//    public void FBSignOn(View view) {
-//        Log.d("MyApp", "Inn");
-//        //FB Single-Signon dialog
-//        ParseFacebookUtils.logIn(this, new LogInCallback() {
-//            @Override
-//            public void done(ParseUser user, ParseException err) {
-//                Log.d("MyApp", "AAA");
-//                if (user == null) {
-//                    Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
-//                } else if (user.isNew()) {
-//                    Log.d("MyApp", "User signed up and logged in through Facebook!");
-//                } else {
-//                    Log.d("MyApp", "User logged in through Facebook!");
-//                }
-//            }
-//        });
-//    }
-
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
-//    }
 
     public void onLoginClick(View v) {
         progressDialog = ProgressDialog.show(LoginActivity.this, "", "Logging in...", true);
@@ -118,23 +98,25 @@ public class LoginActivity extends ActionBarActivity {
         List<String> permissions = Arrays.asList("public_profile", "email", "user_friends");
         // NOTE: for extended permissions, like "user_about_me", your app must be reviewed by the Facebook team
         // (https://developers.facebook.com/docs/facebook-login/permissions/)
+
         ParseFacebookUtils.logInWithReadPermissionsInBackground(this, permissions, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException err) {
                 progressDialog.dismiss();
                 if (user == null) {
-                    Log.d("MemeIn", "Uh oh. The user cancelled the Facebook login.");
+                    //Log.d("MemeIn", "Uh oh. The user cancelled the Facebook login.");
                 } else if (user.isNew()) {
-                    Log.d("MemeIn", "User signed up and logged in through Facebook!");
+                    //Log.d("MemeIn", "User signed up and logged in through Facebook!");
                     showMainActivity();
                 } else {
-                    Log.d("MemeIn", "User logged in through Facebook!");
+                    //Log.d("MemeIn", "User logged in through Facebook!");
                     showMainActivity();
                 }
             }
         });
     }
     private void showMainActivity() {
+
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
