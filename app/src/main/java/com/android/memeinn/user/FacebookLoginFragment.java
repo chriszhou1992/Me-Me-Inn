@@ -130,7 +130,7 @@ public class FacebookLoginFragment extends Fragment {
     private void setupLoginButton(View view) {
         LoginButton mButtonLogin = (LoginButton) view.findViewById(R.id.login_button);
         mButtonLogin.setFragment(this);
-        List<String> permissions = Arrays.asList("public_profile", "email", "user_friends");
+        List<String> permissions = Arrays.asList("public_profile", "user_friends");
         mButtonLogin.setReadPermissions(permissions);
         mButtonLogin.registerCallback(mCallbackManager, mFacebookCallback);
         mButtonLogin.performClick();
