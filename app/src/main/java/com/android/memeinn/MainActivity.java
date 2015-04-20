@@ -79,24 +79,6 @@ public class MainActivity extends Activity {
     };
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
-        // Logs 'install' and 'app activate' App Events.
-        AppEventsLogger.activateApp(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        // Logs 'app deactivate' App Event.
-        AppEventsLogger.deactivateApp(this);
-    }
-
-
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mainpage);
@@ -115,9 +97,6 @@ public class MainActivity extends Activity {
 
         Intent serviceIntent1 = new Intent(this, CheckResponseService.class);
         bindService(serviceIntent1, mResponseServiceConnection, BIND_AUTO_CREATE);
-
-
-        mFragmentManager = getSupportFragmentManager();
 
     }
 

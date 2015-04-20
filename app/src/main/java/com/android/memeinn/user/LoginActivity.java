@@ -52,40 +52,6 @@ public class LoginActivity extends ActionBarActivity{
         EditText passField = (EditText) findViewById(R.id.pword);
         passField.setTypeface(Typeface.DEFAULT);
 
-        // Check if there is a currently logged in user
-        // and it's linked to a Facebook account.
-//        ParseUser currentUser = ParseUser.getCurrentUser();
-//        if ((currentUser != null) && ParseFacebookUtils.isLinked(currentUser)) {
-//            // Go to the Main Activity
-//            showMainActivity();
-//        }
-
-        LoginButton loginButton = (LoginButton) this.findViewById(R.id.login_button);
-        loginButton.setReadPermissions("user_friends");
-        // If using in a fragment
-        //loginButton.setFragment(this);
-        // Other app specific specialization
-
-        callbackManager = CallbackManager.Factory.create();
-        // Callback registration
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                // App code
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
-
-            @Override
-            public void onCancel() {
-                // App code
-            }
-
-            @Override
-            public void onError(FacebookException exception) {
-                // App code
-            }
-        });
     }
 
 
