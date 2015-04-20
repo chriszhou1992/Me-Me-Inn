@@ -7,27 +7,41 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.memeinn.MainActivity;
 import com.android.memeinn.R;
 import com.android.memeinn.Utility;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.List;
 
+import bolts.Task;
+
 /**
  * Default activity of the application. Handles login.
  */
-public class LoginActivity extends ActionBarActivity {
-    private Dialog progressDialog;
+public class LoginActivity extends ActionBarActivity{
+    CallbackManager callbackManager;
+    LoginButton loginButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +54,38 @@ public class LoginActivity extends ActionBarActivity {
 
         // Check if there is a currently logged in user
         // and it's linked to a Facebook account.
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        if ((currentUser != null) && ParseFacebookUtils.isLinked(currentUser)) {
-            // Go to the Main Activity
-            showMainActivity();
-        }
+//        ParseUser currentUser = ParseUser.getCurrentUser();
+//        if ((currentUser != null) && ParseFacebookUtils.isLinked(currentUser)) {
+//            // Go to the Main Activity
+//            showMainActivity();
+//        }
+
+        LoginButton loginButton = (LoginButton) this.findViewById(R.id.login_button);
+        loginButton.setReadPermissions("user_friends");
+        // If using in a fragment
+        //loginButton.setFragment(this);
+        // Other app specific specialization
+
+        callbackManager = CallbackManager.Factory.create();
+        // Callback registration
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // App code
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });
     }
 
 
@@ -55,7 +96,7 @@ public class LoginActivity extends ActionBarActivity {
     public void logIn(View view) {
         EditText usernameField = (EditText) findViewById(R.id.uname);
         EditText passField = (EditText) findViewById(R.id.pword);
-        /*ParseUser.logInInBackground(usernameField.getText().toString(),
+        ParseUser.logInInBackground(usernameField.getText().toString(),
                 passField.getText().toString(), new LogInCallback() {
 
             public void done(ParseUser user, ParseException e) {
@@ -68,7 +109,8 @@ public class LoginActivity extends ActionBarActivity {
                     Utility.warningDialog(LoginActivity.this, "Login Failed", e.getMessage());
                 }
             }
-        });*/
+        });
+        /*
 
         try {
             ParseUser.logIn(usernameField.getText().toString(), passField.getText().toString());
@@ -78,7 +120,7 @@ public class LoginActivity extends ActionBarActivity {
         } catch (ParseException e) {
             Log.d("MyApp", e.getMessage());
             Utility.warningDialog(LoginActivity.this, "Login Failed", e.getMessage());
-        }
+        }*/
     }
 
     /**
@@ -93,37 +135,45 @@ public class LoginActivity extends ActionBarActivity {
 
 
     public void onLoginClick(View v) {
-        progressDialog = ProgressDialog.show(LoginActivity.this, "", "Logging in...", true);
+        //progressDialog = ProgressDialog.show(LoginActivity.this, "", "Logging in...", true);
 
-        List<String> permissions = Arrays.asList("public_profile", "email", "user_friends");
+        List<String> permissions = Arrays.asList("public_profile","email","user_friends");
         // NOTE: for extended permissions, like "user_about_me", your app must be reviewed by the Facebook team
         // (https://developers.facebook.com/docs/facebook-login/permissions/)
 
-        ParseFacebookUtils.logInWithReadPermissionsInBackground(this, permissions, new LogInCallback() {
+        ParseFacebookUtils.logInWithReadPermissionsInBackground(this, permissions
+         ,new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException err) {
-                progressDialog.dismiss();
+
                 if (user == null) {
                     //Log.d("MemeIn", "Uh oh. The user cancelled the Facebook login.");
+                    //failed
+                     //Log.d("APP", err.getMessage());
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    Utility.warningDialog(LoginActivity.this, "Login Failed", err.getMessage());
                 } else if (user.isNew()) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
                     //Log.d("MemeIn", "User signed up and logged in through Facebook!");
-                    showMainActivity();
                 } else {
                     //Log.d("MemeIn", "User logged in through Facebook!");
-                    showMainActivity();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
                 }
             }
-        });
-    }
-    private void showMainActivity() {
 
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+          }
+          );
     }
 
+
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
 

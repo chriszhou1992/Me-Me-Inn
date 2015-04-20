@@ -45,9 +45,9 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
-    provided 'com.facebook.android:facebook-android-sdk:4.0.1'
-    compile 'com.parse.bolts:bolts-android:1.2.0'
-    //compile 'com.parse.bolts:bolts-android:1.+'     //Facebook API Dependency Library
+    //provided 'com.facebook.android:facebook-android-sdk:4.0.0'
+    compile 'com.parse.bolts:bolts-android:1.2.0'     //Facebook API Dependency Library
+    compile 'com.facebook.android:facebook-android-sdk:4.0.1'
     //compile 'com.parse.bolts:bolts-android:1.2.0'
     compile fileTree(dir: 'libs', include: '*.jar')   //Parse API
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'    //Espresso
