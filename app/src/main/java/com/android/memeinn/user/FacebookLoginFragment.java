@@ -1,5 +1,6 @@
 package com.android.memeinn.user;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,7 +29,7 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class FacebookLogin extends Fragment {
+public class FacebookLoginFragment extends Fragment {
 
     private TextView mTextDetails;
     private CallbackManager mCallbackManager;
@@ -55,7 +56,7 @@ public class FacebookLogin extends Fragment {
     };
 
 
-    public FacebookLogin() {
+    public FacebookLoginFragment() {
     }
 
     @Override
