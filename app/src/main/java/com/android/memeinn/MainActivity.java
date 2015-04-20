@@ -19,9 +19,8 @@ import com.android.memeinn.friend.RequestFriendSession;
 import com.android.memeinn.friend.ShowMsgActivity;
 import com.android.memeinn.match.AvailFriendListActivity;
 import com.android.memeinn.match.MatchStartActivity;
+import com.android.memeinn.user.FacebookLogin;
 import com.android.memeinn.user.ProfileActivity;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -291,6 +290,10 @@ public class MainActivity extends Activity {
         startActivity(profIntent);
     }
 
+    public void gotoFacebookFriends(View view){
+        Intent profIntent = new Intent(this, FacebookLogin.class);
+        startActivity(profIntent);
+    }
     /**
      * Start an Intent to go to the interface that allows starting a match with friends.
      * @param view

@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class FragmentSimpleLoginButton extends Fragment {
+public class FacebookLogin extends Fragment {
 
     private TextView mTextDetails;
     private CallbackManager mCallbackManager;
@@ -55,7 +55,7 @@ public class FragmentSimpleLoginButton extends Fragment {
     };
 
 
-    public FragmentSimpleLoginButton() {
+    public FacebookLogin() {
     }
 
     @Override
