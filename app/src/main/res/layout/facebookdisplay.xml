@@ -18,5 +18,32 @@
         android:text="Facebook Profile Fetch Error!"
         android:textColor="#ff3fb8ff"
         android:textSize="30sp"/>
+    
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/logout_button"
+        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        facebook:login_text="Login"
+        facebook:logout_text="Logout"
+        android:layout_below="@+id/facebook_text" />
 
+    <ImageButton
+        android:background="@drawable/mainmenu"
+        android:layout_marginLeft="5dp"
+        android:layout_width="100dip"
+        android:layout_height="30dip"
+        android:id="@+id/onlineDictionaryButton"
+        android:layout_below="@+id/facebook_text"
+        android:layout_toRightOf="@+id/logout_button"
+        android:onClick="gotoMainActivity" />
+
+    <Button
+        android:text="RequestButton"
+        android:layout_marginLeft="5dp"
+        android:layout_width="100dip"
+        android:layout_height="30dip"
+        android:id="@+id/RequestButton"
+        android:layout_below="@+id/facebook_text"
+        android:layout_toRightOf="@+id/onlineDictionaryButton"
+        android:onClick="onClickRequestButton" />
 </RelativeLayout>
