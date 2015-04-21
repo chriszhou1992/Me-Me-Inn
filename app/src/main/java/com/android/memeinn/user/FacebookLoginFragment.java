@@ -1,6 +1,5 @@
 package com.android.memeinn.user;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,7 +20,6 @@ import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -62,7 +60,6 @@ public class FacebookLoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mCallbackManager = CallbackManager.Factory.create();
         setupTokenTracker();
         setupProfileTracker();
@@ -75,13 +72,12 @@ public class FacebookLoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_simple_login_button, container, false);
+        return inflater.inflate(R.layout.facebookdisplay, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setupTextDetails(view);
-        setupLoginButton(view);
     }
 
     @Override
@@ -105,7 +101,7 @@ public class FacebookLoginFragment extends Fragment {
     }
 
     private void setupTextDetails(View view) {
-        mTextDetails = (TextView) view.findViewById(R.id.text_details);
+        mTextDetails = (TextView) view.findViewById(R.id.facebook_text);
     }
 
     private void setupTokenTracker() {
@@ -133,7 +129,7 @@ public class FacebookLoginFragment extends Fragment {
         List<String> permissions = Arrays.asList("public_profile", "user_friends");
         mButtonLogin.setReadPermissions(permissions);
         mButtonLogin.registerCallback(mCallbackManager, mFacebookCallback);
-        mButtonLogin.performClick();
+//        mButtonLogin.performClick();
     }
 
     private String constructWelcomeMessage(Profile profile) {

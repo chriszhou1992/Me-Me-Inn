@@ -10,19 +10,13 @@
     tools:context=".MainActivityFragment">
 
     <TextView
-        android:id="@+id/text_details"
-        android:layout_width="match_parent"
+        android:id="@+id/facebook_text"
         android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/login_button" />
-
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        facebook:login_text="Login"
-        facebook:logout_text="Logout" />
+        android:text="Facebook Profile Fetch Error!"
+        android:textColor="#ff3fb8ff"
+        android:textSize="30sp"/>
 
 </RelativeLayout>

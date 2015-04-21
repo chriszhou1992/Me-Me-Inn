@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageView
         android:layout_width="200dp"
@@ -81,9 +83,12 @@
         android:onClick="gotoProfile" />
 
     <com.facebook.login.widget.LoginButton
-        android:layout_width="50dip"
-        android:layout_height="50dip"
-        android:id="@+id/facebookLoginButton"
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        facebook:login_text="Login"
+        facebook:logout_text="Logout"
+        android:layout_centerInParent="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
