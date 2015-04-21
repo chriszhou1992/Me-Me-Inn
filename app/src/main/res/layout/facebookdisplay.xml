@@ -29,11 +29,21 @@
 
     <ImageButton
         android:background="@drawable/mainmenu"
-        android:layout_margin_left="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_width="100dip"
         android:layout_height="30dip"
         android:id="@+id/onlineDictionaryButton"
         android:layout_below="@+id/facebook_text"
         android:layout_toRightOf="@+id/logout_button"
         android:onClick="gotoMainActivity" />
+
+    <Button
+        android:text="RequestButton"
+        android:layout_marginLeft="5dp"
+        android:layout_width="100dip"
+        android:layout_height="30dip"
+        android:id="@+id/RequestButton"
+        android:layout_below="@+id/facebook_text"
+        android:layout_toRightOf="@+id/onlineDictionaryButton"
+        android:onClick="onClickRequestButton" />
 </RelativeLayout>

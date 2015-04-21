@@ -1,11 +1,16 @@
 package com.android.memeinn.user;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.media.tv.TvInputService;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.android.memeinn.MainActivity;
@@ -15,18 +20,31 @@ import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookOperationCanceledException;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
+import com.facebook.internal.WebDialog;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.facebook.share.model.AppInviteContent;
+import com.facebook.share.model.GameRequestContent;
+import com.facebook.share.widget.AppInviteDialog;
+import com.facebook.share.widget.GameRequestDialog;
 
 import java.util.Arrays;
 import java.util.List;
+
+
+import bolts.AppLinks;
 
 /**
  * Created by yifan on 4/20/15.
  */
 public class FacebookLoginActivity extends FragmentActivity {
+    GameRequestDialog requestDialog;
+    CallbackManager gameCallbackManager;
+
+
     private TextView mTextDetails;
     private CallbackManager mCallbackManager;
     private LoginManager loginManager;
@@ -70,6 +88,7 @@ public class FacebookLoginActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.facebookdisplay);
+
         if((accessToken = AccessToken.getCurrentAccessToken()) == null) {
             mCallbackManager = CallbackManager.Factory.create();
             List<String> permissions = Arrays.asList("public_profile", "user_friends");
@@ -82,7 +101,30 @@ public class FacebookLoginActivity extends FragmentActivity {
             settingTrackersAndView();
         }
 
+
+
+        gameCallbackManager = CallbackManager.Factory.create();
+        requestDialog = new GameRequestDialog(this);
+        requestDialog.registerCallback(gameCallbackManager, new FacebookCallback<GameRequestDialog.Result>() {
+            public void onSuccess(GameRequestDialog.Result result) {
+                String id = result.getRequestId();
+            }
+
+            public void onCancel() {}
+
+            public void onError(FacebookException error) {}
+        });
+
     }
+
+
+    public void onClickRequestButton(View view) {
+        GameRequestContent content = new GameRequestContent.Builder()
+                .setMessage("Come play this level with me")
+                .build();
+        requestDialog.show(content);
+    }
+
 
     private String constructWelcomeMessage(Profile profile) {
         StringBuffer stringBuffer = new StringBuffer();
@@ -132,12 +174,12 @@ public class FacebookLoginActivity extends FragmentActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
+        gameCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     public void gotoMainActivity(View view){
         Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(mainIntent);
     }
-
 
 }
