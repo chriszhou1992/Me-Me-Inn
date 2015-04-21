@@ -66,8 +66,6 @@ public class FacebookLoginActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.facebookdisplay);
-
         if((accessToken = AccessToken.getCurrentAccessToken()) == null) {
             mCallbackManager = CallbackManager.Factory.create();
             List<String> permissions = Arrays.asList("public_profile", "user_friends");
@@ -78,7 +76,7 @@ public class FacebookLoginActivity extends FragmentActivity {
         } else{
             settingTrackersAndView();
         }
-
+        setContentView(R.layout.facebookdisplay);
     }
 
     private String constructWelcomeMessage(Profile profile) {
