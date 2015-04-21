@@ -80,8 +80,7 @@
         android:layout_alignParentEnd="true"
         android:onClick="gotoProfile" />
 
-    <ImageButton
-        android:background="@drawable/profile_icon_black"
+    <com.facebook.login.widget.LoginButton
         android:layout_width="50dip"
         android:layout_height="50dip"
         android:id="@+id/facebookLoginButton"
