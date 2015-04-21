@@ -30,21 +30,13 @@ public class FacebookLoginActivity extends FragmentActivity {
     private LoginManager loginManager;
     private AccessTokenTracker mTokenTracker;
     private ProfileTracker mProfileTracker;
+    private AccessToken accessToken;
     private FacebookCallback<LoginResult> mFacebookCallback = new FacebookCallback<LoginResult>() {
         @Override
         public void onSuccess(LoginResult loginResult) {
             Log.d("MeMeInn", "onSuccess");
-
-            setupTokenTracker();
-            setupProfileTracker();
-
-            mTokenTracker.startTracking();
-            mProfileTracker.startTracking();
-
-            AccessToken accessToken = loginResult.getAccessToken();
-            Profile profile = Profile.getCurrentProfile();
-            mTextDetails = (TextView)findViewById(R.id.facebook_text);
-            mTextDetails.setText(constructWelcomeMessage(profile));
+            accessToken = loginResult.getAccessToken();
+            settingTrackersAndView();
         }
 
         @Override
@@ -59,16 +51,33 @@ public class FacebookLoginActivity extends FragmentActivity {
             Log.d("MeMeInn", "onError " + e);
         }
     };
+
+    private void settingTrackersAndView(){
+        setupTokenTracker();
+        setupProfileTracker();
+
+        mTokenTracker.startTracking();
+        mProfileTracker.startTracking();
+
+        Profile profile = Profile.getCurrentProfile();
+        mTextDetails = (TextView)findViewById(R.id.facebook_text);
+        mTextDetails.setText(constructWelcomeMessage(profile));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.facebookdisplay);
-        mCallbackManager = CallbackManager.Factory.create();
-        List<String> permissions = Arrays.asList("public_profile", "user_friends");
-        loginManager = LoginManager.getInstance();
 
-        loginManager.logInWithReadPermissions(this, permissions);
-        loginManager.registerCallback(mCallbackManager,mFacebookCallback);
+        if((accessToken = AccessToken.getCurrentAccessToken()) == null) {
+            mCallbackManager = CallbackManager.Factory.create();
+            List<String> permissions = Arrays.asList("public_profile", "user_friends");
+            loginManager = LoginManager.getInstance();
+
+            loginManager.logInWithReadPermissions(this, permissions);
+            loginManager.registerCallback(mCallbackManager, mFacebookCallback);
+        } else{
+            settingTrackersAndView();
+        }
 
     }
 
