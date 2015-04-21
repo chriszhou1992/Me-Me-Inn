@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
+import com.android.memeinn.MainActivity;
 import com.android.memeinn.R;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -131,4 +133,11 @@ public class FacebookLoginActivity extends FragmentActivity {
         super.onActivityResult(requestCode, resultCode, data);
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
+
+    public void gotoMainActivity(View view){
+        Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(mainIntent);
+    }
+
+
 }
