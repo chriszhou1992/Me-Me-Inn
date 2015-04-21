@@ -61,7 +61,8 @@ public class FacebookLoginActivity extends FragmentActivity {
 
         Profile profile = Profile.getCurrentProfile();
         mTextDetails = (TextView)findViewById(R.id.facebook_text);
-        mTextDetails.setText(constructWelcomeMessage(profile));
+        if(mTextDetails!=null)
+            mTextDetails.setText(constructWelcomeMessage(profile));
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
