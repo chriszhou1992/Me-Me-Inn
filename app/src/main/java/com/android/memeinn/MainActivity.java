@@ -1,6 +1,8 @@
 package com.android.memeinn;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -21,6 +23,7 @@ import com.android.memeinn.match.AvailFriendListActivity;
 import com.android.memeinn.match.MatchStartActivity;
 import com.android.memeinn.user.FacebookLoginActivity;
 import com.android.memeinn.user.FacebookLoginFragment;
+import com.android.memeinn.user.LoginActivity;
 import com.android.memeinn.user.ProfileActivity;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -44,7 +47,7 @@ import com.android.memeinn.definitionAPI.*;
  * to features of the app.
  */
 public class MainActivity extends Activity {
-
+    private Dialog progressDialog;
     public static final String ACTION_ADD_FRIEND = "com.android.memeinn.ACTION_ADD_FRIEND";
     public static final String ACTION_FRIEND_RESPONSE = "com.android.memeinn.ACTION_FRIEND_RESPONSE";
     public static final String REQUESTFRIEND_FROMID = "REQUESTFRIEND_FROMID";
@@ -292,8 +295,10 @@ public class MainActivity extends Activity {
     }
 
     public void gotoFacebookFriends(View view){
+        progressDialog = ProgressDialog.show(MainActivity.this, "", "connecting facebook...", true);
         Intent profIntent = new Intent(getApplicationContext(), FacebookLoginActivity.class);
         startActivity(profIntent);
+        progressDialog.dismiss();
     }
     /**
      * Start an Intent to go to the interface that allows starting a match with friends.

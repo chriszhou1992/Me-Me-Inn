@@ -1,8 +1,10 @@
 package com.android.memeinn.user;
 
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -42,6 +44,7 @@ public class FacebookLoginActivity extends FragmentActivity {
     private AccessTokenTracker mTokenTracker;
     private ProfileTracker mProfileTracker;
     private AccessToken accessToken;
+    private Dialog progressDialog;
     private FacebookCallback<LoginResult> mFacebookCallback = new FacebookCallback<LoginResult>() {
         @Override
         public void onSuccess(LoginResult loginResult) {
@@ -52,14 +55,16 @@ public class FacebookLoginActivity extends FragmentActivity {
 
         @Override
         public void onCancel() {
-            Log.d("MeMeInn", "onCancel");
-            mTextDetails.setText("User cancelled login.");
+            progressDialog = ProgressDialog.show(FacebookLoginActivity.this, "", "cancelling login...", true);
+            gotoMainActivity(null);
+            progressDialog.dismiss();
         }
 
         @Override
         public void onError(FacebookException e) {
-            mTextDetails.setText("Facebook callback error:"+e.toString());
-            Log.d("MeMeInn", "onError " + e);
+            progressDialog = ProgressDialog.show(FacebookLoginActivity.this, "", "loggin error...", true);
+            gotoMainActivity(null);
+            progressDialog.dismiss();
         }
     };
 
