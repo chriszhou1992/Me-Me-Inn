@@ -1,9 +1,12 @@
 package com.android.memeinn.user;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.android.memeinn.R;
 import com.facebook.AccessToken;
@@ -17,16 +20,23 @@ import com.facebook.share.widget.GameRequestDialog;
 /**
  * Created by yifan on 4/21/15.
  */
-public class FriendsInvitesActivity extends Fragment {
+public class FriendsInvitesFragment extends Fragment {
     GameRequestDialog requestDialog;
     CallbackManager callbackManager;
     private AccessToken accessToken;
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.facebookinvitefriends, container, false);
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         callbackManager = CallbackManager.Factory.create();
-        requestDialog = new GameRequestDialog(this);
+        requestDialog = new GameRequestDialog(getActivity());
         accessToken = AccessToken.getCurrentAccessToken();
 
         requestDialog.registerCallback(callbackManager, new FacebookCallback<GameRequestDialog.Result>() {

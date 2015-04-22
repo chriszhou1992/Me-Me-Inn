@@ -1,5 +1,6 @@
 package com.android.memeinn.user;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -65,7 +66,6 @@ public class FacebookLoginFragment extends Fragment {
         setupProfileTracker();
 
         mTokenTracker.startTracking();
-        mProfileTracker.startTracking();
     }
 
 
