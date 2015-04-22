@@ -1,6 +1,8 @@
 package com.android.memeinn;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -20,7 +22,6 @@ import com.android.memeinn.friend.ShowMsgActivity;
 import com.android.memeinn.match.AvailFriendListActivity;
 import com.android.memeinn.match.MatchStartActivity;
 import com.android.memeinn.user.FacebookLoginActivity;
-import com.android.memeinn.user.FacebookLoginFragment;
 import com.android.memeinn.user.ProfileActivity;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -44,7 +45,6 @@ import com.android.memeinn.definitionAPI.*;
  * to features of the app.
  */
 public class MainActivity extends Activity {
-
     public static final String ACTION_ADD_FRIEND = "com.android.memeinn.ACTION_ADD_FRIEND";
     public static final String ACTION_FRIEND_RESPONSE = "com.android.memeinn.ACTION_FRIEND_RESPONSE";
     public static final String REQUESTFRIEND_FROMID = "REQUESTFRIEND_FROMID";
