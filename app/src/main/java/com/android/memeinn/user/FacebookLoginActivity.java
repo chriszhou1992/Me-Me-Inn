@@ -19,6 +19,9 @@ import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
@@ -32,6 +35,7 @@ import java.util.List;
  * Created by yifan on 4/20/15.
  */
 public class FacebookLoginActivity extends FragmentActivity {
+    private TextView mFriendsList;
     private TextView mTextDetails;
     private CallbackManager mCallbackManager;
     private LoginManager loginManager;
@@ -42,8 +46,9 @@ public class FacebookLoginActivity extends FragmentActivity {
         @Override
         public void onSuccess(LoginResult loginResult) {
             Log.d("MeMeInn", "onSuccess");
-            AccessToken accessToken = loginResult.getAccessToken();
+            AccessToken at = loginResult.getAccessToken();
             settingTrackersAndView();
+            displayFriendsList(at);
         }
 
         @Override
@@ -84,37 +89,25 @@ public class FacebookLoginActivity extends FragmentActivity {
 
         } else{
             settingTrackersAndView();
+            displayFriendsList(accessToken);
         }
+    }
 
-
-        /*
-        gameCallbackManager = CallbackManager.Factory.create();
-        requestDialog = new GameRequestDialog(this);
-        requestDialog.registerCallback(gameCallbackManager, new FacebookCallback<GameRequestDialog.Result>() {
-            public void onSuccess(GameRequestDialog.Result result) {
-                String id = result.getRequestId();
+    public void displayFriendsList(AccessToken at){
+        String graphPath = "/"+at.getUserId()+"/friends";
+        GraphRequest graphRequest = new GraphRequest(at, graphPath, null, HttpMethod.GET, new GraphRequest.Callback() {
+            @Override
+            public void onCompleted(GraphResponse graphResponse) {
+                mFriendsList = (TextView)findViewById(R.id.facebook_friendslist);
+                mFriendsList.setText(graphResponse.toString());
             }
 
-            public void onCancel() {}
-
-            public void onError(FacebookException error) {}
-        });*/
-
-
-
+        });
+        graphRequest.executeAsync();
     }
 
 
     public void onClickRequestButton(View view) {
-//        Intent mainIntent = new Intent(getApplicationContext(), FriendsInvitesFragment.class);
-//        startActivity(mainIntent);
-//
-//        GameRequestContent content = new GameRequestContent.Builder()
-//                .setMessage("Come play this level with me").
-//                .build();
-//        requestDialog.show(content);
-
-
         /*
         GraphRequest(AccessToken, String, Bundle, HttpMethod, Callback)
         accessToken	The access token to use, or null
@@ -122,34 +115,13 @@ public class FacebookLoginActivity extends FragmentActivity {
         parameters	Additional parameters to pass along with the Graph API request; parameters must be Strings, Numbers, Bitmaps, Dates, or Byte arrays.
         httpMethod	The HttpMethod to use for the request, or null for default (HttpMethod.GET)
         */
-
-        /*
-        String graphPath = "/"+accessToken.getUserId()+"/invitable_friends";
-        GraphRequest graphRequest = new GraphRequest(accessToken, graphPath, null, HttpMethod.GET, new GraphRequest.Callback() {
-            @Override
-            public void onCompleted(GraphResponse graphResponse) {
-                mFriendsList = (TextView)findViewById(R.id.facebook_friendslist);
-                mFriendsList.setText(graphResponse.toString());
-            }
-
-        });*/
-
-
-//        new GraphRequest(
-//                session,
-//                "/{user-id}/invitable_friends",
-//                null,
-//                HttpMethod.GET,
-//                new GraphRequest.GraphJSONObjectCallback() {
-//
-//                }
-//        ).executeAsync();
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft=fm.beginTransaction();
         FriendsInvitesFragment f1 = new FriendsInvitesFragment();
         ft.add(R.id.facebookinvitefriends, f1);
         ft.commit();
     }
+
 
 
     private String constructWelcomeMessage(Profile profile) {

@@ -57,7 +57,8 @@ public class FriendsInvitesFragment extends Fragment {
 
     private void onClickGameRequestButton() {
         GameRequestContent content = new GameRequestContent.Builder()
-                .setMessage("Come play this level with me")
+                .setTitle("Check out this awesome app!")
+                .setMessage("Come play this with me!")
                 .build();
         requestDialog.show(content);
     }

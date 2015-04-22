@@ -22,8 +22,6 @@ import com.android.memeinn.friend.ShowMsgActivity;
 import com.android.memeinn.match.AvailFriendListActivity;
 import com.android.memeinn.match.MatchStartActivity;
 import com.android.memeinn.user.FacebookLoginActivity;
-import com.android.memeinn.user.FacebookLoginFragment;
-import com.android.memeinn.user.LoginActivity;
 import com.android.memeinn.user.ProfileActivity;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
