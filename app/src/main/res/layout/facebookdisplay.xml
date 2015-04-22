@@ -48,15 +48,28 @@
         android:onClick="onClickRequestButton" />
 
     <TextView
-        android:id="@+id/facebook_friendslist"
+        android:id="@+id/in_game_friendslist"
         android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
-        android:text="Facebook Friends List Not Fetched!"
+        android:text="Facebook Not In Game Friends List"
         android:textColor="#ff3fb8ff"
-        android:textSize="30sp"
+        android:textSize="15sp"
         android:layout_below="@+id/mainMenuButton"/>
+
+    <TextView
+        android:id="@+id/invitablefriendslist"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:text="Facebook In Game Friends List"
+        android:textColor="#ff3fb8ff"
+        android:textSize="15sp"
+        android:layout_below="@+id/in_game_friendslist"/>
+
+
 
     <RelativeLayout
         android:id="@+id/facebookinvitefriends"
