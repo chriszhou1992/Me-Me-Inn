@@ -216,4 +216,10 @@ public class FacebookLoginActivity extends FragmentActivity {
         startActivity(mainIntent);
     }
 
+    public void gotoLogoutAndMainActivity(View view){
+        LoginManager.getInstance().logOut();
+        Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(mainIntent);
+    }
+
 }

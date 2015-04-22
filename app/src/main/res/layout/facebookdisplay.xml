@@ -19,13 +19,14 @@
         android:textColor="#ff3fb8ff"
         android:textSize="30sp"/>
     
-    <com.facebook.login.widget.LoginButton
+    <ImageButton
+        android:background="@drawable/facebooklogout"
         android:id="@+id/logout_button"
         android:layout_height="30dp"
-        android:layout_width="wrap_content"
-        facebook:login_text="Login"
-        facebook:logout_text="Logout"
-        android:layout_below="@+id/facebook_text" />
+        android:layout_width="75dp"
+        android:layout_below="@+id/facebook_text"
+        android:onClick="gotoLogoutAndMainActivity"/>
+
     <ImageButton
         android:background="@drawable/mainmenu"
         android:layout_marginLeft="5dp"
