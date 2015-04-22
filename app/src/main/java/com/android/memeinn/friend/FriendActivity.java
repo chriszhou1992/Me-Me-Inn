@@ -28,6 +28,13 @@ import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+// import for Firebase
+import com.firebase.client.AuthData;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.FirebaseException;
+
+
 
 import java.util.ArrayList;
 import java.util.List;
