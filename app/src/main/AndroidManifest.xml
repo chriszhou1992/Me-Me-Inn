@@ -163,6 +163,7 @@
             android:name=".user.FacebookLoginActivity"
             android:label="@string/app_name" >
         </activity>
+
     </application>
 
 </manifest>
