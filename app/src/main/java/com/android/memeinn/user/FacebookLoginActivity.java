@@ -52,6 +52,7 @@ public class FacebookLoginActivity extends FragmentActivity {
 
 
     private TextView mTextDetails;
+    private TextView mFriendsList;
     private CallbackManager mCallbackManager;
     private LoginManager loginManager;
     private AccessTokenTracker mTokenTracker;
@@ -127,12 +128,14 @@ public class FacebookLoginActivity extends FragmentActivity {
 
 
     public void onClickRequestButton(View view) {
+        Intent mainIntent = new Intent(getApplicationContext(), FriendsInvitesActivity.class);
+        startActivity(mainIntent);
+//
+//        GameRequestContent content = new GameRequestContent.Builder()
+//                .setMessage("Come play this level with me").
+//                .build();
+//        requestDialog.show(content);
 
-        /*
-        GameRequestContent content = new GameRequestContent.Builder()
-                .setMessage("Come play this level with me")
-                .build();
-        requestDialog.show(content);*/
 
         /*
         GraphRequest(AccessToken, String, Bundle, HttpMethod, Callback)
@@ -141,13 +144,18 @@ public class FacebookLoginActivity extends FragmentActivity {
         parameters	Additional parameters to pass along with the Graph API request; parameters must be Strings, Numbers, Bitmaps, Dates, or Byte arrays.
         httpMethod	The HttpMethod to use for the request, or null for default (HttpMethod.GET)
         */
+
+        /*
         String graphPath = "/"+accessToken.getUserId()+"/invitable_friends";
         GraphRequest graphRequest = new GraphRequest(accessToken, graphPath, null, HttpMethod.GET, new GraphRequest.Callback() {
             @Override
             public void onCompleted(GraphResponse graphResponse) {
-
+                mFriendsList = (TextView)findViewById(R.id.facebook_friendslist);
+                mFriendsList.setText(graphResponse.toString());
             }
-        });
+
+        });*/
+
 
 //        new GraphRequest(
 //                session,

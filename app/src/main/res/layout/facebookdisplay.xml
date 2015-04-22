@@ -26,24 +26,35 @@
         facebook:login_text="Login"
         facebook:logout_text="Logout"
         android:layout_below="@+id/facebook_text" />
-
     <ImageButton
         android:background="@drawable/mainmenu"
         android:layout_marginLeft="5dp"
         android:layout_width="100dip"
         android:layout_height="30dip"
-        android:id="@+id/onlineDictionaryButton"
+        android:id="@+id/mainMenuButton"
         android:layout_below="@+id/facebook_text"
         android:layout_toRightOf="@+id/logout_button"
         android:onClick="gotoMainActivity" />
 
     <Button
-        android:text="RequestButton"
-        android:layout_marginLeft="5dp"
+        android:text="Invitable Friends"
+        android:layout_marginLeft="7dp"
         android:layout_width="100dip"
         android:layout_height="30dip"
+        android:textSize="5dp"
         android:id="@+id/RequestButton"
         android:layout_below="@+id/facebook_text"
-        android:layout_toRightOf="@+id/onlineDictionaryButton"
+        android:layout_toRightOf="@+id/mainMenuButton"
         android:onClick="onClickRequestButton" />
+
+    <TextView
+        android:id="@+id/facebook_friendslist"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:text="Facebook Friends List Not Fetched!"
+        android:textColor="#ff3fb8ff"
+        android:textSize="30sp"
+        android:layout_below="@+id/mainMenuButton"/>
 </RelativeLayout>
