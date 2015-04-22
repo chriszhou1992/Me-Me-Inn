@@ -32,19 +32,12 @@ import java.util.List;
  * Created by yifan on 4/20/15.
  */
 public class FacebookLoginActivity extends FragmentActivity {
-    private GameRequestDialog requestDialog;
-    private CallbackManager gameCallbackManager;
-    FragmentManager fm = getFragmentManager();
-    FragmentTransaction ft=fm.beginTransaction();
-
     private TextView mTextDetails;
-    private TextView mFriendsList;
     private CallbackManager mCallbackManager;
     private LoginManager loginManager;
     private AccessTokenTracker mTokenTracker;
     private ProfileTracker mProfileTracker;
     private AccessToken accessToken;
-    private Dialog progressDialog;
     private FacebookCallback<LoginResult> mFacebookCallback = new FacebookCallback<LoginResult>() {
         @Override
         public void onSuccess(LoginResult loginResult) {
@@ -55,16 +48,12 @@ public class FacebookLoginActivity extends FragmentActivity {
 
         @Override
         public void onCancel() {
-            progressDialog = ProgressDialog.show(FacebookLoginActivity.this, "", "cancelling login...", true);
             gotoMainActivity(null);
-            progressDialog.dismiss();
         }
 
         @Override
         public void onError(FacebookException e) {
-            progressDialog = ProgressDialog.show(FacebookLoginActivity.this, "", "loggin error...", true);
             gotoMainActivity(null);
-            progressDialog.dismiss();
         }
     };
 
@@ -111,8 +100,7 @@ public class FacebookLoginActivity extends FragmentActivity {
             public void onError(FacebookException error) {}
         });*/
 
-        fm = getFragmentManager();
-        ft=fm.beginTransaction();
+
 
     }
 
@@ -156,10 +144,10 @@ public class FacebookLoginActivity extends FragmentActivity {
 //
 //                }
 //        ).executeAsync();
-
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft=fm.beginTransaction();
         FriendsInvitesFragment f1 = new FriendsInvitesFragment();
         ft.add(R.id.facebookinvitefriends, f1);
-        //ft.add(f1,R.id.facebookinvitefriends);
         ft.commit();
     }
 
