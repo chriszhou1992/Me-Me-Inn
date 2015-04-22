@@ -1,6 +1,7 @@
 package com.android.memeinn.user;
 
 import android.app.Dialog;
+import android.app.DownloadManager;
 import android.content.Intent;
 import android.media.tv.TvInputService;
 import android.net.Uri;
@@ -21,15 +22,20 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookOperationCanceledException;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.internal.WebDialog;
+import com.facebook.GraphRequest;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.share.model.AppInviteContent;
 import com.facebook.share.model.GameRequestContent;
 import com.facebook.share.widget.AppInviteDialog;
 import com.facebook.share.widget.GameRequestDialog;
+
+import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,8 +47,8 @@ import bolts.AppLinks;
  * Created by yifan on 4/20/15.
  */
 public class FacebookLoginActivity extends FragmentActivity {
-    GameRequestDialog requestDialog;
-    CallbackManager gameCallbackManager;
+    private GameRequestDialog requestDialog;
+    private CallbackManager gameCallbackManager;
 
 
     private TextView mTextDetails;
@@ -102,7 +108,7 @@ public class FacebookLoginActivity extends FragmentActivity {
         }
 
 
-
+        /*
         gameCallbackManager = CallbackManager.Factory.create();
         requestDialog = new GameRequestDialog(this);
         requestDialog.registerCallback(gameCallbackManager, new FacebookCallback<GameRequestDialog.Result>() {
@@ -113,16 +119,45 @@ public class FacebookLoginActivity extends FragmentActivity {
             public void onCancel() {}
 
             public void onError(FacebookException error) {}
-        });
+        });*/
+
+
 
     }
 
 
     public void onClickRequestButton(View view) {
+
+        /*
         GameRequestContent content = new GameRequestContent.Builder()
                 .setMessage("Come play this level with me")
                 .build();
-        requestDialog.show(content);
+        requestDialog.show(content);*/
+
+        /*
+        GraphRequest(AccessToken, String, Bundle, HttpMethod, Callback)
+        accessToken	The access token to use, or null
+        graphPath	The graph path to retrieve, create, or delete
+        parameters	Additional parameters to pass along with the Graph API request; parameters must be Strings, Numbers, Bitmaps, Dates, or Byte arrays.
+        httpMethod	The HttpMethod to use for the request, or null for default (HttpMethod.GET)
+        */
+        String graphPath = "/"+accessToken.getUserId()+"/invitable_friends";
+        GraphRequest graphRequest = new GraphRequest(accessToken, graphPath, null, HttpMethod.GET, new GraphRequest.Callback() {
+            @Override
+            public void onCompleted(GraphResponse graphResponse) {
+
+            }
+        });
+
+//        new GraphRequest(
+//                session,
+//                "/{user-id}/invitable_friends",
+//                null,
+//                HttpMethod.GET,
+//                new GraphRequest.GraphJSONObjectCallback() {
+//
+//                }
+//        ).executeAsync();
     }
 
 
@@ -174,7 +209,7 @@ public class FacebookLoginActivity extends FragmentActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
-        gameCallbackManager.onActivityResult(requestCode, resultCode, data);
+        //gameCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     public void gotoMainActivity(View view){
