@@ -28,6 +28,9 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.share.widget.GameRequestDialog;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,7 +38,8 @@ import java.util.List;
  * Created by yifan on 4/20/15.
  */
 public class FacebookLoginActivity extends FragmentActivity {
-    private TextView mFriendsList;
+    private TextView invitableFriendsList;
+    private TextView in_game_friendsList;
     private TextView mTextDetails;
     private CallbackManager mCallbackManager;
     private LoginManager loginManager;
@@ -48,6 +52,7 @@ public class FacebookLoginActivity extends FragmentActivity {
             Log.d("MeMeInn", "onSuccess");
             AccessToken at = loginResult.getAccessToken();
             settingTrackersAndView();
+            displayInvitableFriendsList(at);
             displayFriendsList(at);
         }
 
@@ -89,8 +94,33 @@ public class FacebookLoginActivity extends FragmentActivity {
 
         } else{
             settingTrackersAndView();
+            displayInvitableFriendsList(accessToken);
             displayFriendsList(accessToken);
         }
+    }
+
+    public void displayInvitableFriendsList(AccessToken at){
+        String graphPath = "/"+at.getUserId()+"/invitable_friends";
+        GraphRequest graphRequest = new GraphRequest(at, graphPath, null, HttpMethod.GET, new GraphRequest.Callback() {
+            @Override
+            public void onCompleted(GraphResponse graphResponse) {
+                invitableFriendsList = (TextView)findViewById(R.id.invitablefriendslist);
+//                invitableFriendsList.setText(graphResponse.toString());
+                String tempS = "Facebook Not In Game Friends List:\n";
+                try {
+                    JSONArray jsonArray = graphResponse.getJSONObject().getJSONArray("data");
+                    for(int i=0;i<jsonArray.length();i++){
+                        String name = jsonArray.getJSONObject(i).getString("name");
+                        tempS += name+"\n";
+                    }
+                }catch(JSONException e){
+                    e.printStackTrace();
+                }
+                invitableFriendsList.setText(tempS);
+            }
+
+        });
+        graphRequest.executeAsync();
     }
 
     public void displayFriendsList(AccessToken at){
@@ -98,8 +128,19 @@ public class FacebookLoginActivity extends FragmentActivity {
         GraphRequest graphRequest = new GraphRequest(at, graphPath, null, HttpMethod.GET, new GraphRequest.Callback() {
             @Override
             public void onCompleted(GraphResponse graphResponse) {
-                mFriendsList = (TextView)findViewById(R.id.facebook_friendslist);
-                mFriendsList.setText(graphResponse.toString());
+                in_game_friendsList = (TextView)findViewById(R.id.in_game_friendslist);
+//                invitableFriendsList.setText(graphResponse.toString());
+                String tempS = "Facebook In Game Friends List:\n";
+                try {
+                    JSONArray jsonArray = graphResponse.getJSONObject().getJSONArray("data");
+                    for(int i=0;i<jsonArray.length();i++){
+                        String name = jsonArray.getJSONObject(i).getString("name");
+                        tempS += name+"\n";
+                    }
+                }catch(JSONException e){
+                    e.printStackTrace();
+                }
+                in_game_friendsList.setText(tempS);
             }
 
         });
