@@ -7,7 +7,7 @@ import com.firebase.client.Firebase;
  * Singleton Pattern class used to fetch references to Firebase.
  */
 public class FirebaseSingleton {
-    public static final String BASE_URL = "https://me-me-inn.firebaseio.com/";
+    public static final String BASE_URL = "https://memeinn.firebaseio.com/";
     private static Firebase firebaseInstance = null;
     private FirebaseSingleton() {  }
 

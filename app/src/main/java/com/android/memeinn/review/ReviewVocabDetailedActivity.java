@@ -79,7 +79,7 @@ public class ReviewVocabDetailedActivity extends Activity {
     }
 
    /*Assumption:
-    * User will always click on the circle to show meaning if he/she doesn't remember,
+    * friendRequest will always click on the circle to show meaning if he/she doesn't remember,
     * and will then provide feedback(IDK).
     * However the user can click on "I know" without discovering the word meaning and go straight to next word*/
 

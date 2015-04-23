@@ -113,8 +113,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/user"
-        android:id="@+id/user"
+        android:text="@string/friendRequest"
+        android:id="@+id/friendRequest"
         android:textColor="#ff4af5ff"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/name"
@@ -128,7 +128,7 @@
         android:id="@+id/opponent"
         android:textColor="#ff4af5ff"
 
-        android:layout_alignBottom="@+id/user"
+        android:layout_alignBottom="@+id/friendRequest"
         android:layout_toRightOf="@+id/name"
         android:layout_toEndOf="@+id/name"/>
 
@@ -143,8 +143,8 @@
         android:layout_alignTop="@+id/oppoScore"
         android:layout_toLeftOf="@+id/name"
         android:layout_toStartOf="@+id/name"
-        android:layout_alignLeft="@+id/user"
-        android:layout_alignStart="@+id/user"/>
+        android:layout_alignLeft="@+id/friendRequest"
+        android:layout_alignStart="@+id/friendRequest"/>
 
     <TextView
         android:layout_width="wrap_content"

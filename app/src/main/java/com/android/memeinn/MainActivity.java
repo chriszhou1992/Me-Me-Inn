@@ -107,7 +107,7 @@ public class MainActivity extends Activity {
         Firebase userRef = FirebaseSingleton.getInstance("users")
                 .child(ParseUser.getCurrentUser().getUsername());
 
-        //User is not in match
+        //friendRequest is not in match
         Firebase userInMatchRef = userRef.child("isInMatch");
         userInMatchRef.setValue(Boolean.FALSE);
 
@@ -209,7 +209,7 @@ public class MainActivity extends Activity {
                             }
                         };
                 Utility.warningDialog(app.currentActivity, "Match Request Received",
-                        "User " + requestUser + " wants to start a match with you.", "Accept Match",
+                        "friendRequest " + requestUser + " wants to start a match with you.", "Accept Match",
                         acceptListener, "Reject Match", rejectListener);
             }
 

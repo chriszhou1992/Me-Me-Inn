@@ -92,9 +92,9 @@ public class LoginActivity extends ActionBarActivity {
                 if (user == null) {
                     Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
                 } else if (user.isNew()) {
-                    Log.d("MyApp", "User signed up and logged in through Facebook!");
+                    Log.d("MyApp", "friendRequest signed up and logged in through Facebook!");
                 } else {
-                    Log.d("MyApp", "User logged in through Facebook!");
+                    Log.d("MyApp", "friendRequest logged in through Facebook!");
                 }
             }
         });

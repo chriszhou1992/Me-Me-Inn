@@ -21,6 +21,9 @@ import android.widget.Toast;
 
 import com.android.memeinn.MainActivity;
 import com.android.memeinn.R;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -28,25 +31,145 @@ import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
-// import for Firebase
-import com.firebase.client.AuthData;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.FirebaseException;
 
+// import for Firebase
+import com.firebase.client.Firebase;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SuppressLint("InlinedApi")
 public class FriendActivity extends Activity {
+
+    private static final String FIREBASE_URL = "https://memeinn.firebaseio.com";
+    Firebase ref = new Firebase("https://memeinn.firebaseio.com/android/saving-data/fireblog");
+
+    private String mUsername;
+    private Firebase mFirebaseRef;
+    private ValueEventListener mConnectedListener;
+   // private ChatListAdapter mChatListAdapter;
 
     private ListView lst_users;
     private LazyAdapter mAdapter;
     private ArrayList<ParseUser> mAllUsers = new ArrayList<ParseUser>();
     private ArrayList<ParseUser> mFriendUsers = new ArrayList<ParseUser>();
     private int mSelectedIndex = 0;
+
+    private void requestFriend(String currUser, String reqUser){
+
+        Firebase requestRef = ref.child("FriendRequests");
+
+        Map<String, String> request = new HashMap<String, String>();
+        request.put(currUser, reqUser);
+        requestRef.setValue(request);
+        sendRequest();
+
+    }
+
+    private void sendRequest(){
+
+        //send push notification in real time to the other user
+
+        //if the user accepts the request, call to add relation
+
+        //otherwise delete the original request added by the former user
+
+    }
+
+    private void retrieveRequest(final String user){
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                Map<String, String> newRequest = (Map<String, String>) snapshot.getValue();
+
+                // There is a request for current user
+                if(newRequest.containsValue(user)){
+                    sendRequest();
+                }
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+                System.out.println("The read failed: " + firebaseError.getMessage());
+
+            }
+        });
+
+    }
+
+
+    //add friend relations in firebase database
+
+    private void acceptRequest(String reqUser){
+
+        ArrayList<String> strUsersArray = new ArrayList<String>();
+        for (ParseUser user : mAllUsers)
+            strUsersArray.add(user.getUsername());
+        String[] strUsers = strUsersArray.toArray(new String[strUsersArray.size()]);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, android.R.style.Theme_Holo);
+        builder.setTitle("Send request to");
+        builder.setSingleChoiceItems(strUsers, 0, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mSelectedIndex = which;
+            }
+        });
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ParseUser currentUser = ParseUser.getCurrentUser();
+                ParseUser friendUser = mAllUsers.get(mSelectedIndex);
+
+                ParseQuery<RequestFriendSession> query = ParseQuery.getQuery(RequestFriendSession.CLASS_NAME);
+                query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_FROMUSERID, currentUser.getObjectId());
+                query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_FROMUSERNAME, currentUser.getUsername());
+                query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_TOUSERID, friendUser.getObjectId());
+                query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_TOUSERNAME, friendUser.getUsername());
+                query.findInBackground(new FindCallback<RequestFriendSession>() {
+
+                    @Override
+                    public void done(List<RequestFriendSession> objects, ParseException e) {
+                        if (e == null) {
+                            if (objects.size() > 0) {
+                                //
+                            }
+                            else {
+                                makeSessionToParse();
+                            }
+                        }
+                        else {
+                            Toast.makeText(FriendActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.create().show();
+
+    }
+
+    //delete the original request in firebase database
+    private void rejectRequest(String currUser, String reqUser){
+
+        Firebase requestRef = ref.child("FriendRequests").child(currUser);
+        requestRef.removeValue();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

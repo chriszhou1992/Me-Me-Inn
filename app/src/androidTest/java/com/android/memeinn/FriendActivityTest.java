@@ -70,9 +70,9 @@ public class FriendActivityTest extends ActivityInstrumentationTestCase2<LoginAc
 
         ViewInteraction w = onView(withId(R.id.txt_username));
         if (w == null)
-            Log.d("User List", "User List is null! ");
+            Log.d("friendRequest List", "friendRequest List is null! ");
         else
-            Log.d("User List", "User List is not null! ");
+            Log.d("friendRequest List", "friendRequest List is not null! ");
 
     }
 

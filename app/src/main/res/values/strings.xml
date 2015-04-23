@@ -106,7 +106,7 @@
 
     <!--Contest Page Strings-->
     <string name="contestType">GRE Contest!</string>
-    <string name="user">userName</string>
+    <string name="friendRequest">userName</string>
     <string name="opponent">oppoName</string>
     <string name="userScore">0</string>
     <string name="oppoScore">0</string>
