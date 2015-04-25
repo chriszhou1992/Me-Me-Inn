@@ -517,8 +517,6 @@ public class ContestActivity extends Activity {
         super.onDestroy();
         timer.cancel();
         tempTimer.cancel();
-        timer = null;
-        tempTimer = null;
         matchRef.removeValue();
     }
 
