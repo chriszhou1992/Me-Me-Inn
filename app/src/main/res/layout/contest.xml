@@ -3,7 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:background="@drawable/background"
                 android:layout_width="match_parent" android:layout_height="match_parent"
-                android:id="@+id/quizLayout"
+                android:id="@+id/matchLayout"
                 android:clickable="false">
 
     <ImageView
@@ -184,7 +184,7 @@
         android:text="@string/timeLeft"
         android:id="@+id/timeLeft"
         android:layout_marginTop="60dp"
-        android:textColor="#ffff851a"
+        android:textColor="@color/white"
         android:layout_centerHorizontal="true"
         />
 

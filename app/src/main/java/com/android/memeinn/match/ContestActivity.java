@@ -20,7 +20,6 @@ import com.android.memeinn.Global;
 import com.android.memeinn.Question;
 import com.android.memeinn.R;
 import com.android.memeinn.Utility;
-import com.android.memeinn.learn.QuizResultActivity;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -58,6 +57,7 @@ public class ContestActivity extends Activity {
 
     /*Scording Logics*/
     private Integer oppoSelection;
+    private Integer oppoScoreGain;
     private int userScore;
     private int oppoScore;
     private TextView userScoreTextView;
@@ -141,43 +141,68 @@ public class ContestActivity extends Activity {
             }
         });
 
-        addListenerForOpponentSelection();
+        //end match if connection drops
+        matchRef.onDisconnect().removeValue();
+
+        addMatchStatusListener();
         /*Timer*/
         timeLeftTextView = (TextView) findViewById(R.id.timeLeft);
-        countDown = 10;
+        countDown = 11;
         timeLeftTextView.setText(countDown.toString());
 
         oppoSelection = null;
+        oppoScoreGain = null;
     }
 
-    private void addListenerForOpponentSelection() {
-        for (int i = 1; i <= TOTAL_QUESTION_COUNT; i++) {
-            Firebase oppoScoreRef = matchRef.child(opponentName + i);
-            oppoScoreRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (!dataSnapshot.exists())
-                        return;
-                    oppoSelection = 0;
-                    int encoding = dataSnapshot.getValue(Integer.class);
-                    while (encoding % 10 == 0) {
-                        oppoSelection++;
-                        encoding = encoding / 10;
-                    }
-                    if (encoding < 0)
-                        oppoSelection = oppoSelection * -1;
-                    //opponent chose wrong answer
-                    displayScore(0, encoding); //encoding has the remaining countdown
-                    Log.d("contest", "oppoSelected = " + oppoSelection);
-                    Log.d("contest", "oppoCountDown = " + encoding);
+    private void addMatchStatusListener() {
+        matchRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()) {
+                    //display dialog if opponent exits
+                    /*if (!ContestActivity.this.isFinishing())
+                        Utility.warningDialog(ContestActivity.this, "Opponent Exited!",
+                            "Your opponent exited the match!");*/
+                    //force user to win since opponent exited
+                    oppoScore = -1;
+                    goToResult();
+                    finish();
                 }
 
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
+                //opponent acted
+                if (oppoSelection == null && dataSnapshot.hasChild(opponentName + rounds)) {
+                    HashMap m = dataSnapshot.getValue(HashMap.class);
+                    HashMap clickData = (HashMap)m.get(opponentName + rounds);
+                    oppoSelection = (int)clickData.get("choiceClicked");
+                    oppoScoreGain = (int)clickData.get("score");
+                    //put in a negative if opponent didn't gain score
+                    displayScore(0, oppoScoreGain == 0? -1 : oppoScoreGain);
                 }
-            });
-        }
+
+                //round ended
+                if (dataSnapshot.hasChild(currentUsername + rounds) &&
+                        dataSnapshot.hasChild(opponentName + rounds)) {
+
+                    displayRoundResult();
+                    //transition to next question in two seconds
+                    tempTimer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    animatedView.startAnimation(out);
+                                }
+                            });
+                        }
+                    }, 2000);
+                }
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
     }
 
     /**
@@ -195,32 +220,44 @@ public class ContestActivity extends Activity {
                 Log.d("contest", "timer = " + countDown);
             }
         };
+        disableCountDownTimer(false);
         timer.scheduleAtFixedRate(countDownTask, 1000, 1000);
     }
 
     private void decrementCountDown() {
         if (countDown > 0)
             countDown--;
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+            if (timeLeftTextView.getCurrentTextColor() == Color.WHITE)
                 timeLeftTextView.setText(countDown.toString());
-                if (countDown == 0) {
-                    countDown--;
-                    Log.d("contest", "Choice Clicked(null)");
-                    choiceClicked(null);
-                }
+            if (countDown == 0) {
+                timeLeftTextView.setTextColor(Color.RED);
+                Log.d("contest", "Choice Clicked(null)");
+                choiceClicked(null);
+            }
             }
         });
     }
 
+    private void changeChoiceVisibility(int control) {
+        if (control > 0) {
+            for (Button b : optionBtns)
+                b.setVisibility(View.VISIBLE);
+        } else {
+            for (Button b : optionBtns)
+                b.setVisibility(View.INVISIBLE);
+        }
+    }
     /**
      * Setup animation specs for fade-in/fade-out effects. Fade-In animation
      * should start after fade-out animation has finished.
      */
     private void initAnimations() {
         //fade-out/fade-in animations
-        animatedView = findViewById(R.id.quizLayout);
+        animatedView = findViewById(R.id.matchLayout);
         out.setDuration(1000);
         in.setDuration(1000);
         out.setAnimationListener(new Animation.AnimationListener() {
@@ -235,6 +272,8 @@ public class ContestActivity extends Activity {
                 //start fade-in animation and advance to next question
                 nextQuestion();
                 animatedView.startAnimation(in);
+                timeLeftTextView.setText("10");
+                changeChoiceVisibility(-1);
             }
 
             @Override
@@ -245,9 +284,6 @@ public class ContestActivity extends Activity {
         in.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                for (Button b : optionBtns) {
-                    b.setVisibility(View.GONE);
-                }
             }
 
             @Override
@@ -259,14 +295,13 @@ public class ContestActivity extends Activity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                for (Button b : optionBtns) {
-                                    b.setVisibility(View.VISIBLE);
-                                }
+                                changeChoiceVisibility(1);
+                                disableCountDownTimer(false);
                             }
                         });
-                        countDown = 10;
+                        countDown = 11;
                     }
-                }, 1000);
+                }, 500);
             }
 
             @Override
@@ -304,6 +339,16 @@ public class ContestActivity extends Activity {
             }
         }
         setOptionsClickable(true);
+
+        //reset data and display colors for next round
+        resetRoundData();
+    }
+
+    private void resetRoundData() {
+        oppoScoreGain = null;
+        oppoSelection = null;
+        userScoreTextView.setTextColor(Color.WHITE);
+        oppoScoreTextView.setTextColor(Color.WHITE);
     }
 
     /**
@@ -333,10 +378,12 @@ public class ContestActivity extends Activity {
      * Fire up intent to go to QuizResultActivity when quiz is finished.
      */
     private void goToResult(){
-        Intent quizResult = new Intent(getApplicationContext(), QuizResultActivity.class);
-        //quizResult.putExtra("score", score);
-        //quizResult.putExtra("vocabTableName", wordTableName);
-        startActivity(quizResult);
+        Intent matchResult = new Intent(this, MatchResultActivity.class);
+        matchResult.putExtra(Global.EXTRA_MESSAGE_MATCHSCORE, userScore);
+        matchResult.putExtra(Global.EXTRA_MESSAGE_MATCHRESULT, userScore - oppoScore);
+        startActivity(matchResult);
+        matchRef.removeValue();
+        finish();
     }
 
     /**
@@ -386,117 +433,98 @@ public class ContestActivity extends Activity {
         }
     }
 
-
+    private void disableCountDownTimer(boolean disable) {
+        if (disable)
+            timeLeftTextView.setTextColor(Color.LTGRAY);
+        else
+            timeLeftTextView.setTextColor(Color.WHITE);
+    }
     /**
      * onClick() event handler for answer buttons on the interface. Checks whether the answer
      * is correct and changes the button background accordingly.
      * @param btn The button that is clicked.
      */
     public void choiceClicked(View btn) {
+        disableCountDownTimer(true);
         //disable further button clicking
         setOptionsClickable(false);
-        int scoreEncoding = -1;
+
+        HashMap<String, Integer> clickData = new HashMap<>();
+        int score = 0;
+        int i = 0;  //index of the button clicked
 
         if (btn != null) {
-            //ParseObject vocab = wordList.get(rounds - 1);
             if ((boolean) btn.getTag()) {
-                scoreEncoding = countDown + BASE_CORRECT_SCORE;
+                score = countDown + BASE_CORRECT_SCORE;
                 changeAnswerBtnBackground(btn, 1);
-                displayScore(scoreEncoding, 0);
+                displayScore(score, 0);
                 Log.d("contest", "correct choice");
             } else {
                 displayScore(-1, 0);
                 changeAnswerBtnBackground(btn, -1);
                 Log.d("contest", "wrong choice");
                 //if answered incorrectly, add this word to user's review list
-           /* ParseUser u = ParseUser.getCurrentUser();
-            String relationName = "UserReviewList" + vocabCategory;
-            ParseRelation<ParseObject> rel = u.getRelation(relationName);
-            Log.d("quiz", relationName);
-            rel.add(vocab);
-            Log.d("quiz", vocab.getString("word"));
-            u.saveInBackground();*/
+               /* ParseUser u = ParseUser.getCurrentUser();
+                String relationName = "UserReviewList" + vocabCategory;
+                ParseRelation<ParseObject> rel = u.getRelation(relationName);
+                Log.d("quiz", relationName);
+                rel.add(vocab);
+                Log.d("quiz", vocab.getString("word"));
+                u.saveInBackground();*/
             }
-            int i = 0;
+
             for (; i < BTN_IDS.length; i++)
                 if (BTN_IDS[i] == btn.getId())
                     break;
-            //encode
-            scoreEncoding = scoreEncoding * (int) Math.pow(10, i);
         } else {
             displayScore(-1, 0);
-
-            //encode
-            scoreEncoding = -2;
+            i = -1;
         }
 
+        clickData.put("score", score);
+        clickData.put("choiceClicked", i);
         Firebase choiceRef = matchRef.child(currentUsername + rounds);
-        choiceRef.setValue(scoreEncoding);
-
-        matchRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChild(currentUsername + rounds) &&
-                        dataSnapshot.hasChild(opponentName + rounds)) {
-                    oppoSelection = 1;
-                    HashMap m = dataSnapshot.getValue(HashMap.class);
-                    int encoding = (int)m.get(opponentName + rounds);
-                    while (encoding % 10 == 0) {
-                        oppoSelection++;
-                        encoding = encoding / 10;
-                    }
-                    if (encoding < 0)
-                        oppoSelection = oppoSelection * -1;
-
-                    if (encoding == -2)
-                        oppoSelection = null;
-
-                    tempTimer.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            if (oppoSelection != null) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        //displayRoundResult();
-                                        displayRoundResult();
-                                        animatedView.startAnimation(out);
-                                    }
-                                });
-                            }
-                        }
-                    }, 1500);
-                }
-            }
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
+        choiceRef.setValue(clickData);
     }
 
     private void displayRoundResult() {
-        if (oppoSelection == null) {
+        if (oppoSelection == null)
             return;
-        }
 
-        Button b = optionBtns.get(Math.abs(oppoSelection) - 1);
-        if (oppoSelection < 0) {
-            changeAnswerBtnBackground(b, -1);
-            for (int i = 0; i < optionBtns.size(); i++) {
-                b = optionBtns.get(i);
-                if ((boolean)b.getTag())
-                    changeAnswerBtnBackground(b, 1);
-                Log.d("contest", "correct = " + i);
+        if (oppoSelection >= 0) {   //if opponent did select a choice
+            Button b = optionBtns.get(oppoSelection);
+            if (oppoScoreGain <= 0) //opponent selected correct choice
+                changeAnswerBtnBackground(b, -1);
+            else
+                changeAnswerBtnBackground(b, 1);
+        }
+        displayCorrectAnswer();
+    }
+
+    private void displayCorrectAnswer() {
+        Button b;
+        for (int i = 0; i < optionBtns.size(); i++) {
+            b = optionBtns.get(i);
+            if ((boolean)b.getTag()) {
+                changeAnswerBtnBackground(b, 1);
+                break;
             }
-        } else if (oppoSelection > 0)
-            changeAnswerBtnBackground(b, 1);
-        oppoSelection = null;
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        timer = null;
+        tempTimer = null;
         matchRef.removeValue();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();/*
+        Intent friendListIntent = new Intent(this, AvailFriendListActivity.class);
+        startActivity(friendListIntent);
+        finish();*/
     }
 }
