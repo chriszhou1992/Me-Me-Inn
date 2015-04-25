@@ -21,7 +21,6 @@ import com.android.memeinn.friend.RequestFriendSession;
 import com.android.memeinn.friend.ShowMsgActivity;
 import com.android.memeinn.match.AvailFriendListActivity;
 import com.android.memeinn.match.MatchStartActivity;
-import com.android.memeinn.user.FacebookLoginActivity;
 import com.android.memeinn.user.ProfileActivity;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -37,7 +36,6 @@ import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-
 import com.android.memeinn.definitionAPI.*;
 
 /**
@@ -45,6 +43,7 @@ import com.android.memeinn.definitionAPI.*;
  * to features of the app.
  */
 public class MainActivity extends Activity {
+
     public static final String ACTION_ADD_FRIEND = "com.android.memeinn.ACTION_ADD_FRIEND";
     public static final String ACTION_FRIEND_RESPONSE = "com.android.memeinn.ACTION_FRIEND_RESPONSE";
     public static final String REQUESTFRIEND_FROMID = "REQUESTFRIEND_FROMID";
@@ -97,7 +96,6 @@ public class MainActivity extends Activity {
 
         Intent serviceIntent1 = new Intent(this, CheckResponseService.class);
         bindService(serviceIntent1, mResponseServiceConnection, BIND_AUTO_CREATE);
-
     }
 
     /**
@@ -289,6 +287,11 @@ public class MainActivity extends Activity {
     public void gotoProfile(View view) {
         Intent profIntent = new Intent(this, ProfileActivity.class);
         startActivity(profIntent);
+    }
+
+    public void gotouserquizlist(View view) {
+        Intent userquizlistIntent = new Intent(this, ShowUserQuiz.class);
+        startActivity(userquizlistIntent);
     }
 
     public void gotoFacebookFriends(View view){

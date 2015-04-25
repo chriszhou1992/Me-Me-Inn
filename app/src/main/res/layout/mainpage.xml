@@ -32,13 +32,14 @@
         android:id="@+id/vocab"
         android:textSize="18sp"
         android:background="#ff6c303c"
-        android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/icon"
         android:textAllCaps="false"
-        android:layout_alignStart="@+id/icon"
+        android:onClick="gotoVocab"
+        android:layout_below="@+id/name"
         android:layout_alignLeft="@+id/icon"
+        android:layout_alignStart="@+id/icon"
+        android:layout_marginTop="29dp"
         android:layout_alignRight="@+id/icon"
-        android:onClick="gotoVocab" />
+        android:layout_alignEnd="@+id/icon" />
 
     <Button
         android:layout_width="wrap_content"
@@ -47,15 +48,14 @@
         android:id="@+id/friends"
         android:textSize="18sp"
         android:background="#ffb39a6d"
-        android:layout_below="@+id/vocab"
-        android:layout_alignStart="@+id/vocab"
-        android:layout_marginTop="43dp"
+        android:layout_marginTop="31dp"
         android:textAllCaps="false"
-        android:layout_alignEnd="@+id/vocab"
-        android:layout_alignLeft="@+id/vocab"
-        android:layout_alignRight="@+id/vocab"
         android:onClick="goMatchWithFriend"
-        />
+        android:layout_below="@+id/userquiz"
+        android:layout_alignLeft="@+id/vocab"
+        android:layout_alignStart="@+id/vocab"
+        android:layout_alignRight="@+id/icon"
+        android:layout_alignEnd="@+id/icon" />
 
     <Button
         android:layout_width="wrap_content"
@@ -101,5 +101,21 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:onClick="gotoOnlineDictionary" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gotoUserQuiz"
+        android:id="@+id/userquiz"
+        android:textSize="18sp"
+        android:background="#ff6c303c"
+        android:textAllCaps="false"
+        android:layout_below="@+id/vocab"
+        android:layout_marginTop="29dp"
+        android:layout_alignRight="@+id/vocab"
+        android:layout_alignEnd="@+id/vocab"
+        android:layout_alignLeft="@+id/vocab"
+        android:layout_alignStart="@+id/vocab"
+        android:onClick="gotouserquizlist"/>
 
 </RelativeLayout>

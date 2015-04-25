@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.memeinn.R;
@@ -52,6 +53,7 @@ public class ReviewVocabDetailedActivity extends Activity {
     private TextView wordMeaningView;
     private Button hideCircle;
     private TextView reviewProgressView;
+    private LinearLayout optionslayout;
 
     private int total;//total num of words to review
     private int count;//counting up the progress
@@ -66,6 +68,7 @@ public class ReviewVocabDetailedActivity extends Activity {
         wordMeaningView = (TextView) findViewById(R.id.wordMeaningView);
         hideCircle = (Button) findViewById(R.id.checkMeaning);
         reviewProgressView = (TextView) findViewById(R.id.reviewProgress);
+        optionslayout = (LinearLayout) findViewById(R.id.optionslayout);
 
         Intent intent = getIntent();
         vocabType = intent.getStringExtra(VocabActivity.EXTRA_MESSAGE);
@@ -87,6 +90,7 @@ public class ReviewVocabDetailedActivity extends Activity {
     public void showMeaning(View view){
         view.setVisibility(View.GONE);
         wordMeaningView.setVisibility(View.VISIBLE);
+
     }
 
     public void hideMeaning(){
@@ -193,6 +197,7 @@ public class ReviewVocabDetailedActivity extends Activity {
         this.wordContentView.setText(wordContent);
         this.wordMeaningView.setText(wordMeaning);
         this.reviewProgressView.setText(progress);
+        hideMeaning();
     }
 
     public void backToProfile(View view) {

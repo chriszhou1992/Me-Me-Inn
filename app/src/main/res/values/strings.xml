@@ -12,6 +12,7 @@
 
     <!-- Main Page Strings -->
     <string name="gotoVocab">Go To Vocabulary</string>
+    <string name="gotoUserQuiz">Go To User-created quiz</string>
     <string name="matchFriend">Match with Friends</string>
     <string name="matchLadder">Match in Ladder</string>
     <string name="usernameHint">Username</string>
@@ -87,7 +88,7 @@
     <string name="remember"> Know! ^_^ </string>
     <string name="notRemember"> IDK...TT </string>
     <string name="checkMeaning"> check out the meaning!</string>
-    <string name="finishReview"> finish the review</string>
+    <string name="finishReview"> finish</string>
 
 
     <!--Review Page Strings-->
@@ -130,6 +131,7 @@
 
     <!--Check Question Page Strings-->
     <string name="QuestionTitle">Question title</string>
+    <string name="QuestionType">Vocab Type</string>
     <string name="QuestionOption1">Option 1</string>
     <string name="QuestionOption2">Option 2</string>
     <string name="QuestionOption3">Option 3</string>
@@ -145,6 +147,9 @@
 
     <!--Selection contest page Strings-->
     <string name="chooseType">select challenge!</string>
+
+    <!--User-created quiz list Strings-->
+    <string name="userquizlist">User-created Quiz List</string>
 
 
 

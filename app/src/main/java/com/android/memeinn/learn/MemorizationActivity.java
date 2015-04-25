@@ -59,7 +59,7 @@ public class MemorizationActivity extends ActionBarActivity {
         frequencyText = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FREQUENCY);
         wordTableName = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_TABLE_NAME);
 
-        write = (EditText)findViewById(R.id.hidden_edit_view);
+        //write = (EditText)findViewById(R.id.hidden_edit_view);
         ttobj=new TextToSpeech(getApplicationContext(),
                 new TextToSpeech.OnInitListener() {
                     @Override

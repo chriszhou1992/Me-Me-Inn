@@ -58,8 +58,6 @@ public class PostQuestionActivityTest extends ActivityInstrumentationTestCase2<L
         //New intent to goto CheckPost Activity
         onView(withId(R.id.checknewpost)).perform(click());
 
-        onView(withId(R.id.gre)).perform(click());
-
         onView(withId(R.id.acceptthepost)).check(matches(withText("Accept")));
 
     }
@@ -92,6 +90,32 @@ public class PostQuestionActivityTest extends ActivityInstrumentationTestCase2<L
         onView(withId(R.id.gre)).perform(click());
 
         onView(withId(R.id.submitpost)).check(matches(withText("Submit")));
+
+    }
+
+    public void testUserQuiz() {
+        onView(withId(R.id.uname)).perform(typeText("1111"), closeSoftKeyboard());
+        onView(withId(R.id.pword)).perform(typeText("1111"), closeSoftKeyboard());
+
+        //Test if correctly typed
+        onView(withId(R.id.uname)).check(matches(withText("1111")));
+        onView(withId(R.id.pword)).check(matches(withText("1111")));
+
+        //New intent to goto MainActivity
+        onView(withId(R.id.login)).perform(click());
+
+        //Check activity transition
+        onView(withId(R.id.vocab)).check(matches(withText("Go To Vocabulary")));
+        onView(withId(R.id.friends)).check(matches(withText("Match with Friends")));
+        onView(withId(R.id.ladder)).check(matches(withText("Match in Ladder")));
+        onView(withId(R.id.userquiz)).check(matches(withText("Go To User-created quiz")));
+
+        //New intent to goto ProfileActivity
+        onView(withId(R.id.userquiz)).perform(click());
+
+        onView(withId(R.id.gre)).perform(click());
+
+        onView(withId(R.id.name)).check(matches(withText("quiz!")));
 
     }
 }
