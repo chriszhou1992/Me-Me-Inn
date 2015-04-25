@@ -349,6 +349,7 @@ public class ContestActivity extends Activity {
         oppoSelection = null;
         userScoreTextView.setTextColor(Color.WHITE);
         oppoScoreTextView.setTextColor(Color.WHITE);
+        countDown = 11;
     }
 
     /**
@@ -446,6 +447,7 @@ public class ContestActivity extends Activity {
      */
     public void choiceClicked(View btn) {
         disableCountDownTimer(true);
+        countDown = 11;
         //disable further button clicking
         setOptionsClickable(false);
 
