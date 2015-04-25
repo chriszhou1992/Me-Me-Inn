@@ -181,6 +181,7 @@ public class MatchStartActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        timer.cancel();
         timer = null;
     }
 
