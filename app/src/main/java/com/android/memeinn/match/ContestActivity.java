@@ -164,8 +164,8 @@ public class ContestActivity extends Activity {
                         Utility.warningDialog(ContestActivity.this, "Opponent Exited!",
                             "Your opponent exited the match!");*/
                     //force user to win since opponent exited
-                    oppoScore = -1;
-                    goToResult();
+                    //oppoScore = -1;
+                    //goToResult();
                     finish();
                 }
 
