@@ -11,5 +11,6 @@ public class Global {
     public static final String EXTRA_MESSAGE_OPPOSELECTEDTOPIC = "memeinn.contest" +
             ".opposelectedTopic";
 
-
+    public static final String EXTRA_MESSAGE_MATCHSCORE = "memeinn.match.score";
+    public static final String EXTRA_MESSAGE_MATCHRESULT = "memeinn.match.result";
 }
