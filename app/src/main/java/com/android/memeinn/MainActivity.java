@@ -1,8 +1,6 @@
 package com.android.memeinn;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -15,12 +13,15 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 
+import com.android.memeinn.definitionAPI.OnlineDictionaryActivity;
 import com.android.memeinn.friend.CheckRequestService;
 import com.android.memeinn.friend.CheckResponseService;
 import com.android.memeinn.friend.RequestFriendSession;
 import com.android.memeinn.friend.ShowMsgActivity;
 import com.android.memeinn.match.AvailFriendListActivity;
 import com.android.memeinn.match.MatchStartActivity;
+import com.android.memeinn.postquestion.ShowUserQuiz;
+import com.android.memeinn.user.FacebookLoginActivity;
 import com.android.memeinn.user.ProfileActivity;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -35,8 +36,6 @@ import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
-
-import com.android.memeinn.definitionAPI.*;
 
 /**
  * Main interface of the application. Provides navigation

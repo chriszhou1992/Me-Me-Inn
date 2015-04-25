@@ -1,10 +1,7 @@
 package com.android.memeinn.user;
 
-import android.app.Dialog;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -26,7 +23,6 @@ import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.share.widget.GameRequestDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -205,8 +201,10 @@ public class FacebookLoginActivity extends FragmentActivity {
     @Override
     public void onStop() {
         super.onStop();
-        mTokenTracker.stopTracking();
-        mProfileTracker.stopTracking();
+        if (mTokenTracker != null)
+            mTokenTracker.stopTracking();
+        if (mProfileTracker != null)
+            mProfileTracker.stopTracking();
     }
 
     @Override
