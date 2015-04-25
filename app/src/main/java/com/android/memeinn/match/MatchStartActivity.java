@@ -90,6 +90,7 @@ public class MatchStartActivity extends Activity {
                 animatedView.postInvalidate();
                 if (countDown <= 0) {
                     timer.cancel();
+                    timer.purge();
                     //Have to display warning dialog from UI thread since other threads
                     //cannot modify UI
                     runOnUiThread(new Runnable() {
@@ -132,6 +133,7 @@ public class MatchStartActivity extends Activity {
                 MeMeInnApp app = (MeMeInnApp) getApplicationContext();
                 if (!dataSnapshot.exists()) {
                     timer.cancel();
+                    timer.purge();
                     matchRef.removeEventListener(this);
 
                     Utility.warningDialog(app.currentActivity, "Match Rejected",
@@ -144,6 +146,7 @@ public class MatchStartActivity extends Activity {
                     matchRef.removeEventListener(this);
 
                     timer.cancel();
+                    timer.purge();
                     timer = new Timer();
                     //start contest after 1 second
                     timer.schedule(startContestTask, 1000);
@@ -178,7 +181,7 @@ public class MatchStartActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        timer.cancel();
+        timer = null;
     }
 
     /*

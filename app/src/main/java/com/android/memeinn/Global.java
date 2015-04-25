@@ -22,5 +22,6 @@ public class Global {
     public final static String EXTRA_MESSAGE_VOCABTYPE = "memeinn.learn" + ".chapter.vocab.type";
     public final static String EXTRA_MESSAGE_TABLENAME = "memeinn.learn" + ".chapter.vocab.table.name";
 
-
+    public static final String EXTRA_MESSAGE_MATCHSCORE = "memeinn.match.score";
+    public static final String EXTRA_MESSAGE_MATCHRESULT = "memeinn.match.result";
 }
