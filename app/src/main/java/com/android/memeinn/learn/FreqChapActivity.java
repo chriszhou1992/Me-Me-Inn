@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.memeinn.Global;
 import com.android.memeinn.R;
 
 /**
@@ -33,8 +34,8 @@ public class FreqChapActivity extends Activity {
         setContentView(R.layout.freqchaplist);
 
         Intent intent = getIntent();
-        vocabType = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);
-        vocabFrequency = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FREQUENCY);
+        vocabType = intent.getStringExtra(Global.EXTRA_MESSAGE_VOCABTYPE);
+        vocabFrequency = intent.getStringExtra(Global.EXTRA_MESSAGE_FREQUENCY);
         vocabTableName = "GRE";
         vocabTypeView = (TextView) findViewById(R.id.vocabTypeView);
 

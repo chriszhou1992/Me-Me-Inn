@@ -1,14 +1,16 @@
 package com.android.memeinn.learn;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.memeinn.Global;
 import com.android.memeinn.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -18,16 +20,8 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Locale;
-
-import android.app.Activity;
-import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
-import android.view.Menu;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
+import java.util.Map;
 
 
 public class MemorizationActivity extends ActionBarActivity {
@@ -54,10 +48,10 @@ public class MemorizationActivity extends ActionBarActivity {
         wordMeaningView = (TextView) findViewById(R.id.wordMeaningView);
 
         Intent intent = getIntent();
-        vocabType = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);
+        vocabType = intent.getStringExtra(Global.EXTRA_MESSAGE_VOCABTYPE);
         Log.d("myapp", "Memorization.vocabType = " + vocabType);
-        frequencyText = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FREQUENCY);
-        wordTableName = intent.getStringExtra(ChapterActivity.EXTRA_MESSAGE_TABLE_NAME);
+        frequencyText = intent.getStringExtra(Global.EXTRA_MESSAGE_FREQUENCY);
+        wordTableName = intent.getStringExtra(Global.EXTRA_MESSAGE_TABLENAME);
 
         //write = (EditText)findViewById(R.id.hidden_edit_view);
         ttobj=new TextToSpeech(getApplicationContext(),
@@ -116,9 +110,7 @@ public class MemorizationActivity extends ActionBarActivity {
         //query.whereStartsWith("word", frequencyText.toLowerCase());
 
         //query based on word frequency
-        //System.out.println("vocabType" + vocabType);
-        //System.out.println("frequencyText" + frequencyText);
-        //System.out.println("wordTableName" + wordTableName);
+
         if(frequencyText.toLowerCase().equals("high frequency")){
             query.whereGreaterThan("frequency", 4);
         }
@@ -187,9 +179,9 @@ public class MemorizationActivity extends ActionBarActivity {
      */
     public void startQuiz(View quizBtn) {
         Intent quizIntent = new Intent(this, QuizActivity.class);
-        quizIntent.putExtra(ChapterActivity.EXTRA_MESSAGE_FREQUENCY, frequencyText.toLowerCase());
-        quizIntent.putExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE, vocabType);
-        quizIntent.putExtra(ChapterActivity.EXTRA_MESSAGE_TABLE_NAME, wordTableName);
+        quizIntent.putExtra(Global.EXTRA_MESSAGE_FREQUENCY, frequencyText.toLowerCase());
+        quizIntent.putExtra(Global.EXTRA_MESSAGE_VOCABTYPE, vocabType);
+        quizIntent.putExtra(Global.EXTRA_MESSAGE_TABLENAME, wordTableName);
         startActivity(quizIntent);
     }
 

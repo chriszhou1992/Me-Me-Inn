@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.memeinn.Global;
 import com.android.memeinn.Question;
 import com.android.memeinn.R;
 import com.android.memeinn.Utility;
@@ -91,10 +92,10 @@ public class QuizActivity extends Activity {
         Intent i = getIntent();
         if (i != null) {
             //String s = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);
-            wordFrequency = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_FREQUENCY);
-            wordTableName = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_TABLE_NAME);
+            wordFrequency = i.getStringExtra(Global.EXTRA_MESSAGE_FREQUENCY);
+            wordTableName = i.getStringExtra(Global.EXTRA_MESSAGE_TABLENAME);
             //vocabCategory = s == null? "GRE" : s;
-            vocabCategory = i.getStringExtra(ChapterActivity.EXTRA_MESSAGE_VOCAB_TYPE);
+            vocabCategory = i.getStringExtra(Global.EXTRA_MESSAGE_VOCABTYPE);
             System.out.println("vocabCategory" + vocabCategory);
             System.out.println("wordTableName" + wordTableName);
             //firstLetter = s == null? "a" : s;
@@ -281,8 +282,8 @@ public class QuizActivity extends Activity {
      */
     private void goToResult(){
         Intent quizResult = new Intent(getApplicationContext(), QuizResultActivity.class);
-        quizResult.putExtra("score", score);
-        quizResult.putExtra("vocabTableName", wordTableName);
+        quizResult.putExtra(Global.EXTRA_MESSAGE_QUIZSCORE, score);
+        quizResult.putExtra(Global.EXTRA_MESSAGE_VOCABTABLE, wordTableName);
         startActivity(quizResult);
     }
 

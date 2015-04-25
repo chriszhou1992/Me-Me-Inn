@@ -3,11 +3,11 @@ package com.android.memeinn.learn;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.memeinn.Global;
 import com.android.memeinn.R;
 import com.android.memeinn.VocabActivity;
 
@@ -16,9 +16,7 @@ import com.android.memeinn.VocabActivity;
  */
 public class ChapterActivity extends Activity{
 
-    public final static String EXTRA_MESSAGE_FREQUENCY = "chapter.vocab.frequency";
-    public final static String EXTRA_MESSAGE_VOCAB_TYPE = "chapter.vocab.type";
-    public final static String EXTRA_MESSAGE_TABLE_NAME = "chapter.vocab.table.name";
+
 
     private String vocabType = "";//the type of vocabulary
     private TextView vocabTypeView;
@@ -36,7 +34,6 @@ public class ChapterActivity extends Activity{
         // Give TextView a correct type name
         vocabTypeView.setText(vocabType);
 
-        Log.d("myapp", "Chapter.vocabType = " + vocabType);
     }
 
     /**
@@ -50,10 +47,10 @@ public class ChapterActivity extends Activity{
         Intent freqChapIntent;
         freqChapIntent = new Intent(this, FreqChapActivity.class);
         //Intent QuizIntent = new Intent(this, QuizActivity.class);
-        freqChapIntent.putExtra(EXTRA_MESSAGE_TABLE_NAME, vocabTableName);
-        freqChapIntent.putExtra(EXTRA_MESSAGE_VOCAB_TYPE, vocabType);
+        freqChapIntent.putExtra(Global.EXTRA_MESSAGE_TABLENAME, vocabTableName);
+        freqChapIntent.putExtra(Global.EXTRA_MESSAGE_VOCABTYPE, vocabType);
         String frequencyText = ((Button) view).getText().toString();
-        freqChapIntent.putExtra(EXTRA_MESSAGE_FREQUENCY, frequencyText);
+        freqChapIntent.putExtra(Global.EXTRA_MESSAGE_FREQUENCY, frequencyText);
         startActivity(freqChapIntent);
     }
 
