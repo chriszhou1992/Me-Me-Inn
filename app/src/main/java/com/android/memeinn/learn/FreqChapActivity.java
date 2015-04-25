@@ -16,11 +16,7 @@ import com.android.memeinn.R;
  */
 public class FreqChapActivity extends Activity {
 
-    public final static String EXTRA_MESSAGE_FREQUENCY = "chapter.vocab.frequency";
-    public final static String EXTRA_MESSAGE_VOCAB_TYPE = "chapter.vocab.type";
-    public final static String EXTRA_MESSAGE_TABLE_NAME = "chapter.vocab.table.name";
-    //
-    public final static String EXTRA_MESSAGE_CHAPTER = "chapter.vocab.chapter";
+
 
 
     private String vocabType = "";//the type of vocabulary
@@ -53,11 +49,11 @@ public class FreqChapActivity extends Activity {
     public void onClick(View view) {
         Intent MemorizationIntent = new Intent(this, MemorizationActivity.class);
         //Intent QuizIntent = new Intent(this, QuizActivity.class);
-        MemorizationIntent.putExtra(EXTRA_MESSAGE_TABLE_NAME, vocabTableName);
-        MemorizationIntent.putExtra(EXTRA_MESSAGE_VOCAB_TYPE, vocabType);
-        MemorizationIntent.putExtra(EXTRA_MESSAGE_FREQUENCY, vocabFrequency);
+        MemorizationIntent.putExtra(Global.EXTRA_MESSAGE_TABLENAME, vocabTableName);
+        MemorizationIntent.putExtra(Global.EXTRA_MESSAGE_VOCABTYPE, vocabType);
+        MemorizationIntent.putExtra(Global.EXTRA_MESSAGE_FREQUENCY, vocabFrequency);
         String chapterText = ((Button) view).getText().toString();
-        MemorizationIntent.putExtra(EXTRA_MESSAGE_CHAPTER, chapterText);
+        MemorizationIntent.putExtra(Global.EXTRA_MESSAGE_CHAPTER, chapterText);
         startActivity(MemorizationIntent);
     }
 }

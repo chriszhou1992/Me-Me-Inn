@@ -21,6 +21,7 @@ public class Global {
             ".frequency";
     public final static String EXTRA_MESSAGE_VOCABTYPE = "memeinn.learn" + ".chapter.vocab.type";
     public final static String EXTRA_MESSAGE_TABLENAME = "memeinn.learn" + ".chapter.vocab.table.name";
+    public final static String EXTRA_MESSAGE_CHAPTER = "memeinn.learn" + ".chapter.vocab.chapter";
 
 
 }
