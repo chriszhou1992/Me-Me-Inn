@@ -166,6 +166,9 @@ public class ContestActivity extends Activity {
                     //force user to win since opponent exited
                     //oppoScore = -1;
                     //goToResult();
+                    Firebase userInMatchRef = FirebaseSingleton.getInstance(currentUsername +
+                            "/isInMatch");
+                    userInMatchRef.setValue(false);
                     finish();
                 }
 
