@@ -450,7 +450,7 @@ public class ContestActivity extends Activity {
      */
     public void choiceClicked(View btn) {
         disableCountDownTimer(true);
-        countDown = 11;
+        //countDown = 11;
         //disable further button clicking
         setOptionsClickable(false);
 
