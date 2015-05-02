@@ -10,6 +10,8 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.toPackage;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withHint;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -41,8 +43,8 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
     }
 
     public void testSuccessLogin() {
-        onView(withId(R.id.uname)).perform(typeText("my name"), closeSoftKeyboard());
-        onView(withId(R.id.pword)).perform(typeText("my pass"), closeSoftKeyboard());
+        onView(withId(R.id.uname)).perform(typeText("my name\n"), closeSoftKeyboard());
+        onView(withId(R.id.pword)).perform(typeText("my pass\n"), closeSoftKeyboard());
 
         //Test if correctly typed
         onView(withId(R.id.uname)).check(matches(withText("my name")));
@@ -58,8 +60,8 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
     }
 
     public void testInvalidLogin() {
-        onView(withId(R.id.uname)).perform(typeText("my name"), closeSoftKeyboard());
-        onView(withId(R.id.pword)).perform(typeText("my name"), closeSoftKeyboard());
+        onView(withId(R.id.uname)).perform(typeText("my name\n"), closeSoftKeyboard());
+        onView(withId(R.id.pword)).perform(typeText("my name\n"), closeSoftKeyboard());
 
         //Test if correctly typed
         onView(withId(R.id.uname)).check(matches(withText("my name")));
@@ -68,8 +70,9 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         //Click Login
         onView(withId(R.id.login)).perform(click());
 
+        intended(toPackage("com.android.memeinn.MainActivity"));
+
         //check if warning dialog appears
         onView(withClassName(endsWith("DialogTitle"))).check(matches(withText("Login Failed")));
-        onView(withClassName(endsWith("TextView"))).check(matches(withText("invalid login credentials")));
     }
 }
