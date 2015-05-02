@@ -28,8 +28,6 @@ import java.util.List;
 
 public class CheckPostActivity extends Activity{
 
-    public static final String EXTRA_MESSAGE = "vocab.MESSAGE";
-    //public int flag;//0 for review mode, 1 for learning mode
     private ArrayList<ParseObject> questions;
 
     private TextView vocabType;
@@ -60,6 +58,10 @@ public class CheckPostActivity extends Activity{
         initQuestions();
     }
 
+    /**
+     * Accept the Post Question and keep the data
+     * @param view
+     */
     public void onClickAccept(View view) {
         if (currPos < questions.size()) {
             ParseObject o = questions.get(currPos);
@@ -82,6 +84,10 @@ public class CheckPostActivity extends Activity{
         }
     }
 
+    /**
+     * Decline the post question and delete it from database
+     * @param view
+     */
     public void onClickDecline(View view) {
         if (currPos < questions.size()) {
             ParseObject o = questions.get(currPos);
@@ -103,6 +109,9 @@ public class CheckPostActivity extends Activity{
         }
     }
 
+    /**
+     * print the initial post question on the screen
+     */
     private void initQuestions() {
         this.questions = new ArrayList<ParseObject>();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("QuizQuestions");
@@ -127,6 +136,10 @@ public class CheckPostActivity extends Activity{
         currPos = 0;
     }
 
+    /**
+     * display all the post questions one by one depending on the pos
+     * @param pos
+     */
     private void displayContentWithPos(int pos) {
         try {
             resetTextField();
@@ -159,6 +172,9 @@ public class CheckPostActivity extends Activity{
         }
     }
 
+    /**
+     * reset the text field when all post questions are deal with
+     */
     private void resetTextField() {
         vocabType.setText("");
         questionTitle.setText("");
@@ -172,6 +188,9 @@ public class CheckPostActivity extends Activity{
         option4.setTextColor(defaultColor4);
     }
 
+    /**
+     * initialize the screen
+     */
     private void printEmptyMessage() {
         Utility.warningDialog(this, "Reminder ", "No More Quiz to Check", "OK", new DialogInterface.OnClickListener() {
             @Override

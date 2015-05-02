@@ -68,11 +68,13 @@ public class UserQuiz extends Activity {
         options.add(option3);
         options.add(option4);
 
-        //questionTitle.setText(questionTitle + " (" + extraString + ")");
-
         initQuestions();
     }
 
+    /**
+     * click to view the next question
+     * @param view
+     */
     public void choiceClicked(View view) {
         if (currPos+1< questions.size()) {
             currAnswer = questions.get(currPos).getString("CurrentAnswer");
@@ -99,15 +101,12 @@ public class UserQuiz extends Activity {
                             finish();
                         }
                     });
-            /*Utility.warningDialog(this, "End of quiz", "You have done all the quiz", "OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
-                }
-            });*/
         }
     }
 
+    /**
+     * initialize the quiz question
+     */
     private void initQuestions() {
         try {
             this.questions = new ArrayList<ParseObject>();
@@ -141,6 +140,10 @@ public class UserQuiz extends Activity {
         }
     }
 
+    /**
+     * display the quiz question by pos
+     * @param pos
+     */
     private void displayContentWithPos(int pos) {
         try {
             ParseObject question = questions.get(pos);
@@ -155,6 +158,9 @@ public class UserQuiz extends Activity {
         }
     }
 
+    /**
+     * when no quiz anymore, return message to close
+     */
     private void printEmptyMessage() {
         Utility.warningDialog(this, "No quiz avaliable ", "Please come and post your DIY quiz", "OK", new DialogInterface.OnClickListener() {
             @Override
@@ -162,6 +168,5 @@ public class UserQuiz extends Activity {
                 finish();
             }
         });
-        //Toast.makeText(this, "There is no more question to show!", Toast.LENGTH_SHORT).show();
     }
 }

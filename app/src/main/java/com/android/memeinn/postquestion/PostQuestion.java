@@ -38,6 +38,10 @@ public class PostQuestion extends Activity{
         extraString = intent.getStringExtra(AddPostActivity.EXTRA_MESSAGE);
     }
 
+    /**
+     *  click the botton to submit the post question
+     * @param view
+     */
     public void onClickSubmit(View view) {
         EditText questionTitle = (EditText) findViewById(R.id.qtitle);
         EditText option1 = (EditText) findViewById(R.id.option1text);
@@ -62,9 +66,6 @@ public class PostQuestion extends Activity{
             return;
         }
 
-//        ParseUser user = new ParseUser();
-//        user.setUsername(username);
-//        user.setPassword(pass);
         ParseObject question = new ParseObject("QuizQuestions");
         question.put("questionTitle", title);
         question.put("answerA", q1);
