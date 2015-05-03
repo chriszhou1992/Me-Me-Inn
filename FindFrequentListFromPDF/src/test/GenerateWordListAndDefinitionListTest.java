@@ -6,10 +6,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import junit.framework.Assert;
 
 import org.junit.Test;
+
+import com.google.gson.Gson;
 
 import wordList.*;
 public class GenerateWordListAndDefinitionListTest {
@@ -159,5 +163,8 @@ public class GenerateWordListAndDefinitionListTest {
 		} 
 		assertEquals(result,"ozone");
 	}
+	
+	
+
 
 }

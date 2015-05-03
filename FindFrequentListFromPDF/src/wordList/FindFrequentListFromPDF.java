@@ -113,9 +113,11 @@ public class FindFrequentListFromPDF {
 	}
 	
 	public static void readMultipleFiles(){
-		Scanner scan = new Scanner(System.in);
-		System.out.println("Please input nubmer of files:");
-		int numOfF = scan.nextInt();
+//		Scanner scan = new Scanner(System.in);
+//		System.out.println("Please input nubmer of files:");
+//		int numOfF = scan.nextInt();
+		
+		int numOfF = 4;
 		for(int i=0;i<numOfF;i++){
 			System.out.println("Processing file "+i);
 			String fileName =i+".pdf";
@@ -124,7 +126,13 @@ public class FindFrequentListFromPDF {
 	}
 	
 	public static void main(String args[]) throws IOException{
-		
+		String wordList = "wordList1.pdf";
+		String newFile = "GRE_PDFs/TOEFL.json.new.json";
+		String newJSON = "TOEFL_NEW_FEQ.json";
+		generateNewJSON(wordList, newFile, newJSON);
+	}
+	
+	public static void generateNewJSON(String wordList, String newFile, String newJSON) throws IOException{
 		readMultipleFiles();
 		int maxFreq = 0;
 	    Iterator it0 = wordFreq.entrySet().iterator();
@@ -133,67 +141,10 @@ public class FindFrequentListFromPDF {
 	        int curFeq = (int) pair.getValue();
 	        if(curFeq>maxFreq) maxFreq = curFeq;
 	    }
-	    
-	    /*
-	    //Create an array based on maxFeq
-	    String[] words = new String[maxFreq+1];
-	    Iterator it1 = wordFreq.entrySet().iterator();
-	    while (it1.hasNext()) {
-	        Map.Entry pair = (Map.Entry)it1.next();
-	        words[(int) pair.getValue()] = (String) pair.getKey();
-	    }
-	    
-	    
-	    for(int i=words.length-1;i>=0;i--){
-	    	if(words[i]==null) continue;
-	    	//if(words[i].length()>6){
-	    		System.out.println(words[i]+":"+(i));
-	    	//}
-	    }*/
-	    
-	   pdftoHashmap("wordList1.pdf",true);
-//	   for(Word w:baseWordList) {
-//		    	w.setFrequency(wordFreq.get(w.getWord()));
-//		    System.out.println(w.getWord()+":"+w.getFrequency());
-//	   }
-	   
-	   
-	   //read all definitions
-//        BufferedReader br = null;
-//		String sCurrentLine;
-//		br = new BufferedReader(new FileReader("GRE_PDFs/definitionList1.txt"));
-//		int lineNum=0;
-//		while ((sCurrentLine = br.readLine()) != null) {
-//			baseWordList.get(lineNum).setDefinition(sCurrentLine);
-//			Word curWord = baseWordList.get(lineNum);
-//			System.out.println(curWord.getWord()+":"+curWord.getDefinition()+":"+curWord.getFrequency());
-//			lineNum++;
-//		}
-//	   
-//		br.close();
-		
-		//Creat new CSV
-		
-		
-//		File file =new File("wordList.csv");
-//		 
-//		//if file doesnt exists, then create it
-//		if(!file.exists()){
-//			file.createNewFile();
-//		}
-//
-//		//true = append file
-//		FileWriter fileWriter = new FileWriter(file.getName());
-//        BufferedWriter bw = new BufferedWriter(fileWriter);
-//        bw.write("word,definition,frequency");
-//        for (Word w:baseWordList) {
-//			bw.write("\n"+w.getWord()+","+w.getDefinition()+","+w.getFrequency());
-//		}
-//		bw.close();
-//		fileWriter.close();
-		
-	   
-	   BufferedReader br = new BufferedReader(new FileReader("GRE_PDFs/TOEFL.json.new.json"));
+	      
+	   pdftoHashmap(wordList,true);
+   
+	   BufferedReader br = new BufferedReader(new FileReader(newFile));
 	   	Gson gson = new Gson();
 	   //convert the json string back to object
 		AllData obj = gson.fromJson(br, AllData.class);
@@ -214,7 +165,7 @@ public class FindFrequentListFromPDF {
 		}
 	   
 	   
-		File writeFile = new File("TOEFL_NEW_FEQ.json");
+		File writeFile = new File(newJSON);
 		 
 		// if file doesnt exists, then create it
 		if (!writeFile.exists()) {

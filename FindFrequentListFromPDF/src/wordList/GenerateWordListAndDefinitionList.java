@@ -18,7 +18,6 @@ public class GenerateWordListAndDefinitionList {
 		
 		generateNewFile(fileName, writeFile0);
 	}
-	
 	public static void generateNewFile(String fileName, File writeFile0){
 		Gson gson = new Gson();
 		
