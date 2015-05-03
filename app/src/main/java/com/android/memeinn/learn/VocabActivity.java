@@ -8,9 +8,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.android.memeinn.R;
-import com.android.memeinn.learn.ChapterActivity;
-import com.android.memeinn.learn.FreqChapActivity;
-import com.android.memeinn.learn.QuizActivity;
 import com.android.memeinn.review.ReviewActivity;
 
 
