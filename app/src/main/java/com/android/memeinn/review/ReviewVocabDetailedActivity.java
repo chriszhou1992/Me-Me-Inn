@@ -79,25 +79,29 @@ public class ReviewVocabDetailedActivity extends Activity {
 
     }
 
-   /*Assumption:
-    * User will always click on the circle to show meaning if he/she doesn't remember,
-    * and will then provide feedback(IDK).
-    * However the user can click on "I know" without discovering the word meaning and go straight to next word*/
 
-    //disappear the circle and show word meaning hidden underneath
+    /**
+     * Make the circle disappear and show word meaning hidden underneath
+     * @param view The circle button
+     */
     public void showMeaning(View view){
         view.setVisibility(View.GONE);
         wordMeaningView.setVisibility(View.VISIBLE);
 
     }
 
+    /**
+     * Show the circle and cover the meaning
+     */
     public void hideMeaning(){
         hideCircle.setVisibility(View.VISIBLE);
         wordMeaningView.setVisibility(View.GONE);
     }
 
-    //user nailed the word
-    //remove the word from review list table
+    /**
+     * User nailed the word; remove the word from review list table
+     * @param view The IK button
+     */
     public void knowWord(View view){
         ParseUser u = ParseUser.getCurrentUser();
         String relationName = "UserReviewList" + vocabType;
@@ -131,6 +135,9 @@ public class ReviewVocabDetailedActivity extends Activity {
         }
     }
 
+    /**
+     * The review list is empty; pop out a dialog to let the user return to previous page
+     */
     public void listEmpty(){
         System.out.println("UserReviewList is empty!");
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -145,7 +152,9 @@ public class ReviewVocabDetailedActivity extends Activity {
         alertDialog.show();
     }
 
-    //parse the vocabulary set and print the words and meanings
+    /**
+     * Parse the vocabulary set and print the words and meanings
+     */
     private void initList() {
         ParseUser u = ParseUser.getCurrentUser();
         String relationName = "UserReviewList"+vocabType;
@@ -174,19 +183,26 @@ public class ReviewVocabDetailedActivity extends Activity {
         });
     }
 
-    //initialize the memorization view page
+    /**
+     * Initialize the memorization view page
+     */
     private void initReviewView() {
         count = 0;
         setWordDisplayWithPos(0);
     }
 
-    // helper function when click the next or previous button
+    /**
+     * Helper function that hides the meaning and display the page when IK or IDK is clicked
+     */
     private void updateReviewView() {
         hideMeaning();
         setWordDisplayWithPos(currPos);
     }
 
-    //get the current word position to control the sequence
+    /**
+     * Get current word and display the page appropriately
+     * @param pos Current position of the word to show
+     */
     private void setWordDisplayWithPos(int pos) {
         ParseObject word = wordList.get(pos);
         String wordContent = word.getString("word");
@@ -198,6 +214,10 @@ public class ReviewVocabDetailedActivity extends Activity {
         hideMeaning();
     }
 
+    /**
+     * Go back to profile page
+     * @param view The "Finish" button
+     */
     public void backToProfile(View view) {
         ParseUser.getCurrentUser().saveInBackground();
         Intent profIntent = new Intent(this, ProfileActivity.class);

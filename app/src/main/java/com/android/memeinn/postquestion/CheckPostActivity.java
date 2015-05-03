@@ -59,7 +59,7 @@ public class CheckPostActivity extends Activity{
 
     /**
      * Accept the Post Question and keep the data
-     * @param view
+     * @param view The "Accept" button
      */
     public void onClickAccept(View view) {
         if (currPos < questions.size()) {
@@ -85,7 +85,7 @@ public class CheckPostActivity extends Activity{
 
     /**
      * Decline the post question and delete it from database
-     * @param view
+     * @param view The "Decline" button
      */
     public void onClickDecline(View view) {
         if (currPos < questions.size()) {
@@ -137,7 +137,7 @@ public class CheckPostActivity extends Activity{
 
     /**
      * display all the post questions one by one depending on the pos
-     * @param pos
+     * @param pos current position of the word to show
      */
     private void displayContentWithPos(int pos) {
         try {

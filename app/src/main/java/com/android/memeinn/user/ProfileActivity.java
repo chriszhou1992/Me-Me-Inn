@@ -45,7 +45,7 @@ public class ProfileActivity extends Activity {
      * select the category of words to review.
      * @param view The Button that is clicked.
      */
-    public void gotoVocab(View view) {
+    public void gotoReview(View view) {
         Intent vocabIntent = new Intent(this, VocabActivity.class);
         vocabIntent.setFlags(0);//flag: 0 for review, 1 for learn
         startActivity(vocabIntent);
@@ -60,16 +60,28 @@ public class ProfileActivity extends Activity {
         startActivity(Friends);
     }
 
+    /**
+     * Callback function for Check Post button(available to admin user only). Triggers an Intent to go to the CheckPostActivity.
+     * @param view The Button that is clicked.
+     */
     public void gotoCheckPost(View view) {
         Intent CheckPost = new Intent(this, CheckPostActivity.class);
         startActivity(CheckPost);
     }
 
+    /**
+     * Callback function for Add Post button. Triggers an Intent to go to the AddPostActivity.
+     * @param view The Button that is clicked.
+     */
     public void gotoAddPost(View view) {
         Intent AddPost = new Intent(this, AddPostActivity.class);
         startActivity(AddPost);
     }
 
+    /**
+     * Callback function for Log Out button. Triggers an Intent to go to the LoginActivity.
+     * @param view The Button that is clicked.
+     */
     public void onLogOut(View view){
         ParseUser.logOut();
         Intent LogOut = new Intent(this, LoginActivity.class);

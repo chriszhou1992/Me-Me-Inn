@@ -30,7 +30,7 @@ public class PostQuestion extends Activity{
 
     /**
      *  click the botton to submit the post question
-     * @param view
+     * @param view The "Submit" button
      */
     public void onClickSubmit(View view) {
         EditText questionTitle = (EditText) findViewById(R.id.qtitle);

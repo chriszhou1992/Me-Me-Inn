@@ -166,6 +166,11 @@ public class MemorizationActivity extends ActionBarActivity {
         this.wordMeaningView.setText(wordMeaning);
     }
 
+    /**
+     * Get current word by position
+     * @param pos current position number
+     * @return the word as String
+     */
     private String getWord(int pos) {
         Map.Entry<String, String> entry = indexedList.get(pos);
         String wordContent = entry.getKey();
@@ -193,6 +198,10 @@ public class MemorizationActivity extends ActionBarActivity {
         super.onPause();
     }
 
+    /**
+     * Speak the vocabulary pronounciation
+     * @param view The button clicked
+     */
     public void speakText(View view){
         String toSpeak = getWord(currPos);
         Toast.makeText(getApplicationContext(), toSpeak,

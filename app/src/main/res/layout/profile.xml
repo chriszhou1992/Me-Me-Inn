@@ -52,7 +52,7 @@
         android:layout_alignEnd="@+id/ranking"
         android:layout_alignLeft="@+id/ranking"
         android:layout_alignRight="@+id/ranking"
-        android:onClick="gotoVocab"
+        android:onClick="gotoReview"
         android:nestedScrollingEnabled="false"/>
 
     <Button

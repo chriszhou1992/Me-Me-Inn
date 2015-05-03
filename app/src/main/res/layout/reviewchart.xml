@@ -89,9 +89,6 @@
         android:background="#ff02790d"
         android:textAllCaps="false"
         android:onClick="knowWord"
-        android:layout_below="@+id/checkMeaning"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_marginLeft="49dp"
         android:layout_marginStart="49dp" />
 
@@ -100,8 +97,6 @@
             android:layout_height="wrap_content"
             android:text="@string/finishReview"
             android:id="@+id/finishReview"
-            android:layout_below="@+id/checkMeaning"
-            android:layout_centerInParent="true"
             android:onClick="backToProfile" />
 
     <Button
@@ -114,9 +109,6 @@
         android:textAllCaps="false"
         android:layout_marginBottom="46dp"
         android:onClick="onClickNext"
-        android:layout_below="@+id/checkMeaning"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_marginRight="48dp"
         android:layout_marginEnd="48dp" />
 
