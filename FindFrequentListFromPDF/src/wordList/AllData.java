@@ -1,3 +1,4 @@
+package wordList;
 
 
 import java.util.ArrayList;

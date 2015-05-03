@@ -1,3 +1,4 @@
+package wordList;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,11 +10,18 @@ import java.util.Iterator;
 
 import com.google.gson.Gson;
 
-
 public class GenerateWordListAndDefinitionList {
 	public static void main(String[] args){
-		Gson gson = new Gson();
+		
 		String fileName = "GRE_PDFs/GMAT.json.new.json";
+		File writeFile0 = new File("GRE_PDFs/wordList1.txt");
+		
+		generateNewFile(fileName, writeFile0);
+	}
+	
+	public static void generateNewFile(String fileName, File writeFile0){
+		Gson gson = new Gson();
+		
 		//String fileName = "GRE_PDFs/SAT.json.new.json";
 		//String fileName = "GRE_PDFs/TOEFL.json.new.json";
 		try {
@@ -24,7 +32,7 @@ public class GenerateWordListAndDefinitionList {
 			AllData obj = gson.fromJson(br, AllData.class);
 			ArrayList<DataObject> results = obj.getResults();
 			
-			File writeFile0 = new File("GRE_PDFs/wordList1.txt");
+			
 			 
 			// if file doesnt exists, then create it
 			if (!writeFile0.exists()) {
@@ -60,5 +68,6 @@ public class GenerateWordListAndDefinitionList {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	
 	}
 }

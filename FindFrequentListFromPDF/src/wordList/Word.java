@@ -1,3 +1,4 @@
+package wordList;
 
 public class Word {
 	private String word;

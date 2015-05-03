@@ -1,3 +1,4 @@
+package wordList;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,6 +26,7 @@ public class FindFrequentListFromPDF {
 	static Map<String, Integer> wordFreq = new HashMap<String, Integer>();
 	static ArrayList<Word> baseWordList = new ArrayList<Word>();
 	// convert one pdf to WordFrequencyHashmap
+	
 	static void pdftoHashmap(String fileName, boolean isBase) {
 		PDFParser parser;
 		String parsedText = null;;

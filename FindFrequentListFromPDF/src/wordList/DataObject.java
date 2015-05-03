@@ -1,3 +1,4 @@
+package wordList;
 
 
 public class DataObject {
