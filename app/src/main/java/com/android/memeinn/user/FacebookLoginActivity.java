@@ -226,4 +226,8 @@ public class FacebookLoginActivity extends FragmentActivity {
         startActivity(mainIntent);
     }
 
+    public AccessToken getAccessToken(){
+        return accessToken;
+    }
+
 }
