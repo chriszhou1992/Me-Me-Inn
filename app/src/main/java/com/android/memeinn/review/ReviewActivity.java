@@ -17,7 +17,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.android.memeinn.R;
-import com.android.memeinn.VocabActivity;
+import com.android.memeinn.learn.VocabActivity;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;

@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.android.memeinn.R;
 import com.android.memeinn.Utility;
-import com.android.memeinn.VocabActivity;
+import com.android.memeinn.learn.VocabActivity;
 import com.android.memeinn.user.ProfileActivity;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -53,7 +53,6 @@ public class ReviewVocabDetailedActivity extends Activity {
     private TextView wordMeaningView;
     private Button hideCircle;
     private TextView reviewProgressView;
-    private LinearLayout optionslayout;
 
     private int total;//total num of words to review
     private int count;//counting up the progress
@@ -68,7 +67,6 @@ public class ReviewVocabDetailedActivity extends Activity {
         wordMeaningView = (TextView) findViewById(R.id.wordMeaningView);
         hideCircle = (Button) findViewById(R.id.checkMeaning);
         reviewProgressView = (TextView) findViewById(R.id.reviewProgress);
-        optionslayout = (LinearLayout) findViewById(R.id.optionslayout);
 
         Intent intent = getIntent();
         vocabType = intent.getStringExtra(VocabActivity.EXTRA_MESSAGE);

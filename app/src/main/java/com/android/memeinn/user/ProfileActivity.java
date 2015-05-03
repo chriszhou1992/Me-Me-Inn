@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.memeinn.R;
-import com.android.memeinn.VocabActivity;
+import com.android.memeinn.learn.VocabActivity;
 import com.android.memeinn.friend.FriendActivity;
 import com.android.memeinn.postquestion.AddPostActivity;
 import com.android.memeinn.postquestion.CheckPostActivity;

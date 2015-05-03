@@ -232,8 +232,6 @@ public class QuizActivity extends Activity {
         } else {
             changeAnswerBtnBackground(view, -1);
             //if answered incorrectly, add this word to user's review list
-            /*from lingzi- I reversed this relationship so that each word is
-            associated with the current user*/
             ParseUser u = ParseUser.getCurrentUser();
             String relationName = "UserReviewList" + vocabCategory;
             ParseRelation<ParseObject> rel = u.getRelation(relationName);
@@ -293,6 +291,7 @@ public class QuizActivity extends Activity {
         }
     }
 
+
     /**
      * Getter for current score.
      * @return int The current quiz score.
@@ -326,6 +325,5 @@ public class QuizActivity extends Activity {
     public int getButtonId(int idx){
         return BTN_IDS[idx];
     }
-
 
 }

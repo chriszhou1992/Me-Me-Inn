@@ -1,4 +1,4 @@
-package com.android.memeinn;
+package com.android.memeinn.learn;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.memeinn.R;
 import com.android.memeinn.learn.ChapterActivity;
 import com.android.memeinn.learn.FreqChapActivity;
 import com.android.memeinn.learn.QuizActivity;
@@ -25,24 +26,6 @@ public class VocabActivity extends Activity{
 
         Intent intent = getIntent();
         flag = intent.getFlags();
-    }
-
-    /**
-     * triggers intent to quiz activity
-     * @param view
-     */
-    public void goToQuiz(View view) {
-        Intent quizAct = new Intent(this, QuizActivity.class);
-        startActivity(quizAct);
-    }
-
-    /**
-     * Triggers intent to review activity
-     * @param view
-     */
-    public void goToReview(View view) {
-        Intent memoAct = new Intent(this, FreqChapActivity.class);
-        startActivity(memoAct);
     }
 
     public void gotoChapOrReview(View view) {

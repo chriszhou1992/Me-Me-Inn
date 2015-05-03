@@ -34,6 +34,7 @@ public class ReviewActivityTest  extends ActivityInstrumentationTestCase2<Review
     private String lastWord;
     private String lastProgress;
     private ReviewVocabDetailedActivity currAct;
+    private ViewInteraction v;
 
     public ReviewActivityTest() {
         super(ReviewVocabDetailedActivity.class);
@@ -47,7 +48,37 @@ public class ReviewActivityTest  extends ActivityInstrumentationTestCase2<Review
         // Espresso will not launch our activity for us, we must launch it via getActivity().
         currAct = getActivity();
         if (currAct != null)
-            Log.d("Myapp", "GetActivity");
+            Log.d("Myapp", "ReviewActivityTest: GetActivity");
+
+        v = onView(withId(R.id.wordContentView));
+        if (v == null)
+            Log.d("Review Test", "testWord is null! ");
+        else
+            Log.d("Review Test", "testWord is not null! ");
+
+        v.perform(new ViewAction(){
+            @Override
+            public Matcher<View> getConstraints() {
+                return isAssignableFrom(TextView.class);
+            }
+
+            @Override
+            public String getDescription() {
+                return "Retrieve vocab from View";
+            }
+
+            @Override
+            public void perform(UiController uiController, View view) {
+                if (view == null)
+                    Log.d("NOOO", "NULL");
+                else {
+                    System.out.println("called by");
+                    System.out.print(view.getClass());
+                    lastWord  = ((TextView)view).getText().toString(); //Save, because of check in getConstraints()
+
+                }
+            }
+        });
     }
 
     /**
@@ -93,37 +124,9 @@ public class ReviewActivityTest  extends ActivityInstrumentationTestCase2<Review
     public void testNextWordGeneratedWithIK() {
 
         Log.d("Myapp", "Review Test: testNextWordGenerated");
-        ViewInteraction v = onView(withId(R.id.wordContentView));
-        if (v == null)
-            Log.d("Review Test", "testWord is null! ");
-        else
-            Log.d("Review Test", "testWord is not null! ");
 
         //check word updated after "I know"
 
-        v.perform(new ViewAction(){
-            @Override
-            public Matcher<View> getConstraints() {
-                return isAssignableFrom(TextView.class);
-            }
-
-            @Override
-            public String getDescription() {
-                return "Retrieve vocab from View";
-            }
-
-            @Override
-            public void perform(UiController uiController, View view) {
-                if (view == null)
-                    Log.d("NOOO", "NULL");
-                else {
-                    System.out.println("called by");
-                    System.out.print(view.getClass());
-                    lastWord  = ((TextView)view).getText().toString(); //Save, because of check in getConstraints()
-
-                }
-            }
-        });
         System.out.println("after text");
         onView(withId(R.id.testWord)).check(matches(withText(containsString(lastWord))));
         onView(withId(R.id.ik)).perform(click());
@@ -137,35 +140,8 @@ public class ReviewActivityTest  extends ActivityInstrumentationTestCase2<Review
     public void testNextWordGeneratedWithIDK() {
 
         Log.d("Myapp", "Review Test: testNextWordGenerated");
-        ViewInteraction v = onView(withId(R.id.wordContentView));
-        if (v == null)
-            Log.d("Review Test", "testWord is null! ");
-        else
-            Log.d("Review Test", "testWord is not null! ");
         //check word updated after "I don't know"
-        v.perform(new ViewAction(){
-            @Override
-            public Matcher<View> getConstraints() {
-                return isAssignableFrom(TextView.class);
-            }
 
-            @Override
-            public String getDescription() {
-                return "Retrieve vocab from View";
-            }
-
-            @Override
-            public void perform(UiController uiController, View view) {
-                if (view == null)
-                    Log.d("NOOO", "NULL");
-                else {
-                    System.out.println("called by");
-                    System.out.print(view.getClass());
-                    lastWord  = ((TextView)view).getText().toString(); //Save, because of check in getConstraints()
-
-                }
-            }
-        });
         System.out.println("after text");
         onView(withId(R.id.testWord)).check(matches(withText(containsString(lastWord))));
         onView(withId(R.id.idk)).perform(click());
@@ -175,36 +151,9 @@ public class ReviewActivityTest  extends ActivityInstrumentationTestCase2<Review
     public void testProgressBarUpdateWithIK(){
 
         Log.d("Myapp", "Review Test: testProgressBarUpdated");
-        ViewInteraction v = onView(withId(R.id.reviewProgress));
-        if (v == null)
-            Log.d("Review Test", "progress bar is null! ");
-        else
-            Log.d("Review Test", "progress bar is not null! ");
 
         //check progress bar updated after "I know"
-        v.perform(new ViewAction(){
-            @Override
-            public Matcher<View> getConstraints() {
-                return isAssignableFrom(TextView.class);
-            }
 
-            @Override
-            public String getDescription() {
-                return "Retrieve vocab from View";
-            }
-
-            @Override
-            public void perform(UiController uiController, View view) {
-                if (view == null)
-                    Log.d("NOOO", "NULL");
-                else {
-                    System.out.println("called by");
-                    System.out.print(view.getClass());
-                    lastProgress  = ((TextView)view).getText().toString(); //Save, because of check in getConstraints()
-
-                }
-            }
-        });
         System.out.println("after text");
         onView(withId(R.id.reviewProgress)).check(matches(withText(containsString(lastProgress))));
         onView(withId(R.id.ik)).perform(click());
@@ -216,36 +165,9 @@ public class ReviewActivityTest  extends ActivityInstrumentationTestCase2<Review
     public void testProgressBarUpdateWithIDK() {
 
         Log.d("Myapp", "Review Test: testProgressBarUpdated");
-        ViewInteraction v = onView(withId(R.id.reviewProgress));
-        if (v == null)
-            Log.d("Review Test", "progress bar is null! ");
-        else
-            Log.d("Review Test", "progress bar is not null! ");
 
         //check progress bar updated after "I don't know"
-        v.perform(new ViewAction() {
-            @Override
-            public Matcher<View> getConstraints() {
-                return isAssignableFrom(TextView.class);
-            }
 
-            @Override
-            public String getDescription() {
-                return "Retrieve vocab from View";
-            }
-
-            @Override
-            public void perform(UiController uiController, View view) {
-                if (view == null)
-                    Log.d("NOOO", "NULL");
-                else {
-                    System.out.println("called by");
-                    System.out.print(view.getClass());
-                    lastProgress = ((TextView) view).getText().toString(); //Save, because of check in getConstraints()
-
-                }
-            }
-        });
         System.out.println("after text");
         onView(withId(R.id.reviewProgress)).check(matches(withText(containsString(lastProgress))));
         onView(withId(R.id.idk)).perform(click());

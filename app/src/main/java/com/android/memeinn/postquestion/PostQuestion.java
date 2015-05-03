@@ -6,24 +6,14 @@ package com.android.memeinn.postquestion;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.android.memeinn.MainActivity;
 import com.android.memeinn.Utility;
-import com.android.memeinn.learn.ChapterActivity;
 import com.android.memeinn.R;
-import com.android.memeinn.learn.MemorizationActivity;
-import com.android.memeinn.learn.QuizActivity;
-import com.android.memeinn.review.ReviewActivity;
-import com.parse.ParseException;
-import com.parse.ParseUser;
 import com.parse.ParseObject;
 
 public class PostQuestion extends Activity{

@@ -37,7 +37,6 @@ public class MemorizationActivity extends ActionBarActivity {
     private TextView wordMeaningView;
 
     TextToSpeech ttobj;
-    private EditText write;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

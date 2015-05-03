@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.android.memeinn.Global;
 import com.android.memeinn.R;
-import com.android.memeinn.VocabActivity;
 
 /**
  * Activity for ChapterList GUI.

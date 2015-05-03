@@ -3,6 +3,8 @@ package com.android.memeinn;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
+import com.android.memeinn.learn.VocabActivity;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;

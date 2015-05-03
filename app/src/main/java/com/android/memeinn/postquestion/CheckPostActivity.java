@@ -11,7 +11,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.util.Log;
 
 import com.android.memeinn.R;
@@ -165,6 +164,8 @@ public class CheckPostActivity extends Activity{
                     break;
                 case "D":
                     option4.setTextColor(Color.RED);
+                    break;
+                default:
                     break;
             }
         } catch (IndexOutOfBoundsException e) {
