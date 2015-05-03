@@ -1,5 +1,6 @@
 package com.android.memeinn;
 
+import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.LargeTest;
 
@@ -9,6 +10,7 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withHint;
@@ -48,8 +50,20 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         onView(withId(R.id.uname)).check(matches(withText("my name")));
         onView(withId(R.id.pword)).check(matches(withText("my pass")));
 
+        //Monitor the intent is processed
+        Instrumentation.ActivityMonitor mainActivityMonitor = getInstrumentation()
+                .addMonitor(MainActivity.class.getName(), null, false);
+
         //New intent to goto MainActivity
         onView(withId(R.id.login)).perform(click());
+
+        //Verify the intent is processed
+        mainActivityMonitor.waitForActivityWithTimeout(5000);
+        assertEquals("Monitor for MainActivity has not been called",
+                1, mainActivityMonitor.getHits());
+
+        // Remove the ActivityMonitor
+        getInstrumentation().removeMonitor(mainActivityMonitor);
 
         //Check activity transition
         onView(withId(R.id.vocab)).check(matches(withText("Go To Vocabulary")));
@@ -70,5 +84,16 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 
         //check if warning dialog appears
         onView(withClassName(endsWith("DialogTitle"))).check(matches(withText("Login Failed")));
+        closePopUpDialog();
+    }
+
+    /**
+     * Helper function that closes the pop up dialog and verify the close.
+     */
+    private void closePopUpDialog() {
+        //close dialog
+        onView(withId(android.R.id.button1)).perform(click());
+        //check dialog disappeared
+        onView(withClassName(endsWith("DialogTitle"))).check(doesNotExist());
     }
 }

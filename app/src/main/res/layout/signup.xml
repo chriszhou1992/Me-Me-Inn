@@ -83,7 +83,7 @@
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="@string/cancelBtnText"
-        android:id="@+id/login"
+        android:id="@+id/cancel"
         android:background="?android:attr/selectableItemBackground"
         android:textColor="@color/white"
         android:textSize="25sp"
@@ -101,7 +101,7 @@
         android:background="?android:attr/selectableItemBackground"
         android:textColor="@color/white"
         android:textSize="25sp"
-        android:layout_alignTop="@+id/login"
+        android:layout_alignTop="@+id/cancel"
         android:layout_alignEnd="@+id/pword2"
         android:layout_alignRight="@+id/pword2"
         android:onClick="signUp" />

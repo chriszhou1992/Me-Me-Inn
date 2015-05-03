@@ -1,13 +1,16 @@
 package com.android.memeinn;
 
+import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.android.memeinn.user.LoginActivity;
 import com.android.memeinn.user.SignUpActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withHint;
@@ -24,7 +27,7 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpA
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        // Espresso will not launch our activity for us, we must launch it via getActivity().
+        //Espresso will not launch our activity for us, we must launch it via getActivity().
         getActivity();
     }
 
@@ -39,29 +42,30 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpA
         onView(withId(R.id.pword2)).check(matches(withHint("Confirm your password")));
     }
 
-    /*
-    public void testSuccessSignUp() {
+    public void testSignUpCanceled() {
+        //Monitor the intent is processed
+        Instrumentation.ActivityMonitor loginActivityMonitor = getInstrumentation()
+                .addMonitor(LoginActivity.class.getName(), null, false);
 
-        onView(withId(R.id.uname)).perform(typeText("my name"), closeSoftKeyboard());
-        onView(withId(R.id.pword)).perform(typeText("my pass"), closeSoftKeyboard());
+        //Click Cancel Button
+        onView(withId(R.id.cancel)).perform(click());
+        //Verify intent is processed
+        loginActivityMonitor.waitForActivityWithTimeout(5000);
+        assertEquals("Monitor for LoginActivity has not been called",
+                1, loginActivityMonitor.getHits());
 
-        //Test if correctly typed
-        onView(withId(R.id.uname)).check(matches(withText("my name")));
-        onView(withId(R.id.pword)).check(matches(withText("my pass")));
+        //Remove the loginActivityMonitor
+        getInstrumentation().removeMonitor(loginActivityMonitor);
 
-        //New intent to goto MainActivity
-        onView(withId(R.id.login)).perform(click());
-
-        //Check activity transition
-        onView(withId(R.id.vocab)).check(matches(withText("Go To Vocabulary")));
-        onView(withId(R.id.friends)).check(matches(withText("Match with Friends")));
-        onView(withId(R.id.ladder)).check(matches(withText("Match in Ladder")));
-    }*/
+        //Check went back to LoginActivity
+        onView(withId(R.id.uname)).check(matches(withHint("Username")));
+        onView(withId(R.id.pword)).check(matches(withHint("Password")));
+    }
 
     public void testInvalidSignUpDuplicateUsername() {
-        onView(withId(R.id.uname)).perform(typeText("my name"), closeSoftKeyboard());
-        onView(withId(R.id.pword)).perform(typeText("hello world"), closeSoftKeyboard());
-        onView(withId(R.id.pword2)).perform(typeText("hello world"), closeSoftKeyboard());
+        onView(withId(R.id.uname)).perform(typeText("my name\n"), closeSoftKeyboard());
+        onView(withId(R.id.pword)).perform(typeText("hello world\n"), closeSoftKeyboard());
+        onView(withId(R.id.pword2)).perform(typeText("hello world\n"), closeSoftKeyboard());
 
         //Test if correctly typed
         onView(withId(R.id.uname)).check(matches(withText("my name")));
@@ -75,12 +79,13 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpA
         onView(withClassName(endsWith("DialogTitle"))).check(matches(withText("SignUp Failed")));
         onView(withClassName(endsWith("TextView")))
                 .check(matches(withText("username my name already taken")));
+        closePopUpDialog();
     }
 
     public void testInvalidSignUpUnmatchedPassword() {
-        onView(withId(R.id.uname)).perform(typeText("abcd"), closeSoftKeyboard());
-        onView(withId(R.id.pword)).perform(typeText("hello world"), closeSoftKeyboard());
-        onView(withId(R.id.pword2)).perform(typeText("hello w"), closeSoftKeyboard());
+        onView(withId(R.id.uname)).perform(typeText("abcd\n"), closeSoftKeyboard());
+        onView(withId(R.id.pword)).perform(typeText("hello world\n"), closeSoftKeyboard());
+        onView(withId(R.id.pword2)).perform(typeText("hello w\n"), closeSoftKeyboard());
 
         //Test if correctly typed
         onView(withId(R.id.uname)).check(matches(withText("abcd")));
@@ -94,13 +99,13 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpA
         onView(withClassName(endsWith("DialogTitle"))).check(matches(withText("Bad Input")));
         onView(withClassName(endsWith("TextView")))
                 .check(matches(withText("Username/Password is not in correct format.")));
+        closePopUpDialog();
     }
 
 
     public void testInvalidSignUpEmptyUsername() {
-        onView(withId(R.id.uname)).perform(typeText(""), closeSoftKeyboard());
-        onView(withId(R.id.pword)).perform(typeText("hello world"), closeSoftKeyboard());
-        onView(withId(R.id.pword2)).perform(typeText("hello world"), closeSoftKeyboard());
+        onView(withId(R.id.pword)).perform(typeText("hello world\n"), closeSoftKeyboard());
+        onView(withId(R.id.pword2)).perform(typeText("hello world\n"), closeSoftKeyboard());
 
         //Test if correctly typed
         onView(withId(R.id.uname)).check(matches(withText("")));
@@ -114,12 +119,13 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpA
         onView(withClassName(endsWith("DialogTitle"))).check(matches(withText("Bad Input")));
         onView(withClassName(endsWith("TextView")))
                 .check(matches(withText("Username/Password is not in correct format.")));
+        closePopUpDialog();
     }
 
     public void testInvalidSignUpEmptyPassword() {
-        onView(withId(R.id.uname)).perform(typeText("abcd"), closeSoftKeyboard());
-        onView(withId(R.id.pword)).perform(typeText(""), closeSoftKeyboard());
-        onView(withId(R.id.pword2)).perform(typeText("hello world"), closeSoftKeyboard());
+        onView(withId(R.id.uname)).perform(typeText("abcd\n"), closeSoftKeyboard());
+        onView(withId(R.id.pword)).perform(typeText("\n"), closeSoftKeyboard());
+        onView(withId(R.id.pword2)).perform(typeText("hello world\n"), closeSoftKeyboard());
 
         //Test if correctly typed
         onView(withId(R.id.uname)).check(matches(withText("abcd")));
@@ -133,5 +139,16 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpA
         onView(withClassName(endsWith("DialogTitle"))).check(matches(withText("Bad Input")));
         onView(withClassName(endsWith("TextView")))
                 .check(matches(withText("Username/Password is not in correct format.")));
+        closePopUpDialog();
+    }
+
+    /**
+     * Helper function that closes the pop up dialog and verify the close.
+     */
+    private void closePopUpDialog() {
+        //close dialog
+        onView(withId(android.R.id.button1)).perform(click());
+        //check dialog disappeared
+        onView(withClassName(endsWith("DialogTitle"))).check(doesNotExist());
     }
 }

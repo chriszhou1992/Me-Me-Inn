@@ -54,6 +54,7 @@ public class SignUpActivity extends Activity {
         if (username.equals("") || pass.equals("") ||
                 verifyPass.equals("") || !verifyPass.equals(pass)) {
             Utility.warningDialog(this, "Bad Input", "Username/Password is not in correct format.");
+            progressBar.setVisibility(View.GONE);
             return;
         }
 
