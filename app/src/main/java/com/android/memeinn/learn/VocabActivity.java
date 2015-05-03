@@ -31,13 +31,13 @@ public class VocabActivity extends Activity{
     public void gotoChapOrReview(View view) {
         if(flag == 1){
             Intent goToChapIntent = new Intent(this, ChapterActivity.class);
-            String vocabType = ((Button) /*findViewById(R.id.gre)*/view).getText().toString();
+            String vocabType = ((Button) view).getText().toString();
             Log.d("MyApp", "VocabType" + vocabType);
             goToChapIntent.putExtra(EXTRA_MESSAGE, vocabType);
             startActivity(goToChapIntent);
         } else if (flag == 0){
             Intent goToReviewIntent = new Intent(this, ReviewActivity.class);
-            String vocabType = ((Button) /*findViewById(R.id.gre)*/view).getText().toString();
+            String vocabType = ((Button) view).getText().toString();
             Log.d("MyApp", "VocabType" + vocabType);
             goToReviewIntent.putExtra(EXTRA_MESSAGE, vocabType);
             startActivity(goToReviewIntent);
