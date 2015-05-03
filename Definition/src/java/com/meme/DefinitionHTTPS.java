@@ -49,6 +49,9 @@ import org.apache.http.HttpEntity;
 import java.io.InputStream;
 
 public class DefinitionHTTPS {
+	public DefinitionHTTPS(){
+		
+	}
 	public static void main(String[] args){
 		String defination = givenAcceptingAllCertificates_whenHttpsUrlIsConsumed_thenException("ubiquitous");
 		System.out.println(defination);
