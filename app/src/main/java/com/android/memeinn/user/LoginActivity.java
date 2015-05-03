@@ -1,56 +1,44 @@
 package com.android.memeinn.user;
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import com.android.memeinn.MainActivity;
 import com.android.memeinn.R;
 import com.android.memeinn.Utility;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
-
-import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.List;
 
-import bolts.Task;
-
 /**
  * Default activity of the application. Handles login.
  */
-public class LoginActivity extends ActionBarActivity{
+public class LoginActivity extends ActionBarActivity {
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-
         //Fix the issue Android changes the font of password fields into monospace
         EditText passField = (EditText) findViewById(R.id.pword);
         passField.setTypeface(Typeface.DEFAULT);
 
+        progressBar = (ProgressBar) findViewById(R.id.spinner);
     }
 
 
@@ -59,33 +47,54 @@ public class LoginActivity extends ActionBarActivity{
      * @param view
      */
     public void logIn(View view) {
+        //prevent multiple login clicks
+        if (progressBar.getVisibility() == View.VISIBLE)
+            return;
+        progressBar.setVisibility(View.VISIBLE);
+
         EditText usernameField = (EditText) findViewById(R.id.uname);
         EditText passField = (EditText) findViewById(R.id.pword);
-        ParseUser.logInInBackground(usernameField.getText().toString(),
-                passField.getText().toString(), new LogInCallback() {
 
-            public void done(ParseUser user, ParseException e) {
-                if (user != null) {
-                    Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+        //Use AsyncTask to enable built-in Espresso support for testing async operations
+        AsyncTask<String, Void, String> loginTask = createLoginAsyncTask();
+        loginTask.execute(usernameField.getText().toString(), passField.getText().toString());
+    }
+
+    /**
+     * Private function that creates an async task for login.
+     * @return AsyncTask
+     */
+    private AsyncTask<String, Void, String> createLoginAsyncTask() {
+        return new AsyncTask<String, Void, String>() {
+            @Override
+            protected String doInBackground(String... params) {
+                try {
+                    ParseUser.logIn(params[0], params[1]);
+                } catch (ParseException e) {
+                    return e.getMessage();
+                }
+                return null;
+            }
+
+            /**
+             * Called on UI thread to perform the UI updates after the login operation finishes
+             * in the backend.
+             * @param errorMsg The returned string for a possible login error. A value of null
+             *                 indicates login success.
+             */
+            @Override
+            protected void onPostExecute(String errorMsg) {
+                progressBar.setVisibility(View.GONE);
+                if (errorMsg == null) { //login success then launch main activity
+                    Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(mainIntent);
+                    finish();
                 } else {
-                    //failed
-                    Log.d("APP", e.getMessage());
-                    Utility.warningDialog(LoginActivity.this, "Login Failed", e.getMessage());
+                    Log.d("MyApp", errorMsg);
+                    Utility.warningDialog(LoginActivity.this, "Login Failed", errorMsg);
                 }
             }
-        });
-        /*
-
-        try {
-            ParseUser.logIn(usernameField.getText().toString(), passField.getText().toString());
-            //Intent mainIntent = new Intent(this, MainActivity.class);
-            Intent mainIntent = new Intent(this, MainActivity.class);
-            startActivity(mainIntent);
-        } catch (ParseException e) {
-            Log.d("MyApp", e.getMessage());
-            Utility.warningDialog(LoginActivity.this, "Login Failed", e.getMessage());
-        }*/
+        };
     }
 
     /**

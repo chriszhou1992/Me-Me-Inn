@@ -2,10 +2,12 @@ package com.android.memeinn.user;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.android.memeinn.MainActivity;
 import com.android.memeinn.R;
@@ -14,6 +16,7 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 
 public class SignUpActivity extends Activity {
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,8 @@ public class SignUpActivity extends Activity {
         EditText passVerifyField = (EditText) findViewById(R.id.pword2);
         passField.setTypeface(Typeface.DEFAULT);
         passVerifyField.setTypeface(Typeface.DEFAULT);
+
+        progressBar = (ProgressBar) findViewById(R.id.spinner);
     }
 
     /**
@@ -33,6 +38,11 @@ public class SignUpActivity extends Activity {
      * @param view
      */
     public void signUp(View view) {
+        //prevent multiple signup clicks
+        if (progressBar.getVisibility() == View.VISIBLE)
+            return;
+        progressBar.setVisibility(View.VISIBLE);
+
         EditText usernameField = (EditText) findViewById(R.id.uname);
         EditText passField = (EditText) findViewById(R.id.pword);
         EditText passVerifyField = (EditText) findViewById(R.id.pword2);
@@ -47,35 +57,51 @@ public class SignUpActivity extends Activity {
             return;
         }
 
-        ParseUser user = new ParseUser();
-        user.setUsername(username);
-        user.setPassword(pass);
-        //user.setEmail("email@example.com");
-        //user.put("phone", "650-555-0000");
+        AsyncTask<String, Void, String> signUpTask = createSignUpAsyncTask();
+        signUpTask.execute(username, pass);
+    }
 
-        /*
-        user.signUpInBackground(new SignUpCallback() {
-            public void done(ParseException e) {
-                if (e == null) {
-                    Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+    /**
+     * Private function that creates an async task for sign up.
+     * @return AsyncTask
+     */
+    private AsyncTask<String, Void, String> createSignUpAsyncTask() {
+        return new AsyncTask<String, Void, String>() {
+            @Override
+            protected String doInBackground(String... params) {
+                ParseUser user = new ParseUser();
+                user.setUsername(params[0]);
+                user.setPassword(params[1]);
+                //user.setEmail("email@example.com");
+                //user.put("phone", "650-555-0000");
+
+                try {
+                    user.signUp();
+                } catch (ParseException e) {
+                    return e.getMessage();
+                }
+                return null;
+            }
+
+            /**
+             * Called on UI thread to perform the UI updates after the login operation finishes
+             * in the backend.
+             * @param errorMsg The returned string for a possible login error. A value of null
+             *                 indicates login success.
+             */
+            @Override
+            protected void onPostExecute(String errorMsg) {
+                progressBar.setVisibility(View.GONE);
+                if (errorMsg == null) { //login success then launch main activity
+                    Intent mainIntent = new Intent(SignUpActivity.this, MainActivity.class);
                     startActivity(mainIntent);
-                    Log.d("MyApp", "Success");
+                    finish();
                 } else {
-                    //failed
-                    Log.d("MyApp", e.getMessage());
-                    Utility.warningDialog(SignUpActivity.this, "SignUp Failed", e.getMessage());
+                    Log.d("MyApp", errorMsg);
+                    Utility.warningDialog(SignUpActivity.this, "SignUp Failed", errorMsg);
                 }
             }
-        });*/
-
-        try {
-            user.signUp();
-            Intent mainIntent = new Intent(this, MainActivity.class);
-            startActivity(mainIntent);
-        } catch (ParseException e) {
-            Log.d("MyApp", e.getMessage());
-            Utility.warningDialog(SignUpActivity.this, "SignUp Failed", e.getMessage());
-        }
+        };
     }
 
     /**
