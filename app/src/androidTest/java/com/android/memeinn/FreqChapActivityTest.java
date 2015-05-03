@@ -25,126 +25,42 @@ public class FreqChapActivityTest extends ActivityInstrumentationTestCase2<Vocab
         getActivity();
     }
 
-    
-    public void testButtonA() {
-        onView(withId(R.id.gre)).perform(click());
-        onView(withId(R.id.buttonA)).perform(click());
-        onView(withId(R.id.prevWordBtn)).check(matches(withText("Previous")));
-        onView(withId(R.id.nextWordBtn)).check(matches(withText("Next")));
-    }
-
-    public void testButtonB() {
-        onView(withId(R.id.gre)).perform(click());
-        onView(withId(R.id.buttonB)).perform(click());
-        onView(withId(R.id.prevWordBtn)).check(matches(withText("Previous")));
-        onView(withId(R.id.nextWordBtn)).check(matches(withText("Next")));
-    }
-
-
-    public void testButtonAIntent() {
-        onView(withId(R.id.gre)).perform(click());
-        onView(withId(R.id.buttonA)).perform(click());
-        onView(withId(R.id.wordContentView)).check(matches(isDisplayed()));
-        onView(withId(R.id.wordMeaningView)).check(matches(isDisplayed()));
-    }
-
-    public void testButtonBIntent() {
-        onView(withId(R.id.gre)).perform(click());
-        onView(withId(R.id.buttonA)).perform(click());
-        onView(withId(R.id.wordContentView)).check(matches(isDisplayed()));
-        onView(withId(R.id.wordMeaningView)).check(matches(isDisplayed()));
-    }
-
-    //newly added test cases
 
     /**
-     * Test new frequency partitioning features
+     * Test new vocabulary partitioning features
      */
 
 
-    public void testWithHighFrequencyClicked() {
-        Log.d("Myapp", "testWithHighFrequencyClicked");
+    public void testButtonA() {
         onView(withId(R.id.gre)).perform(click());
-        onView(withId(R.id.buttonA)).perform(click());
-
-        onView(withId(R.id.prevWordBtn)).check(matches(withText("Previous")));
-        onView(withId(R.id.nextWordBtn)).check(matches(withText("Next")));
+        onView(withId(R.id.gre)).check(matches(withText("GRE")));
     }
 
-    public void testWithMediumFrequencyClicked() {
-        Log.d("Myapp", "testWithMediumFrequencyClicked");
-        onView(withId(R.id.gre)).perform(click());
-        onView(withId(R.id.buttonB)).perform(click());
-
-        onView(withId(R.id.prevWordBtn)).check(matches(withText("Previous")));
-        onView(withId(R.id.nextWordBtn)).check(matches(withText("Next")));
+    public void testButtonB() {
+        onView(withId(R.id.ielts)).perform(click());
+        onView(withId(R.id.ielts)).check(matches(withText("IELTS")));
     }
 
-
-    public void testWithLowFrequencyClicked() {
-        Log.d("Myapp", "testWithLowFrequencyClicked");
-        onView(withId(R.id.gre)).perform(click());
-        onView(withId(R.id.buttonC)).perform(click());
-
-        onView(withId(R.id.prevWordBtn)).check(matches(withText("Previous")));
-        onView(withId(R.id.nextWordBtn)).check(matches(withText("Next")));
+    public void testButtonC() {
+        onView(withId(R.id.act)).perform(click());
+        onView(withId(R.id.act)).check(matches(withText("ACT")));
     }
 
+    public void testButtonD() {
+        onView(withId(R.id.toefl)).perform(click());
+        onView(withId(R.id.toefl)).check(matches(withText("TOEFL")));
+    }
 
-    public void testHighFrequencyWordMatch() throws InterruptedException{
-        Log.d("Myapp", "testWithHighFrequencyClicked");
+    public void testButtonE() {
+        onView(withId(R.id.sat)).perform(click());
+        onView(withId(R.id.sat)).check(matches(withText("SAT")));
+    }
 
-        onView(withId(R.id.gre)).perform(click());
-        Thread.sleep(100);
-        onView(withId(R.id.buttonA)).perform(click());
-        //onView(withId(R.id.nextWordBtn)).perform(click());
-        //needs sometime for database to respond
-        Thread.sleep(5000);
-        onView(withId(R.id.wordContentView)).check(matches(withText("abate")));
+    public void testButtonF() {
+        onView(withId(R.id.gmat)).perform(click());
+        onView(withId(R.id.gmat)).check(matches(withText("GMAT")));
     }
 
 
-    public void testMeidumFrequencyWordMatch() throws InterruptedException{
-        Log.d("Myapp", "testWithHighFrequencyClicked");
-
-        onView(withId(R.id.gre)).perform(click());
-        Thread.sleep(100);
-        onView(withId(R.id.buttonB)).perform(click());
-        //onView(withId(R.id.nextWordBtn)).perform(click());
-        //needs sometime for database to respond
-        Thread.sleep(5000);
-        onView(withId(R.id.wordContentView)).check(matches(withText("abhor")));
-    }
-
-
-
-    public void testLowFrequencyWordMatch() throws InterruptedException{
-        Log.d("Myapp", "testWithHighFrequencyClicked");
-
-        onView(withId(R.id.gre)).perform(click());
-        Thread.sleep(100);
-        onView(withId(R.id.buttonC)).perform(click());
-        //onView(withId(R.id.nextWordBtn)).perform(click());
-        //needs sometime for database to respond
-        Thread.sleep(5000);
-        onView(withId(R.id.wordContentView)).check(matches(withText("abacus")));
-    }
-
-
-
-        //all the way from sign in
-        /*
-        onView(withId(R.id.uname)).perform(typeText("my name"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.pword)).perform(typeText("my pass"), ViewActions.closeSoftKeyboard());
-
-        //Test if correctly typed
-        onView(withId(R.id.uname)).check(matches(withText("my name")));
-        onView(withId(R.id.pword)).check(matches(withText("my pass")));
-
-        //New intent to goto MainActivity
-        onView(withId(R.id.login)).perform(click());
-        Thread.sleep(100);
-        onView(withId(R.id.vocab)).perform(click());
-        Thread.sleep(100);*/
 }
 
