@@ -186,6 +186,8 @@ public class MatchStartActivity extends Activity {
     }
 
     /*
+    @ToDo: Comparision of using thread and unclockCanvasAndPost to public UI changes or use
+    PostInvaldated to trigger redraws.
     @Override
     public void run() {
         SurfaceHolder holder = animatedView.getHolder();

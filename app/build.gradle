@@ -50,6 +50,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')   //Parse API
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.1'    //Espresso
     androidTestCompile 'com.android.support.test:runner:0.2'    //Espresso Dependency
+    androidTestCompile 'com.android.support.test:rules:0.2'     //Espresso Dependency
     compile 'com.firebase:firebase-client-android:2.2.1+' //firebase api
     androidTestCompile "org.mockito:mockito-core:1.+"
 

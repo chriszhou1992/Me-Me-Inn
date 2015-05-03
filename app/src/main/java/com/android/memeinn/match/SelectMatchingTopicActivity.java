@@ -42,10 +42,6 @@ public class SelectMatchingTopicActivity  extends Activity {
     String oppoName;
     private String currentUsername;
 
-    /**
-     * start creating
-     * @param savedInstanceState
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,11 +61,16 @@ public class SelectMatchingTopicActivity  extends Activity {
         ((TextView)findViewById(R.id.oppoName)).setText(oppoName);
     }
 
+    /**
+     * Creates an event listener for the opponent's topic choice in Firebase.
+     * @return ChildEventListener The created event listener.
+     */
     private ChildEventListener createListenerOpponentTopicChoice() {
         return new ChildEventListener() {
             private int childCount = 0;
             //2 users' entry and ROUNDS*2 questions entry
             private final int MAX_CHILD_COUNT = 2 + ROUNDS * 2;
+
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 childCount++;
@@ -77,7 +78,6 @@ public class SelectMatchingTopicActivity  extends Activity {
                     Log.d("match", "childCount = " + childCount);
                     directToContestPage();
                 }
-
             }
 
             @Override
@@ -158,6 +158,11 @@ public class SelectMatchingTopicActivity  extends Activity {
         });
     }
 
+    /**
+     * Function used to publish a question to Firebase.
+     * @param q Question The question to be published.
+     * @param questionIndex int An integer indicating the current question index.
+     */
     private void publishQuestion(Question q, int questionIndex) {
         int compare = currentUsername.compareToIgnoreCase(oppoName);
         if (compare < 0)
@@ -166,6 +171,10 @@ public class SelectMatchingTopicActivity  extends Activity {
             matchRef.child("Q" + (2 * (questionIndex + 1)) ).setValue(q); //even-indexed questions
     }
 
+    /**
+     * Function that fires up an intent for ContestActivity. Called when all questions are
+     * generated from both players to start the actual competition.
+     */
     private void directToContestPage(){
         if (oppoChosen != null && userChosen != null){
             Intent matchStartIntent = new Intent(this, ContestActivity.class);
@@ -180,6 +189,10 @@ public class SelectMatchingTopicActivity  extends Activity {
         Log.d("match", "directing");
     }
 
+    /**
+     * onClick event callback function used to publish the chosen topic to Firebase.
+     * @param view The View clicked.
+     */
     public void chooseTopic(View view) {
         if(userChosen == null){
             view.setBackgroundColor(Color.GREEN);
@@ -188,10 +201,5 @@ public class SelectMatchingTopicActivity  extends Activity {
             //create match questions from the selected topic
             generateMatchQuestions();
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-
     }
 }

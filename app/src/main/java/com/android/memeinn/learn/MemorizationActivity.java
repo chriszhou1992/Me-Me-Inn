@@ -36,8 +36,10 @@ public class MemorizationActivity extends ActionBarActivity {
     private TextView wordContentView;
     private TextView wordMeaningView;
 
+    //created object for pronunciation functionality
     TextToSpeech ttobj;
-
+    //necessary to keep this unused variable for the textToSpeech class
+    private EditText write;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +54,7 @@ public class MemorizationActivity extends ActionBarActivity {
         frequencyText = intent.getStringExtra(Global.EXTRA_MESSAGE_FREQUENCY);
         wordTableName = intent.getStringExtra(Global.EXTRA_MESSAGE_TABLENAME);
 
-        //write = (EditText)findViewById(R.id.hidden_edit_view);
+        write = (EditText)findViewById(R.id.hidden_edit_view);
         ttobj=new TextToSpeech(getApplicationContext(),
                 new TextToSpeech.OnInitListener() {
                     @Override

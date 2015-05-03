@@ -8,9 +8,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.android.memeinn.R;
-import com.android.memeinn.learn.ChapterActivity;
-import com.android.memeinn.learn.FreqChapActivity;
-import com.android.memeinn.learn.QuizActivity;
 import com.android.memeinn.review.ReviewActivity;
 
 
@@ -31,13 +28,13 @@ public class VocabActivity extends Activity{
     public void gotoChapOrReview(View view) {
         if(flag == 1){
             Intent goToChapIntent = new Intent(this, ChapterActivity.class);
-            String vocabType = ((Button) /*findViewById(R.id.gre)*/view).getText().toString();
+            String vocabType = ((Button) view).getText().toString();
             Log.d("MyApp", "VocabType" + vocabType);
             goToChapIntent.putExtra(EXTRA_MESSAGE, vocabType);
             startActivity(goToChapIntent);
         } else if (flag == 0){
             Intent goToReviewIntent = new Intent(this, ReviewActivity.class);
-            String vocabType = ((Button) /*findViewById(R.id.gre)*/view).getText().toString();
+            String vocabType = ((Button) view).getText().toString();
             Log.d("MyApp", "VocabType" + vocabType);
             goToReviewIntent.putExtra(EXTRA_MESSAGE, vocabType);
             startActivity(goToReviewIntent);
