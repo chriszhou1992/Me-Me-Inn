@@ -262,15 +262,7 @@ public class MatchStartAnimView extends SurfaceView
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        /*boolean retry = true;
-        while (retry) {
-            try {
-                animationThread.join();
-                retry = false;
-            } catch (InterruptedException e) {
-                // try again shutting down the thread
-            }
-        }*/
+
     }
 
     /**
