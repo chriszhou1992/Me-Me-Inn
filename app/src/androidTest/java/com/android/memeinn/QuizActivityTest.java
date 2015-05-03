@@ -1,5 +1,7 @@
 package com.android.memeinn;
 
+import android.app.Instrumentation;
+import android.content.Intent;
 import android.support.test.espresso.UiController;
 import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.ViewInteraction;
@@ -40,6 +42,14 @@ public class QuizActivityTest extends ActivityInstrumentationTestCase2<QuizActiv
     @Override
     public void setUp() throws Exception {
         super.setUp();
+        Intent redirectedEvent = new Intent();
+        //redirectedEvent.setClassName("com.UI", "com.UI.AddClassEvent");
+        redirectedEvent.putExtra(Global.EXTRA_MESSAGE_FREQUENCY, "high frequency");
+        redirectedEvent.putExtra(Global.EXTRA_MESSAGE_TABLENAME, "GRE");
+        redirectedEvent.putExtra(Global.EXTRA_MESSAGE_VOCABTYPE, "GRE");
+
+        setActivityIntent(redirectedEvent);
+
         // Espresso will not launch our activity for us, we must launch it via getActivity().
         currAct = getActivity();
         if (currAct != null)
@@ -58,6 +68,20 @@ public class QuizActivityTest extends ActivityInstrumentationTestCase2<QuizActiv
      * different word can be generated
      */
     public void testDifferentWord() {
+
+
+        //Monitor the intent is processed
+        Instrumentation.ActivityMonitor QuizActivityMonitor = getInstrumentation()
+                .addMonitor(QuizActivity.class.getName(), null, false);
+
+        //Verify the intent is processed
+        QuizActivityMonitor.waitForActivityWithTimeout(5000);
+        assertEquals("Monitor for MainActivity has not been called",
+                1, QuizActivityMonitor.getHits());
+
+        // Remove the ActivityMonitor
+        getInstrumentation().removeMonitor(QuizActivityMonitor);
+
 
         Log.d("Myapp", "testDifferentWord");
 
@@ -104,6 +128,9 @@ public class QuizActivityTest extends ActivityInstrumentationTestCase2<QuizActiv
 
     }
 
+    /**
+     * test on the score accumulation
+     */
     public void testScoreAccumulation(){
         if (currAct != null)
             Log.d("Myapp", "testScoreAccumulation");
