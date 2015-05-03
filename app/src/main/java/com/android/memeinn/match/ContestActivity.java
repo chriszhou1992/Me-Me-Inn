@@ -154,18 +154,16 @@ public class ContestActivity extends Activity {
         oppoScoreGain = null;
     }
 
+    /**
+     * Private function that adds a listener for match status.
+     */
     private void addMatchStatusListener() {
         matchRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
-                    //display dialog if opponent exits
-                    /*if (!ContestActivity.this.isFinishing())
-                        Utility.warningDialog(ContestActivity.this, "Opponent Exited!",
-                            "Your opponent exited the match!");*/
-                    //force user to win since opponent exited
-                    //oppoScore = -1;
-                    //goToResult();
+                    //@ToDo: Indicate user if opponent exits
+
                     Firebase userInMatchRef = FirebaseSingleton.getInstance(currentUsername +
                             "/isInMatch");
                     userInMatchRef.setValue(false);
@@ -227,6 +225,10 @@ public class ContestActivity extends Activity {
         timer.scheduleAtFixedRate(countDownTask, 1000, 1000);
     }
 
+    /**
+     * TimerTask function that is invoked by the timer to decrement countdown counter
+     * and publish the countdown to UI.
+     */
     private void decrementCountDown() {
         if (countDown > 0)
             countDown--;
@@ -245,6 +247,11 @@ public class ContestActivity extends Activity {
         });
     }
 
+    /**
+     * Function used to control the visibility of choice buttons.
+     * @param control int An integer that acts as a control flag for the visibility. A positive
+     *                means make buttons visible, else make buttons invisible.
+     */
     private void changeChoiceVisibility(int control) {
         if (control > 0) {
             for (Button b : optionBtns)
@@ -347,6 +354,10 @@ public class ContestActivity extends Activity {
         resetRoundData();
     }
 
+    /**
+     * Function that resets the data to initial values for a fresh start
+     * of next round.
+     */
     private void resetRoundData() {
         oppoScoreGain = null;
         oppoSelection = null;
@@ -404,6 +415,14 @@ public class ContestActivity extends Activity {
         }
     }
 
+    /**
+     * Function used to handle the logic for score gain/loss for users.
+     * @param userScoreGain int An integer representing the score gain for current user.
+     * @param oppoScoreGain int An integer representing the score gain for opponent.
+     * @note For the score gained parameters, a positive means a real gain from a correct
+     * answer; a negative indicates a score gain of 0 from an incorrect answer; a zero indicates
+     * no change in score.
+     */
     private void displayScore(int userScoreGain, int oppoScoreGain) {
         if (userScoreGain > 0)
             userScore += userScoreGain;
@@ -415,6 +434,14 @@ public class ContestActivity extends Activity {
             displayScore(oppoScoreTextView, oppoScoreGain, oppoScore);
     }
 
+    /**
+     * Function used to publish the score gains to UI. A gain of score is published with green
+     * text of "+number" then shortly followed with a white text of final score. An incorrect
+     * answer is published with red text and no change of final score.
+     * @param scoreTextView TextView The UI component where the score update should be published.
+     * @param scoreGain int An integer representing the score gain that needs to be published.
+     * @param finalScore int An integer representing the final score after the score gain is added.
+     */
     private void displayScore(final TextView scoreTextView, int scoreGain,
                               final Integer finalScore) {
         if (scoreGain < 0) {
@@ -437,6 +464,14 @@ public class ContestActivity extends Activity {
         }
     }
 
+    /**
+     * Function used to disable the timer countdown updates to UI. It does so by changing the
+     * color of the TextView displaying the countdown, and this color is checked in the
+     * countdown function so that if the disabled color is seen no changes will be published
+     * to UI.
+     * @param disable boolean A boolean control flag indicating whether the timer countdown
+     *                should be disabled or not.
+     */
     private void disableCountDownTimer(boolean disable) {
         if (disable)
             timeLeftTextView.setTextColor(Color.LTGRAY);
@@ -450,7 +485,6 @@ public class ContestActivity extends Activity {
      */
     public void choiceClicked(View btn) {
         disableCountDownTimer(true);
-        //countDown = 11;
         //disable further button clicking
         setOptionsClickable(false);
 
@@ -468,14 +502,7 @@ public class ContestActivity extends Activity {
                 displayScore(-1, 0);
                 changeAnswerBtnBackground(btn, -1);
                 Log.d("contest", "wrong choice");
-                //if answered incorrectly, add this word to user's review list
-               /* ParseUser u = ParseUser.getCurrentUser();
-                String relationName = "UserReviewList" + vocabCategory;
-                ParseRelation<ParseObject> rel = u.getRelation(relationName);
-                Log.d("quiz", relationName);
-                rel.add(vocab);
-                Log.d("quiz", vocab.getString("word"));
-                u.saveInBackground();*/
+                //@ToDo: if answered incorrectly, add this word to user's review list
             }
 
             for (; i < BTN_IDS.length; i++)
@@ -492,6 +519,9 @@ public class ContestActivity extends Activity {
         choiceRef.setValue(clickData);
     }
 
+    /**
+     * Function used to publish the correctness of the selected choice to UI.
+     */
     private void displayRoundResult() {
         if (oppoSelection == null)
             return;
@@ -506,6 +536,9 @@ public class ContestActivity extends Activity {
         displayCorrectAnswer();
     }
 
+    /**
+     * Function that publishes the correct choice button to UI.
+     */
     private void displayCorrectAnswer() {
         Button b;
         for (int i = 0; i < optionBtns.size(); i++) {
@@ -517,19 +550,15 @@ public class ContestActivity extends Activity {
         }
     }
 
+    /**
+     * Overridden function that performs additional clean up when the activity
+     * is destroyed.
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
         timer.cancel();
         tempTimer.cancel();
         matchRef.removeValue();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();/*
-        Intent friendListIntent = new Intent(this, AvailFriendListActivity.class);
-        startActivity(friendListIntent);
-        finish();*/
     }
 }

@@ -57,8 +57,10 @@
         android:textSize="18sp"
         android:background="#ff809e6d"
         android:textAllCaps="false"
+        android:onClick="gotoChapOrReview"
         android:layout_below="@+id/toefl"
-        android:onClick="gotoChapOrReview" />
+        android:layout_alignLeft="@+id/gre"
+        android:layout_alignStart="@+id/gre" />
 
     <Button
         android:layout_width="wrap_content"

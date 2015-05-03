@@ -36,6 +36,10 @@ public class MatchResultActivity extends Activity {
         }
     }
 
+    /**
+     * OnClick callback function that fires up an intent to go back to MainActivity.
+     * @param view Button The button that is clicked.
+     */
     public void goBack(View view){
         Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(mainIntent);
