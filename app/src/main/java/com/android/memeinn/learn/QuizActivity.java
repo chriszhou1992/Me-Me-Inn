@@ -97,6 +97,12 @@ public class QuizActivity extends Activity {
             //vocabCategory = s == null? "GRE" : s;
             vocabCategory = i.getStringExtra(Global.EXTRA_MESSAGE_VOCABTYPE);
             //firstLetter = s == null? "a" : s;
+            Log.d("quiz!", "word frequency is " + wordFrequency);
+            Log.d("quiz!", "word table name is " + wordTableName);
+            Log.d("quiz!", "vocab category is " + vocabCategory);
+
+
+
         }
     }
 
@@ -139,6 +145,7 @@ public class QuizActivity extends Activity {
         //query.whereStartsWith("word", firstLetter);
 
         System.out.println("Quiz ChapterActivity.EXTRA_MESSAGE_FREQUENCY" + wordFrequency);
+        Log.d("quiz~", wordFrequency);
         if(wordFrequency.toLowerCase().equals("high frequency")){
             query.whereGreaterThan("frequency", 4);
         }
