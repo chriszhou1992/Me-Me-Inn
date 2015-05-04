@@ -261,7 +261,6 @@ public class FriendActivity extends Activity {
             }
 
             ParseUser data = mFriendUsers.get(position);
-//			_holder.img_contact.setImageURI(data.photoUri);
             _holder.txt_username.setText(data.getUsername());
 
             return convertView;

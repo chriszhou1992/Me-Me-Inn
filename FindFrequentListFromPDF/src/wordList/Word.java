@@ -1,5 +1,10 @@
 package wordList;
 
+/**
+ * This is the object class that defines a word object,
+ * it stores the content of the word, its definaton as well as
+ * its frequency
+ */
 public class Word {
 	private String word;
 	private String definition;

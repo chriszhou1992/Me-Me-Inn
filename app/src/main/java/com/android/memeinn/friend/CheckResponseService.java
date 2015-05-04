@@ -19,11 +19,13 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 public class CheckResponseService extends Service {
-    public static final String MY_SERVICE = "CheckResponseService";
 
     private boolean mBInited = false;
     private Timer mCheckTimer = null;
 
+    /**
+     *  local binder
+     */
     public class LocalBinder extends Binder {
         public final Service service;
 
@@ -55,15 +57,9 @@ public class CheckResponseService extends Service {
         return Service.START_STICKY;
     }
 
-    @Override
-    public void onCreate() {
-    }
-
-    @Override
-    public void onDestroy() {
-    }
-
-    //to check database
+    /**
+     * to check database
+     */
     private void startTimer() {
         if (mCheckTimer != null) {
             mCheckTimer.cancel();
@@ -83,7 +79,9 @@ public class CheckResponseService extends Service {
         }
     }
 
-    //connect with database and return content
+    /**
+     * connect with database and return content
+     */
     private void CheckParseDB() {
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
