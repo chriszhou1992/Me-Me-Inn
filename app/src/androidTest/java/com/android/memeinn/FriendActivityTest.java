@@ -13,7 +13,6 @@ import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.not;
 
 public class FriendActivityTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
@@ -32,8 +31,8 @@ public class FriendActivityTest extends ActivityInstrumentationTestCase2<LoginAc
      * Friend name could be listed
      */
     public void testFriendList() {
-        onView(withId(R.id.uname)).perform(typeText("1111"), closeSoftKeyboard());
-        onView(withId(R.id.pword)).perform(typeText("1111"), closeSoftKeyboard());
+        onView(withId(R.id.uname)).perform(typeText("1111\n"), closeSoftKeyboard());
+        onView(withId(R.id.pword)).perform(typeText("1111\n"), closeSoftKeyboard());
 
         //Test if correctly typed
         onView(withId(R.id.uname)).check(matches(withText("1111")));

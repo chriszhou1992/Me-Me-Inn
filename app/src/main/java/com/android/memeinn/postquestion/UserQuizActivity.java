@@ -1,44 +1,27 @@
 package com.android.memeinn.postquestion;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.app.AlertDialog;
 
-import com.android.memeinn.Question;
 import com.android.memeinn.R;
 import com.android.memeinn.Utility;
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseRelation;
-import com.parse.ParseUser;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 /**
  * Activity that handles logics dealing with quizzes.
  */
-public class UserQuiz extends Activity {
+public class UserQuizActivity extends Activity {
 
     String extraString = "";
     private ArrayList<ParseObject> questions;
@@ -54,7 +37,7 @@ public class UserQuiz extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userquizmain);
         Intent intent = getIntent();
-        extraString = intent.getStringExtra(ShowUserQuiz.EXTRA_MESSAGE);
+        extraString = intent.getStringExtra(ShowUserQuizActivity.EXTRA_MESSAGE);
 
         questionTitle = (TextView) findViewById(R.id.questionT);
         option1 = (Button) findViewById(R.id.option0);

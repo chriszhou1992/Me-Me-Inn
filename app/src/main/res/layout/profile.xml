@@ -100,7 +100,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log out"
+        android:text="@string/logoutText"
         android:id="@+id/logout"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"

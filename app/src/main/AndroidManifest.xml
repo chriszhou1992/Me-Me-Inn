@@ -134,7 +134,7 @@
         <service android:name=".friend.CheckResponseService" />
 
         <activity
-            android:name=".postquestion.PostQuestion"
+            android:name=".postquestion.PostQuestionActivity"
             android:label="@string/app_name" >
         </activity>
 
@@ -149,12 +149,12 @@
         </activity>
 
         <activity
-            android:name=".postquestion.ShowUserQuiz"
+            android:name=".postquestion.ShowUserQuizActivity"
             android:label="@string/app_name" >
         </activity>
 
         <activity
-            android:name=".postquestion.UserQuiz"
+            android:name=".postquestion.UserQuizActivity"
             android:label="@string/app_name" >
         </activity>
 

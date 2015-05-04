@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import com.android.memeinn.R;
 
-public class ShowUserQuiz extends Activity{
+public class ShowUserQuizActivity extends Activity{
 
     public static final String EXTRA_MESSAGE = "vocab.MESSAGE";
 
@@ -25,7 +25,7 @@ public class ShowUserQuiz extends Activity{
      * @param view
      */
     public void gotoUserQ(View view) {
-        Intent goToUserQuiz = new Intent(this, UserQuiz.class);
+        Intent goToUserQuiz = new Intent(this, UserQuizActivity.class);
         String vocabType = ((Button) /*findViewById(R.id.gre)*/view).getText().toString();
         Log.d("MyApp", "VocabType" + vocabType);
         goToUserQuiz.putExtra(EXTRA_MESSAGE, vocabType);

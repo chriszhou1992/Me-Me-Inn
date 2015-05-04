@@ -11,11 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.android.memeinn.learn.ChapterActivity;
 import com.android.memeinn.R;
-import com.android.memeinn.learn.MemorizationActivity;
-import com.android.memeinn.learn.QuizActivity;
-import com.android.memeinn.review.ReviewActivity;
 
 public class AddPostActivity extends Activity {
 
@@ -32,7 +28,7 @@ public class AddPostActivity extends Activity {
      * @param view
      */
     public void gotoPostQuestion(View view) {
-        Intent goToPost = new Intent(this, PostQuestion.class);
+        Intent goToPost = new Intent(this, PostQuestionActivity.class);
         String vocabType = ((Button) /*findViewById(R.id.gre)*/view).getText().toString();
         Log.d("MyApp", "VocabType" + vocabType);
         goToPost.putExtra(EXTRA_MESSAGE, vocabType);

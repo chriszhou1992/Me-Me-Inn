@@ -1,9 +1,5 @@
 package com.android.memeinn.postquestion;
 
-/**
- * Created by qingsongqi on 4/9/15.
- */
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +12,7 @@ import com.android.memeinn.Utility;
 import com.android.memeinn.R;
 import com.parse.ParseObject;
 
-public class PostQuestion extends Activity{
+public class PostQuestionActivity extends Activity{
 
     String extraString = "";
 

@@ -104,6 +104,7 @@
     <string name="title_activity_review_finished_pop_up">ReviewFinishedPopUp</string>
     <string name="checkpost">Check Post</string>
     <string name="addpost">Add Post</string>
+    <string name="logoutText">Log out</string>
 
     <!--Contest Page Strings-->
     <string name="contestType">GRE Contest!</string>
