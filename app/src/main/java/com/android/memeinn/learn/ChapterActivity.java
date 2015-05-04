@@ -14,9 +14,6 @@ import com.android.memeinn.R;
  * Activity for ChapterList GUI.
  */
 public class ChapterActivity extends Activity{
-
-
-
     private String vocabType = "";//the type of vocabulary
     private TextView vocabTypeView;
     private String vocabTableName = "";
@@ -41,7 +38,6 @@ public class ChapterActivity extends Activity{
      * @param view Button The chapter button clicked
      */
     public void onClick(View view) {
-
         //modified here
         Intent freqChapIntent;
         freqChapIntent = new Intent(this, FreqChapActivity.class);

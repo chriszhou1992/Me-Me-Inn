@@ -68,26 +68,9 @@ public class QuizActivityTest extends ActivityInstrumentationTestCase2<QuizActiv
      * different word can be generated
      */
     public void testDifferentWord() {
-
-
-        //Monitor the intent is processed
-        Instrumentation.ActivityMonitor QuizActivityMonitor = getInstrumentation()
-                .addMonitor(QuizActivity.class.getName(), null, false);
-
-        //Verify the intent is processed
-        QuizActivityMonitor.waitForActivityWithTimeout(5000);
-        assertEquals("Monitor for MainActivity has not been called",
-                1, QuizActivityMonitor.getHits());
-
-        // Remove the ActivityMonitor
-        getInstrumentation().removeMonitor(QuizActivityMonitor);
-
-
-        Log.d("Myapp", "testDifferentWord");
-
         onView(withId(R.id.testWord))
                 .check(matches(withText(not(containsString("quiz!")))));
-       Log.d("quizTest", "find success test word ");
+        Log.d("quizTest", "find success test word ");
         ViewInteraction v = onView(withId(R.id.testWord));
         if (v == null)
             Log.d("quizTest", "testWord is null! ");
@@ -125,13 +108,21 @@ public class QuizActivityTest extends ActivityInstrumentationTestCase2<QuizActiv
 
         onView(withId(R.id.name))
                 .check(matches(withText("quiz!")));
-
     }
 
     /**
      * test on the score accumulation
      */
-    public void testScoreAccumulation(){
+    public void testScoreAccumulation() {
+        //Force blocked waiting of 3 seconds
+        Instrumentation.ActivityMonitor QuizActivityMonitor = getInstrumentation()
+                .addMonitor(QuizActivity.class.getName(), null, false);
+        //Verify the intent is processed
+        QuizActivityMonitor.waitForActivityWithTimeout(3000);
+        // Remove the ActivityMonitor
+        getInstrumentation().removeMonitor(QuizActivityMonitor);
+
+
         if (currAct != null)
             Log.d("Myapp", "testScoreAccumulation");
 
@@ -199,18 +190,17 @@ public class QuizActivityTest extends ActivityInstrumentationTestCase2<QuizActiv
     }
 
     public int getSelectionResult(View questionField) {
+        int selButtonId = Utility.randomInt(0, currAct.getNUM_OF_OPTIONS()-1);
+        Button chosen = currAct.getButton(selButtonId);
+        boolean right = (boolean)chosen.getTag();
 
-            int selButtonId = Utility.randomInt(0, currAct.getNUM_OF_OPTIONS()-1);
-            Button chosen = currAct.getButton(selButtonId);
-            boolean right = (boolean)chosen.getTag();
+        lastWord = chosen.getText().toString();
 
-            lastWord = chosen.getText().toString();
+        onView((withId(currAct.getButtonId(selButtonId)))).perform(click());
+        do{}
+        while(lastWord.equals(((TextView) questionField).getText().toString()));
 
-            onView((withId(currAct.getButtonId(selButtonId)))).perform(click());
-            do{}
-            while(lastWord.equals(((TextView) questionField).getText().toString()));
-
-            return right ? 1:0;
+        return right ? 1:0;
     }
 
 }

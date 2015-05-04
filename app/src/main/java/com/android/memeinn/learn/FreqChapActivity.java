@@ -15,10 +15,6 @@ import com.android.memeinn.R;
  * Activity for the learning system. Used to learn/memorize words.
  */
 public class FreqChapActivity extends Activity {
-
-
-
-
     private String vocabType = "";//the type of vocabulary
     private String vocabFrequency = "";
     private TextView vocabTypeView;

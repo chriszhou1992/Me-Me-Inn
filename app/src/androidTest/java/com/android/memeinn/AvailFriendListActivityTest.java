@@ -41,6 +41,5 @@ public class AvailFriendListActivityTest extends
             else if (btnText.equals("alwaysInMatch"))
                 assertEquals(b.getCurrentTextColor(), Color.BLUE);
         }
-        //onView(matches(withText("alwaysOnline"))).check()
     }
 }
