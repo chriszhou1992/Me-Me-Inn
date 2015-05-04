@@ -25,8 +25,12 @@ import com.google.gson.Gson;
 public class FindFrequentListFromPDF {
 	static Map<String, Integer> wordFreq = new HashMap<String, Integer>();
 	static ArrayList<Word> baseWordList = new ArrayList<Word>();
-	// convert one pdf to WordFrequencyHashmap
-	
+
+    /**
+     * This function extracts word strings from the inpput pdf file,
+     * load then into memory and store them in hashmap
+     * @param fileName The filename of the input PDF file
+     */
 	static void pdftoHashmap(String fileName, boolean isBase) {
 		PDFParser parser;
 		String parsedText = null;;
@@ -75,8 +79,13 @@ public class FindFrequentListFromPDF {
 			}
 		}
 	}
-	
-	//Strip Page String into String Array
+
+    /**
+     * This function parses the strings of a pdf page
+     * into a java string in the form of arrayList
+     * @param str input string extracted from pdf page
+     * @return java string converted from pdf page
+     */
 	static ArrayList<String> stripPageToStringArray(String str){
 		ArrayList<String> newArr = new ArrayList<String>();
 		str = str.toLowerCase();
@@ -94,8 +103,12 @@ public class FindFrequentListFromPDF {
 		}
 		return newArr;
 	}
-	
-	//Feed String Array HashMap of String to Frequency(int)
+
+    /**
+     * This function parses a string into a list of words and increment counts of
+     * these words in a hashmap
+     * @param strs input string that needs to be parsed
+     */
 	static void stringArrayToHashmap(ArrayList<String> strs, boolean isBase){
 			for(String cur:strs){
 				if(!cur.equals("")){
@@ -111,11 +124,12 @@ public class FindFrequentListFromPDF {
 				}
 			}
 	}
-	
+
+    /**
+     * This helper function reads multiple pdf files at the same time
+     * and make them ready for processing
+     */
 	public static void readMultipleFiles(){
-//		Scanner scan = new Scanner(System.in);
-//		System.out.println("Please input nubmer of files:");
-//		int numOfF = scan.nextInt();
 		
 		int numOfF = 4;
 		for(int i=0;i<numOfF;i++){
@@ -124,14 +138,15 @@ public class FindFrequentListFromPDF {
 			pdftoHashmap(fileName,false);
 		}
 	}
-	
-	public static void main(String args[]) throws IOException{
-		String wordList = "wordList1.pdf";
-		String newFile = "GRE_PDFs/TOEFL.json.new.json";
-		String newJSON = "TOEFL_NEW_FEQ.json";
-		generateNewJSON(wordList, newFile, newJSON);
-	}
-	
+
+
+    /**
+     * This function writes data into jason file as output, which
+     * contains vocabulary as well as its frequency
+     * @param wordList data that needs to be write into json file
+     * @param newFile filename of output file
+     * @param newJSON output jason data
+     */
 	public static void generateNewJSON(String wordList, String newFile, String newJSON) throws IOException{
 		readMultipleFiles();
 		int maxFreq = 0;
@@ -146,6 +161,7 @@ public class FindFrequentListFromPDF {
    
 	   BufferedReader br = new BufferedReader(new FileReader(newFile));
 	   	Gson gson = new Gson();
+
 	   //convert the json string back to object
 		AllData obj = gson.fromJson(br, AllData.class);
 		ArrayList<DataObject> results = obj.getResults();
@@ -179,5 +195,18 @@ public class FindFrequentListFromPDF {
 		bw.write(json);
 		bw.close();
 	}
+
+    /**
+     * This is the main function that calculates the frequency of
+     * vocabulary that have been stored in the database
+     * @param args
+     * @throws IOException
+     */
+    public static void main(String args[]) throws IOException{
+        String wordList = "wordList1.pdf";
+        String newFile = "GRE_PDFs/TOEFL.json.new.json";
+        String newJSON = "TOEFL_NEW_FEQ.json";
+        generateNewJSON(wordList, newFile, newJSON);
+    }
 
 }
