@@ -1,6 +1,5 @@
 package wordList;
 
-
 import java.util.ArrayList;
 
 public class AllData {

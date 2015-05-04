@@ -7,17 +7,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import com.google.gson.Gson;
 
 public class GenerateWordListAndDefinitionList {
-	public static void main(String[] args){
-		
-		String fileName = "GRE_PDFs/GMAT.json.new.json";
-		File writeFile0 = new File("GRE_PDFs/wordList1.txt");
-		
-		generateNewFile(fileName, writeFile0);
-	}
+    /**
+     *  This is this function to calculates frequency of all
+     * vocabulary based on a given PDF file
+     * @param fileName input PDF file name
+     * @param writeFile0 filename of output file
+     */
 	public static void generateNewFile(String fileName, File writeFile0){
 		Gson gson = new Gson();
 
@@ -67,4 +65,17 @@ public class GenerateWordListAndDefinitionList {
 		}
 	
 	}
+
+    /**
+     * This is the main function of this class. It calculates frequency of all
+     * vocabulary based on all of the given PDF files.
+     * @param args
+     */
+    public static void main(String[] args){
+
+        String fileName = "GRE_PDFs/GMAT.json.new.json";
+        File writeFile0 = new File("GRE_PDFs/wordList1.txt");
+
+        generateNewFile(fileName, writeFile0);
+    }
 }
