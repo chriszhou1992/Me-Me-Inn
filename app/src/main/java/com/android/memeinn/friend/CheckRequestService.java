@@ -18,7 +18,6 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 public class CheckRequestService extends Service {
-    public static final String MY_SERVICE = "CheckRequestService";
 
     private boolean mBInited = false;
     private Timer mCheckTimer = null;
@@ -54,15 +53,9 @@ public class CheckRequestService extends Service {
         return Service.START_STICKY;
     }
 
-    @Override
-    public void onCreate() {
-    }
-
-    @Override
-    public void onDestroy() {
-    }
-
-    // check database
+    /**
+     * check database
+     */
     private void startTimer() {
         if (mCheckTimer != null) {
             mCheckTimer.cancel();
@@ -82,13 +75,14 @@ public class CheckRequestService extends Service {
         }
     }
 
-    // parse database and return content
+    /**
+     * parse database and return content
+     */
     private void CheckParseDB() {
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
             ParseQuery<RequestFriendSession> query = ParseQuery.getQuery(RequestFriendSession.CLASS_NAME);
             String curUser = currentUser.getObjectId();
-//	    	query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_TOUSERID, currentUser.getObjectId());
             query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_TOUSERID, curUser);
             query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_ISACCEPTED, false);
             query.whereEqualTo(RequestFriendSession.REQUEST_FIELD_ISREJECTED, false);
@@ -96,7 +90,6 @@ public class CheckRequestService extends Service {
             query.getFirstInBackground(new GetCallback<RequestFriendSession>() {
                 public void done(final RequestFriendSession session, ParseException e) {
                     if (session == null) {
-                        // nothing
                     }
                     else {
                         session.setIsToChecked(true);

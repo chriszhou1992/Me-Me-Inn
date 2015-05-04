@@ -2,17 +2,9 @@ package com.android.memeinn;
 
 import android.app.Activity;
 import android.app.Instrumentation;
-import android.test.ActivityInstrumentationTestCase2;
+test.ActivityInstrumentationTestCase2;
 
-import com.android.memeinn.postquestion.AddPostActivity;
-import com.android.memeinn.postquestion.CheckPostActivity;
-import com.android.memeinn.postquestion.PostQuestionActivity;
-import com.android.memeinn.postquestion.ShowUserQuizActivity;
-import com.android.memeinn.postquestion.UserQuizActivity;
 import com.android.memeinn.user.LoginActivity;
-import com.android.memeinn.user.ProfileActivity;
-
-import java.util.Stack;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;

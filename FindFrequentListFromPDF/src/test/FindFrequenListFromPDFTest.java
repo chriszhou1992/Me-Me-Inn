@@ -1,23 +1,22 @@
 package test;
 import static org.junit.Assert.*;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import org.junit.Test;
-
 import com.google.gson.Gson;
-
 import wordList.AllData;
 import wordList.DataObject;
 import wordList.FindFrequentListFromPDF;
 import wordList.GenerateWordListAndDefinitionList;
 
-
+/**
+ * This class test all of the functions implemented
+ * in FindFrequentListFromPDF class
+ */
 public class FindFrequenListFromPDFTest {
 
 	@Test
