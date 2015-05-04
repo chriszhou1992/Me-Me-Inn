@@ -2,6 +2,10 @@ package wordList;
 
 import java.util.ArrayList;
 
+/**
+ * Convert json data imported from Parse database
+ * into java object
+ */
 public class AllData {
 	private ArrayList<DataObject> results;
 
