@@ -20,9 +20,7 @@ public class GenerateWordListAndDefinitionList {
 	}
 	public static void generateNewFile(String fileName, File writeFile0){
 		Gson gson = new Gson();
-		
-		//String fileName = "GRE_PDFs/SAT.json.new.json";
-		//String fileName = "GRE_PDFs/TOEFL.json.new.json";
+
 		try {
 	 
 			BufferedReader br = new BufferedReader(new FileReader(fileName));

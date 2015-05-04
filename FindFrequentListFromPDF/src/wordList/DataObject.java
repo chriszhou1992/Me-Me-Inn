@@ -1,6 +1,10 @@
 package wordList;
 
-
+/**
+ * This object class stores basic information of any word,
+ * which includes its content, defination, frequency, create time, update time,
+ * and its unique ID
+ */
 public class DataObject {
 	private String createdAt;
     private String definition;
