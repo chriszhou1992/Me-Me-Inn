@@ -27,8 +27,6 @@ public class FreqChapActivityTest extends ActivityInstrumentationTestCase2<Vocab
     /**
      * Test new vocabulary partitioning features
      */
-
-
     public void testButtonA() {
         onView(withId(R.id.gre)).perform(click());
         onView(withId(R.id.gre)).check(matches(withText("GRE")));

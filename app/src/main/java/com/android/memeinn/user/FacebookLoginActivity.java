@@ -42,6 +42,7 @@ public class FacebookLoginActivity extends FragmentActivity {
     private AccessTokenTracker mTokenTracker;
     private ProfileTracker mProfileTracker;
     private AccessToken accessToken;
+
     private FacebookCallback<LoginResult> mFacebookCallback = new FacebookCallback<LoginResult>() {
         @Override
         public void onSuccess(LoginResult loginResult) {
@@ -63,6 +64,10 @@ public class FacebookLoginActivity extends FragmentActivity {
         }
     };
 
+    /**
+     * Setting up trackers in case of profile/token change,
+     * update view according to profile change
+     */
     private void settingTrackersAndView(){
         setupTokenTracker();
         setupProfileTracker();
@@ -75,6 +80,14 @@ public class FacebookLoginActivity extends FragmentActivity {
         if(mTextDetails!=null)
             mTextDetails.setText(constructWelcomeMessage(profile));
     }
+
+    /**
+     * On activity create, login the facebook user
+     * setting up access token according to user login.
+     * If user already logged in, retrieve the old accessToken
+     * Displaying in/out of game friend lists for the current logged in user.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,13 +108,24 @@ public class FacebookLoginActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * Function for displaying the not in game friends list,
+     * using graph API to retrieve the list
+     *
+     * GraphRequest(AccessToken, String, Bundle, HttpMethod, Callback)
+     * accessToken	The access token to use, or null
+     * graphPath	The graph path to retrieve, create, or delete
+     * parameters	Additional parameters to pass along with the Graph API request; parameters must be Strings, Numbers, Bitmaps, Dates, or Byte arrays.
+     * httpMethod	The HttpMethod to use for the request, or null for default (HttpMethod.GET)
+     *
+     * @param at
+     */
     public void displayInvitableFriendsList(AccessToken at){
         String graphPath = "/"+at.getUserId()+"/invitable_friends";
         GraphRequest graphRequest = new GraphRequest(at, graphPath, null, HttpMethod.GET, new GraphRequest.Callback() {
             @Override
             public void onCompleted(GraphResponse graphResponse) {
                 invitableFriendsList = (TextView)findViewById(R.id.invitablefriendslist);
-//                invitableFriendsList.setText(graphResponse.toString());
                 String tempS = "Facebook Not In Game Friends List:\n";
                 try {
                     JSONArray jsonArray = graphResponse.getJSONObject().getJSONArray("data");
@@ -119,13 +143,17 @@ public class FacebookLoginActivity extends FragmentActivity {
         graphRequest.executeAsync();
     }
 
+    /**
+     * Function for displaying the in game friends list,
+     * using graph API to retrieve the list
+     * @param at
+     */
     public void displayFriendsList(AccessToken at){
         String graphPath = "/"+at.getUserId()+"/friends";
         GraphRequest graphRequest = new GraphRequest(at, graphPath, null, HttpMethod.GET, new GraphRequest.Callback() {
             @Override
             public void onCompleted(GraphResponse graphResponse) {
                 in_game_friendsList = (TextView)findViewById(R.id.in_game_friendslist);
-//                invitableFriendsList.setText(graphResponse.toString());
                 String tempS = "Facebook In Game Friends List:\n";
                 try {
                     JSONArray jsonArray = graphResponse.getJSONObject().getJSONArray("data");
@@ -143,15 +171,11 @@ public class FacebookLoginActivity extends FragmentActivity {
         graphRequest.executeAsync();
     }
 
-
+    /**
+     * While clicking on the invite friend button
+     * Load the invite friend Fragment into view
+     */
     public void onClickRequestButton(View view) {
-        /*
-        GraphRequest(AccessToken, String, Bundle, HttpMethod, Callback)
-        accessToken	The access token to use, or null
-        graphPath	The graph path to retrieve, create, or delete
-        parameters	Additional parameters to pass along with the Graph API request; parameters must be Strings, Numbers, Bitmaps, Dates, or Byte arrays.
-        httpMethod	The HttpMethod to use for the request, or null for default (HttpMethod.GET)
-        */
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft=fm.beginTransaction();
         FriendsInvitesFragment f1 = new FriendsInvitesFragment();
@@ -160,7 +184,11 @@ public class FacebookLoginActivity extends FragmentActivity {
     }
 
 
-
+    /**
+     * Display welcome message to specific logged in facebook user
+     * @param profile
+     * @return string of the welcome message
+     */
     private String constructWelcomeMessage(Profile profile) {
         StringBuffer stringBuffer = new StringBuffer();
         if (profile != null) {
@@ -169,6 +197,9 @@ public class FacebookLoginActivity extends FragmentActivity {
         return stringBuffer.toString();
     }
 
+    /**
+     * Setting up on facebook token change tracker
+     */
     private void setupTokenTracker() {
         mTokenTracker = new AccessTokenTracker() {
             @Override
@@ -178,6 +209,9 @@ public class FacebookLoginActivity extends FragmentActivity {
         };
     }
 
+    /**
+     * Setting up on facebook profile change tracker
+     */
     private void setupProfileTracker() {
         mProfileTracker = new ProfileTracker() {
             @Override
@@ -189,6 +223,9 @@ public class FacebookLoginActivity extends FragmentActivity {
     }
 
 
+    /**
+     * On app resume, resume the profile and view text
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -198,6 +235,9 @@ public class FacebookLoginActivity extends FragmentActivity {
             mTextDetails.setText(newText);
     }
 
+    /**
+     * On app stop, stop both facebook trackers
+     */
     @Override
     public void onStop() {
         super.onStop();
@@ -207,6 +247,9 @@ public class FacebookLoginActivity extends FragmentActivity {
             mProfileTracker.stopTracking();
     }
 
+    /**
+     * on Call back activity, use call back manager to handle result
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -215,17 +258,27 @@ public class FacebookLoginActivity extends FragmentActivity {
         //gameCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
+    /**
+     * Go to the main menu while clicking
+     */
     public void gotoMainActivity(View view){
         Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(mainIntent);
     }
 
+    /**
+     * Go to the main menu while clicking logout, also void the accessToken
+     */
     public void gotoLogoutAndMainActivity(View view){
         LoginManager.getInstance().logOut();
         Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(mainIntent);
     }
 
+    /**
+     * Get private accessToken for this session
+     * @return
+     */
     public AccessToken getAccessToken(){
         return accessToken;
     }

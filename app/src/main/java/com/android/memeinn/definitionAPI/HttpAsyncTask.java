@@ -34,8 +34,13 @@ public class HttpAsyncTask extends AsyncTask<String, Void, String> {
     public String result=null;
     public TextView editText;
 
+    /**
+     * Consturctor
+     * @param connMgr
+     * @param context
+     * @param editText
+     */
     public HttpAsyncTask(ConnectivityManager connMgr, Context context, TextView editText){
-        //connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
         this.connMgr = connMgr;
         this.context = context;
         this.editText = editText;
@@ -43,13 +48,17 @@ public class HttpAsyncTask extends AsyncTask<String, Void, String> {
 
     @Override
     public String doInBackground(String... urls) {
-
         return GET(urls[0]);
     }
-    // onPostExecute displays the results of the AsyncTask.
+
+    /**
+     * onPostExecute displays the results of the AsyncTask.
+     * After the post operation is executed, update the text view according
+     * to the returned string result
+     * @param result
+     */
     @Override
     public void onPostExecute(String result) {
-        //Toast.makeText(context, "Received!", Toast.LENGTH_LONG).show();
         try {
             JSONObject json = new JSONObject(result);
 
@@ -66,6 +75,15 @@ public class HttpAsyncTask extends AsyncTask<String, Void, String> {
             e.printStackTrace();
         }
     }
+
+
+    /**
+     * Http method Get method set up and calling
+     * Including the correct user token for online dictionary API call
+     * Including correct JSON header and url for the Get Call
+     * @param url
+     * @return
+     */
     public String GET(String url){
         InputStream inputStream = null;
         String result = "";
@@ -98,6 +116,12 @@ public class HttpAsyncTask extends AsyncTask<String, Void, String> {
         return result;
     }
 
+    /**
+     * Convert the input stream into readable string format
+     * @param inputStream
+     * @return
+     * @throws IOException
+     */
     public String convertInputStreamToString(InputStream inputStream) throws IOException {
         BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
         String line = "";
@@ -108,15 +132,6 @@ public class HttpAsyncTask extends AsyncTask<String, Void, String> {
         inputStream.close();
         return result;
 
-    }
-
-    public boolean isConnected(){
-
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected())
-            return true;
-        else
-            return false;
     }
 
 }

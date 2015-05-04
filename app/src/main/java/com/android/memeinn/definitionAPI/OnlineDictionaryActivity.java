@@ -22,6 +22,14 @@ public class OnlineDictionaryActivity extends Activity {
     private TextView etResponse;
     private EditText etWord;
 
+    /**
+     * On creating the activity view
+     * Make an online dictionary API call using the HTTPAsyncTask
+     * Set up a listener for the word input field
+     * Whenever the word changes, make an online dictionary API call
+     * The etResponse view reflect the result of the online dictionary API call
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

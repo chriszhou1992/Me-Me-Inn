@@ -34,6 +34,9 @@ public class FacebookLoginActivityTest extends ActivityInstrumentationTestCase2<
         super(FacebookLoginActivity.class);
     }
 
+    /**
+     * Setting up test by setting up FacebookLoginActivity and its main activity
+     */
     @Override
     public void setUp() throws Exception {
             super.setUp();
@@ -41,6 +44,11 @@ public class FacebookLoginActivityTest extends ActivityInstrumentationTestCase2<
             getActivity();
     }
 
+    /**
+     * Test whether facebook profileName matches
+     * the logged in profile name
+     * Using graph api for getting the correct facebook login user accessToken
+     */
     public void testFacebookProfileName(){
         try {
             Thread.sleep(2000);
@@ -65,11 +73,15 @@ public class FacebookLoginActivityTest extends ActivityInstrumentationTestCase2<
 
             });
             onView(withId(R.id.facebook_text)).perform();
-        }catch(InterruptedException| NullPointerException e){
-            e.printStackTrace();
-        }
+            }catch(InterruptedException| NullPointerException e){
+                e.printStackTrace();
+            }
     }
 
+    /**
+     * Test whether facebook invitable friend list matches the required ones
+     * Using graph api for getting the correct facebook login user accessToken
+     */
     public void testFacebookInvitableFriendList(){
         try {
             Thread.sleep(2000);
@@ -99,6 +111,10 @@ public class FacebookLoginActivityTest extends ActivityInstrumentationTestCase2<
         }
     }
 
+    /**
+     * Test whether facebook already in game friend list matches the required ones
+     * Using graph api for getting the correct facebook login user accessToken
+     */
     public void testFacebookFriendsList(){
         try {
             Thread.sleep(2000);
@@ -128,6 +144,11 @@ public class FacebookLoginActivityTest extends ActivityInstrumentationTestCase2<
         }
     }
 
+    /**
+     * Test whether facebook invite friends functionality works properly
+     * by checking whether the invitable friends displayed properly
+     * Using graph api for getting the correct facebook login user accessToken
+     */
     public void testFacebookInviteFriends(){
         try {
             Thread.sleep(2000);

@@ -25,12 +25,23 @@ public class FriendsInvitesFragment extends Fragment {
     CallbackManager callbackManager;
     private AccessToken accessToken;
 
+    /**
+     * Create friend request view
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.facebookinvitefriends, container, false);
     }
 
+    /**
+     * Setting up callbackManager, requestDialog and accessToken on create this instance
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +60,13 @@ public class FriendsInvitesFragment extends Fragment {
 
             public void onError(FacebookException error) {
             }
-
         });
-
         onClickGameRequestButton();
     }
 
+    /**
+     * When clicking on the game request button, load a request dialog
+     */
     private void onClickGameRequestButton() {
         GameRequestContent content = new GameRequestContent.Builder()
                 .setTitle("Check out this awesome app!")
@@ -63,6 +75,12 @@ public class FriendsInvitesFragment extends Fragment {
         requestDialog.show(content);
     }
 
+    /**
+     * Callback function handler for new activity
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
