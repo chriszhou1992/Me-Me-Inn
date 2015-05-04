@@ -4,13 +4,8 @@ package com.android.memeinn;
  * Created by qingsongqi on 4/9/15.
  */
 
-import android.support.test.espresso.ViewInteraction;
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
-
-import com.android.memeinn.learn.ChapterActivity;
 import com.android.memeinn.user.LoginActivity;
-import com.android.memeinn.user.ProfileActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;

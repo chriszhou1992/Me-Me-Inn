@@ -1,29 +1,16 @@
 package com.android.memeinn;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.View;
-import android.widget.TextView;
-
 import com.android.memeinn.user.FacebookLoginActivity;
 import com.facebook.AccessToken;
-import com.facebook.FacebookActivity;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
-
 import junit.framework.Assert;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static android.support.test.espresso.action.ViewActions.typeText;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
  * Created by Yifan on 5/2/15.
