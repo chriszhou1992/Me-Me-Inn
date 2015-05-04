@@ -23,7 +23,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-
+/**
+ * Activity that displays words for user to learn/memorize.
+ */
 public class MemorizationActivity extends ActionBarActivity {
 
     private String vocabType = "";

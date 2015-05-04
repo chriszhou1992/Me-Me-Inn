@@ -5,12 +5,11 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
 
-/*
+/**
  * An extension of ParseObject that makes
  * it more convenient to access information
  * about a given Meal
  */
-
 @ParseClassName("RequestFriendSession")
 public class RequestFriendSession extends ParseObject {
 

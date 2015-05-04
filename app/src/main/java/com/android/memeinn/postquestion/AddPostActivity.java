@@ -1,9 +1,5 @@
 package com.android.memeinn.postquestion;
 
-/**
- * Created by qingsongqi on 4/9/15.
- */
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

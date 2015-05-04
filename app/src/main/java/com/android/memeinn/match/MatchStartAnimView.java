@@ -21,6 +21,9 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.parse.ParseUser;
 
+/**
+ * Custom SurfaceView class to enable animated matching screen.
+ */
 public class MatchStartAnimView extends SurfaceView
         implements SurfaceHolder.Callback {
 

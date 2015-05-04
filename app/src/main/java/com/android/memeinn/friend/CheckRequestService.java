@@ -1,8 +1,5 @@
 package com.android.memeinn.friend;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.annotation.TargetApi;
 import android.app.Service;
 import android.content.Intent;
@@ -17,6 +14,12 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+/**
+ * Custom Service to check incoming friend requests.
+ */
 public class CheckRequestService extends Service {
 
     private boolean mBInited = false;

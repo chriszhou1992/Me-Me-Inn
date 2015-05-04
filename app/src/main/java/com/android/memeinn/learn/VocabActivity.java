@@ -25,6 +25,10 @@ public class VocabActivity extends Activity{
         flag = intent.getFlags();
     }
 
+    /**
+     * Event callback triggering intent to Chapter lists or Review system.
+     * @param view
+     */
     public void gotoChapOrReview(View view) {
         if(flag == 1){
             Intent goToChapIntent = new Intent(this, ChapterActivity.class);

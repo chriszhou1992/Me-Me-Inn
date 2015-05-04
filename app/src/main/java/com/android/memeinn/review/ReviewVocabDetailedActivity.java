@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.memeinn.R;
@@ -225,12 +224,18 @@ public class ReviewVocabDetailedActivity extends Activity {
         finish();
     }
 
+    /**
+     * Event callback function when the global Back button on Android is pressed.
+     */
     @Override
     public void onBackPressed() {
         ParseUser.getCurrentUser().saveInBackground();
         super.onBackPressed();
     }
 
+    /**
+     * Event callback function when the activity is destroyed. Perform additional cleanups.
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();

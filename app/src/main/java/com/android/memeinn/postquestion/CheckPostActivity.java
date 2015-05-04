@@ -1,9 +1,5 @@
 package com.android.memeinn.postquestion;
 
-/**
- * Created by qingsongqi on 4/9/15.
- */
-
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CheckPostActivity extends Activity{
-
     private ArrayList<ParseObject> questions;
 
     private TextView vocabType;

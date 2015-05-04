@@ -11,7 +11,9 @@ import com.android.memeinn.Global;
 import com.android.memeinn.MainActivity;
 import com.android.memeinn.R;
 
-
+/**
+ * Activity to display the quiz result.
+ */
 public class QuizResultActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +31,10 @@ public class QuizResultActivity extends Activity {
         }
     }
 
-
+    /**
+     * Event callback triggering intent to go back to MainActivity.
+     * @param view
+     */
     public void goBack(View view){
         Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(mainIntent);

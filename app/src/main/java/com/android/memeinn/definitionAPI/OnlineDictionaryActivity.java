@@ -12,10 +12,6 @@ import android.widget.TextView;
 
 import com.android.memeinn.R;
 
-
-/**
- * Created by yifan on 4/7/15.
- */
 public class OnlineDictionaryActivity extends Activity {
 
     private String word;

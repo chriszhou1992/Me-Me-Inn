@@ -133,7 +133,9 @@ public class FriendActivity extends Activity {
         }
     };
 
-    //add the just accepted frined to the friend list and print on the table
+    /**
+     * Adds the just accepted friend to the friend list and print on the table.
+     */
     public void onAddFriend(View view) {
         ArrayList<String> strUsersArray = new ArrayList<String>();
         for (ParseUser user : mAllUsers)
@@ -190,7 +192,9 @@ public class FriendActivity extends Activity {
         builder.create().show();
     }
 
-    // parse data to the database
+    /**
+     * Parse data to the database.
+     */
     private void makeSessionToParse() {
         ParseUser currentUser = ParseUser.getCurrentUser();
         ParseUser friendUser = mAllUsers.get(mSelectedIndex);
@@ -219,7 +223,7 @@ public class FriendActivity extends Activity {
         });
     }
 
-    /*
+    /**
      * list adapter, print data by adapter
      */
     public class LazyAdapter extends BaseAdapter {

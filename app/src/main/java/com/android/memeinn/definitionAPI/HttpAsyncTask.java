@@ -2,12 +2,9 @@ package com.android.memeinn.definitionAPI;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -23,11 +20,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Map;
 
-/**
- * Created by yifan on 4/7/15.
- */
 public class HttpAsyncTask extends AsyncTask<String, Void, String> {
     public ConnectivityManager connMgr;
     public Context context;

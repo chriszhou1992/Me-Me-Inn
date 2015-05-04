@@ -11,6 +11,9 @@ import com.android.memeinn.Global;
 import com.android.memeinn.MainActivity;
 import com.android.memeinn.R;
 
+/**
+ * Activity for displaying the match result.
+ */
 public class MatchResultActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,9 +1,5 @@
 package com.android.memeinn.friend;
 
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.annotation.TargetApi;
 import android.app.Service;
 import android.content.Intent;
@@ -18,13 +14,19 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-public class CheckResponseService extends Service {
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
+/**
+ * Custom Service to check incoming responses to friend requests.
+ */
+public class CheckResponseService extends Service {
     private boolean mBInited = false;
     private Timer mCheckTimer = null;
 
     /**
-     *  local binder
+     *  Local binder
      */
     public class LocalBinder extends Binder {
         public final Service service;
@@ -58,7 +60,7 @@ public class CheckResponseService extends Service {
     }
 
     /**
-     * to check database
+     * Timer to check database.
      */
     private void startTimer() {
         if (mCheckTimer != null) {
@@ -80,7 +82,7 @@ public class CheckResponseService extends Service {
     }
 
     /**
-     * connect with database and return content
+     * Connect with database and return content.
      */
     private void CheckParseDB() {
         ParseUser currentUser = ParseUser.getCurrentUser();

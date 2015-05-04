@@ -28,8 +28,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * intermediate class for selecting competition topic
- * Created by bchen11 on 3/31/15.
+ * Intermediate Activity for selecting match topic.
  */
 public class SelectMatchingTopicActivity  extends Activity {
 
