@@ -2,9 +2,17 @@ package com.android.memeinn;
 
 import android.app.Activity;
 import android.app.Instrumentation;
-test.ActivityInstrumentationTestCase2;
+import android.test.ActivityInstrumentationTestCase2;
 
+import com.android.memeinn.postquestion.AddPostActivity;
+import com.android.memeinn.postquestion.CheckPostActivity;
+import com.android.memeinn.postquestion.PostQuestionActivity;
+import com.android.memeinn.postquestion.ShowUserQuizActivity;
+import com.android.memeinn.postquestion.UserQuizActivity;
 import com.android.memeinn.user.LoginActivity;
+import com.android.memeinn.user.ProfileActivity;
+
+import java.util.Stack;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -17,7 +25,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.endsWith;
 
-public class PostQuestionActivityTest extends ActivityInstrumentationTestCase2<LoginActivity>{
+public class PostQuestionActivityTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
     private Stack<Instrumentation.ActivityMonitor> activityMonitorStack;
 
